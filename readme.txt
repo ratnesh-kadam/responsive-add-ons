@@ -40,10 +40,16 @@ that it was important to make it inclusive rather than exclusive.
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial set up and release
+
+= 1.0.1 =
+* Bug Fixes
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial set up and release
+
+= 1.0.1 =
+* Bug fixes
