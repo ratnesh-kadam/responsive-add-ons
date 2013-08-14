@@ -60,7 +60,7 @@ if( !defined( 'ABSPATH' ) ) {
 
             <tr>
                 <th><?php _e( 'Site Statistics Tracker', 'responsive-addons' ); ?></th>
-                <td><textarea id="<?php echo esc_attr( 'responsive_addons_options[site_statistics_tracker]' ); ?>" class="large-text" cols="50" rows="30" name="<?php echo esc_attr(
+                <td><textarea id="<?php echo esc_attr( 'responsive_addons_options[site_statistics_tracker]' ); ?>" class="large-text" cols="50" rows="15" name="<?php echo esc_attr(
                         'responsive_addons_options[site_statistics_tracker]' ); ?>"><?php echo ( !empty( $options['site_statistics_tracker'] ) ) ? esc_html( $options['site_statistics_tracker'] ) : ''; ?></textarea>
                     <label class="description" for="<?php echo esc_attr( 'responsive_addons_options[site_statistics_tracker]' ); ?>">
                         <?php _e( 'Google Analytics, StatCounter, any other or all of them.', 'responsive-addons' ) ?>

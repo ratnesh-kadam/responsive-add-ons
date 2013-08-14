@@ -118,7 +118,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         public static function is_responsive() {
             $theme = wp_get_theme();
 
-            if( $theme->Name == 'Responsive' || $theme->Template == 'Responsive' || $theme->Name == 'Responsive Pro' || $theme->Template == 'Responsive Pro' ) {
+            if( $theme->Name == 'Responsive' || $theme->Template == 'responsive' || $theme->Name == 'Responsive Pro' || $theme->Template == 'responsivepro' ) {
                 return true;
             }
             else {
@@ -177,6 +177,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                         'heading'     => '',
                         'type'        => 'textarea',
                         'id'          => 'site_statistics_tracker',
+                        'class'		  => array( 'site-tracker' ),
                         'description' => __( 'Google Analytics, StatCounter, any other or all of them.', 'responsive-addons' ),
                         'placeholder' => ''
                     ),
