@@ -4,7 +4,7 @@ Donate Link: http://cyberchimps.com
 Tags: google, yahoo, bing, analytics, verification
 Requires at least: 3.0.1
 Tested up to: 3.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,10 @@ that it was important to make it inclusive rather than exclusive.
 = 1.0.2 =
 * Bug Fixes
 
+= 1.0.3 =
+* Bug Fixes
+* Added styling to textarea
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -59,3 +63,7 @@ that it was important to make it inclusive rather than exclusive.
 
 = 1.0.2 =
 * Bug fixes
+
+= 1.0.3 =
+* Bug Fixes
+* Added styling to textarea
