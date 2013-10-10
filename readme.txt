@@ -35,8 +35,11 @@ that it was important to make it inclusive rather than exclusive.
 
 == Screenshots ==
 
-1. The <a href="http://wordpress.org/themes/responsive" title="Responsive">Responsive Theme</a> options layout
-2. Other theme's options layout
+1. Responsive Add Ons plugin is recommended when you have the <a href="http://wordpress.org/themes/responsive" title="Responsive">Responsive Theme</a> installed and active
+2. After clicking on the install plugin you are taken to the suggested plugin installer, just click on "Install" below the plugin name
+3. The plugin gets downloaded and installed automatically
+4. Responsive Add Ons places it's options inside <a href="http://wordpress.org/themes/responsive" title="Responsive">Responsive's</a> theme options
+5. Even if you don't have the Responsive theme it will still add it's functionality to any other theme. You will be able to find the options in the settings tab
 
 == Changelog ==
 
