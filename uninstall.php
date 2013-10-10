@@ -17,10 +17,10 @@
 
 // Exit if accessed directly
 if( !defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 if( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-    exit();
+	exit();
 }
 
 delete_option( 'responsive_addons_options' );
