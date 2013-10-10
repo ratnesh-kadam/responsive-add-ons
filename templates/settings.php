@@ -59,7 +59,11 @@ if( !defined( 'ABSPATH' ) ) {
 			</tr>
 
 			<tr>
-				<th><?php _e( 'Site Statistics Tracker', 'responsive-addons' ); ?></th>
+				<th>
+					<?php _e( 'Site Statistics Tracker', 'responsive-addons' ); ?>
+					<br/><a class="resp-addon-forum button" href="http://cyberchimps.com/forum/free/responsive/">Forum</a>
+					<a style="margin:5px;" class="resp-addon-guide button" href="http://cyberchimps.com/guide/responsive-add-ons/">Guide</a>
+				</th>
 				<td><textarea id="<?php echo esc_attr( 'responsive_addons_options[site_statistics_tracker]' ); ?>" class="large-text" cols="50" rows="15" name="<?php echo esc_attr(
 						'responsive_addons_options[site_statistics_tracker]' ); ?>"><?php echo ( !empty( $options['site_statistics_tracker'] ) ) ? esc_html( $options['site_statistics_tracker'] ) : ''; ?></textarea>
 					<label class="description" for="<?php echo esc_attr( 'responsive_addons_options[site_statistics_tracker]' ); ?>">
