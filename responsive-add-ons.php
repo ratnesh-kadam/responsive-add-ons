@@ -3,7 +3,7 @@
 Plugin Name: Responsive Add Ons
 Plugin URI: http://cyberchimps.com
 Description: Added functionality for the responsive theme
-Version: 1.0.3
+Version: 1.0.4
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
