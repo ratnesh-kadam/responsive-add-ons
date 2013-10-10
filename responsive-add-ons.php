@@ -173,8 +173,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 					),
 					array(
 						'title'       => __( 'Site Statistics Tracker', 'responsive-addons' ),
-						'subtitle'    => '<span class="info-box information help-links">' . __( 'Leave blank if plugin handles your webmaster tools', 'responsive-addons' ) . '</span>',
-						'heading'     => '',
+						'subtitle'    => '<span class="info-box information help-links">' . __( 'Leave blank if plugin handles your webmaster tools', 'responsive-addons' ) . '</span>' .
+										 '<a style="margin:5px;" class="resp-addon-forum button" href="http://cyberchimps.com/forum/free/responsive/">Forum</a>' .
+										 '<a style="margin:5px;" class="resp-addon-guide button" href="http://cyberchimps.com/guide/responsive-add-ons/">Guide</a>',
+                        'heading'     => '',
 						'type'        => 'textarea',
 						'id'          => 'site_statistics_tracker',
 						'class'       => array( 'site-tracker' ),
