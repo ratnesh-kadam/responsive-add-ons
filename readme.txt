@@ -43,22 +43,22 @@ that it was important to make it inclusive rather than exclusive.
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial set up and release
-
-= 1.0.1 =
-* Bug Fixes
-
-= 1.0.2 =
-* Bug Fixes
+= 1.0.4 =
+* Language Updates
+* Links to forum and guides
 
 = 1.0.3 =
 * Bug Fixes
 * Added styling to textarea
 
-= 1.0.4 =
-* Language Updates
-* Links to forum and guides
+= 1.0.2 =
+* Bug Fixes
+
+= 1.0.1 =
+* Bug Fixes
+
+= 1.0.0 =
+* Initial set up and release
 
 == Upgrade Notice ==
 
