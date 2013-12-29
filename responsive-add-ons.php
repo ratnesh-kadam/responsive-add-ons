@@ -3,7 +3,7 @@
 Plugin Name: Responsive Add Ons
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Added functionality for the responsive theme
-Version: 1.0.4
+Version: 1.0.5
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
