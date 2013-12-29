@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: CyberChimps
+Contributors: cyberchimps
 Donate Link: http://cyberchimps.com
 Tags: google, yahoo, bing, analytics, verification
 Requires at least: 3.0.1
 Tested up to: 3.6
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,9 @@ that it was important to make it inclusive rather than exclusive.
 
 == Changelog ==
 
+= 1.0.5 =
+* Bug fixes
+
 = 1.0.4 =
 * Language Updates
 * Links to forum and guides
@@ -62,19 +65,22 @@ that it was important to make it inclusive rather than exclusive.
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-* Initial set up and release
-
-= 1.0.1 =
+= 1.0.5 =
 * Bug fixes
 
-= 1.0.2 =
-* Bug fixes
+= 1.0.4 =
+* Language Updates
+* Links to forum and guides
 
 = 1.0.3 =
 * Bug Fixes
 * Added styling to textarea
 
-= 1.0.4 =
-* Language Updates
-* Links to forum and guides
+= 1.0.2 =
+* Bug fixes
+
+= 1.0.1 =
+* Bug fixes
+
+= 1.0.0 =
+* Initial set up and release
