@@ -188,6 +188,15 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			$new = array_merge( $options, $new_options );
 
+			$new['theme_elements'][] =
+					array(
+						'title'       => __( 'Stop 2.x.x.x Updates', 'responsive-addons' ),
+						'subtitle'    => '',
+						'heading'     => '',
+						'type'        => 'checkbox',
+						'id'          => 'stop_responsive2',
+					);
+					
 			return $new;
 		}
 
