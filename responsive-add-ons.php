@@ -70,7 +70,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 				add_filter( 'responsive_options_filter', array( &$this, 'responsive_options' ), 10, 1 );
 
 				$stop_responsive2 = isset( $options['stop_responsive2'] ) ? $options['stop_responsive2'] : '';
-				
+
 				// Check if stop_responsive2 toggle is on, if on then include update class from wp-updates.com
 				if( 1 == $stop_responsive2 ) {
 					// Notify user of theme update on "Updates" page in Dashboard.
@@ -78,8 +78,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 					new WPUpdatesThemeUpdater_797( 'http://wp-updates.com/api/2/theme', 'responsive' );
 				}
 
-			}
-			else {
+			} else {
 				$this->init_settings();
 			}
 		}
@@ -92,18 +91,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			// Check if the theme being used is Responsive. If True then add settings to Responsive settings, else set up a settings page
 			if( $this->is_responsive() ) {
-			
-				// Check if stop_responsive2 toggle is on, if on then include update class from wp-updates.com
-				if( responsive_free_get_option('stop_responsive2') ) {
-					require_once('wp-updates-theme.php');
-					new WPUpdatesThemeUpdater_797( 'http://wp-updates.com/api/2/theme', basename( get_template_directory() ) );
-				}
-				
+
 				add_filter( 'responsive_option_options_filter', array( $this, 'responsive_theme_options_set' ) );
 
-			}
-			else {
-				$this->init_settings();
 			}
 		}
 
@@ -119,7 +109,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 * Settings
 		 */
 		public function init_settings() {
-			register_setting( 'responsive_addons', 'responsive_addons_options', array( &$this, 'responsive_addons_sanitize' ) );
+			register_setting(
+				'responsive_addons',
+				'responsive_addons_options',
+				array( &$this, 'responsive_addons_sanitize' )
+			);
 
 		}
 
@@ -128,10 +122,14 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 */
 		public function add_menu() {
 			// Hides Menu options if the current theme is responsive
-			if( !$this->is_responsive() ) {
-				add_options_page( 'Responsive Addons', 'Responsive Add Ons', 'manage_options', 'responsive_addons', array( &$this,
-					'plugin_settings_page'
-				) );
+			if( ! $this->is_responsive() ) {
+				add_options_page(
+					__( 'Responsive Add Ons', 'responsive-addons' ),
+					__( 'Responsive Add Ons', 'responsive-addons' ),
+					'manage_options',
+					'responsive_addons',
+					array( &$this, 'plugin_settings_page' )
+				);
 			}
 		}
 
@@ -211,7 +209,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 					),
 					array(
 						'title'       => __( 'Site Statistics Tracker', 'responsive-addons' ),
-						'subtitle'    => '<span class="info-box information help-links">' . __( 'Leave blank if plugin handles your webmaster tools', 'responsive-addons' ) . '</span>' . '<a style="margin:5px;" class="resp-addon-forum button" href="http://cyberchimps.com/forum/free/responsive/">Forum</a>' . '<a style="margin:5px;" class="resp-addon-guide button" href="http://cyberchimps.com/guide/responsive-add-ons/">Guide</a>',
+						'subtitle'    => '<span class="info-box information help-links">' . __( 'Leave blank if plugin handles your webmaster tools', 'responsive-addons' ) . '</span>' . '<a style="margin:5px;" class="resp-addon-forum button" href="http://cyberchimps.com/forum/free/responsive/">Forum</a>' . '<a style="margin:5px;" class="resp-addon-guide button" href="http://cyberchimps.com/guide/responsive-add-ons/">' . __( 'Guide', 'responsive-addons' ) . '</a>',
 						'heading'     => '',
 						'type'        => 'textarea',
 						'id'          => 'site_statistics_tracker',
@@ -227,12 +225,12 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			// Add stop_responsive2 options only to Responsive theme.
 			if( $this->is_responsive() ) {
 				$new['theme_elements'][] = array(
-					'title'       => __( 'Stop 2.x.x.x Updates', 'responsive-addons' ),
+					'title'       => __( 'Disable Responsive 2 Updates', 'responsive-addons' ),
 					'subtitle'    => '',
 					'heading'     => '',
 					'type'        => 'checkbox',
 					'id'          => 'stop_responsive2',
-					'description' => __( 'Check to disable', 'responsive' ),
+					'description' => __( 'check to disable', 'responsive' ),
 				);
 			}
 
@@ -282,8 +280,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 					),
 					array(
 						'title'       => __( 'Site Statistics Tracker', 'responsive-addons' ),
-						'subtitle'    => '<span class="info-box information help-links">' . __( 'Leave blank if plugin handles your webmaster tools', 'responsive-addons' ) . '</span>' . '<a style="margin:5px;" class="resp-addon-forum button" href="http://cyberchimps.com/forum/free/responsive/">Forum</a>' . '<a style="margin:5px;" class="resp-addon-guide button" href="http://cyberchimps.com/guide/responsive-add-ons/">Guide</a>',
-                        'heading'     => '',
+						'subtitle'    => '<span class="info-box information help-links">' . __( 'Leave blank if plugin handles your webmaster tools', 'responsive-addons' ) . '</span>' . '<a style="margin:5px;" class="resp-addon-forum button" href="http://cyberchimps.com/forum/free/responsive/">Forum</a>' . '<a style="margin:5px;" class="resp-addon-guide button" href="http://cyberchimps.com/guide/responsive-add-ons/">' . __( 'Guide', 'responsive-addons' ) . '</a>',
+						'heading'     => '',
 						'type'        => 'textarea',
 						'id'          => 'site_statistics_tracker',
 						'class'       => array( 'site-tracker' ),
