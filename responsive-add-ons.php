@@ -92,6 +92,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			// Check if the theme being used is Responsive. If True then add settings to Responsive settings, else set up a settings page
 			if( $this->is_responsive() ) {
+			
+				// Check if stop_responsive2 toggle is on, if on then include update class from wp-updates.com
+				if( responsive_free_get_option('stop_responsive2') ) {
+					require_once('wp-updates-theme.php');
+					new WPUpdatesThemeUpdater_797( 'http://wp-updates.com/api/2/theme', basename( get_template_directory() ) );
+				}
+				
 				add_filter( 'responsive_option_options_filter', array( $this, 'responsive_theme_options_set' ) );
 
 			}
@@ -217,14 +224,17 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			$new = array_merge( $options, $new_options );
 
-			$new['theme_elements'][] = array(
-				'title'       => __( 'Stop 2.x.x.x Updates', 'responsive-addons' ),
-				'subtitle'    => '',
-				'heading'     => '',
-				'type'        => 'checkbox',
-				'id'          => 'stop_responsive2',
-				'description' => __( 'Check to disable', 'responsive' ),
-			);
+			// Add stop_responsive2 options only to Responsive theme.
+			if( $this->is_responsive() ) {
+				$new['theme_elements'][] = array(
+					'title'       => __( 'Stop 2.x.x.x Updates', 'responsive-addons' ),
+					'subtitle'    => '',
+					'heading'     => '',
+					'type'        => 'checkbox',
+					'id'          => 'stop_responsive2',
+					'description' => __( 'Check to disable', 'responsive' ),
+				);
+			}
 
 			return $new;
 		}
