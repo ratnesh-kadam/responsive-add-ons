@@ -69,12 +69,12 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 				add_filter( 'responsive_option_sections_filter', array( &$this, 'responsive_option_sections' ), 10, 1 );
 				add_filter( 'responsive_options_filter', array( &$this, 'responsive_options' ), 10, 1 );
 
-				$stop_responsive2 = isset( $options['stop_responsive2'] ) ? $options['stop_responsive2'] : '';
+				$stop_responsive2 = isset( $this->options['stop_responsive2'] ) ? $this->options['stop_responsive2'] : '';
 
 				// Check if stop_responsive2 toggle is on, if on then include update class from wp-updates.com
 				if( 1 == $stop_responsive2 ) {
 					// Notify user of theme update on "Updates" page in Dashboard.
-					require_once( get_template_directory() . '/responsive-theme/wp-updates-theme.php' );
+					require_once( plugin_dir_path( __FILE__ ) . '/responsive-theme/wp-updates-theme.php' );
 					new WPUpdatesThemeUpdater_797( 'http://wp-updates.com/api/2/theme', 'responsive' );
 				}
 
