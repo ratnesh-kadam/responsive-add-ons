@@ -3,7 +3,7 @@ Contributors: cyberchimps
 Donate Link: http://cyberchimps.com
 Tags: google, yahoo, bing, analytics, verification
 Requires at least: 3.4
-Tested up to: 3.8
+Tested up to: 3.9.1
 Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,6 +43,10 @@ that it was important to make it inclusive rather than exclusive.
 
 == Changelog ==
 
+= 1.0.6 - 10 June 2014 =
+* Add Responsive 2 Support
+* Add option to choose between Responsive 1 and 2 - http://content.cyberchimps.com/responsive-2-migration
+
 = 1.0.5 =
 * Bug fixes
 
@@ -64,6 +68,9 @@ that it was important to make it inclusive rather than exclusive.
 * Initial set up and release
 
 == Upgrade Notice ==
+
+= 1.0.6 =
+* Getting ready for Responsive 2 release - http://content.cyberchimps.com/responsive-2-migration
 
 = 1.0.5 =
 * Bug fixes
