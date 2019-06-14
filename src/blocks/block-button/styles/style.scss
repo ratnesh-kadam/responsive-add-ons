@@ -1,0 +1,88 @@
+/**
+ * Button styles
+ * Loads on front end and back end
+ */
+
+ .ra-block-button {
+	margin: 0 0 1.2em 0;
+	position: relative;
+
+	.blocks-rich-text {
+		display: inline-flex;
+	}
+
+	.components-autocomplete {
+		display: inline-block;
+		width: auto;
+		margin: 0 auto;
+		position: relative;
+	}
+}
+
+.ra-button {
+	text-align: center;
+	font-size: 18px;
+	line-height: 1 !important;
+	background-color: #32373c;
+	border: none;
+	border-radius: 50px;
+	box-shadow: none;
+	color: #fff;
+	cursor: pointer;
+	padding: .6em 1em;
+	text-decoration: none;
+	word-break: break-word;
+	transition: .3s ease;
+	display: inline-block;
+
+	&:hover {
+		box-shadow: inset 0 0 200px rgba(255, 255, 255, 0.15);
+	}
+}
+
+.ra-button-shape-square,
+input[type="submit"].ra-button-shape-square {
+	border-radius: 0;
+}
+
+.ra-button-shape-rounded,
+input[type="submit"].ra-button-shape-rounded {
+	border-radius: 5px;
+}
+
+.ra-button-shape-circular,
+input[type="submit"].ra-button-shape-circular {
+	border-radius: 100px;
+}
+
+.ra-button-size-small,
+input[type="submit"].ra-button-size-small {
+	font-size: 14px;
+}
+
+.ra-button-size-medium,
+input[type="submit"].ra-button-size-medium {
+	font-size: 20px;
+}
+
+.ra-button-size-large,
+input[type="submit"].ra-button-size-large {
+	font-size: 26px;
+	padding: .8em 1.2em;
+}
+
+.ra-button-size-extralarge,
+input[type="submit"].ra-button-size-extralarge {
+	font-size: 34px;
+	padding: .8em 1.2em;
+}
+
+.ra-button-right {
+	transform: translateX(-100%);
+	left: 100%;
+	position: relative;
+}
+
+.ra-button-center {
+	margin: 0 auto;
+}
