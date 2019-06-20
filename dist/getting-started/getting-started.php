@@ -48,8 +48,8 @@ add_action( 'admin_enqueue_scripts', 'responsive_blocks_start_load_admin_scripts
 function responsive_blocks_getting_started_menu() {
 
 	add_menu_page(
-		__( 'Responsive Add Ons', 'responsive-blocks' ),
-		__( 'Responsive Add Ons', 'responsive-blocks' ),
+		__( 'Responsive Blocks', 'responsive-blocks' ),
+		__( 'Responsive Blocks', 'responsive-blocks' ),
 		'manage_options',
 		'responsive-blocks',
 		'responsive_blocks_getting_started_page_temp',
@@ -71,28 +71,26 @@ function responsive_blocks_getting_started_menu() {
 			esc_html__( 'Responsive Blocks Settings', 'responsive-blocks' ),
 			esc_html__( 'Settings', 'responsive-blocks' ),
 			'manage_options',
-			'responsive-blocks',
-			'responsive_blocks_getting_started_page_temp'
+			'responsive-blocks-plugin-settings',
+			'responsive_blocks_render_settings_page'
 		);
 	}
 
 }
 add_action( 'admin_menu', 'responsive_blocks_getting_started_menu' );
 
+function responsive_blocks_getting_started_page_temp(){
+	$str = dirname( __FILE__ );
+	$len = strlen($str);
+	$final_path = substr($str,0, $len-20);
+	include($final_path.'templates\settings.php');
+}
 
 /**
  * Outputs the markup used on the Getting Started
  *
  * @since 1.0.0
  */
-function responsive_blocks_getting_started_page_temp(){
-	$str = dirname( __FILE__ );
-	$len = strlen($str);
-	$final_path = substr($str,0, $len-20);
-	//include( sprintf( "%s/templates/settings.php", dirname( __FILE__ ) ) );
-	include($final_path.'templates\settings.php');
-}
-
 function responsive_blocks_getting_started_page() {
 
 	/**
@@ -133,7 +131,7 @@ function responsive_blocks_getting_started_page() {
 		'install-theme_responsive-blocks'
 	);
 	?>
-	<div class="wrap ra-getting-started">
+	<div class="wrap ab-getting-started">
 		<div class="intro-wrap">
 			<div class="intro">
 				<a href="<?php echo esc_url( 'https://goo.gl/NfXcof' ); ?>"><img class="responsive-logo" src="<?php echo esc_url( plugins_url( 'logo.png', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit Responsive Blocks', 'responsive-blocks' ); ?>" /></a>
@@ -152,115 +150,115 @@ function responsive_blocks_getting_started_page() {
 		<div class="panels">
 			<div id="panel" class="panel">
 				<div id="responsive-blocks-panel" class="panel-left visible">
-					<div class="ra-block-split clearfix">
-						<div class="ra-block-split-left">
-							<div class="ra-titles">
+					<div class="ab-block-split clearfix">
+						<div class="ab-block-split-left">
+							<div class="ab-titles">
 								<h2><?php esc_html_e( 'Welcome to the future of site building with Gutenberg and Responsive Blocks!', 'responsive-blocks' ); ?></h2>
 								<p><?php esc_html_e( 'The Responsive Blocks collection is now ready to use in your posts and pages. Simply search for "responsive" or "ab" in the block inserter to display the Responsive Blocks collection. Check out the help file link above for detailed instructions!', 'responsive-blocks' ); ?></p>
 							</div>
 						</div>
-						<div class="ra-block-split-right">
-							<div class="ra-block-theme">
+						<div class="ab-block-split-right">
+							<div class="ab-block-theme">
 								<img src="<?php echo esc_url( plugins_url( 'images/build-content.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Responsive Blocks Theme', 'responsive-blocks' ); ?>" />
 							</div>
 						</div>
 					</div>
 
-					<div class="ra-block-feature-wrap clear">
+					<div class="ab-block-feature-wrap clear">
 						<i class="fas fa-cube"></i>
 						<h2><?php esc_html_e( 'Available Responsive Blocks', 'responsive-blocks' ); ?></h2>
 						<p><?php esc_html_e( 'The following blocks are available in Responsive Blocks. More blocks are on the way so stay tuned!', 'responsive-blocks' ); ?></p>
 
-						<div class="ra-block-features">
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc26.svg', __FILE__ ) ); ?>" alt="Post Grid Block" /></div>
-								<div class="ra-block-feature-text">
+						<div class="ab-block-features">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc26.svg', __FILE__ ) ); ?>" alt="Post Grid Block" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Post Grid Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc430.svg', __FILE__ ) ); ?>" alt="Container Block" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc430.svg', __FILE__ ) ); ?>" alt="Container Block" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Container Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Wrap several blocks into a section and add padding, margins, background colors and images.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc41.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Call To Action Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc41.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Call To Action Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Call-To-Action Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc4.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Testimonials Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc4.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Testimonials Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Testimonial Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add a customer or client testimonial to your site with an avatar, text, citation and more.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc184.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Inline Notices Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc184.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Inline Notices Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Inline Notice Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add a colorful notice or message to your site with text, a title and a dismiss icon.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc50.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Sharing Icons Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc50.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Sharing Icons Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Sharing Icons Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add social sharing icons to your page with size, shape, color and style options.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc94-f.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Author Profile Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc94-f.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Author Profile Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Author Profile Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add a user profile box to your site with a title, bio info, an avatar and social media links.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc115.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Accordion Toggle', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc115.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Accordion Toggle', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Accordion Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add an accordion text toggle with a title and descriptive text. Includes font size and toggle options.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc45.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Customizable Button Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc45.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Customizable Button Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Customizable Button', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add a fancy stylized button to your post or page with size, shape, target, and color options.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc38.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Drop Cap Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc38.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Drop Cap Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Drop Cap Block', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add a stylized drop cap to the beginning of your paragraph. Choose from three different styles.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
 
-							<div class="ra-block-feature">
-								<div class="ra-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc402.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Spacer and Divider Block', 'responsive-blocks' ); ?>" /></div>
-								<div class="ra-block-feature-text">
+							<div class="ab-block-feature">
+								<div class="ab-block-feature-icon"><img src="<?php echo esc_url( plugins_url( 'images/cc402.svg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Spacer and Divider Block', 'responsive-blocks' ); ?>" /></div>
+								<div class="ab-block-feature-text">
 									<h3><?php esc_html_e( 'Spacer & Divider', 'responsive-blocks' ); ?></h3>
 									<p><?php esc_html_e( 'Add an adjustable spacer between your blocks with an optional divider with styling options.', 'responsive-blocks' ); ?></p>
 								</div>
 							</div>
-						</div><!-- .ra-block-features -->
-					</div><!-- .ra-block-feature-wrap -->
+						</div><!-- .ab-block-features -->
+					</div><!-- .ab-block-feature-wrap -->
 				</div><!-- .panel-left -->
 
 				<!-- Plugin help file panel -->
@@ -312,7 +310,7 @@ function responsive_blocks_getting_started_page() {
 				<div class="panel-right">
 
 					<?php if ( ! function_exists( 'gutenberg_init' ) || ! function_exists( 'responsive_blocks_loader' ) ) { ?>
-					<div class="panel-aside panel-ra-plugin panel-club ra-quick-start">
+					<div class="panel-aside panel-ab-plugin panel-club ab-quick-start">
 						<div class="panel-club-inside">
 							<div class="cell panel-title">
 								<h3><i class="fa fa-check"></i> <?php esc_html_e( 'Quick Start Checklist', 'responsive-blocks' ); ?></h3>
@@ -362,7 +360,7 @@ function responsive_blocks_getting_started_page() {
 					<?php } ?>
 
 					<?php if ( ! function_exists( 'responsive_blocks_setup' ) ) { ?>
-					<div class="panel-aside panel-ra-plugin panel-club">
+					<div class="panel-aside panel-ab-plugin panel-club">
 						<div class="panel-club-inside">
 							<div class="cell panel-title">
 								<h3><i class="fa fa-download"></i> <?php esc_html_e( 'Free Theme Download', 'responsive-blocks' ); ?></h3>
@@ -370,7 +368,7 @@ function responsive_blocks_getting_started_page() {
 
 							<ul>
 								<li class="cell">
-									<p><a class="ra-theme-image" href="<?php echo esc_url( 'https://goo.gl/FCT6xS' ); ?>"><img src="<?php echo esc_url( plugins_url( 'theme.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit Responsive Blocks', 'responsive-blocks' ); ?>" /></a></p>
+									<p><a class="ab-theme-image" href="<?php echo esc_url( 'https://goo.gl/FCT6xS' ); ?>"><img src="<?php echo esc_url( plugins_url( 'theme.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit Responsive Blocks', 'responsive-blocks' ); ?>" /></a></p>
 
 									<p><?php esc_html_e( 'Download our FREE Responsive Blocks theme to help you get started with the Responsive Blocks plugin and the new WordPress block editor.', 'responsive-blocks' ); ?></p>
 
@@ -381,7 +379,7 @@ function responsive_blocks_getting_started_page() {
 					</div>
 					<?php } ?>
 
-					<div class="panel-aside panel-ra-plugin panel-club">
+					<div class="panel-aside panel-ab-plugin panel-club">
 						<div class="panel-club-inside">
 							<div class="cell panel-title">
 								<h3><i class="fa fa-envelope"></i> <?php esc_html_e( 'Stay Updated', 'responsive-blocks' ); ?></h3>
@@ -397,7 +395,7 @@ function responsive_blocks_getting_started_page() {
 						</div>
 					</div>
 
-					<div class="panel-aside panel-ra-plugin panel-club">
+					<div class="panel-aside panel-ab-plugin panel-club">
 						<div class="panel-club-inside">
 							<div class="cell panel-title">
 								<h3><i class="fa fa-arrow-circle-down"></i> <?php esc_html_e( 'Free Blocks & Tutorials', 'responsive-blocks' ); ?></h3>
@@ -416,22 +414,22 @@ function responsive_blocks_getting_started_page() {
 				<div class="footer-wrap">
 					<h2 class="visit-title"><?php esc_html_e( 'Free Blocks and Resources', 'responsive-blocks' ); ?></h2>
 
-					<div class="ra-block-footer">
-						<div class="ra-block-footer-column">
+					<div class="ab-block-footer">
+						<div class="ab-block-footer-column">
 							<i class="far fa-envelope"></i>
 							<h3><?php esc_html_e( 'Blocks In Your Inbox', 'responsive-blocks' ); ?></h3>
 							<p><?php esc_html_e( 'Join the newsletter to receive emails when we add new blocks, release plugin and theme updates, send out free resources, and more!', 'responsive-blocks' ); ?></p>
 							<a class="button-primary" href="https://responsiveblocks.com/subscribe?utm_source=AB%20Theme%20GS%20Page%20Footer%20Subscribe"><?php esc_html_e( 'Subscribe Today', 'responsive-blocks' ); ?></a>
 						</div>
 
-						<div class="ra-block-footer-column">
+						<div class="ab-block-footer-column">
 							<i class="far fa-edit"></i>
 							<h3><?php esc_html_e( 'Articles & Tutorials', 'responsive-blocks' ); ?></h3>
 							<p><?php esc_html_e( 'Check out the Responsive Blocks site to find block editor tutorials, free blocks and updates about the Responsive Blocks plugin and theme!', 'responsive-blocks' ); ?></p>
 							<a class="button-primary" href="https://responsiveblocks.com/blog?utm_source=AB%20Theme%20GS%20Page%20Footer%20Blog"><?php esc_html_e( 'Visit the Blog', 'responsive-blocks' ); ?></a>
 						</div>
 
-						<div class="ra-block-footer-column">
+						<div class="ab-block-footer-column">
 							<i class="far fa-newspaper"></i>
 							<h3><?php esc_html_e( 'Gutenberg News', 'responsive-blocks' ); ?></h3>
 							<p><?php esc_html_e( 'Stay up to date with the new WordPress editor. Gutenberg News curates Gutenberg articles, tutorials, videos and more free resources.', 'responsive-blocks' ); ?></p>
@@ -439,14 +437,14 @@ function responsive_blocks_getting_started_page() {
 						</div>
 					</div>
 
-					<div class="ra-footer">
+					<div class="ab-footer">
 						<p>
 							<?php
 							/* translators: %1$s StudioPress website URL. %2$s WP Engine website URL. */
 							echo sprintf( esc_html__( 'Made by the fine folks at %1$s and %2$s.', 'responsive-blocks' ), '<a href=" ' . esc_url( 'https://studiopress.com/' ) . ' ">StudioPress</a>', '<a href=" ' . esc_url( 'https://wpengine.com/' ) . ' ">WP Engine</a>' );
 							?>
 						</p>
-						<div class="ra-footer-links">
+						<div class="ab-footer-links">
 							<a href="https:/responsiveblocks.com/"><?php esc_html_e( 'ResponsiveBlocks.com', 'responsive-blocks' ); ?></a>
 							<a href="https://responsiveblocks.com/blog/"><?php esc_html_e( 'Blog', 'responsive-blocks' ); ?></a>
 							<a href="https://responsiveblocks.com/responsive-blocks-docs/"><?php esc_html_e( 'Docs', 'responsive-blocks' ); ?></a>
@@ -464,11 +462,6 @@ function responsive_blocks_getting_started_page() {
  * Renders the plugin settings page.
  */
 function responsive_blocks_render_settings_page() {
-
-	/*Redirect to Responsive Addons Settins page at the moment Origninal Page settins are available below*/
-	wp_safe_redirect( esc_url( admin_url( 'options-general.php?page=responsive_addons' ) ) );
-	exit;
-	
 
 	$pages_dir = trailingslashit( dirname( __FILE__ ) ) . 'pages/';
 
