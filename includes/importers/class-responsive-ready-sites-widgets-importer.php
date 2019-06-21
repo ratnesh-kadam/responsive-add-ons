@@ -86,7 +86,7 @@ class Responsive_Ready_Sites_Widgets_Importer {
 		// If no data or could not decode.
 		if ( empty( $data ) || ! is_object( $data ) ) {
 			wp_die(
-				esc_html__( 'Import data could not be read. Please try a different file.', 'responsive-ready-sites' ),
+				esc_html__( 'Import data could not be read. Please try a different file.', 'responsive-addons' ),
 				'',
 				array(
 					'back_link' => true,
@@ -130,7 +130,7 @@ class Responsive_Ready_Sites_Widgets_Importer {
 				$sidebar_available    = false;
 				$use_sidebar_id       = 'wp_inactive_widgets'; // add to inactive if sidebar does not exist in theme.
 				$sidebar_message_type = 'error';
-				$sidebar_message      = esc_html__( 'Widget area does not exist in theme (using Inactive)', 'responsive-ready-sites' );
+				$sidebar_message      = esc_html__( 'Widget area does not exist in theme (using Inactive)', 'responsive-addons' );
 			}
 
 			// Result for sidebar.
@@ -152,7 +152,7 @@ class Responsive_Ready_Sites_Widgets_Importer {
 				if ( ! $fail && ! isset( $available_widgets[ $id_base ] ) ) {
 					$fail                = true;
 					$widget_message_type = 'error';
-					$widget_message      = esc_html__( 'Site does not support widget', 'responsive-ready-sites' ); // explain why widget not imported.
+					$widget_message      = esc_html__( 'Site does not support widget', 'responsive-addons' ); // explain why widget not imported.
 				}
 
 				// Filter to modify settings object before conversion to array and import
@@ -188,7 +188,7 @@ class Responsive_Ready_Sites_Widgets_Importer {
 
 							$fail                = true;
 							$widget_message_type = 'warning';
-							$widget_message      = esc_html__( 'Widget already exists', 'responsive-ready-sites' ); // explain why widget not imported.
+							$widget_message      = esc_html__( 'Widget already exists', 'responsive-addons' ); // explain why widget not imported.
 
 							break;
 
@@ -257,16 +257,16 @@ class Responsive_Ready_Sites_Widgets_Importer {
 					// Success message.
 					if ( $sidebar_available ) {
 						$widget_message_type = 'success';
-						$widget_message      = esc_html__( 'Imported', 'responsive-ready-sites' );
+						$widget_message      = esc_html__( 'Imported', 'responsive-addons' );
 					} else {
 						$widget_message_type = 'warning';
-						$widget_message      = esc_html__( 'Imported to Inactive', 'responsive-ready-sites' );
+						$widget_message      = esc_html__( 'Imported to Inactive', 'responsive-addons' );
 					}
 				}
 
 				// Result for widget instance.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['name']         = isset( $available_widgets[ $id_base ]['name'] ) ? $available_widgets[ $id_base ]['name'] : $id_base; // widget name or ID if name not available (not supported by site).
-				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : esc_html__( 'No Title', 'responsive-ready-sites' ); // show "No Title" if widget instance is untitled.
+				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : esc_html__( 'No Title', 'responsive-addons' ); // show "No Title" if widget instance is untitled.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message_type'] = $widget_message_type;
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message']      = $widget_message;
 

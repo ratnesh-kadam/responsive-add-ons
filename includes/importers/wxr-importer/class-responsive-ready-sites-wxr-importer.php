@@ -242,7 +242,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				),
 				'url'     => $url,
 				'strings' => array(
-					'complete' => __( 'Import complete!', 'responsive-ready-sites' ),
+					'complete' => __( 'Import complete!', 'responsive-addons' ),
 				),
 			);
 		}
