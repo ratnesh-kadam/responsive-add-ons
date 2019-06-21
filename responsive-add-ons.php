@@ -45,6 +45,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			$plugin = plugin_basename( __FILE__ );
 			add_filter( "plugin_action_links_$plugin", array( &$this, 'plugin_settings_link' ) );
 
+			// Responsive Ready Site Importer Menu
+            add_action('admin_menu', array( &$this, 'add_responsive_ready_sites_menu' ) );
+
 			$this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
 
@@ -373,6 +376,30 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			return $links;
 		}
+
+        /**
+         * Add Responsive Ready Sites Menu
+         *
+         * @since 1.0.0
+         */
+        public function add_responsive_ready_sites_menu() {
+            $page_title = apply_filters( 'responsive_ready_sites_menu_page_title', __( 'Responsive Ready Sites', 'responsive-addons' ) );
+
+            $page = add_theme_page( $page_title, $page_title, 'manage_options', 'responsive_ready_sites', array( &$this, 'menu_callback' ) );
+        }
+
+        /**
+         * Menu callback
+         *
+         * @since 1.0.0
+         */
+        public function menu_callback() {
+            ?>
+            <div class="responsive-sites-menu-page-wrapper">
+                <?php require_once plugin_dir_path( __FILE__ ) . 'admin/partials/responsive-ready-sites-admin-display.php'; ?>
+            </div>
+            <?php
+        }
 
 	}
 }
