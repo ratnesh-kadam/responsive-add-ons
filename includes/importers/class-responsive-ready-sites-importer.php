@@ -46,8 +46,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		public function __construct() {
 
 			add_action( 'init', array( $this, 'load_importer' ) );
-			require_once RESPONSIVE_ADDONS_DIR . 'includes/class-responsive-ready-sites-plugin-installer.php';
-			require_once RESPONSIVE_ADDONS_DIR . 'includes/class-responsive-ready-sites-widgets-importer.php';
+			require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/class-responsive-ready-sites-plugin-installer.php';
+			require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/class-responsive-ready-sites-widgets-importer.php';
+			require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/class-responsive-ready-sites-options-importer.php';
 
 			// Import AJAX.
 			add_action( 'wp_ajax_responsive-ready-sites-import-set-site-data', array( $this, 'import_start' ) );
@@ -293,7 +294,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 					update_option( '_responsive_ready_sites_old_site_options', $options_data );
 				}
 
-				$options_importer = Responsive_Ready_Sites_Options_Import::instance();
+				$options_importer = Responsive_Ready_Sites_Options_Importer::instance();
 				$options_importer->import_options( $options_data );
 				wp_send_json_success( $options_data );
 			} else {
