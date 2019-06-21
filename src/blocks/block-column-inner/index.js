@@ -21,7 +21,7 @@ const { registerBlockType } = wp.blocks;
  * Register advanced columns block.
  */
 registerBlockType( 'responsive-blocks/ra-column', {
-	title: __( 'AB Advanced Column', 'responsive-blocks' ),
+	title: __( 'RA Advanced Column', 'responsive-blocks' ),
 	description: __( 'Add a pre-defined column layout.', 'responsive-blocks' ),
 	icon: 'editor-table',
 	category: 'responsive-blocks',

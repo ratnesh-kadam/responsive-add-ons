@@ -154,7 +154,7 @@ class ABPricingTableBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-pricing-table', {
-	title: __( 'AB Pricing Column', 'responsive-blocks' ),
+	title: __( 'RA Pricing Column', 'responsive-blocks' ),
 	description: __( 'Add a pricing column.', 'responsive-blocks' ),
 	icon: 'cart',
 	category: 'responsive-blocks',

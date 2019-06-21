@@ -161,7 +161,7 @@ class ABTestimonialBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-testimonial', {
-	title: __( 'AB Testimonial', 'responsive-blocks' ),
+	title: __( 'RA Testimonial', 'responsive-blocks' ),
 	description: __( 'Add a user testimonial with a name and title.', 'responsive-blocks' ),
 	icon: 'format-quote',
 	category: 'responsive-blocks',

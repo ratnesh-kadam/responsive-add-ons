@@ -22,7 +22,7 @@ const validAlignments = [ 'center', 'wide', 'full' ];
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-post-grid', {
-	title: __( 'AB Post and Page Grid', 'responsive-blocks' ),
+	title: __( 'RA Post and Page Grid', 'responsive-blocks' ),
 	description: __( 'Add a grid or list of customizable posts or pages.', 'responsive-blocks' ),
 	icon: 'grid-view',
 	category: 'responsive-blocks',

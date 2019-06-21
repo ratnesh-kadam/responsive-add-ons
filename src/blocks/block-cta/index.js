@@ -288,7 +288,7 @@ class ABCTABlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-cta', {
-	title: __( 'AB Call To Action', 'responsive-blocks' ),
+	title: __( 'RA Call To Action', 'responsive-blocks' ),
 	description: __( 'Add a call to action section with a title, text, and a button.', 'responsive-blocks' ),
 	icon: 'megaphone',
 	category: 'responsive-blocks',

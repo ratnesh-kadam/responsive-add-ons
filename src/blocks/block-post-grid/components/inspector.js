@@ -138,13 +138,13 @@ export default class Inspector extends Component {
 		// Add the landscape image size to the select
 		const abImageSizeLandscape = {
 			value: 'ra-post-grid-image-landscape',
-			label: __( 'AB Grid Landscape' ),
+			label: __( 'RA Grid Landscape' ),
 		};
 
 		// Add the square image size to the select
 		const abImageSizeSquare = {
 			value: 'ra-post-grid-image-square',
-			label: __( 'AB Grid Square' ),
+			label: __( 'RA Grid Square' ),
 		};
 
 		// Get the image size options

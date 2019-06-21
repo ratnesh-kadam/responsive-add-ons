@@ -103,7 +103,7 @@ class ABButtonBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-button', {
-	title: __( 'AB Button', 'responsive-blocks' ),
+	title: __( 'RA Button', 'responsive-blocks' ),
 	description: __( 'Add a customizable button.', 'responsive-blocks' ),
 	icon: 'admin-links',
 	category: 'responsive-blocks',

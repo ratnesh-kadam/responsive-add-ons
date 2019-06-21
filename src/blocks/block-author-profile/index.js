@@ -253,7 +253,7 @@ class ABAuthorProfileBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-profile-box', {
-	title: __( 'AB Profile Box', 'responsive-blocks' ),
+	title: __( 'RA Profile Box', 'responsive-blocks' ),
 	description: __( 'Add a profile box with bio info and social media links.', 'responsive-blocks' ),
 	icon: 'admin-users',
 	category: 'responsive-blocks',
