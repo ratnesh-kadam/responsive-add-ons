@@ -60,7 +60,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			$this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
 
-			
+			$this->load_responsive_sites_importer();
 		}
 
 		/**
@@ -389,7 +389,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Add Responsive Ready Sites Menu
          *
-         * @since 1.0.0
+         * @since 1.0.8
          */
         public function add_responsive_ready_sites_menu() {
             $page_title = apply_filters( 'responsive_ready_sites_menu_page_title', __( 'Responsive Ready Sites', 'responsive-addons' ) );
@@ -400,7 +400,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Menu callback
          *
-         * @since 1.0.0
+         * @since 1.0.8
          */
         public function menu_callback() {
             ?>
@@ -410,6 +410,14 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             <?php
         }
 
+        /**
+         * Load Responsive Ready Sites Importer
+         *
+         * @since 1.0.8
+         */
+        private function load_responsive_sites_importer() {
+            require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/class-responsive-ready-sites-importer.php';
+        }
 	}
 }
 
