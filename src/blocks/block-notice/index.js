@@ -101,7 +101,7 @@ class ABNoticeBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-notice', {
-	title: __( 'AB Notice', 'responsive-blocks' ),
+	title: __( 'RA Notice', 'responsive-blocks' ),
 	description: __( 'Add a stylized text notice.', 'responsive-blocks' ),
 	icon: 'format-aside',
 	category: 'responsive-blocks',

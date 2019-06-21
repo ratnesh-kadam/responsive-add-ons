@@ -87,7 +87,7 @@ class ABSpacerBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-spacer', {
-	title: __( 'AB Spacer', 'responsive-blocks' ),
+	title: __( 'RA Spacer', 'responsive-blocks' ),
 	description: __( 'Add a spacer and divider between your blocks.', 'responsive-blocks' ),
 	icon: 'image-flip-vertical',
 	category: 'responsive-blocks',

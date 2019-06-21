@@ -38,7 +38,7 @@ const {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-sharing', {
-	title: __( 'AB Sharing', 'responsive-blocks' ),
+	title: __( 'RA Sharing', 'responsive-blocks' ),
 	description: __( 'Add sharing buttons to your posts and pages.', 'responsive-blocks' ),
 	icon: 'admin-links',
 	category: 'responsive-blocks',

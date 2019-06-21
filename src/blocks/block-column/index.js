@@ -18,7 +18,7 @@ const { registerBlockType } = wp.blocks;
  * Register advanced columns block InnerBlocks.
  */
 registerBlockType( 'responsive-blocks/ra-columns', {
-	title: __( 'AB Advanced Columns', 'responsive-blocks' ),
+	title: __( 'RA Advanced Columns', 'responsive-blocks' ),
 	description: __( 'Add a pre-defined column layout.', 'responsive-blocks' ),
 	icon: 'editor-table',
 	category: 'responsive-blocks',

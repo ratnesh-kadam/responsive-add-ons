@@ -77,7 +77,7 @@ class ABDropCapBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-drop-cap', {
-	title: __( 'AB Drop Cap', 'responsive-blocks' ),
+	title: __( 'RA Drop Cap', 'responsive-blocks' ),
 	description: __( 'Add a styled drop cap to the beginning of your paragraph.', 'responsive-blocks' ),
 	icon: 'format-quote',
 	category: 'responsive-blocks',

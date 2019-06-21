@@ -105,7 +105,7 @@ class ABAccordionBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-accordion', {
-	title: __( 'AB Accordion', 'responsive-blocks' ),
+	title: __( 'RA Accordion', 'responsive-blocks' ),
 	description: __( 'Add accordion block with a title and text.', 'responsive-blocks' ),
 	icon: 'editor-ul',
 	category: 'responsive-blocks',

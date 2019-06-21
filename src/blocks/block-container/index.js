@@ -177,7 +177,7 @@ class ABContainerBlock extends Component {
 
 // Register the block
 registerBlockType( 'responsive-blocks/ra-container', {
-	title: __( 'AB Container', 'responsive-blocks' ),
+	title: __( 'RA Container', 'responsive-blocks' ),
 	description: __( 'Add a container block to wrap several blocks in a parent container.', 'responsive-blocks' ),
 	icon: 'editor-table',
 	category: 'responsive-blocks',
