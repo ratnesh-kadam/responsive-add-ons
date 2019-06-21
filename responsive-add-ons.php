@@ -25,6 +25,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+// Set Constants
+if ( ! defined( 'RESPONSIVE_ADDONS_FILE' ) ) {
+    define( 'RESPONSIVE_ADDONS_FILE', __FILE__ );
+}
+
+if ( ! defined( 'RESPONSIVE_ADDONS_DIR' ) ) {
+    define( 'RESPONSIVE_ADDONS_DIR', plugin_dir_path( RESPONSIVE_ADDONS_FILE ) );
+}
+
 if( !class_exists( 'Responsive_Addons' ) ) {
 
 	class Responsive_Addons {
