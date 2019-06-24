@@ -1,0 +1,70 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+.responsive-ready-sites-import-process-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: -2px;
+    z-index: 999999;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.responsive-ready-sites-result-preview .responsive-ready-sites-import-process-wrap progress {
+    background: #eeeeee;
+}
+.responsive-ready-sites-import-process-wrap progress {
+    padding: 0px;
+    border: 0 none;
+    background: #0085bd;
+    border-radius: 5px;
+    height: 4px;
+    flex: 1;
+}
+.responsive-ready-sites-import-process-wrap progress::-webkit-progress-value {
+    background: #00679b;
+}
+
+.responsive-ready-sites-import-process-wrap progress::-webkit-progress-bar {
+    background: transparent;
+}
+.responsive-ready-sites-import-process-wrap progress::-webkit-progress-value {
+    background: #00679b;
+}
+.responsive-ready-sites-import-process-wrap progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+.current-importing-status-wrap {
+    font-size: 1rem;
+}
+
+.current-importing-status-wrap hr {
+    border-color: #f1f1f1;
+}
+
+.current-importing-status {
+    font-size: 1rem;
+    background: #eeeeee;
+    padding: 1em 1.5em;
+}
+
+.current-importing-status-title {
+    margin-bottom: .5em;
+}
+.current-importing-status p {
+    margin: 0;
+}
+
+.theme-browser .theme .site-preview > .theme-screenshot {
+    transition: all linear 5s;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.theme-browser .theme .site-preview > .theme-screenshot:hover {
+    background-position: center bottom;
+    background-size: cover;
+}

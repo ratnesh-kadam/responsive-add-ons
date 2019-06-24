@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
+if ( ! class_exists( 'Responsive_Ready_Sites_WXR_Importer' ) ) :
 	/**
 	 * Class Responsive_Ready_Sites_WXR_Importer
 	 *
@@ -46,10 +46,14 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		private function __construct() {
 
 			require_once ABSPATH . '/wp-admin/includes/class-wp-importer.php';
-			require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/wxr-importer/class-wp-importer-logger.php';
-			require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
-			require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/wxr-importer/class-wxr-importer.php';
-			require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/wxr-importer/class-wxr-import-info.php';
+
+            $responsive_ready_sites_wxr_importers_dir = plugin_dir_path( __FILE__ );
+            error_log(print_r($responsive_ready_sites_wxr_importers_dir,true));
+
+			require_once $responsive_ready_sites_wxr_importers_dir . 'class-wp-importer-logger.php';
+			require_once $responsive_ready_sites_wxr_importers_dir . 'class-wp-importer-logger-serversentevents.php';
+			require_once $responsive_ready_sites_wxr_importers_dir . 'class-wxr-importer.php';
+			require_once $responsive_ready_sites_wxr_importers_dir . 'class-wxr-import-info.php';
 
 			add_filter( 'upload_mimes', array( $this, 'add_mime_type_xml_and_json' ) );
 			add_action( 'wp_ajax_responsive-wxr-import', array( $this, 'stream_import' ) );
