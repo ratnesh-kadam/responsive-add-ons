@@ -31,7 +31,11 @@ if ( ! defined( 'RESPONSIVE_ADDONS_FILE' ) ) {
 }
 
 if ( ! defined( 'RESPONSIVE_ADDONS_DIR' ) ) {
-    define( 'RESPONSIVE_ADDONS_DIR', plugin_dir_path( RESPONSIVE_ADDONS_FILE ) );
+    define( 'RESPONSIVE_ADDONS_DIR', plugin_dir_url( RESPONSIVE_ADDONS_FILE ) );
+}
+
+if ( ! defined( 'RESPONSIVE_ADDONS_URI' ) ) {
+    define( 'RESPONSIVE_ADDONS_URI', plugins_url( '/', RESPONSIVE_ADDONS_FILE ) );
 }
 
 if( !class_exists( 'Responsive_Addons' ) ) {
@@ -56,8 +60,17 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			// Responsive Ready Site Importer Menu
             add_action('admin_menu', array( &$this, 'add_responsive_ready_sites_menu' ) );
+            add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
 
-			$this->options        = get_option( 'responsive_theme_options' );
+            add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_styles' ) );
+
+            add_action( 'wp_ajax_responsive-ready-sites-required-plugins', array( &$this, 'required_plugin'));
+            add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array(&$this, 'required_plugin_activate'));
+            add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array(&$this, 'set_reset_data'));
+            add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array(&$this, 'backup_settings'));
+
+
+            $this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
 
 			$this->load_responsive_sites_importer();
@@ -405,7 +418,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         public function menu_callback() {
             ?>
             <div class="responsive-sites-menu-page-wrapper">
-                <?php require_once plugin_dir_path( __FILE__ ) . 'admin/partials/responsive-ready-sites-admin-display.php'; ?>
+                <?php $responsive_blocks_admin_dir = plugin_dir_path( __FILE__ ) . 'admin/'; ?>
+                <?php require_once $responsive_blocks_admin_dir . 'partials/responsive-ready-sites-admin-display.php'; ?>
             </div>
             <?php
         }
@@ -415,8 +429,172 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          *
          * @since 1.0.8
          */
-        private function load_responsive_sites_importer() {
-            require_once RESPONSIVE_ADDONS_DIR . 'includes/importers/class-responsive-ready-sites-importer.php';
+        public function load_responsive_sites_importer() {
+            $responsive_blocks_includes_dir = plugin_dir_path( __FILE__ ) . 'includes/';
+            require_once $responsive_blocks_includes_dir . 'importers/class-responsive-ready-sites-importer.php';
+        }
+
+        /**
+         * Include Admin JS
+         *
+         * @since 1.0.8
+         */
+        public function responsive_ready_sites_admin_enqueue_scripts(){
+            wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI.'/admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '1.0.7', true );
+
+            $data = apply_filters(
+                'responsive_sites_localize_vars',
+                array(
+                    'debug'             => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false, //phpcs:ignore
+                    'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
+                    'siteURL'           => site_url(),
+                    '_ajax_nonce'       => wp_create_nonce( 'responsive-addons' ),
+                    'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
+                    'required_plugins'   => array(),
+                )
+            );
+
+            wp_localize_script( 'responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data );
+
+        }
+
+        /**
+         * Include Admin css
+         *
+         * @since 1.0.8
+         */
+        public function responsive_ready_sites_admin_enqueue_styles() {
+            //Responsive Ready Sites admin styles.
+            wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI.'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
+            wp_enqueue_style( 'responsive-ready-sites-admin' );
+        }
+
+        /**
+         * Backup existing settings.
+         */
+        public function backup_settings() {
+            if ( ! current_user_can( 'manage_options' ) ) {
+                return;
+            }
+
+            $file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
+            $old_settings = get_option( 'responsive-settings', array() );
+            update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
+            wp_send_json_success();
+        }
+
+        /**
+         * Set reset data
+         */
+        public function set_reset_data() {
+            if ( ! current_user_can( 'manage_options' ) ) {
+                return;
+            }
+
+            global $wpdb;
+
+            $post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_post'" );
+            $form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_wp_forms'" );
+            $term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_responsive_ready_sites_imported_term'" );
+
+            wp_send_json_success(
+                array(
+                    'reset_posts'    => $post_ids,
+                    'reset_wp_forms' => $form_ids,
+                    'reset_terms'    => $term_ids,
+                )
+            );
+        }
+
+        /**
+         * Required Plugin
+         *
+         * @since 1.0.0
+         * @return void
+         */
+        public function required_plugin() {
+
+            // Verify Nonce.
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
+            $response = array(
+                'active'       => array(),
+                'inactive'     => array(),
+                'notinstalled' => array(),
+            );
+
+            if ( ! current_user_can( 'customize' ) ) {
+                wp_send_json_error( $response );
+            }
+
+            $required_plugins             = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
+
+            if ( count( $required_plugins ) > 0 ) {
+                foreach ( $required_plugins as $key => $plugin ) {
+
+                    // Lite - Installed but Inactive.
+                    if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
+
+                        $response['inactive'][] = $plugin;
+
+                        // Lite - Not Installed.
+                    } elseif ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) ) {
+
+                        $response['notinstalled'][] = $plugin;
+
+                        // Lite - Active.
+                    } else {
+                        $response['active'][] = $plugin;
+                    }
+                }
+            }
+
+            // Send response.
+            wp_send_json_success(
+                array(
+                    'required_plugins'             => $response,
+                )
+            );
+        }
+
+
+        /**
+         * Required Plugin Activate
+         *
+         * @since 1.0.0
+         */
+        public function required_plugin_activate() {
+
+            if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+                wp_send_json_error(
+                    array(
+                        'success' => false,
+                        'message' => __( 'No plugin specified', 'responsive-addons' ),
+                    )
+                );
+            }
+
+            $data               = array();
+            $plugin_init        = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
+
+            $activate = activate_plugin( $plugin_init, '', false, true );
+
+            if ( is_wp_error( $activate ) ) {
+                wp_send_json_error(
+                    array(
+                        'success' => false,
+                        'message' => $activate->get_error_message(),
+                    )
+                );
+            }
+
+            wp_send_json_success(
+                array(
+                    'success' => true,
+                    'message' => __( 'Plugin Activated', 'responsive-addons' ),
+                )
+            );
+
         }
 	}
 }
