@@ -92,7 +92,11 @@
 ?>
 
 <script type="text/template" id="tmpl-responsive-ready-site-preview">
-	<div class="responsive-ready-site-preview theme-install-overlay expanded">
+	<div class="responsive-ready-site-preview theme-install-overlay wp-full-overlay collapsed">
+        <div class="wp-full-overlay-header">
+            <a class="button hide-if-no-customize button-primary responsive-addons astra-demo-import" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
+            <button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
+        </div>
 		<div class="wp-full-overlay-main">
 			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'responsive-addons' ); ?>"></iframe>
 		</div>

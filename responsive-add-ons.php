@@ -46,7 +46,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 		public $plugin_options;
 
-		
+		public static $api_url;
 
 		public function __construct() {
 
@@ -74,6 +74,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			$this->plugin_options = get_option( 'responsive_addons_options' );
 
 			$this->load_responsive_sites_importer();
+
+            self::set_api_url();
 		}
 
 		/**
@@ -87,6 +89,15 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 */
 		public static function deactivate() {
 		}
+
+        /**
+         * Setter for $api_url
+         *
+         * @since  1.0.0
+         */
+        public static function set_api_url() {
+            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
+        }
 
 		/**
 		 * Hook into WP admin_init
@@ -440,7 +451,14 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @since 1.0.8
          */
         public function responsive_ready_sites_admin_enqueue_scripts(){
+
+            wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '1.0.7', true );
+
+            wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '1.0.7', true );
+
             wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI.'/admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '1.0.7', true );
+
+            wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI. 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '1.0.7', true );
 
             $data = apply_filters(
                 'responsive_sites_localize_vars',
@@ -456,6 +474,31 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             wp_localize_script( 'responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data );
 
+            $data = apply_filters(
+                'responsive_sites_localize_vars',
+                array(
+                    'ApiURL'  => self::$api_url,
+                )
+            );
+
+            // Use this for premium demos.
+            $request_params = apply_filters(
+                'responsive_sites_api_params',
+                array(
+                    'site_url'     => '',
+                )
+            );
+
+            wp_localize_script( 'responsive-ready-sites-api', 'responsiveSitesApi', $data );
+            $data = apply_filters(
+                'responsive_sites_render_localize_vars',
+                array(
+                    'sites'                => $request_params,
+                    'settings'             => array(),
+                )
+            );
+
+            wp_localize_script( 'render-responsive-ready-sites', 'responsiveSitesRender', $data );
         }
 
         /**
