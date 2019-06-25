@@ -68,3 +68,16 @@
     background-position: center bottom;
     background-size: cover;
 }
+.responsive-ready-site-preview .wp-full-overlay-main {
+    top: 70px;
+}
+.responsive-ready-site-preview .wp-full-overlay-header {
+    background-color: #f1f1f1;
+    height: 70px;
+}
+.close-full-overlay.responsive-addons {
+    float: right;
+}
+.wp-full-overlay-header .button.responsive-addons{
+    float:left;
+}

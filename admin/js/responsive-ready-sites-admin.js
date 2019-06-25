@@ -183,6 +183,7 @@ var ResponsiveSitesAjaxQueue = (function() {
         {
             $( document ).on( 'click'                     , '.import-demo-data', ResponsiveSitesAdmin._importDemo );
             $( document ).on('click'                     , '.theme-browser .theme-screenshot, .theme-browser .more-details, .theme-browser .install-theme-preview', ResponsiveSitesAdmin._preview);
+            $( document ).on('click'                     , '.close-full-overlay', ResponsiveSitesAdmin._fullOverlay);
 
             $( document ).on( 'responsive-ready-sites-install-start'       , ResponsiveSitesAdmin._process_import );
 
@@ -948,6 +949,20 @@ var ResponsiveSitesAjaxQueue = (function() {
                     $(document).trigger( 'responsive-ready-sites-reset-widgets-data-done' );
                 });
         },
+
+        /**
+         * Full Overlay
+         */
+        _fullOverlay: function (event) {
+            event.preventDefault();
+
+            $('body').removeClass('importing-site');
+            $('.theme-install-overlay').css('display', 'none');
+            $('.theme-install-overlay').remove();
+            $('.theme-preview-on').removeClass('theme-preview-on');
+            $('html').removeClass('astra-site-preview-on');
+        },
+
 
         _reset_posts: function() {
             //POSTS
