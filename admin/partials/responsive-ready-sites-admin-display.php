@@ -14,6 +14,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div id="responsive-ready-site-preview"></div>
+<div id="responsive-ready-sites-import-options"></div>
 <div class="wrap" id="responsive-ready-sites-admin-page">
 	<h1>Responsive Ready Sites Page</h1>
 	<div class="responsive-ready-sites-import-display">
@@ -92,13 +93,98 @@
 ?>
 
 <script type="text/template" id="tmpl-responsive-ready-site-preview">
-	<div class="responsive-ready-site-preview theme-install-overlay wp-full-overlay collapsed">
+	<div class="responsive-ready-site-preview theme-install-overlay wp-full-overlay collapsed"
+         data-demo-id="{{{data.id}}}"
+         data-demo-url="{{{data.responsive_site_url}}}"
+         data-demo-api="{{{data.demo_api}}}"
+         data-demo-name="{{{data.name}}}"
+         data-demo-slug="{{{data.slug}}}"
+         data-screenshot="{{{data.screenshot}}}"
+         data-required-plugins="{{data.required_plugins}}">
         <div class="wp-full-overlay-header">
-            <a class="button hide-if-no-customize button-primary responsive-addons astra-demo-import" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
-            <button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
+            <div>
+                <span class="responsive-site-demo-name">{{data.demo_name}}</span>
+                <a class="button hide-if-no-customize button-primary responsive-addons responsive-demo-import-options" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
+                <button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
+            </div>
         </div>
 		<div class="wp-full-overlay-main">
-			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'responsive-addons' ); ?>"></iframe>
+			<iframe src="{{{data.responsive_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'responsive-addons' ); ?>"></iframe>
 		</div>
 	</div>
+</script>
+
+<?php
+/** Theme Import Options Page */
+?>
+<script type="text/template" id="tmpl-responsive-ready-sites-import-options-page">
+    <div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
+         data-demo-id="{{{data.id}}}"
+         data-demo-url="{{{data.responsive_site_url}}}"
+         data-demo-api="{{{data.demo_api}}}"
+         data-demo-name="{{{data.name}}}"
+         data-demo-slug="{{{data.slug}}}"
+         data-screenshot="{{{data.screenshot}}}"
+         data-required-plugins="{{data.required_plugins}}">
+
+        <div class="wp-full-overlay-header">
+            <span>{{{ data.name }}}</span>
+        </div>
+        <div class="wp-full-overlay-main">
+            <div class="site-import-options">
+            <div class="responsive-ready-sites-advanced-options">
+                <ul class="responsive-ready-site-contents">
+                    <li class="responsive-ready-sites-import-plugins">
+                        <label>
+                            <input type="checkbox" name="plugins" checked="checked" class="checkbox">
+                            <strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
+                        </label>
+                        <span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
+                        <div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
+                            <p><?php _e( 'Install Required Plugins.', 'responsive-addons' ); ?></p>
+                        </div>
+                    </li>
+                    <li class="responsive-ready-sites-import-customizer">
+                        <label>
+                            <input type="checkbox" name="customizer" checked="checked" class="checkbox">
+                            <strong>Import Customizer Settings</strong>
+                        </label>
+                        <span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
+                        <div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-customizer-settings" style="display: none;">
+                            <p><?php _e( 'Import Customizer Settings.', 'responsive-addons' ); ?></p>
+                        </div>
+                    </li>
+                    <li class="responsive-ready-sites-import-xml">
+                        <label>
+                            <input type="checkbox" name="xml" checked="checked" class="checkbox">
+                            <strong>Import Content</strong>
+                        </label>
+                        <span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
+                        <div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
+                            <p><?php _e( 'Selecting this option will import dummy pages, posts, images and menus. If you do not want to import dummy content, please uncheck this option.', 'responsive-addons' ); ?></p>
+                        </div>
+                    </li>
+                    <li class="responsive-ready-sites-reset-data">
+                        <label>
+                            <input type="checkbox" name="reset" class="checkbox">
+                            <strong>Delete Previous Import</strong>
+                        </label>
+                        <span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-reset-data"><span class="dashicons dashicons-editor-help"></span></span>
+                        <div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-reset-data" style="display: none;">
+                            <p><?php _e( 'WARNING: This will delete the all site data.', 'responsive-addons' ); ?></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="responsive-ready-sites-import-button-wrap">
+                <a class="button button-hero hide-if-no-customize button-primary responsive-ready-site-import" href="#">
+                <?php esc_html_e( 'Import Site', 'responsive-addons' ); ?>
+                </a>
+                <div class="responsive-ready-site-import-process-wrap" style="display: none;">
+                    <progress class="responsive-ready-site-import-process" max="100" value="0"></progress>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
 </script>
