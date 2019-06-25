@@ -77,7 +77,67 @@
 }
 .close-full-overlay.responsive-addons {
     float: right;
+    width: 70px;
+    height: 70px;
+    background: inherit;
+}
+.close-full-overlay.responsive-addons::before {
+    font: normal 30px/1 dashicons;
 }
 .wp-full-overlay-header .button.responsive-addons{
-    float:left;
+    float: none;
+}
+.wp-full-overlay-header .button.responsive-demo-import-options{
+    margin: 20px 20px 20px 20px;
+    font-size: 14px;
+    height: 30px;
+}
+.wp-full-overlay-header .responsive-site-demo-name{
+    display: inline-block;
+    margin: 10px 8px 10px 20px;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 2em;
+}
+.responsive-ready-sites-advanced-options-wrap.wp-full-overlay{
+    background: #fff;
+}
+.responsive-ready-sites-advanced-options-wrap .site-import-options{
+    color: #000000;
+    width: 35%;
+    padding: 15px;
+    z-index: 5000;
+    display: inline-block;
+}
+.responsive-ready-site-contents > li{
+    background: #f1f1f1;
+    padding: 10px;
+    text-align: left;
+}
+.responsive-ready-sites-advanced-options-wrap .wp-full-overlay-main {
+    top: 30%;
+    background: #ffffff;
+    text-align: center;
+}
+.responsive-ready-sites-advanced-options-wrap .wp-full-overlay-header {
+    background-color: #f1f1f1;
+    height: 70px;
+}
+.responsive-ready-sites-tooltip-icon{
+    float: right;
+}
+.responsive-ready-sites-tooltip-message{
+    margin-left: 20px;
+}
+responsive-ready-site-import.button.updating-message:before,
+responsive-ready-site-import.button.installing:before {
+    -webkit-animation: cssAnimation .72s ease infinite;
+    -moz-animation: cssAnimation .72s ease infinite;
+    -o-animation: cssAnimation .72s ease infinite;
+    -ms-animation: cssAnimation .72s ease infinite;
+    animation: cssAnimation .72s ease infinite;
+}
+.button.updating-message.responsive-ready-site-import::before{
+    vertical-align: text-bottom;
+    margin: 10px 5px 0 -2px;
 }
