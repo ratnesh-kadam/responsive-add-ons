@@ -45,15 +45,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 */
 		public function __construct() {
 
-			//add_action( 'init', array( $this, 'load_importer' ) );
-            include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-            require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-            $responsive_ready_sites_importers_dir = plugin_dir_path( __FILE__ );
+			add_action( 'init', array( $this, 'load_importer' ) );
 
-            require_once $responsive_ready_sites_importers_dir . 'wxr-importer/class-responsive-ready-sites-wxr-importer.php';
-
-			//$responsive_ready_sites_importers_dir = plugin_dir_path( __FILE__ ) . '';
-            require_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-plugin-installer.php';
+			$responsive_ready_sites_importers_dir = plugin_dir_path( __FILE__ );
+			require_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-plugin-installer.php';
 			require_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-widgets-importer.php';
 			require_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-options-importer.php';
 
@@ -85,7 +80,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		public function load_importer() {
 			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-            $responsive_ready_sites_importers_dir = plugin_dir_path( __FILE__ );
+			$responsive_ready_sites_importers_dir = plugin_dir_path( __FILE__ );
 
 			require_once $responsive_ready_sites_importers_dir . 'wxr-importer/class-responsive-ready-sites-wxr-importer.php';
 		}

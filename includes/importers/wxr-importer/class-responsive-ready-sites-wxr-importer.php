@@ -47,8 +47,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_WXR_Importer' ) ) :
 
 			require_once ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 
-            $responsive_ready_sites_wxr_importers_dir = plugin_dir_path( __FILE__ );
-            error_log(print_r($responsive_ready_sites_wxr_importers_dir,true));
+			$responsive_ready_sites_wxr_importers_dir = plugin_dir_path( __FILE__ );
 
 			require_once $responsive_ready_sites_wxr_importers_dir . 'class-wp-importer-logger.php';
 			require_once $responsive_ready_sites_wxr_importers_dir . 'class-wp-importer-logger-serversentevents.php';
