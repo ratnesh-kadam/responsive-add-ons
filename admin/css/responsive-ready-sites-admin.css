@@ -3,144 +3,158 @@
  * included in this file.
  */
 .responsive-ready-sites-import-process-wrap {
-    display: flex;
-    align-items: center;
-    margin-top: -2px;
-    z-index: 999999;
-    position: relative;
-    border-radius: 3px;
-    overflow: hidden;
+	display: flex;
+	align-items: center;
+	margin-top: -2px;
+	z-index: 999999;
+	position: relative;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
 .responsive-ready-sites-result-preview .responsive-ready-sites-import-process-wrap progress {
-    background: #eeeeee;
+	background: #eeeeee;
 }
 .responsive-ready-sites-import-process-wrap progress {
-    padding: 0px;
-    border: 0 none;
-    background: #0085bd;
-    border-radius: 5px;
-    height: 4px;
-    flex: 1;
+	padding: 0px;
+	border: 0 none;
+	background: #0085bd;
+	border-radius: 5px;
+	height: 4px;
+	flex: 1;
 }
 .responsive-ready-sites-import-process-wrap progress::-webkit-progress-value {
-    background: #00679b;
+	background: #00679b;
 }
 
 .responsive-ready-sites-import-process-wrap progress::-webkit-progress-bar {
-    background: transparent;
+	background: transparent;
 }
 .responsive-ready-sites-import-process-wrap progress::-webkit-progress-value {
-    background: #00679b;
+	background: #00679b;
 }
 .responsive-ready-sites-import-process-wrap progress::-webkit-progress-bar {
-    background: transparent;
+	background: transparent;
 }
 
 .current-importing-status-wrap {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
 .current-importing-status-wrap hr {
-    border-color: #f1f1f1;
+	border-color: #f1f1f1;
 }
 
 .current-importing-status {
-    font-size: 1rem;
-    background: #eeeeee;
-    padding: 1em 1.5em;
+	font-size: 1rem;
+	background: #eeeeee;
+	padding: 1em 1.5em;
 }
 
 .current-importing-status-title {
-    margin-bottom: .5em;
+	margin-bottom: .5em;
 }
 .current-importing-status p {
-    margin: 0;
+	margin: 0;
 }
 
 .theme-browser .theme .site-preview > .theme-screenshot {
-    transition: all linear 5s;
-    background-position: center top;
-    background-size: cover;
-    background-repeat: no-repeat;
+	transition: all linear 5s;
+	background-position: center top;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 .theme-browser .theme .site-preview > .theme-screenshot:hover {
-    background-position: center bottom;
-    background-size: cover;
+	background-position: center bottom;
+	background-size: cover;
 }
 .responsive-ready-site-preview .wp-full-overlay-main {
-    top: 70px;
+	top: 70px;
 }
 .responsive-ready-site-preview .wp-full-overlay-header {
-    background-color: #f1f1f1;
-    height: 70px;
+	background-color: #f1f1f1;
+	height: 70px;
 }
 .close-full-overlay.responsive-addons {
-    float: right;
-    width: 70px;
-    height: 70px;
-    background: inherit;
+	float: right;
+	width: 70px;
+	height: 70px;
+	background: inherit;
 }
 .close-full-overlay.responsive-addons:before {
-    font: normal 30px/1 dashicons;
+	font: normal 30px/1 dashicons;
 }
 .wp-full-overlay-header .button.responsive-addons{
-    float: none;
+	float: none;
 }
 .wp-full-overlay-header .button.responsive-demo-import-options{
-    margin: 20px 20px 20px 20px;
-    font-size: 14px;
-    height: 30px;
+	margin: 20px 20px 20px 20px;
+	font-size: 14px;
+	height: 30px;
 }
 .wp-full-overlay-header .responsive-site-demo-name{
-    display: inline-block;
-    margin: 10px 8px 10px 20px;
-    font-size: 25px;
-    font-weight: 500;
-    line-height: 2em;
+	display: inline-block;
+	margin: 10px 8px 10px 20px;
+	font-size: 25px;
+	font-weight: 500;
+	line-height: 2em;
 }
 .responsive-ready-sites-advanced-options-wrap.wp-full-overlay{
-    background: #fff;
+	background: #fff;
 }
 .responsive-ready-sites-advanced-options-wrap .site-import-options{
-    color: #000000;
-    width: 35%;
-    padding: 15px;
-    z-index: 5000;
-    display: inline-block;
+	color: #000000;
+	width: 35%;
+	padding: 15px;
+	z-index: 5000;
+	display: inline-block;
 }
 .responsive-ready-site-contents > li{
-    background: #f1f1f1;
-    padding: 10px;
-    text-align: left;
+	background: #f1f1f1;
+	padding: 10px;
+	text-align: left;
 }
 .responsive-ready-sites-advanced-options-wrap .wp-full-overlay-main {
-    top: 30%;
-    background: #ffffff;
-    text-align: center;
+	top: 30%;
+	background: #ffffff;
+	text-align: center;
 }
 .responsive-ready-sites-advanced-options-wrap .wp-full-overlay-header {
-    background-color: #f1f1f1;
-    height: 70px;
+	background-color: #f1f1f1;
+	height: 70px;
 }
 .responsive-ready-sites-tooltip-icon{
-    float: right;
+	float: right;
 }
 .responsive-ready-sites-tooltip-message{
-    margin-left: 20px;
+	margin-left: 20px;
 }
 responsive-ready-site-import.button.updating-message:before,
 responsive-ready-site-import.button.installing:before {
-    -webkit-animation: cssAnimation .72s ease infinite;
-    -moz-animation: cssAnimation .72s ease infinite;
-    -o-animation: cssAnimation .72s ease infinite;
-    -ms-animation: cssAnimation .72s ease infinite;
-    animation: cssAnimation .72s ease infinite;
+	-webkit-animation: cssAnimation .72s ease infinite;
+	-moz-animation: cssAnimation .72s ease infinite;
+	-o-animation: cssAnimation .72s ease infinite;
+	-ms-animation: cssAnimation .72s ease infinite;
+	animation: cssAnimation .72s ease infinite;
 }
 .button.updating-message.responsive-ready-site-import:before {
-    vertical-align: text-bottom;
-    margin: 10px 5px 0 -2px;
+	vertical-align: text-bottom;
+	margin: 10px 5px 0 -2px;
 }
 .site-import-options .responsive-ready-sites-import-button-wrap {
-    text-align: left;
+	text-align: left;
+}
+.responsive-ready-sites-advanced-options-wrap .close-full-overlay{
+	display: block;
+	position: relative;
+	padding-right: 2px;
+	color: #444;
+	cursor: pointer;
+	text-decoration: none;
+	transition: color .1s ease-in-out, background .1s ease-in-out;
+}
+.responsive-ready-sites-advanced-options-wrap .close-full-overlay:before{
+	font: normal 30px/1 dashicons;
+	content: "\f335";
+	position: relative;
 }
