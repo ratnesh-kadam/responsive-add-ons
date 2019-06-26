@@ -81,7 +81,7 @@
     height: 70px;
     background: inherit;
 }
-.close-full-overlay.responsive-addons::before {
+.close-full-overlay.responsive-addons:before {
     font: normal 30px/1 dashicons;
 }
 .wp-full-overlay-header .button.responsive-addons{
@@ -137,7 +137,10 @@ responsive-ready-site-import.button.installing:before {
     -ms-animation: cssAnimation .72s ease infinite;
     animation: cssAnimation .72s ease infinite;
 }
-.button.updating-message.responsive-ready-site-import::before{
+.button.updating-message.responsive-ready-site-import:before {
     vertical-align: text-bottom;
     margin: 10px 5px 0 -2px;
+}
+.site-import-options .responsive-ready-sites-import-button-wrap {
+    text-align: left;
 }
