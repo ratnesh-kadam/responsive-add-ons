@@ -97,7 +97,7 @@
          data-demo-id="{{{data.id}}}"
          data-demo-url="{{{data.responsive_site_url}}}"
          data-demo-api="{{{data.demo_api}}}"
-         data-demo-name="{{{data.name}}}"
+         data-demo-name="{{{data.demo_name}}}"
          data-demo-slug="{{{data.slug}}}"
          data-screenshot="{{{data.screenshot}}}"
          data-required-plugins="{{data.required_plugins}}">
@@ -118,17 +118,20 @@
 /** Theme Import Options Page */
 ?>
 <script type="text/template" id="tmpl-responsive-ready-sites-import-options-page">
-    <div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
+    <div class="responsive-ready-sites-advanced-options-wrap theme-install-overlay wp-full-overlay collapsed"
          data-demo-id="{{{data.id}}}"
          data-demo-url="{{{data.responsive_site_url}}}"
          data-demo-api="{{{data.demo_api}}}"
-         data-demo-name="{{{data.name}}}"
+         data-demo-name="{{{data.demo_name}}}"
          data-demo-slug="{{{data.slug}}}"
          data-screenshot="{{{data.screenshot}}}"
          data-required-plugins="{{data.required_plugins}}">
 
         <div class="wp-full-overlay-header">
-            <span>{{{ data.name }}}</span>
+            <div>
+                <span class="responsive-site-demo-name">{{data.demo_name}}</span>
+                <button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
+            </div>
         </div>
         <div class="wp-full-overlay-main">
             <div class="site-import-options">

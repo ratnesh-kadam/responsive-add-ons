@@ -183,7 +183,7 @@ var ResponsiveSitesAjaxQueue = (function() {
         {
             $( document ).on( 'click'                     , '.import-demo-data', ResponsiveSitesAdmin._importDemo );
             $( document ).on('click'                     , '.theme-browser .theme-screenshot, .theme-browser .more-details, .theme-browser .install-theme-preview', ResponsiveSitesAdmin._preview);
-            $( document ).on('click'                     , '.close-full-overlay', ResponsiveSitesAdmin._fullOverlay);
+            $( document ).on('click'                     , '.close-full-overlay', ResponsiveSitesAdmin._closeFullOverlay);
             $( document ).on('click', '.responsive-demo-import-options', ResponsiveSitesAdmin._importSiteOptionsScreen);
             $( document ).on('click', '.responsive-ready-sites-tooltip-icon', ResponsiveSitesAdmin._toggle_tooltip);
             $( document ).on('click', '.responsive-ready-site-import', ResponsiveSitesAdmin._importTest);
@@ -322,6 +322,7 @@ var ResponsiveSitesAjaxQueue = (function() {
                 responsive_site_options: responsiveSiteOptions,
             }];
             $('#responsive-ready-sites-import-options').append(template(templateData[0]));
+            $('.theme-install-overlay').css('display', 'block');
         },
 
         _toggle_tooltip: function( event ) {
@@ -1010,7 +1011,7 @@ var ResponsiveSitesAjaxQueue = (function() {
         /**
          * Full Overlay
          */
-        _fullOverlay: function (event) {
+        _closeFullOverlay: function (event) {
             event.preventDefault();
 
             $('body').removeClass('importing-site');
