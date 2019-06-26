@@ -187,12 +187,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_bind: function()
 		{
-			$( document ).on( 'click'                     , '.import-demo-data', ResponsiveSitesAdmin._importDemo );
+			$( document ).on( 'click'                     , '.import-demo-data, .responsive-ready-site-import', ResponsiveSitesAdmin._importDemo );
 			$( document ).on( 'click'                     , '.theme-browser .theme-screenshot, .theme-browser .more-details, .theme-browser .install-theme-preview', ResponsiveSitesAdmin._preview );
 			$( document ).on( 'click'                     , '.close-full-overlay', ResponsiveSitesAdmin._closeFullOverlay );
 			$( document ).on( 'click', '.responsive-demo-import-options', ResponsiveSitesAdmin._importSiteOptionsScreen );
 			$( document ).on( 'click', '.responsive-ready-sites-tooltip-icon', ResponsiveSitesAdmin._toggle_tooltip );
-			$( document ).on( 'click', '.responsive-ready-site-import', ResponsiveSitesAdmin._importTest );
 
 			$( document ).on( 'responsive-ready-sites-install-start'       , ResponsiveSitesAdmin._process_import );
 
@@ -329,6 +328,112 @@ var ResponsiveSitesAjaxQueue = (function() {
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
+
+			if ( $.isArray( requiredPlugins ) ) {
+				// or
+				var $pluginsFilter = $( '#plugin-filter' ),
+					data           = {
+						action           : 'responsive-ready-sites-required-plugins',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+						required_plugins : requiredPlugins
+				};
+
+				// Add disabled class from import button.
+				$( '.responsive-demo-import' )
+					.addClass( 'disabled not-click-able' )
+					.removeAttr( 'data-import' );
+
+				$( '.required-plugins' ).addClass( 'loading' ).html( '<span class="spinner is-active"></span>' );
+
+				// Required Required.
+				$.ajax(
+					{
+						url  : responsiveSitesAdmin.ajaxurl,
+						type : 'POST',
+						data : data,
+					}
+				)
+					.fail(
+						function( jqXHR ){
+
+							// Remove loader.
+							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+
+						}
+					)
+					.done(
+						function ( response ) {
+							required_plugins = response.data['required_plugins'];
+
+							// Remove loader.
+							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+							$( '.required-plugins-list' ).html( '' );
+
+							/**
+							 * Count remaining plugins.
+							 *
+							 * @type number
+							 */
+							var remaining_plugins = 0;
+
+							/**
+							 * Not Installed
+							 *
+							 * List of not installed required plugins.
+							 */
+							if ( typeof required_plugins.notinstalled !== 'undefined' ) {
+
+								// Add not have installed plugins count.
+								remaining_plugins += parseInt( required_plugins.notinstalled.length );
+
+								$( required_plugins.notinstalled ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Inactive
+							 *
+							 * List of not inactive required plugins.
+							 */
+							if ( typeof required_plugins.inactive !== 'undefined' ) {
+
+								// Add inactive plugins count.
+								remaining_plugins += parseInt( required_plugins.inactive.length );
+
+								$( required_plugins.inactive ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Active
+							 *
+							 * List of not active required plugins.
+							 */
+							if ( typeof required_plugins.active !== 'undefined' ) {
+
+								$( required_plugins.active ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Enable Demo Import Button
+							 *
+							 * @type number
+							 */
+							responsiveSitesAdmin.requiredPlugins = required_plugins;
+						}
+					);
+
+			}
 		},
 
 		_toggle_tooltip: function( event ) {
@@ -560,6 +665,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			}];
 			$( '#responsive-ready-site-preview' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
+
 		},
 
 		/**
@@ -658,7 +764,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						xml_path : ResponsiveSitesAdmin.xml_path,
 					},
 					beforeSend: function () {
-						$( '.cybershimpssite-import-process-wrap' ).show();
+						$( '.responsive-ready-sites-import-process-wrap' ).show();
 						ResponsiveSitesAdmin._log_message( 'Importing XML data' );
 					},
 				}
@@ -679,7 +785,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 							$( '.current-importing-status-description' ).html( '' ).show();
 
-							$( '.responsive-ready-sites-result-preview .inner' ).append( '<div class="responsive-ready-sites-import-process-wrap"><progress class="responsive-ready-sites-import-process" max="100" value="0"></progress></div>' );
+							$( '.responsive-ready-sites-import-xml .inner' ).append( '<div class="responsive-ready-sites-import-process-wrap"><progress class="responsive-ready-sites-import-process" max="100" value="0"></progress></div>' );
 
 							var evtSource       = new EventSource( wxrImport.data.url );
 							evtSource.onmessage = function ( message ) {
@@ -736,6 +842,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var date = new Date();
 
 			ResponsiveSitesAdmin.import_start_time = new Date();
+
+			$( '.responsive-ready-site-import' ).addClass( 'updating-message installing' )
+				.text( "Importing.." );
+			$( '.responsive-ready-site-import' ).addClass( 'disabled not-click-able' );
 
 			$( '.responsive-ready-sites-result-preview' ).show();
 			var output = '<div class="current-importing-status-title"></div><div class="current-importing-status-description"></div>';

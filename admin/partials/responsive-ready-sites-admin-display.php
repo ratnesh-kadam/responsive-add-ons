@@ -37,9 +37,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="responsive-ready-sites-import-process-wrap" style="display: none;">
-		<progress class="responsive-ready-sites-import-process" max="100" value="0"></progress>
-	</div>
 	<div class="theme-browser rendered">
 		<div id="responsive-sites" class="themes wp-clearfix"></div>
 	</div>
@@ -61,7 +58,8 @@
 		 data-demo-url="{{{ data[0].items[ key ]['responsive_site_url'] }}}"
 		 data-demo-slug="{{{  data[0].items[ key ].slug }}}"
 		 data-demo-name="{{{  data[0].items[ key ].name }}}"
-		 data-screenshot="{{{ data[0].items[ key ]['featured_image_url'] }}}">
+		 data-screenshot="{{{ data[0].items[ key ]['featured_image_url'] }}}"
+		 data-required-plugins="{{ JSON.stringify(data[0].items[ key ]['required_plugins']) }}">
 
 		<div class="inner">
 					<span class="site-preview" data-href="{{ data[0].items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
@@ -138,13 +136,11 @@
 			<div class="responsive-ready-sites-advanced-options">
 				<ul class="responsive-ready-site-contents">
 					<li class="responsive-ready-sites-import-plugins">
-						<label>
-							<input type="checkbox" name="plugins" checked="checked" class="checkbox">
-							<strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
-						</label>
+						<input type="checkbox" name="plugins" checked="checked" class="disabled checkbox" readonly>
+						<strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
 						<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
 						<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
-							<p><?php _e( 'Install Required Plugins.', 'responsive-addons' ); ?></p>
+							<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
 						</div>
 					</li>
 					<li class="responsive-ready-sites-import-customizer">
@@ -156,6 +152,9 @@
 						<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-customizer-settings" style="display: none;">
 							<p><?php _e( 'Import Customizer Settings.', 'responsive-addons' ); ?></p>
 						</div>
+						<div class="responsive-ready-sites-import-customizer-process-wrap" style="display: none;">
+							<progress class="responsive-ready-sites-import-customizer-process" max="100" value="0"></progress>
+						</div>
 					</li>
 					<li class="responsive-ready-sites-import-xml">
 						<label>
@@ -165,6 +164,9 @@
 						<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
 						<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
 							<p><?php _e( 'Selecting this option will import dummy pages, posts, images and menus. If you do not want to import dummy content, please uncheck this option.', 'responsive-addons' ); ?></p>
+						</div>
+						<div class="responsive-ready-sites-import-process-wrap" style="display: none;">
+							<progress class="responsive-ready-sites-import-process" max="100" value="0"></progress>
 						</div>
 					</li>
 					<li class="responsive-ready-sites-reset-data">
@@ -183,9 +185,6 @@
 				<a class="button button-hero hide-if-no-customize button-primary responsive-ready-site-import" href="#">
 				<?php esc_html_e( 'Import Site', 'responsive-addons' ); ?>
 				</a>
-				<div class="responsive-ready-site-import-process-wrap" style="display: none;">
-					<progress class="responsive-ready-site-import-process" max="100" value="0"></progress>
-				</div>
 			</div>
 			</div>
 		</div>
