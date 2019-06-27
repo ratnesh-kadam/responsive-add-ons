@@ -214,12 +214,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'wp-plugin-install-success' , ResponsiveSitesAdmin._installSuccess );
 		},
 
-		_importTest: function( event ) {
-			event.preventDefault();
-			$( '.responsive-ready-site-import' ).addClass( 'updating-message installing' )
-				.text( "Importing.." );
-		},
-
 		/**
 		 * Import Complete.
 		 */
@@ -266,23 +260,13 @@ var ResponsiveSitesAjaxQueue = (function() {
 								time += seconds + ' Seconds';
 							}
 
-							var	output = '<h2>Done</h2>';
-							output    += '<p>Your Ready site has been imported successfully in ' + time + '! Now go ahead, customize the text, images, and design to make it yours!</p>';
-							output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">View Site <i class="dashicons dashicons-external"></i></a></p>';
+							var	output = '<h2>Responsive Ready Site Import Complete</h2>';
+							output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">Launch Site</a></p>';
 
-							$( '.responsive-ready-sites-import-display' ).remove();
+							$( '.site-import-options' ).hide();
+							$( '.result_preview' ).html('').show();
 							$( '.result_preview' ).html( output );
 
-							var data     = [{
-								items: [
-									{id: 1, name: "First Demo", responsive_site_url: "https://ccdemos.cyberchimps.com", featured_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testone", status: "publish"},
-									{id: 2, name: "Second Demo", responsive_site_url: "https://ccdemos.cyberchimps.com", featured_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testtwo", status: "publish"},
-									{id: 3, name: "Third Demo", responsive_site_url: "https://ccdemos.cyberchimps.com", featured_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testthree", status: "publish"}
-								]
-							}];
-							var template = wp.template( 'responsive-sites-list' );
-
-							jQuery( '#responsive-sites' ).show().html( template( data ) );
 							// Pass - Import Complete.
 						}
 					}
@@ -541,6 +525,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							// 3. Pass - Import Site Options.
 							$( document ).trigger( 'responsive-ready-sites-import-options-done' );
 						}
+						$( document ).trigger( 'responsive-ready-sites-import-options-done' );
 					}
 				);
 		},
