@@ -83,7 +83,7 @@ function responsive_blocks_getting_started_page_temp(){
 	$str = dirname( __FILE__ );
 	$len = strlen($str);
 	$final_path = substr($str,0, $len-20);
-	include($final_path.'templates\settings.php');
+	include($final_path.'templates/settings.php');
 }
 
 /**
