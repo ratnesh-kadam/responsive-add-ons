@@ -151,7 +151,7 @@
 							    <p><?php _e( 'Import Customizer Settings.', 'responsive-addons' ); ?></p>
 						    </div>
 						    <div class="responsive-ready-sites-import-customizer-process-wrap" style="display: none;">
-							    <progress class="responsive-ready-sites-import-customizer-process" max="100" value="0"></progress>
+							    <progress id="responsive-ready-sites-import-customizer-process" class="responsive-ready-sites-import-customizer-process" max="100" value="0"></progress>
 						    </div>
 					    </li>
 					    <li class="responsive-ready-sites-import-xml">

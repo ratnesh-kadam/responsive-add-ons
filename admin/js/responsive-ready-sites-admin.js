@@ -475,6 +475,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 							site_customizer_data: ResponsiveSitesAdmin.site_customizer_data,
 						},
 						beforeSend: function () {
+							$( '.responsive-ready-sites-import-customizer-process-wrap' ).css( 'display', 'block' );
+							var process_bars        = document.getElementById( 'responsive-ready-sites-import-customizer-process' );
+							process_bars.value = 0;
 							ResponsiveSitesAdmin._log_message( 'Importing Customizer Data.....' );
 						},
 					}
@@ -485,6 +488,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 								// log.
 							} else {
 								ResponsiveSitesAdmin._log_message( 'Customizer Setting Imported' );
+								var process_bars        = document.getElementById( 'responsive-ready-sites-import-customizer-process' );
+								process_bars.value = 100;
 								$( document ).trigger( 'responsive-ready-sites-import-customizer-settings-done' );
 							}
 						}
