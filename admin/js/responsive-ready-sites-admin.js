@@ -264,7 +264,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">Launch Site</a></p>';
 
 							$( '.site-import-options' ).hide();
-							$( '.result_preview' ).html('').show();
+							$( '.result_preview' ).html( '' ).show();
 							$( '.result_preview' ).html( output );
 
 							// Pass - Import Complete.
@@ -314,7 +314,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
 
 			if ( $.isArray( requiredPlugins ) ) {
-				// or
+				// or.
 				var $pluginsFilter = $( '#plugin-filter' ),
 					data           = {
 						action           : 'responsive-ready-sites-required-plugins',
@@ -463,31 +463,35 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 * Import Customizer Setting
 		 */
 		_importCustomizerSettings: function() {
+			if ( ResponsiveSitesAdmin._is_process_customizer() ) {
 
-			$.ajax(
-				{
-					url  : responsiveSitesAdmin.ajaxurl,
-					type : 'POST',
-					dataType: 'json',
-					data : {
-						action	: 'responsive-ready-sites-import-customizer-settings',
-						site_customizer_data : ResponsiveSitesAdmin.site_customizer_data,
-					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( 'Importing Customizer Data.....' );
-					},
-				}
-			)
-				.done(
-					function ( forms){
-						if (false === forms.success) {
-							// log.
-						} else {
-							ResponsiveSitesAdmin._log_message( 'Customizer Setting Imported' );
-							$( document ).trigger( 'responsive-ready-sites-import-customizer-settings-done' );
-						}
+				$.ajax(
+					{
+						url: responsiveSitesAdmin.ajaxurl,
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							action: 'responsive-ready-sites-import-customizer-settings',
+							site_customizer_data: ResponsiveSitesAdmin.site_customizer_data,
+						},
+						beforeSend: function () {
+							ResponsiveSitesAdmin._log_message( 'Importing Customizer Data.....' );
+						},
 					}
 				)
+					.done(
+						function (forms) {
+							if (false === forms.success) {
+								// log.
+							} else {
+								ResponsiveSitesAdmin._log_message( 'Customizer Setting Imported' );
+								$( document ).trigger( 'responsive-ready-sites-import-customizer-settings-done' );
+							}
+						}
+					)
+			} else {
+				$( document ).trigger( 'responsive-ready-sites-import-customizer-settings-done' );
+			}
 		},
 
 		/**
@@ -739,79 +743,97 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_importXML: function() {
 
-			$.ajax(
-				{
-					url  : responsiveSitesAdmin.ajaxurl,
-					type : 'POST',
-					dataType: 'json',
-					data : {
-						action  : 'responsive-ready-sites-import-xml',
-						xml_path : ResponsiveSitesAdmin.xml_path,
-					},
-					beforeSend: function () {
-						$( '.responsive-ready-sites-import-process-wrap' ).show();
-						ResponsiveSitesAdmin._log_message( 'Importing XML data' );
-					},
-				}
-			)
-				.done(
-					function ( xml_data ) {
-
-						// 2. Fail - Import XML Data.
-						if ( false === xml_data.success ) {
-							// log.
-						} else {
-
-							// 2. Pass - Import XML Data.
-
-							// Import XML though Event Source.
-							wxrImport.data = xml_data.data;
-							wxrImport.render();
-
-							$( '.current-importing-status-description' ).html( '' ).show();
-
-							$( '.responsive-ready-sites-import-xml .inner' ).append( '<div class="responsive-ready-sites-import-process-wrap"><progress class="responsive-ready-sites-import-process" max="100" value="0"></progress></div>' );
-
-							var evtSource       = new EventSource( wxrImport.data.url );
-							evtSource.onmessage = function ( message ) {
-								var data = JSON.parse( message.data );
-								switch ( data.action ) {
-									case 'updateDelta':
-
-										wxrImport.updateDelta( data.type, data.delta );
-										break;
-
-									case 'complete':
-										evtSource.close();
-
-										document.getElementsByClassName( "cybershimps-sites-import-process" ).value = '100';
-										$( '.cybershimps-sites-import-process-wrap' ).hide();
-
-										$( document ).trigger( 'responsive-ready-sites-import-xml-done' );
-
-										break;
-								}
-							};
-							evtSource.addEventListener(
-								'log',
-								function ( message ) {
-									var data    = JSON.parse( message.data );
-									var message = data.message || '';
-									if ( message && 'info' === data.level ) {
-										message = message.replace(
-											/"/g,
-											function(letter) {
-												return '';
-											}
-										);
-										// log message on screen.
-									}
-								}
-							);
-						}
+			if ( ResponsiveSitesAdmin._is_process_xml() ) {
+				$.ajax(
+					{
+						url: responsiveSitesAdmin.ajaxurl,
+						type: 'POST',
+						dataType: 'json',
+						data: {
+							action: 'responsive-ready-sites-import-xml',
+							xml_path: ResponsiveSitesAdmin.xml_path,
+						},
+						beforeSend: function () {
+							$( '.responsive-ready-sites-import-process-wrap' ).show();
+							ResponsiveSitesAdmin._log_message( 'Importing XML data' );
+						},
 					}
-				);
+				)
+					.done(
+						function (xml_data) {
 
+							// 2. Fail - Import XML Data.
+							if (false === xml_data.success) {
+								// log.
+							} else {
+
+								// 2. Pass - Import XML Data.
+
+								// Import XML though Event Source.
+								wxrImport.data = xml_data.data;
+								wxrImport.render();
+
+								$( '.current-importing-status-description' ).html( '' ).show();
+
+								$( '.responsive-ready-sites-import-xml .inner' ).append( '<div class="responsive-ready-sites-import-process-wrap"><progress class="responsive-ready-sites-import-process" max="100" value="0"></progress></div>' );
+
+								var evtSource       = new EventSource( wxrImport.data.url );
+								evtSource.onmessage = function (message) {
+									var data = JSON.parse( message.data );
+									switch (data.action) {
+										case 'updateDelta':
+
+											wxrImport.updateDelta( data.type, data.delta );
+											break;
+
+										case 'complete':
+											evtSource.close();
+
+											document.getElementsByClassName( "cybershimps-sites-import-process" ).value = '100';
+											$( '.cybershimps-sites-import-process-wrap' ).hide();
+
+											$( document ).trigger( 'responsive-ready-sites-import-xml-done' );
+
+											break;
+									}
+								};
+								evtSource.addEventListener(
+									'log',
+									function (message) {
+										var data    = JSON.parse( message.data );
+										var message = data.message || '';
+										if (message && 'info' === data.level) {
+											message = message.replace(
+												/"/g,
+												function (letter) {
+													return '';
+												}
+											);
+											// log message on screen.
+										}
+									}
+								);
+							}
+						}
+					);
+			} else {
+				$( document ).trigger( 'responsive-ready-sites-import-xml-done' );
+			}
+
+		},
+
+		_is_process_xml: function() {
+			if ( $( '.responsive-ready-sites-import-xml' ).find( '.checkbox' ).is( ':checked' ) ) {
+				return true;
+			}
+			return false;
+		},
+
+		_is_process_customizer: function() {
+			if ( $( '.responsive-ready-sites-import-customizer' ).find( '.checkbox' ).is( ':checked' ) ) {
+				return true;
+			}
+			return false;
 		},
 
 		/**
@@ -832,7 +854,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 				.text( "Importing.." );
 			$( '.responsive-ready-site-import' ).addClass( 'disabled not-click-able' );
 
-			$( '.responsive-ready-sites-result-preview' ).show();
 			var output = '<div class="current-importing-status-title"></div><div class="current-importing-status-description"></div>';
 			$( '.current-importing-status' ).html( output );
 
@@ -964,11 +985,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_resetData: function( event ) {
 			event.preventDefault();
 
-			// if ( $( '.responsive-ready-sites-reset-data' ).find('.checkbox').is(':checked') ) {
-			$( document ).trigger( 'responsive-ready-sites-reset-data' );
-			// } else {
-			// $(document).trigger( 'responsive-ready-sites-reset-data-done' );
-			// }
+			if ( $( '.responsive-ready-sites-reset-data' ).find( '.checkbox' ).is( ':checked' ) ) {
+				$( document ).trigger( 'responsive-ready-sites-reset-data' );
+			} else {
+				$( document ).trigger( 'responsive-ready-sites-reset-data-done' );
+			}
 		},
 
 		ucwords: function( str ) {
