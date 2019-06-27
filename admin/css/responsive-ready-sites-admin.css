@@ -96,6 +96,11 @@
 	z-index: 5000;
 	display: inline-block;
 }
+.responsive-ready-sites-advanced-options-wrap .sites-import-process-errors{
+	color: #000000;
+	padding: 15px;
+	z-index: 5000;
+}
 .responsive-ready-site-contents > li{
 	background: #f1f1f1;
 	padding: 10px;
@@ -185,4 +190,9 @@ responsive-ready-site-import.button.installing:before {
 	font: normal 30px/1 dashicons;
 	-webkit-font-smoothing: antialiased;
 	vertical-align: top;
+}
+.sites-import-process-errors .import-process-error{
+	width: 35%;
+	text-align: center;
+	display: inline-block;
 }
