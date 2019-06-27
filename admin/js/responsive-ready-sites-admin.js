@@ -475,6 +475,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							site_customizer_data: ResponsiveSitesAdmin.site_customizer_data,
 						},
 						beforeSend: function () {
+							$( '.responsive-ready-sites-import-customizer .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
 							ResponsiveSitesAdmin._log_message( 'Importing Customizer Data.....' );
 						},
 					}
@@ -485,6 +486,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 								// log.
 							} else {
 								ResponsiveSitesAdmin._log_message( 'Customizer Setting Imported' );
+								$( '.responsive-ready-sites-import-customizer .responsive-ready-sites-tooltip-icon' ).removeClass( 'processing-import' );
+								$( '.responsive-ready-sites-import-customizer .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 								$( document ).trigger( 'responsive-ready-sites-import-customizer-settings-done' );
 							}
 						}
@@ -792,6 +795,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 											document.getElementsByClassName( "cybershimps-sites-import-process" ).value = '100';
 											$( '.cybershimps-sites-import-process-wrap' ).hide();
 
+											$( '.responsive-ready-sites-import-xml .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 											$( document ).trigger( 'responsive-ready-sites-import-xml-done' );
 
 											break;
@@ -986,6 +990,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			event.preventDefault();
 
 			if ( $( '.responsive-ready-sites-reset-data' ).find( '.checkbox' ).is( ':checked' ) ) {
+				$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
 				$( document ).trigger( 'responsive-ready-sites-reset-data' );
 			} else {
 				$( document ).trigger( 'responsive-ready-sites-reset-data-done' );
@@ -1237,6 +1242,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 									ResponsiveSitesAdmin.reset_remaining_posts -= 1;
 									if ( 0 == ResponsiveSitesAdmin.reset_remaining_posts ) {
 										$( document ).trigger( 'responsive-ready-sites-delete-posts-done' );
+										$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 										$( document ).trigger( 'responsive-ready-sites-reset-data-done' );
 									}
 								}
@@ -1248,6 +1254,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			} else {
 				$( document ).trigger( 'responsive-ready-sites-delete-posts-done' );
+				$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 				$( document ).trigger( 'responsive-ready-sites-reset-data-done' );
 			}
 		},
