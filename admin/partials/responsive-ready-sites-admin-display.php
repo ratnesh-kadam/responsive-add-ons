@@ -130,6 +130,11 @@
 			</div>
 		</div>
 		<div class="wp-full-overlay-main">
+			<div class="sites-import-process-errors" style="display: none">
+				<div class="import-process-error">
+					<h4>Error while importing content</h4>
+				</div>
+			</div>
 			<div class="site-import-options">
 				<div class="responsive-ready-sites-advanced-options">
 					<ul class="responsive-ready-site-contents">
