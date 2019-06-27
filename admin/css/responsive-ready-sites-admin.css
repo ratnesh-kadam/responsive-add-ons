@@ -28,23 +28,6 @@
 .responsive-ready-sites-import-process-wrap progress::-webkit-progress-bar {
 	background: transparent;
 }
-.responsive-ready-sites-import-customizer .responsive-ready-sites-import-customizer-process-wrap progress {
-	background: #eeeeee;
-}
-.responsive-ready-sites-import-customizer-process-wrap progress {
-	padding: 0px;
-	border: 0 none;
-	background: #0085bd;
-	border-radius: 5px;
-	height: 4px;
-	flex: 1;
-}
-.responsive-ready-sites-import-customizer-process-wrap progress::-webkit-progress-value {
-	background: #00679b;
-}
-.responsive-ready-sites-import-customizer-process-wrap progress::-webkit-progress-bar {
-	background: transparent;
-}
 .current-importing-status-wrap {
 	font-size: 1rem;
 }
