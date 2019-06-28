@@ -127,7 +127,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 					for ( var i = 0; i < process_bars_length; i++ ) {
 						process_bars[i].value = progress_bar;
 					}
-					ResponsiveSitesAdmin._log_message( 'Importing Content.. ' + progress );
 				}
 			}
 		},
@@ -236,29 +235,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 						if ( false === data.success ) {
 							// log.
 						} else {
-
-							var date = new Date();
-
-							ResponsiveSitesAdmin.import_end_time = new Date();
-							var diff                             = ( ResponsiveSitesAdmin.import_end_time.getTime() - ResponsiveSitesAdmin.import_start_time.getTime() );
-
-							var time    = '';
-							var seconds = Math.floor( diff / 1000 );
-							var minutes = Math.floor( seconds / 60 );
-							var hours   = Math.floor( minutes / 60 );
-
-							minutes = minutes - ( hours * 60 );
-							seconds = seconds - ( minutes * 60 );
-
-							if ( hours ) {
-								time += hours + ' Hours ';
-							}
-							if ( minutes ) {
-								time += minutes + ' Minutes ';
-							}
-							if ( seconds ) {
-								time += seconds + ' Seconds';
-							}
 
 							var	output = '<h2>Responsive Ready Site Import Complete</h2>';
 							output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">Launch Site</a></p>';
@@ -442,17 +418,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 						action	: 'responsive-ready-sites-import-wpforms',
 						wpforms_path : ResponsiveSitesAdmin.wpforms_path,
 					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( "Importing WPForms....." );
-					},
 				}
 			)
+				.fail(
+					function( jqXHR ){
+						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+					}
+				)
 				.done(
 					function ( forms){
 						if (false === forms.success) {
 							// log.
 						} else {
-							ResponsiveSitesAdmin._log_message( "WPForms Imported Successfully" );
 							$( document ).trigger( 'responsive-ready-sites-import-wpforms-done' );
 						}
 					}
@@ -476,16 +453,19 @@ var ResponsiveSitesAjaxQueue = (function() {
 						},
 						beforeSend: function () {
 							$( '.responsive-ready-sites-import-customizer .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
-							ResponsiveSitesAdmin._log_message( 'Importing Customizer Data.....' );
 						},
 					}
 				)
+					.fail(
+						function( jqXHR ){
+							ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+						}
+					)
 					.done(
 						function (forms) {
 							if (false === forms.success) {
 								// log.
 							} else {
-								ResponsiveSitesAdmin._log_message( 'Customizer Setting Imported' );
 								$( '.responsive-ready-sites-import-customizer .responsive-ready-sites-tooltip-icon' ).removeClass( 'processing-import' );
 								$( '.responsive-ready-sites-import-customizer .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 								$( document ).trigger( 'responsive-ready-sites-import-customizer-settings-done' );
@@ -511,14 +491,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 						action       : 'responsive-ready-sites-import-options',
 						options_data : ResponsiveSitesAdmin.options_data,
 					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( 'Importing Options..' );
-					},
 				}
 			)
 				.fail(
 					function( jqXHR ){
-						// log message.
+						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
 					}
 				)
 				.done(
@@ -526,7 +503,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 						// Fail - Import Site Options.
 						if ( false === options_data.success ) {
-							ResponsiveSitesAdmin._log_message( options_data );
+							ResponsiveSitesAdmin._log_error( options_data );
 						} else {
 
 							// 3. Pass - Import Site Options.
@@ -550,25 +527,21 @@ var ResponsiveSitesAjaxQueue = (function() {
 						action       : 'responsive-ready-sites-import-widgets',
 						widgets_data : ResponsiveSitesAdmin.widgets_data,
 					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( 'Importing Widgets..' );
-					},
 				}
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_message( jqXHR.status + ' ' + jqXHR.responseText, true );
+						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
 					}
 				)
 				.done(
 					function ( widgets_data ) {
 
 						if ( false === widgets_data.success ) {
-							ResponsiveSitesAdmin._log_message( widgets_data.data );
+							ResponsiveSitesAdmin._log_error( widgets_data.data );
 
 						} else {
 
-							ResponsiveSitesAdmin._log_message( 'Imported Widgets!' );
 							$( document ).trigger( 'responsive-ready-sites-import-widgets-done' );
 						}
 						$( document ).trigger( 'responsive-ready-sites-import-widgets-done' );
@@ -665,8 +638,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_activateAllPlugins: function( activate_plugins ) {
 
-			ResponsiveSitesAdmin._log_message( 'Activating Required Plugins..' );
-
 			$.each(
 				activate_plugins,
 				function(index, single_plugin) {
@@ -716,13 +687,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_installAllPlugins: function( not_installed ) {
 
-			ResponsiveSitesAdmin._log_message( 'Installing Required Plugins..' );
-
 			$.each(
 				not_installed,
 				function(index, single_plugin) {
-
-					ResponsiveSitesAdmin._log_message( 'Installing Plugin - ' + ResponsiveSitesAdmin.ucwords( single_plugin.name ) );
 
 					// Add each plugin activate request in Ajax queue.
 					// @see wp-admin/js/updates.js.
@@ -758,10 +725,14 @@ var ResponsiveSitesAjaxQueue = (function() {
 						},
 						beforeSend: function () {
 							$( '.responsive-ready-sites-import-process-wrap' ).show();
-							ResponsiveSitesAdmin._log_message( 'Importing XML data' );
 						},
 					}
 				)
+					.fail(
+						function( jqXHR ){
+							ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+						}
+					)
 					.done(
 						function (xml_data) {
 
@@ -865,17 +836,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		},
 
-		_log_message: function( data, append ) {
+		_log_error: function( data, append ) {
 
+			$( '.sites-import-process-errors' ).show();
 			var markup = '<p>' + data + '</p>';
 			if (typeof data == 'object' ) {
 				var markup = '<p>' + JSON.stringify( data ) + '</p>';
 			}
 
 			if ( append ) {
-				$( '.current-importing-status-title' ).append( markup );
+				$( '.current-importing-status-error-title' ).append( markup );
 			} else {
-				$( '.current-importing-status-title' ).html( markup );
+				$( '.current-importing-status-error-title' ).html( markup );
 			}
 		},
 
@@ -930,6 +902,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 					},
 				}
 			)
+				.fail(
+					function( jqXHR ){
+						ResponsiveSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+					}
+				)
 				.done(
 					function ( demo_data ) {
 
@@ -962,11 +939,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 										},
 									}
 								)
-									.fail(
-										function( jqXHR ){
-
-										}
-									)
 									.done(
 										function ( response ) {
 											var required_plugins = response.data['required_plugins'] || '';
@@ -1034,8 +1006,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 			setTimeout(
 				function() {
 
-						ResponsiveSitesAdmin._log_message( 'Installing Plugin - ' + ResponsiveSitesAdmin.ucwords( response.slug ) );
-
 						$.ajax(
 							{
 								url: responsiveSitesAdmin.ajaxurl,
@@ -1051,8 +1021,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 								if ( result.success ) {
 									 var pluginsList = responsiveSitesAdmin.required_plugins.inactive;
-
-									 ResponsiveSitesAdmin._log_message( 'Installed Plugin - ' + ResponsiveSitesAdmin.ucwords( 'Testing' ) );
 
 									 // Reset not installed plugins list.
 									 responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( response.slug, pluginsList );
@@ -1085,21 +1053,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						action : 'responsive-ready-sites-backup-settings',
 					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( 'Processing Customizer Settings Backup..' );
-					},
 				}
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_message( jqXHR.status + ' ' + jqXHR.responseText, true );
+						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
 					}
 				)
 				.done(
 					function ( data ) {
-
-						// 1. Pass - Import Customizer Options.
-						ResponsiveSitesAdmin._log_message( 'Customizer Settings Backup Done..' );
 
 						// Custom trigger.
 						$( document ).trigger( trigger_name );
@@ -1113,8 +1075,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_pluginInstalling: function(event, args) {
 			event.preventDefault();
 
-			ResponsiveSitesAdmin._log_message( 'Installing Plugin - ' );
-
 		},
 
 		_reset_customizer_data: function() {
@@ -1125,19 +1085,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						action : 'responsive-ready-sites-reset-customizer-data'
 					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( 'Reseting Customizer Data..' );
-					},
 				}
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_message( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 					}
 				)
 				.done(
 					function ( data ) {
-						ResponsiveSitesAdmin._log_message( 'Complete Resetting Customizer Data..' );
 						$( document ).trigger( 'responsive-ready-sites-reset-customizer-data-done' );
 					}
 				);
@@ -1152,19 +1108,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						action : 'responsive-ready-sites-reset-site-options'
 					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( 'Reseting Site Options..' );
-					},
 				}
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_message( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 					}
 				)
 				.done(
 					function ( data ) {
-						ResponsiveSitesAdmin._log_message( 'Complete Reseting Site Options..' );
 						$( document ).trigger( 'responsive-ready-sites-reset-site-options-done' );
 					}
 				);
@@ -1179,19 +1131,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						action : 'responsive-ready-sites-reset-widgets-data'
 					},
-					beforeSend: function() {
-						ResponsiveSitesAdmin._log_message( 'Reseting Widgets..' );
-					},
 				}
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_message( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 					}
 				)
 				.done(
 					function ( data ) {
-						ResponsiveSitesAdmin._log_message( 'Complete Reseting Widgets..' );
 						$( document ).trigger( 'responsive-ready-sites-reset-widgets-data-done' );
 					}
 				);
@@ -1221,8 +1169,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 					ResponsiveSitesAdmin.site_imported_data['reset_posts'],
 					function(index, post_id) {
 
-						ResponsiveSitesAdmin._log_message( 'Deleting Posts..' );
-
 						ResponsiveSitesAjaxQueue.add(
 							{
 								url: responsiveSitesAdmin.ajaxurl,
@@ -1236,8 +1182,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 									if ( ResponsiveSitesAdmin.reset_processed_posts < ResponsiveSitesAdmin.site_imported_data['reset_posts'].length ) {
 										ResponsiveSitesAdmin.reset_processed_posts += 1;
 									}
-
-									ResponsiveSitesAdmin._log_message( 'Deleting Post ' + ResponsiveSitesAdmin.reset_processed_posts + ' of ' + ResponsiveSitesAdmin.site_imported_data['reset_posts'].length + '<br/>' + result.data );
 
 									ResponsiveSitesAdmin.reset_remaining_posts -= 1;
 									if ( 0 == ResponsiveSitesAdmin.reset_remaining_posts ) {
@@ -1267,7 +1211,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 				$.each(
 					ResponsiveSitesAdmin.site_imported_data['reset_wp_forms'],
 					function(index, post_id) {
-						ResponsiveSitesAdmin._log_message( 'Deleting WP Forms..' );
 						ResponsiveSitesAjaxQueue.add(
 							{
 								url: responsiveSitesAdmin.ajaxurl,
@@ -1281,8 +1224,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 									if ( ResponsiveSitesAdmin.reset_processed_wp_forms < ResponsiveSitesAdmin.site_imported_data['reset_wp_forms'].length ) {
 										ResponsiveSitesAdmin.reset_processed_wp_forms += 1;
 									}
-
-									ResponsiveSitesAdmin._log_message( 'Deleting Form ' + ResponsiveSitesAdmin.reset_processed_wp_forms + ' of ' + ResponsiveSitesAdmin.site_imported_data['reset_wp_forms'].length + '<br/>' + result.data );
 
 									ResponsiveSitesAdmin.reset_remaining_wp_forms -= 1;
 									if ( 0 == ResponsiveSitesAdmin.reset_remaining_wp_forms ) {
@@ -1309,7 +1250,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 				$.each(
 					ResponsiveSitesAdmin.site_imported_data['reset_terms'],
 					function(index, term_id) {
-						ResponsiveSitesAdmin._log_message( 'Deleting Terms..' );
 						ResponsiveSitesAjaxQueue.add(
 							{
 								url: responsiveSitesAdmin.ajaxurl,
@@ -1322,8 +1262,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 									if ( ResponsiveSitesAdmin.reset_processed_terms < ResponsiveSitesAdmin.site_imported_data['reset_terms'].length ) {
 										ResponsiveSitesAdmin.reset_processed_terms += 1;
 									}
-
-									ResponsiveSitesAdmin._log_message( 'Deleting Term ' + ResponsiveSitesAdmin.reset_processed_terms + ' of ' + ResponsiveSitesAdmin.site_imported_data['reset_terms'].length + '<br/>' + result.data );
 
 									ResponsiveSitesAdmin.reset_remaining_terms -= 1;
 									if ( 0 == ResponsiveSitesAdmin.reset_remaining_terms ) {

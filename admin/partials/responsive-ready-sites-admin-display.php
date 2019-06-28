@@ -16,24 +16,8 @@
 <div id="responsive-ready-site-preview"></div>
 <div id="responsive-ready-sites-import-options"></div>
 <div class="wrap" id="responsive-ready-sites-admin-page">
-	<h1>Responsive Ready Sites Page</h1>
-	<div class="responsive-ready-sites-import-display">
-		<p>
-			<button class="button-primary import-demo-data">Import Demo Site Data</button>
-		</p>
-	</div>
-	<div class="responsive-ready-sites-result-preview" style="display: none;">
-		<div class="inner">
-			<h2><?php esc_html_e( 'We\'re importing your website.', 'responsive-addons' ); ?></h2>
-			<p><?php esc_html_e( 'The process can take anywhere between 2 to 10 minutes depending on the size of the website and speed of connection.', 'responsive-addons' ); ?></p>
-			<p><?php esc_html_e( 'Please do not close this browser window until the site is imported completely.', 'responsive-addons' ); ?></p>
-			<div class="current-importing-status-wrap">
-				<div class="current-importing-status">
-					<div class="current-importing-status-title"></div>
-					<div class="current-importing-status-description"></div>
-				</div>
-			</div>
-		</div>
+	<div class="responsive-sites-header">
+		<span>Responsive Ready Sites</span>
 	</div>
 	<div class="theme-browser rendered">
 		<div id="responsive-sites" class="themes wp-clearfix"></div>
@@ -132,9 +116,10 @@
 		<div class="wp-full-overlay-main">
 			<div class="sites-import-process-errors" style="display: none">
 				<div class="import-process-error">
-					<h4>Error while importing content</h4>
+					<div class="current-importing-status-error-title"></div>
 				</div>
 			</div>
+
 			<div class="site-import-options">
 				<div class="responsive-ready-sites-advanced-options">
 					<ul class="responsive-ready-site-contents">

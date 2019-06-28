@@ -27,18 +27,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 // Set Constants
 if ( ! defined( 'RESPONSIVE_ADDONS_FILE' ) ) {
-    define( 'RESPONSIVE_ADDONS_FILE', __FILE__ );
+	define( 'RESPONSIVE_ADDONS_FILE', __FILE__ );
 }
 
 if ( ! defined( 'RESPONSIVE_ADDONS_DIR' ) ) {
-    define( 'RESPONSIVE_ADDONS_DIR', plugin_dir_url( RESPONSIVE_ADDONS_FILE ) );
+	define( 'RESPONSIVE_ADDONS_DIR', plugin_dir_url( RESPONSIVE_ADDONS_FILE ) );
 }
 
 if ( ! defined( 'RESPONSIVE_ADDONS_URI' ) ) {
-    define( 'RESPONSIVE_ADDONS_URI', plugins_url( '/', RESPONSIVE_ADDONS_FILE ) );
+	define( 'RESPONSIVE_ADDONS_URI', plugins_url( '/', RESPONSIVE_ADDONS_FILE ) );
 }
 
-if( !class_exists( 'Responsive_Addons' ) ) {
+if ( ! class_exists( 'Responsive_Addons' ) ) {
 
 	class Responsive_Addons {
 
@@ -59,23 +59,22 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			add_filter( "plugin_action_links_$plugin", array( &$this, 'plugin_settings_link' ) );
 
 			// Responsive Ready Site Importer Menu
-            add_action('admin_menu', array( &$this, 'add_responsive_ready_sites_menu' ) );
-            add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
+			add_action( 'admin_menu', array( &$this, 'add_responsive_ready_sites_menu' ) );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
 
-            add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_styles' ) );
+			add_action( 'admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_styles' ) );
 
-            add_action( 'wp_ajax_responsive-ready-sites-required-plugins', array( &$this, 'required_plugin'));
-            add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array(&$this, 'required_plugin_activate'));
-            add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array(&$this, 'set_reset_data'));
-            add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array(&$this, 'backup_settings'));
+			add_action( 'wp_ajax_responsive-ready-sites-required-plugins', array( &$this, 'required_plugin' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array( &$this, 'required_plugin_activate' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array( &$this, 'set_reset_data' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array( &$this, 'backup_settings' ) );
 
-
-            $this->options        = get_option( 'responsive_theme_options' );
+			$this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
 
 			$this->load_responsive_sites_importer();
 
-            self::set_api_url();
+			self::set_api_url();
 		}
 
 		/**
@@ -90,14 +89,14 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		public static function deactivate() {
 		}
 
-        /**
-         * Setter for $api_url
-         *
-         * @since  1.0.0
-         */
-        public static function set_api_url() {
-            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
-        }
+		/**
+		 * Setter for $api_url
+		 *
+		 * @since  1.0.0
+		 */
+		public static function set_api_url() {
+			self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
+		}
 
 		/**
 		 * Hook into WP admin_init
@@ -106,11 +105,12 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		public function admin_init( $options ) {
 
 			// Check if the theme being used is Responsive. If True then add settings to Responsive settings, else set up a settings page
-			if( $this->is_responsive() ) {
+			if ( $this->is_responsive() ) {
 				add_filter( 'responsive_option_sections_filter', array( &$this, 'responsive_option_sections' ), 10, 1 );
 				add_filter( 'responsive_options_filter', array( &$this, 'responsive_options' ), 10, 1 );
 
-				/*$stop_responsive2 = isset( $this->options['stop_responsive2'] ) ? $this->options['stop_responsive2'] : '';
+				/*
+				$stop_responsive2 = isset( $this->options['stop_responsive2'] ) ? $this->options['stop_responsive2'] : '';
 
 				// Check if stop_responsive2 toggle is on, if on then include update class from wp-updates.com
 				if( 1 == $stop_responsive2 ) {
@@ -131,7 +131,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		public function after_setup_theme() {
 
 			// Check if the theme being used is Responsive. If True then add settings to Responsive settings, else set up a settings page
-			if( $this->is_responsive() ) {
+			if ( $this->is_responsive() ) {
 
 				add_filter( 'responsive_option_options_filter', array( $this, 'responsive_theme_options_set' ) );
 
@@ -163,7 +163,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 */
 		public function add_menu() {
 			// Hides Menu options if the current theme is responsive
-			if( ! $this->is_responsive() ) {
+			if ( ! $this->is_responsive() ) {
 				add_options_page(
 					__( 'Responsive Add Ons', 'responsive-addons' ),
 					__( 'Responsive Add Ons', 'responsive-addons' ),
@@ -178,11 +178,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 * The settings page
 		 */
 		public function plugin_settings_page() {
-			if( !current_user_can( 'manage_options' ) ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 			}
 			// Render the settings template
-			include( sprintf( "%s/templates/settings.php", dirname( __FILE__ ) ) );
+			include sprintf( '%s/templates/settings.php', dirname( __FILE__ ) );
 		}
 
 		/**
@@ -193,7 +193,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		public static function is_responsive() {
 			$theme = wp_get_theme();
 
-			if( $theme->Name == 'Responsive' || $theme->Template == 'responsive' || $theme->Name == 'Responsive Pro' || $theme->Template == 'responsivepro' ) {
+			if ( $theme->Name == 'Responsive' || $theme->Template == 'responsive' || $theme->Name == 'Responsive Pro' || $theme->Template == 'responsivepro' ) {
 				return true;
 			} else {
 				return false;
@@ -205,8 +205,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			$new_sections = array(
 				array(
 					'title' => __( 'Webmaster Tools', 'responsive-addons' ),
-					'id'    => 'webmaster'
-				)
+					'id'    => 'webmaster',
+				),
 			);
 
 			$new = array_merge( $sections, $new_sections );
@@ -228,7 +228,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'type'        => 'text',
 						'id'          => 'google_site_verification',
 						'description' => __( 'Enter your Google ID number only', 'responsive-addons' ),
-						'placeholder' => ''
+						'placeholder' => '',
 					),
 					array(
 						'title'       => __( 'Bing Site Verification', 'responsive-addons' ),
@@ -237,7 +237,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'type'        => 'text',
 						'id'          => 'bing_site_verification',
 						'description' => __( 'Enter your Bing ID number only', 'responsive-addons' ),
-						'placeholder' => ''
+						'placeholder' => '',
 					),
 					array(
 						'title'       => __( 'Yahoo Site Verification', 'responsive-addons' ),
@@ -246,7 +246,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'type'        => 'text',
 						'id'          => 'yahoo_site_verification',
 						'description' => __( 'Enter your Yahoo ID number only', 'responsive-addons' ),
-						'placeholder' => ''
+						'placeholder' => '',
 					),
 					array(
 						'title'       => __( 'Site Statistics Tracker', 'responsive-addons' ),
@@ -256,15 +256,16 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'id'          => 'site_statistics_tracker',
 						'class'       => array( 'site-tracker' ),
 						'description' => __( 'Google Analytics, StatCounter, any other or all of them.', 'responsive-addons' ),
-						'placeholder' => ''
+						'placeholder' => '',
 					),
-				)
+				),
 			);
 
 			$new = array_merge( $options, $new_options );
 
 			// Commented for now to hide updates option
-			/* Add stop_responsive2 options only to Responsive theme.
+			/*
+			 Add stop_responsive2 options only to Responsive theme.
 			if( $this->is_responsive() ) {
 				$new['theme_elements'][] = array(
 					'title'       => __( 'Disable Responsive 2 Updates', 'responsive-addons' ),
@@ -296,7 +297,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'description' => __( 'Enter your Google ID number only', 'responsive-addons' ),
 						'placeholder' => '',
 						'default'     => '',
-						'validate'    => 'text'
+						'validate'    => 'text',
 					),
 					array(
 						'title'       => __( 'Bing Site Verification', 'responsive-addons' ),
@@ -307,7 +308,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'description' => __( 'Enter your Bing ID number only', 'responsive-addons' ),
 						'placeholder' => '',
 						'default'     => '',
-						'validate'    => 'text'
+						'validate'    => 'text',
 					),
 					array(
 						'title'       => __( 'Yahoo Site Verification', 'responsive-addons' ),
@@ -318,7 +319,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'description' => __( 'Enter your Yahoo ID number only', 'responsive-addons' ),
 						'placeholder' => '',
 						'default'     => '',
-						'validate'    => 'text'
+						'validate'    => 'text',
 					),
 					array(
 						'title'       => __( 'Site Statistics Tracker', 'responsive-addons' ),
@@ -330,10 +331,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 						'description' => __( 'Google Analytics, StatCounter, any other or all of them.', 'responsive-addons' ),
 						'placeholder' => '',
 						'default'     => '',
-						'validate'    => 'js'
+						'validate'    => 'js',
 					),
 
-				)
+				),
 			);
 
 			$new_options = array_merge( $options, $new_options );
@@ -349,19 +350,19 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			// Test if using Responsive theme. If yes load from responsive options else load from plugin options
 			$responsive_options = ( $this->is_responsive() ) ? $this->options : $this->plugin_options;
 
-			if( !empty( $responsive_options['google_site_verification'] ) ) {
+			if ( ! empty( $responsive_options['google_site_verification'] ) ) {
 				echo '<meta name="google-site-verification" content="' . esc_attr( $responsive_options['google_site_verification'] ) . '" />' . "\n";
 			}
 
-			if( !empty( $responsive_options['bing_site_verification'] ) ) {
+			if ( ! empty( $responsive_options['bing_site_verification'] ) ) {
 				echo '<meta name="msvalidate.01" content="' . esc_attr( $responsive_options['bing_site_verification'] ) . '" />' . "\n";
 			}
 
-			if( !empty( $responsive_options['yahoo_site_verification'] ) ) {
+			if ( ! empty( $responsive_options['yahoo_site_verification'] ) ) {
 				echo '<meta name="y_key" content="' . esc_attr( $responsive_options['yahoo_site_verification'] ) . '" />' . "\n";
 			}
 
-			if( !empty( $responsive_options['site_statistics_tracker'] ) ) {
+			if ( ! empty( $responsive_options['site_statistics_tracker'] ) ) {
 				echo $responsive_options['site_statistics_tracker'];
 			}
 		}
@@ -370,23 +371,22 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			$output = array();
 
-			foreach( $input as $key => $test ) {
-				switch( $key ) {
+			foreach ( $input as $key => $test ) {
+				switch ( $key ) {
 					case 'google_site_verification':
-						$output[$key] = wp_filter_post_kses( $test );
+						$output[ $key ] = wp_filter_post_kses( $test );
 						break;
 					case 'yahoo_site_verification':
-						$output[$key] = wp_filter_post_kses( $test );
+						$output[ $key ] = wp_filter_post_kses( $test );
 						break;
 					case 'bing_site_verification':
-						$output[$key] = wp_filter_post_kses( $test );
+						$output[ $key ] = wp_filter_post_kses( $test );
 						break;
 					case 'site_statistics_tracker':
-						$output[$key] = wp_kses_stripslashes( $test );
+						$output[ $key ] = wp_kses_stripslashes( $test );
 						break;
 
 				}
-
 			}
 
 			return $output;
@@ -410,242 +410,246 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			return $links;
 		}
 
-        /**
-         * Add Responsive Ready Sites Menu
-         *
-         * @since 1.0.8
-         */
-        public function add_responsive_ready_sites_menu() {
-            $page_title = apply_filters( 'responsive_ready_sites_menu_page_title', __( 'Responsive Ready Sites', 'responsive-addons' ) );
+		/**
+		 * Add Responsive Ready Sites Menu
+		 *
+		 * @since 1.0.8
+		 */
+		public function add_responsive_ready_sites_menu() {
+			$page_title = apply_filters( 'responsive_ready_sites_menu_page_title', __( 'Responsive Ready Sites', 'responsive-addons' ) );
 
-            $page = add_theme_page( $page_title, $page_title, 'manage_options', 'responsive_ready_sites', array( &$this, 'menu_callback' ) );
-        }
+			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'responsive_ready_sites', array( &$this, 'menu_callback' ) );
+		}
 
-        /**
-         * Menu callback
-         *
-         * @since 1.0.8
-         */
-        public function menu_callback() {
-            ?>
-            <div class="responsive-sites-menu-page-wrapper">
-                <?php $responsive_blocks_admin_dir = plugin_dir_path( __FILE__ ) . 'admin/'; ?>
-                <?php require_once $responsive_blocks_admin_dir . 'partials/responsive-ready-sites-admin-display.php'; ?>
-            </div>
-            <?php
-        }
+		/**
+		 * Menu callback
+		 *
+		 * @since 1.0.8
+		 */
+		public function menu_callback() {
+			?>
+			<div class="responsive-sites-menu-page-wrapper">
+				<?php $responsive_blocks_admin_dir = plugin_dir_path( __FILE__ ) . 'admin/'; ?>
+				<?php require_once $responsive_blocks_admin_dir . 'partials/responsive-ready-sites-admin-display.php'; ?>
+			</div>
+			<?php
+		}
 
-        /**
-         * Load Responsive Ready Sites Importer
-         *
-         * @since 1.0.8
-         */
-        public function load_responsive_sites_importer() {
-            $responsive_blocks_includes_dir = plugin_dir_path( __FILE__ ) . 'includes/';
-            require_once $responsive_blocks_includes_dir . 'importers/class-responsive-ready-sites-importer.php';
-        }
+		/**
+		 * Load Responsive Ready Sites Importer
+		 *
+		 * @since 1.0.8
+		 */
+		public function load_responsive_sites_importer() {
+			$responsive_blocks_includes_dir = plugin_dir_path( __FILE__ ) . 'includes/';
+			require_once $responsive_blocks_includes_dir . 'importers/class-responsive-ready-sites-importer.php';
+		}
 
-        /**
-         * Include Admin JS
-         *
-         * @since 1.0.8
-         */
-        public function responsive_ready_sites_admin_enqueue_scripts(){
+		/**
+		 * Include Admin JS
+		 *
+		 * @since 1.0.8
+		 */
+		public function responsive_ready_sites_admin_enqueue_scripts( $hook ) {
 
-            wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '1.0.7', true );
+			if ( 'appearance_page_responsive_ready_sites' !== $hook ) {
+				return;
+			}
 
-            wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '1.0.7', true );
+			wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '1.0.7', true );
 
-            wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI.'/admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '1.0.7', true );
+			wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '1.0.7', true );
 
-            wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI. 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '1.0.7', true );
+			wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI . '/admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '1.0.7', true );
 
-            $data = apply_filters(
-                'responsive_sites_localize_vars',
-                array(
+			wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI . 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '1.0.7', true );
+
+			$data = apply_filters(
+				'responsive_sites_localize_vars',
+				array(
                     'debug'             => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false, //phpcs:ignore
-                    'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
-                    'siteURL'           => site_url(),
-                    '_ajax_nonce'       => wp_create_nonce( 'responsive-addons' ),
-                    'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
-                    'required_plugins'   => array(),
-                )
-            );
+					'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'siteURL'           => site_url(),
+					'_ajax_nonce'       => wp_create_nonce( 'responsive-addons' ),
+					'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
+					'required_plugins'  => array(),
+				)
+			);
 
-            wp_localize_script( 'responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data );
+			wp_localize_script( 'responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data );
 
-            $data = apply_filters(
-                'responsive_sites_localize_vars',
-                array(
-                    'ApiURL'  => self::$api_url,
-                )
-            );
+			$data = apply_filters(
+				'responsive_sites_localize_vars',
+				array(
+					'ApiURL' => self::$api_url,
+				)
+			);
 
-            // Use this for premium demos.
-            $request_params = apply_filters(
-                'responsive_sites_api_params',
-                array(
-                    'site_url'     => '',
-                )
-            );
+			// Use this for premium demos.
+			$request_params = apply_filters(
+				'responsive_sites_api_params',
+				array(
+					'site_url' => '',
+				)
+			);
 
-            wp_localize_script( 'responsive-ready-sites-api', 'responsiveSitesApi', $data );
-            $data = apply_filters(
-                'responsive_sites_render_localize_vars',
-                array(
-                    'sites'                => $request_params,
-                    'settings'             => array(),
-                )
-            );
+			wp_localize_script( 'responsive-ready-sites-api', 'responsiveSitesApi', $data );
+			$data = apply_filters(
+				'responsive_sites_render_localize_vars',
+				array(
+					'sites'    => $request_params,
+					'settings' => array(),
+				)
+			);
 
-            wp_localize_script( 'render-responsive-ready-sites', 'responsiveSitesRender', $data );
-        }
+			wp_localize_script( 'render-responsive-ready-sites', 'responsiveSitesRender', $data );
+		}
 
-        /**
-         * Include Admin css
-         *
-         * @since 1.0.8
-         */
-        public function responsive_ready_sites_admin_enqueue_styles() {
-            //Responsive Ready Sites admin styles.
-            wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI.'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
-            wp_enqueue_style( 'responsive-ready-sites-admin' );
-        }
+		/**
+		 * Include Admin css
+		 *
+		 * @since 1.0.8
+		 */
+		public function responsive_ready_sites_admin_enqueue_styles() {
+			// Responsive Ready Sites admin styles.
+			wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI . 'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
+			wp_enqueue_style( 'responsive-ready-sites-admin' );
+		}
 
-        /**
-         * Backup existing settings.
-         */
-        public function backup_settings() {
-            if ( ! current_user_can( 'manage_options' ) ) {
-                return;
-            }
+		/**
+		 * Backup existing settings.
+		 */
+		public function backup_settings() {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
 
-            $file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
-            $old_settings = get_option( 'responsive-settings', array() );
-            update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
-            wp_send_json_success();
-        }
+			$file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
+			$old_settings = get_option( 'responsive-settings', array() );
+			update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
+			wp_send_json_success();
+		}
 
-        /**
-         * Set reset data
-         */
-        public function set_reset_data() {
-            if ( ! current_user_can( 'manage_options' ) ) {
-                return;
-            }
+		/**
+		 * Set reset data
+		 */
+		public function set_reset_data() {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
 
-            global $wpdb;
+			global $wpdb;
 
-            $post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_post'" );
-            $form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_wp_forms'" );
-            $term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_responsive_ready_sites_imported_term'" );
+			$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_post'" );
+			$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_wp_forms'" );
+			$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_responsive_ready_sites_imported_term'" );
 
-            wp_send_json_success(
-                array(
-                    'reset_posts'    => $post_ids,
-                    'reset_wp_forms' => $form_ids,
-                    'reset_terms'    => $term_ids,
-                )
-            );
-        }
+			wp_send_json_success(
+				array(
+					'reset_posts'    => $post_ids,
+					'reset_wp_forms' => $form_ids,
+					'reset_terms'    => $term_ids,
+				)
+			);
+		}
 
-        /**
-         * Required Plugin
-         *
-         * @since 1.0.0
-         * @return void
-         */
-        public function required_plugin() {
+		/**
+		 * Required Plugin
+		 *
+		 * @since 1.0.0
+		 * @return void
+		 */
+		public function required_plugin() {
 
-            // Verify Nonce.
-            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+			// Verify Nonce.
+			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-            $response = array(
-                'active'       => array(),
-                'inactive'     => array(),
-                'notinstalled' => array(),
-            );
+			$response = array(
+				'active'       => array(),
+				'inactive'     => array(),
+				'notinstalled' => array(),
+			);
 
-            if ( ! current_user_can( 'customize' ) ) {
-                wp_send_json_error( $response );
-            }
+			if ( ! current_user_can( 'customize' ) ) {
+				wp_send_json_error( $response );
+			}
 
-            $required_plugins             = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
+			$required_plugins = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
 
-            if ( count( $required_plugins ) > 0 ) {
-                foreach ( $required_plugins as $key => $plugin ) {
+			if ( count( $required_plugins ) > 0 ) {
+				foreach ( $required_plugins as $key => $plugin ) {
 
-                    // Lite - Installed but Inactive.
-                    if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
+					// Lite - Installed but Inactive.
+					if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
 
-                        $response['inactive'][] = $plugin;
+						$response['inactive'][] = $plugin;
 
-                        // Lite - Not Installed.
-                    } elseif ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) ) {
+						// Lite - Not Installed.
+					} elseif ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) ) {
 
-                        $response['notinstalled'][] = $plugin;
+						$response['notinstalled'][] = $plugin;
 
-                        // Lite - Active.
-                    } else {
-                        $response['active'][] = $plugin;
-                    }
-                }
-            }
+						// Lite - Active.
+					} else {
+						$response['active'][] = $plugin;
+					}
+				}
+			}
 
-            // Send response.
-            wp_send_json_success(
-                array(
-                    'required_plugins'             => $response,
-                )
-            );
-        }
+			// Send response.
+			wp_send_json_success(
+				array(
+					'required_plugins' => $response,
+				)
+			);
+		}
 
 
-        /**
-         * Required Plugin Activate
-         *
-         * @since 1.0.0
-         */
-        public function required_plugin_activate() {
+		/**
+		 * Required Plugin Activate
+		 *
+		 * @since 1.0.0
+		 */
+		public function required_plugin_activate() {
 
-            if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
-                wp_send_json_error(
-                    array(
-                        'success' => false,
-                        'message' => __( 'No plugin specified', 'responsive-addons' ),
-                    )
-                );
-            }
+			if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => __( 'No plugin specified', 'responsive-addons' ),
+					)
+				);
+			}
 
-            $data               = array();
-            $plugin_init        = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
+			$data        = array();
+			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
 
-            $activate = activate_plugin( $plugin_init, '', false, true );
+			$activate = activate_plugin( $plugin_init, '', false, true );
 
-            if ( is_wp_error( $activate ) ) {
-                wp_send_json_error(
-                    array(
-                        'success' => false,
-                        'message' => $activate->get_error_message(),
-                    )
-                );
-            }
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $activate->get_error_message(),
+					)
+				);
+			}
 
-            wp_send_json_success(
-                array(
-                    'success' => true,
-                    'message' => __( 'Plugin Activated', 'responsive-addons' ),
-                )
-            );
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => __( 'Plugin Activated', 'responsive-addons' ),
+				)
+			);
 
-        }
+		}
 	}
 }
 
 /**
  * Initialize Plugin
  */
-if( class_exists( 'Responsive_Addons' ) ) {
+if ( class_exists( 'Responsive_Addons' ) ) {
 
 	// Installation and uninstallation hooks
 	register_activation_hook( __FILE__, array( 'Responsive_Addons', 'activate' ) );
@@ -660,69 +664,69 @@ if( class_exists( 'Responsive_Addons' ) ) {
 			/**
 			 * Exit if accessed directly
 			 */
-			if ( ! defined( 'ABSPATH' ) ) {
-				exit;
-			}
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 			/**
 			 * Initialize the blocks
 			 */
-			function responsive_blocks_loader() {
+function responsive_blocks_loader() {
 
-				$responsive_blocks_includes_dir = plugin_dir_path( __FILE__ ) . 'includes/';
-				$responsive_blocks_src_dir      = plugin_dir_path( __FILE__ ) . 'src/';
-				$responsive_blocks_dist_dir     = plugin_dir_path( __FILE__ ) . 'dist/';
+	$responsive_blocks_includes_dir = plugin_dir_path( __FILE__ ) . 'includes/';
+	$responsive_blocks_src_dir      = plugin_dir_path( __FILE__ ) . 'src/';
+	$responsive_blocks_dist_dir     = plugin_dir_path( __FILE__ ) . 'dist/';
 
-				/**
-				 * Load the blocks functionality
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'dist/init.php';
+	/**
+	 * Load the blocks functionality
+	 */
+	require_once plugin_dir_path( __FILE__ ) . 'dist/init.php';
 
-				/**
-				 * Load Getting Started page
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'dist/getting-started/getting-started.php';
+	/**
+	 * Load Getting Started page
+	 */
+	require_once plugin_dir_path( __FILE__ ) . 'dist/getting-started/getting-started.php';
 
-				/**
-				 * Load Social Block PHP
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'src/blocks/block-sharing/index.php';
+	/**
+	 * Load Social Block PHP
+	 */
+	require_once plugin_dir_path( __FILE__ ) . 'src/blocks/block-sharing/index.php';
 
-				/**
-				 * Load Post Grid PHP
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'src/blocks/block-post-grid/index.php';
+	/**
+	 * Load Post Grid PHP
+	 */
+	require_once plugin_dir_path( __FILE__ ) . 'src/blocks/block-post-grid/index.php';
 
-				/**
-				 * Load the newsletter block and related dependencies.
-				 */
-				if ( PHP_VERSION_ID >= 50600 ) {
-					if ( ! class_exists( '\DrewM\MailChimp\MailChimp' ) ) {
-						require_once $responsive_blocks_includes_dir . 'libraries/drewm/mailchimp-api/MailChimp.php';
-					}
+	/**
+	 * Load the newsletter block and related dependencies.
+	 */
+	if ( PHP_VERSION_ID >= 50600 ) {
+		if ( ! class_exists( '\DrewM\MailChimp\MailChimp' ) ) {
+			require_once $responsive_blocks_includes_dir . 'libraries/drewm/mailchimp-api/MailChimp.php';
+		}
 
-					require_once $responsive_blocks_includes_dir . 'exceptions/class-api-error-exception.php';
-					require_once $responsive_blocks_includes_dir . 'exceptions/class-mailchimp-api-error-exception.php';
-					require_once $responsive_blocks_includes_dir . 'interfaces/newsletter-provider-interface.php';
-					require_once $responsive_blocks_includes_dir . 'classes/class-mailchimp.php';
-					require_once $responsive_blocks_includes_dir . 'newsletter/newsletter-functions.php';
-					require_once $responsive_blocks_src_dir . 'blocks/block-newsletter/index.php';
-				}
+		require_once $responsive_blocks_includes_dir . 'exceptions/class-api-error-exception.php';
+		require_once $responsive_blocks_includes_dir . 'exceptions/class-mailchimp-api-error-exception.php';
+		require_once $responsive_blocks_includes_dir . 'interfaces/newsletter-provider-interface.php';
+		require_once $responsive_blocks_includes_dir . 'classes/class-mailchimp.php';
+		require_once $responsive_blocks_includes_dir . 'newsletter/newsletter-functions.php';
+		require_once $responsive_blocks_src_dir . 'blocks/block-newsletter/index.php';
+	}
 
-				/**
-				 * Compatibility functionality.
-				 */
-				require_once $responsive_blocks_includes_dir . 'compat.php';
-			}
+	/**
+	 * Compatibility functionality.
+	 */
+	require_once $responsive_blocks_includes_dir . 'compat.php';
+}
 			add_action( 'plugins_loaded', 'responsive_blocks_loader' );
 
 
 			/**
 			 * Load the plugin textdomain
 			 */
-			function responsive_blocks_init() {
-				load_plugin_textdomain( 'responsive-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
-			}
+function responsive_blocks_init() {
+	load_plugin_textdomain( 'responsive-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
+}
 			add_action( 'init', 'responsive_blocks_init' );
 
 
@@ -731,36 +735,36 @@ if( class_exists( 'Responsive_Addons' ) ) {
 			 *
 			 * @param bool $network_wide Whether or not the plugin is being network activated.
 			 */
-			function responsive_blocks_activate( $network_wide = false ) {
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Only used to do a redirect. False positive.
-				if ( ! $network_wide && ! isset( $_GET['activate-multi'] ) ) {
-					add_option( 'responsive_blocks_do_activation_redirect', true );
-				}
-			}
+function responsive_blocks_activate( $network_wide = false ) {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Only used to do a redirect. False positive.
+	if ( ! $network_wide && ! isset( $_GET['activate-multi'] ) ) {
+		add_option( 'responsive_blocks_do_activation_redirect', true );
+	}
+}
 			register_activation_hook( __FILE__, 'responsive_blocks_activate' );
 
 
 			/**
 			 * Redirect to the Responsive Blocks Getting Started page on single plugin activation.
 			 */
-			function responsive_blocks_redirect() {
-				if ( get_option( 'responsive_blocks_do_activation_redirect', false ) ) {
-					delete_option( 'responsive_blocks_do_activation_redirect' );
-					wp_safe_redirect( esc_url( admin_url( 'options-general.php?page=responsive_addons' ) ) );
-					exit;
-				}
-			}
+function responsive_blocks_redirect() {
+	if ( get_option( 'responsive_blocks_do_activation_redirect', false ) ) {
+		delete_option( 'responsive_blocks_do_activation_redirect' );
+		wp_safe_redirect( esc_url( admin_url( 'options-general.php?page=responsive_addons' ) ) );
+		exit;
+	}
+}
 			add_action( 'admin_init', 'responsive_blocks_redirect' );
 
 
 			/**
 			 * Add image sizes
 			 */
-			function responsive_blocks_image_sizes() {
-				// Post Grid Block.
-				add_image_size( 'ra-block-post-grid-landscape', 600, 400, true );
-				add_image_size( 'ra-block-post-grid-square', 600, 600, true );
-			}
+function responsive_blocks_image_sizes() {
+	// Post Grid Block.
+	add_image_size( 'ra-block-post-grid-landscape', 600, 400, true );
+	add_image_size( 'ra-block-post-grid-square', 600, 600, true );
+}
 			add_action( 'after_setup_theme', 'responsive_blocks_image_sizes' );
 
 			/**
@@ -768,14 +772,14 @@ if( class_exists( 'Responsive_Addons' ) ) {
 			 *
 			 * @return string
 			 */
-			function responsive_blocks_main_plugin_file() {
-				return __FILE__;
-			}
+function responsive_blocks_main_plugin_file() {
+	return __FILE__;
+}
 
 
 
 
-		/*****RESPONSIVE BLOCKS CODE ENDS HERE******/
+		/*****RESPONSIVE BLOCKS CODE ENDS HERE*/
 
 
 
