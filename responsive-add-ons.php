@@ -450,8 +450,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          *
          * @since 1.0.8
          */
-        public function responsive_ready_sites_admin_enqueue_scripts(){
+        public function responsive_ready_sites_admin_enqueue_scripts( $hook ){
 
+            if( 'appearance_page_responsive_ready_sites' !== $hook ){
+                return;
+            }
             wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '1.0.7', true );
 
             wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '1.0.7', true );
