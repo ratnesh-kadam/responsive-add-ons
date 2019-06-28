@@ -195,8 +195,8 @@ responsive-ready-site-import.button.installing:before {
 	width: 35%;
 	text-align: center;
 	display: inline-block;
-	padding: 15px;
-	background: #ff0000;
+	border: 2px solid #ff0000;
+	border-radius: 5px;
 }
 #responsive-ready-sites-admin-page .responsive-sites-header {
 	margin: 20px 20px 20px 0px;

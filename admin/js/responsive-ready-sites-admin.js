@@ -422,7 +422,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
@@ -458,7 +458,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				)
 					.fail(
 						function( jqXHR ){
-							ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+							ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 						}
 					)
 					.done(
@@ -495,7 +495,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
@@ -503,13 +503,12 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 						// Fail - Import Site Options.
 						if ( false === options_data.success ) {
-							ResponsiveSitesAdmin._log_error( options_data );
+							ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 						} else {
 
 							// 3. Pass - Import Site Options.
 							$( document ).trigger( 'responsive-ready-sites-import-options-done' );
 						}
-						$( document ).trigger( 'responsive-ready-sites-import-options-done' );
 					}
 				);
 		},
@@ -531,20 +530,19 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
 					function ( widgets_data ) {
 
 						if ( false === widgets_data.success ) {
-							ResponsiveSitesAdmin._log_error( widgets_data.data );
+							ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 
 						} else {
 
 							$( document ).trigger( 'responsive-ready-sites-import-widgets-done' );
 						}
-						$( document ).trigger( 'responsive-ready-sites-import-widgets-done' );
 					}
 				);
 		},
@@ -660,7 +658,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 									responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( single_plugin.slug, pluginsList );
 
 									// Enable Demo Import Button.
-								} else {
 								}
 							}
 						}
@@ -730,7 +727,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				)
 					.fail(
 						function( jqXHR ){
-							ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+							ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 						}
 					)
 					.done(
@@ -825,6 +822,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			ResponsiveSitesAdmin.import_start_time = new Date();
 
+			$( '.sites-import-process-errors .current-importing-status-error-title' ).html('');
+
+			$( '.sites-import-process-errors' ).hide();
 			$( '.responsive-ready-site-import' ).addClass( 'updating-message installing' )
 				.text( "Importing.." );
 			$( '.responsive-ready-site-import' ).addClass( 'disabled not-click-able' );
@@ -838,7 +838,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		_log_error: function( data, append ) {
 
-			$( '.sites-import-process-errors' ).show();
+			$( '.sites-import-process-errors' ).css('display', 'block');
 			var markup = '<p>' + data + '</p>';
 			if (typeof data == 'object' ) {
 				var markup = '<p>' + JSON.stringify( data ) + '</p>';
@@ -849,6 +849,13 @@ var ResponsiveSitesAjaxQueue = (function() {
 			} else {
 				$( '.current-importing-status-error-title' ).html( markup );
 			}
+
+			$( '.responsive-ready-site-import' ).removeClass( 'updating-message installing' )
+				.text( "Import Site" );
+			$( '.responsive-ready-site-import' ).removeClass( 'disabled not-click-able' );
+			$( '.responsive-ready-sites-tooltip-icon' ).removeClass('processed-import');
+			$( '.responsive-ready-sites-tooltip-icon' ).removeClass('processing-import');
+			$( '.responsive-ready-sites-import-process-wrap' ).hide();
 		},
 
 		/**
@@ -904,7 +911,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+						ResponsiveSitesAdmin._log_title( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
@@ -1057,7 +1064,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText, true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
@@ -1089,7 +1096,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
@@ -1112,7 +1119,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
@@ -1135,7 +1142,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_error( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
@@ -1186,6 +1193,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 									ResponsiveSitesAdmin.reset_remaining_posts -= 1;
 									if ( 0 == ResponsiveSitesAdmin.reset_remaining_posts ) {
 										$( document ).trigger( 'responsive-ready-sites-delete-posts-done' );
+										$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).removeClass( 'processing-import' );
 										$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 										$( document ).trigger( 'responsive-ready-sites-reset-data-done' );
 									}
