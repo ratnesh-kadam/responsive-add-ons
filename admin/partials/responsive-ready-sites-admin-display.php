@@ -122,9 +122,10 @@
 
 			<div class="site-import-options">
 				<div class="responsive-ready-sites-advanced-options">
+                    <h2>Importing {{data.demo_name}}</h2>
+                    <p>Importing this ready site will &hellip;</p>
 					<ul class="responsive-ready-site-contents">
 						<li class="responsive-ready-sites-import-plugins">
-							<input type="checkbox" name="plugins" checked="checked" class="disabled checkbox" readonly>
 							<strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
 							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
@@ -133,12 +134,11 @@
 						</li>
 						<li class="responsive-ready-sites-import-customizer">
 							<label>
-								<input type="checkbox" name="customizer" checked="checked" class="checkbox">
 								<strong>Import Customizer Settings</strong>
 							</label>
 							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-customizer-settings" style="display: none;">
-								<p><?php _e( 'Import Customizer Settings.', 'responsive-addons' ); ?></p>
+								<p><?php _e( 'Imports sample customizer settings including site identity, typography, colors and other theme options.', 'responsive-addons' ); ?></p>
 							</div>
 							<div class="responsive-ready-sites-import-customizer-process-wrap" style="display: none;">
 								<progress class="responsive-ready-sites-import-customizer-process" max="100" value="0"></progress>
@@ -146,12 +146,11 @@
 						</li>
 						<li class="responsive-ready-sites-import-xml">
 							<label>
-								<input type="checkbox" name="xml" checked="checked" class="checkbox">
 								<strong>Import Content</strong>
 							</label>
 							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
-								<p><?php _e( 'Selecting this option will import dummy pages, posts, images and menus. If you do not want to import dummy content, please uncheck this option.', 'responsive-addons' ); ?></p>
+								<p><?php _e( 'Imports sample pages, posts, images and menus.', 'responsive-addons' ); ?></p>
 							</div>
 							<div class="responsive-ready-sites-import-process-wrap" style="display: none;">
 								<progress class="responsive-ready-sites-import-process" max="100" value="0"></progress>
@@ -159,12 +158,11 @@
 						</li>
 						<li class="responsive-ready-sites-reset-data">
 							<label>
-								<input type="checkbox" name="reset" class="checkbox">
 								<strong>Delete Previous Import</strong>
 							</label>
 							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-reset-data"><span class="dashicons dashicons-editor-help"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-reset-data" style="display: none;">
-								<p><?php _e( 'WARNING: This will delete the all site data.', 'responsive-addons' ); ?></p>
+								<p><?php _e( 'Deletes previous import including customizer settings and content. Plugins are not deleted.', 'responsive-addons' ); ?></p>
 							</div>
 						</li>
 					</ul>
