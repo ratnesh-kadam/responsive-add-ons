@@ -55,6 +55,23 @@ class Responsive_Ready_Sites_Options_Importer {
 			// Plugin: WPForms.
 			'wpforms_settings',
 
+            // Plugin: Elementor.
+            'elementor_container_width',
+            'elementor_cpt_support',
+            'elementor_css_print_method',
+            'elementor_default_generic_fonts',
+            'elementor_disable_color_schemes',
+            'elementor_disable_typography_schemes',
+            'elementor_editor_break_lines',
+            'elementor_exclude_user_roles',
+            'elementor_global_image_lightbox',
+            'elementor_page_title_selector',
+            'elementor_scheme_color',
+            'elementor_scheme_color-picker',
+            'elementor_scheme_typography',
+            'elementor_space_between_widgets',
+            'elementor_stretched_section_container',
+
 		);
 	}
 

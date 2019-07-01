@@ -69,7 +69,7 @@
 	<# } #>
 </script>
 <?php
-/** Simgle Demo Preview */
+/** Single Demo Preview */
 ?>
 
 <script type="text/template" id="tmpl-responsive-ready-site-preview">
@@ -81,6 +81,7 @@
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
+        <input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.demo_name}}</span>
@@ -106,6 +107,7 @@
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
+        <input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
 
 		<div class="wp-full-overlay-header">
 			<div>
