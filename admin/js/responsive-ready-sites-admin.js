@@ -440,8 +440,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 * Import Customizer Setting
 		 */
 		_importCustomizerSettings: function() {
-			if ( ResponsiveSitesAdmin._is_process_customizer() ) {
-
 				$.ajax(
 					{
 						url: responsiveSitesAdmin.ajaxurl,
@@ -472,9 +470,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 							}
 						}
 					)
-			} else {
-				$( document ).trigger( 'responsive-ready-sites-import-customizer-settings-done' );
-			}
 		},
 
 		/**
@@ -710,7 +705,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_importXML: function() {
 
-			if ( ResponsiveSitesAdmin._is_process_xml() ) {
 				$.ajax(
 					{
 						url: responsiveSitesAdmin.ajaxurl,
@@ -788,24 +782,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							}
 						}
 					);
-			} else {
-				$( document ).trigger( 'responsive-ready-sites-import-xml-done' );
-			}
 
-		},
-
-		_is_process_xml: function() {
-			if ( $( '.responsive-ready-sites-import-xml' ).find( '.checkbox' ).is( ':checked' ) ) {
-				return true;
-			}
-			return false;
-		},
-
-		_is_process_customizer: function() {
-			if ( $( '.responsive-ready-sites-import-customizer' ).find( '.checkbox' ).is( ':checked' ) ) {
-				return true;
-			}
-			return false;
 		},
 
 		/**
@@ -822,7 +799,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			ResponsiveSitesAdmin.import_start_time = new Date();
 
-			$( '.sites-import-process-errors .current-importing-status-error-title' ).html('');
+			$( '.sites-import-process-errors .current-importing-status-error-title' ).html( '' );
 
 			$( '.sites-import-process-errors' ).hide();
 			$( '.responsive-ready-site-import' ).addClass( 'updating-message installing' )
@@ -838,7 +815,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		_log_error: function( data, append ) {
 
-			$( '.sites-import-process-errors' ).css('display', 'block');
+			$( '.sites-import-process-errors' ).css( 'display', 'block' );
 			var markup = '<p>' + data + '</p>';
 			if (typeof data == 'object' ) {
 				var markup = '<p>' + JSON.stringify( data ) + '</p>';
@@ -853,8 +830,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( '.responsive-ready-site-import' ).removeClass( 'updating-message installing' )
 				.text( "Import Site" );
 			$( '.responsive-ready-site-import' ).removeClass( 'disabled not-click-able' );
-			$( '.responsive-ready-sites-tooltip-icon' ).removeClass('processed-import');
-			$( '.responsive-ready-sites-tooltip-icon' ).removeClass('processing-import');
+			$( '.responsive-ready-sites-tooltip-icon' ).removeClass( 'processed-import' );
+			$( '.responsive-ready-sites-tooltip-icon' ).removeClass( 'processing-import' );
 			$( '.responsive-ready-sites-import-process-wrap' ).hide();
 		},
 
@@ -968,12 +945,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_resetData: function( event ) {
 			event.preventDefault();
 
-			if ( $( '.responsive-ready-sites-reset-data' ).find( '.checkbox' ).is( ':checked' ) ) {
-				$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
-				$( document ).trigger( 'responsive-ready-sites-reset-data' );
-			} else {
-				$( document ).trigger( 'responsive-ready-sites-reset-data-done' );
-			}
+			$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
+			$( document ).trigger( 'responsive-ready-sites-reset-data' );
 		},
 
 		ucwords: function( str ) {
