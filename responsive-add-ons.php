@@ -69,6 +69,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array(&$this, 'set_reset_data'));
             add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array(&$this, 'backup_settings'));
 
+            //get Active Site
+            add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
+
 
             $this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
@@ -527,6 +530,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             $old_settings = get_option( 'responsive-settings', array() );
             update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
             wp_send_json_success();
+        }
+
+        /**
+         * Get Active Site
+         */
+        public function get_active_site() {
+            $current_active_site = get_option('responsive_current_active_site');
         }
 
         /**

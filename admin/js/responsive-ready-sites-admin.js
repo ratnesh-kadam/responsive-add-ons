@@ -159,6 +159,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		current_site: [],
 		current_screen: '',
+		active_site: '',
 		widgets_data: '',
 
 		templateData: {},
@@ -225,6 +226,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					dataType: 'json',
 					data : {
 						action : 'responsive-ready-sites-import-end',
+						slug: ResponsiveSitesAdmin.active_site,
 					}
 				}
 			)
@@ -903,6 +905,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 							ResponsiveSitesAdmin.xml_path             = encodeURI( demo_data.data['xml_path'] ) || '';
 							ResponsiveSitesAdmin.wpforms_path         = encodeURI( demo_data.data['wpforms_path'] ) || '';
+							ResponsiveSitesAdmin.active_site		  = demo_data.data['slug'] || '';
 							ResponsiveSitesAdmin.site_customizer_data = JSON.stringify( demo_data.data['site_customizer_data'] ) || '';
 							ResponsiveSitesAdmin.required_plugins     = JSON.stringify( demo_data.data['required_plugins'] ) || '';
 							ResponsiveSitesAdmin.widgets_data         = JSON.stringify( demo_data.data['site_widgets_data'] ) || '';

@@ -19,6 +19,8 @@
 		 */
 		_api_params		: {},
 
+		active_site 	: '',
+
 		init: function()
 		{
 			this._bind();
@@ -50,6 +52,23 @@
 		 * @param  {String}  trigger         Filtered Trigger.
 		 */
 		_showSites: function( resetPagedCount, trigger ) {
+
+			$.ajax(
+				{
+					url  : responsiveSitesAdmin.ajaxurl,
+					type : 'POST',
+					data : {
+						action : 'responsive-ready-sites-get-active-site',
+					},
+				}
+			)
+				.done(
+					function ( response ) {
+						if ( response.success ) {
+							ResponsiveSitesRender.active_site = response.data;
+						}
+					}
+				);
 
 			if ( undefined === resetPagedCount ) {
 				resetPagedCount = true

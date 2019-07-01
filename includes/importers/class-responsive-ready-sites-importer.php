@@ -404,7 +404,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * @return void
 		 */
 		public function import_end() {
-			// Do some actions on import completed.
+
+            $current_active_site = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
+            update_option('responsive_current_active_site', $current_active_site );
 		}
 
 
@@ -428,6 +430,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				'site_customizer_data' => '',
 				'required_plugins'     => '',
 				'site_widgets_data'    => '',
+                'slug'                 => '',
 			);
 
 			$api_args = apply_filters(
@@ -469,6 +472,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$remote_args['site_customizer_data'] = $data['site_customizer_data'];
 				$remote_args['required_plugins']     = $data['required_plugins'];
 				$remote_args['site_widgets_data']    = $data['site_widget_data'];
+				$remote_args['slug']                 = $data['slug'];
 			}
 
 			// Merge remote demo and defaults.
