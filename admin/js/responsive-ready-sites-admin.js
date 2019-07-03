@@ -1262,6 +1262,166 @@ var ResponsiveSitesAjaxQueue = (function() {
 				$( document ).trigger( 'responsive-ready-sites-delete-terms-done' );
 			}
 		},
+
+		_reset_everything: function () {
+
+			// reset customizer data.
+			$.ajax(
+				{
+					url  : responsiveSitesAdmin.ajaxurl,
+					type : 'POST',
+					data : {
+						action : 'responsive-ready-sites-reset-customizer-data'
+					},
+				}
+			)
+				.fail(
+					function( jqXHR ){
+						// display message on fail.
+					}
+				)
+				.done(
+					function ( data ) {
+						// reverted customizer data.
+					}
+				);
+
+			// reset options data.
+			$.ajax(
+				{
+					url  : responsiveSitesAdmin.ajaxurl,
+					type : 'POST',
+					data : {
+						action : 'responsive-ready-sites-reset-site-options'
+					},
+				}
+			)
+				.fail(
+					function( jqXHR ){
+						// display message on fail.
+					}
+				)
+				.done(
+					function ( data ) {
+						// options are reverted.
+					}
+				);
+
+			// Widgets.
+			$.ajax(
+				{
+					url  : responsiveSitesAdmin.ajaxurl,
+					type : 'POST',
+					data : {
+						action : 'responsive-ready-sites-reset-widgets-data'
+					},
+				}
+			)
+				.fail(
+					function( jqXHR ){
+						// display message on fail.
+					}
+				)
+				.done(
+					function ( data ) {
+						// widgets data is reverted.
+					}
+				);
+
+			// delete posts.
+			if ( ResponsiveSitesAdmin.site_imported_data['reset_posts'].length ) {
+
+				ResponsiveSitesAdmin.reset_remaining_posts = ResponsiveSitesAdmin.site_imported_data['reset_posts'].length;
+
+				$.each(
+					ResponsiveSitesAdmin.site_imported_data['reset_posts'],
+					function(index, post_id) {
+
+						ResponsiveSitesAjaxQueue.add(
+							{
+								url: responsiveSitesAdmin.ajaxurl,
+								type: 'POST',
+								data: {
+									action  : 'responsive-ready-sites-delete-posts',
+									post_id : post_id,
+								},
+								success: function( result ){
+
+									if ( ResponsiveSitesAdmin.reset_processed_posts < ResponsiveSitesAdmin.site_imported_data['reset_posts'].length ) {
+										ResponsiveSitesAdmin.reset_processed_posts += 1;
+									}
+
+									ResponsiveSitesAdmin.reset_remaining_posts -= 1;
+								}
+							}
+						);
+					}
+				);
+				ResponsiveSitesAjaxQueue.run();
+
+			}
+
+			// delete wp-forms.
+			if ( ResponsiveSitesAdmin.site_imported_data['reset_wp_forms'].length ) {
+				ResponsiveSitesAdmin.reset_remaining_wp_forms = ResponsiveSitesAdmin.site_imported_data['reset_wp_forms'].length;
+
+				$.each(
+					ResponsiveSitesAdmin.site_imported_data['reset_wp_forms'],
+					function(index, post_id) {
+						ResponsiveSitesAjaxQueue.add(
+							{
+								url: responsiveSitesAdmin.ajaxurl,
+								type: 'POST',
+								data: {
+									action  : 'responsive-ready-sites-delete-wp-forms',
+									post_id : post_id,
+								},
+								success: function( result ){
+
+									if ( ResponsiveSitesAdmin.reset_processed_wp_forms < ResponsiveSitesAdmin.site_imported_data['reset_wp_forms'].length ) {
+										ResponsiveSitesAdmin.reset_processed_wp_forms += 1;
+									}
+
+									ResponsiveSitesAdmin.reset_remaining_wp_forms -= 1;
+								}
+							}
+						);
+					}
+				);
+				ResponsiveSitesAjaxQueue.run();
+
+			}
+
+			// delete terms.
+			if ( ResponsiveSitesAdmin.site_imported_data['reset_terms'].length ) {
+				ResponsiveSitesAdmin.reset_remaining_terms = ResponsiveSitesAdmin.site_imported_data['reset_terms'].length;
+
+				$.each(
+					ResponsiveSitesAdmin.site_imported_data['reset_terms'],
+					function(index, term_id) {
+						ResponsiveSitesAjaxQueue.add(
+							{
+								url: responsiveSitesAdmin.ajaxurl,
+								type: 'POST',
+								data: {
+									action  : 'responsive-ready-sites-delete-terms',
+									term_id : term_id,
+								},
+								success: function( result ){
+									if ( ResponsiveSitesAdmin.reset_processed_terms < ResponsiveSitesAdmin.site_imported_data['reset_terms'].length ) {
+										ResponsiveSitesAdmin.reset_processed_terms += 1;
+									}
+
+									ResponsiveSitesAdmin.reset_remaining_terms -= 1;
+								}
+							}
+						);
+					}
+				);
+				ResponsiveSitesAjaxQueue.run();
+
+			}
+		},
 	};
 
 	/**
