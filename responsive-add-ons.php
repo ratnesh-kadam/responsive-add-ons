@@ -553,7 +553,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             wp_enqueue_style( 'responsive-ready-sites-admin' );
 
             // Getting Started styles.
-            wp_register_style( 'responsive-blocks-getting-started',  RESPONSIVE_ADDONS_URI.'admin/getting-started.css', false, '1.0.0' );
+            wp_register_style( 'responsive-blocks-getting-started',  RESPONSIVE_ADDONS_URI.'admin/css/getting-started.css', false, '1.0.0' );
             wp_enqueue_style( 'responsive-blocks-getting-started' );
         }
 
