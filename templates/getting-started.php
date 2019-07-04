@@ -29,43 +29,43 @@
 					<div class="ab-block-features">
 						<div class="ab-block-feature">
 							<div class="ab-block-feature-text">
-								<h3><?php esc_html_e( 'Post Grid Block', 'responsive-blocks' ); ?></h3>
-								<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-blocks' ); ?></p>
+								<h3><?php esc_html_e( 'Post Grid Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-addons' ); ?></p>
 							</div>
 						</div>
 
 						<div class="ab-block-feature">
 							<div class="ab-block-feature-text">
-								<h3><?php esc_html_e( 'Container Block', 'responsive-blocks' ); ?></h3>
-								<p><?php esc_html_e( 'Wrap several blocks into a section and add padding, margins, background colors and images.', 'responsive-blocks' ); ?></p>
+								<h3><?php esc_html_e( 'Container Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Wrap several blocks into a section and add padding, margins, background colors and images.', 'responsive-addons' ); ?></p>
 							</div>
 						</div>
 
 						<div class="ab-block-feature">
 							<div class="ab-block-feature-text">
-								<h3><?php esc_html_e( 'Call-To-Action Block', 'responsive-blocks' ); ?></h3>
-								<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-blocks' ); ?></p>
+								<h3><?php esc_html_e( 'Call-To-Action Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-addons' ); ?></p>
 							</div>
 						</div>
 
 						<div class="ab-block-feature">
 							<div class="ab-block-feature-text">
-								<h3><?php esc_html_e( 'Testimonial Block', 'responsive-blocks' ); ?></h3>
-								<p><?php esc_html_e( 'Add a customer or client testimonial to your site with an avatar, text, citation and more.', 'responsive-blocks' ); ?></p>
+								<h3><?php esc_html_e( 'Testimonial Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add a customer or client testimonial to your site with an avatar, text, citation and more.', 'responsive-addons' ); ?></p>
 							</div>
 						</div>
 
 						<div class="ab-block-feature">
 							<div class="ab-block-feature-text">
-								<h3><?php esc_html_e( 'Inline Notice Block', 'responsive-blocks' ); ?></h3>
-								<p><?php esc_html_e( 'Add a colorful notice or message to your site with text, a title and a dismiss icon.', 'responsive-blocks' ); ?></p>
+								<h3><?php esc_html_e( 'Inline Notice Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add a colorful notice or message to your site with text, a title and a dismiss icon.', 'responsive-addons' ); ?></p>
 							</div>
 						</div>
 
 						<div class="ab-block-feature">
 							<div class="ab-block-feature-text">
-								<h3><?php esc_html_e( 'Sharing Icons Block', 'responsive-blocks' ); ?></h3>
-								<p><?php esc_html_e( 'Add social sharing icons to your page with size, shape, color and style options.', 'responsive-blocks' ); ?></p>
+								<h3><?php esc_html_e( 'Sharing Icons Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add social sharing icons to your page with size, shape, color and style options.', 'responsive-addons' ); ?></p>
 							</div>
 						</div>
 
@@ -74,7 +74,7 @@
 		</div><!-- .panel -->
 		<div class="ab-block-middle">
 			<div class="ab-block-middle-header">
-				<h2>How to use these blocks</h2>
+				<h2>How to use these blocks?</h2>
 			</div>
 			<div class="ab-block-middle-wrap">
 				<p>Responsive blocks are available for use in the new WordPress post/page editor. The new WordPress editor is available form WordPress 5.0. If you're using an older version of WordPress, please install the Gutenberg plugin to use the Responsive blocks.</p>
@@ -86,7 +86,7 @@
 
 			<div class="ab-block-footer">
 				<p><?php esc_html_e( 'Join our newsletter to receive emails when we add new blocks, release updates.', 'responsive-addon' ); ?></p>
-				<a class="button-primary" href="https://responsiveblocks.com/subscribe?utm_source=AB%20Theme%20GS%20Page%20Footer%20Subscribe"><?php esc_html_e( 'Subscribe', 'responsive-addons' ); ?></a>
+				<a class="button-primary" href="#"><?php esc_html_e( 'Subscribe', 'responsive-addons' ); ?></a>
 			</div>
 		</div><!-- .footer-wrap -->
 	</div><!-- .panels -->
