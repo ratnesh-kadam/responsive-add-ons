@@ -208,8 +208,12 @@
 	max-width: 100% !important;
 }
 
-.footer-wrap {
-	margin-top: 6%;
+.ab-getting-started .footer-wrap {
+	padding: 4% 12% 4% 12%;
+}
+
+.ab-getting-started .intro-wrap {
+	padding: 4% 12% 1% 12%;
 }
 
 @media only screen and (max-width:768px) {
@@ -376,7 +380,7 @@
 
 .ab-block-middle {
 	text-align: center;
-	padding: 4%;
+	padding: 4% 12% 4% 12%;
 	border-bottom: 5px solid #f1f2f3;
 }
 .wrap.ab-getting-started {
