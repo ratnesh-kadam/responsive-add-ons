@@ -187,10 +187,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             add_submenu_page(
                 'responsive-addons',
-                esc_html__( 'Guttenberg Blocks', 'responsive-addons' ),
-                esc_html__( 'Guttenberg Blocks', 'responsive-addons' ),
+                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
+                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
                 'manage_options',
-                'responsive-guttenberg-block',
+                'responsive-gutenberg-block',
                 array( &$this, 'responsive_blocks_getting_started_page' )
             );
 

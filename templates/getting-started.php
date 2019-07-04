@@ -9,7 +9,7 @@
 <div class="wrap ab-getting-started">
 	<div class="intro-wrap">
 		<div class="intro">
-			<h1><?php printf( esc_html__( 'Responsive Guttenberg Block Add-ons', 'responsive-addons' ) ); ?></h1>
+			<h1><?php printf( esc_html__( 'Responsive Gutenberg Block Add-ons', 'responsive-addons' ) ); ?></h1>
 		</div>
 		<div class="clearfix">
 			<div class="info">
