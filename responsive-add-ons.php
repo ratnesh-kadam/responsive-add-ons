@@ -59,7 +59,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			add_filter( "plugin_action_links_$plugin", array( &$this, 'plugin_settings_link' ) );
 
 			// Responsive Ready Site Importer Menu
-            add_action('admin_menu', array( &$this, 'add_responsive_ready_sites_menu' ) );
+            //add_action('admin_menu', array( &$this, 'add_responsive_ready_sites_menu' ) );
             add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
 
             add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_styles' ) );
@@ -166,18 +166,53 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 */
 		public function add_menu() {
 			// Hides Menu options if the current theme is responsive
-			if( ! $this->is_responsive() ) {
-				add_options_page(
-					__( 'Responsive Add Ons', 'responsive-addons' ),
-					__( 'Responsive Add Ons', 'responsive-addons' ),
+
+            add_menu_page(
+					__( 'Responsive Add-Ons', 'responsive-addons' ),
+					__( 'Responsive Add-Ons', 'responsive-addons' ),
 					'manage_options',
-					'responsive_addons',
-					array( &$this, 'plugin_settings_page' )
+					'responsive-addons',
+					array( &$this, 'plugin_settings_page' ),
+                    'dashicons-admin-generic'
 				);
-			}
+
+            add_submenu_page(
+                'responsive-addons',
+                esc_html__( 'Responsive Add-Ons', 'responsive-addons' ),
+                esc_html__( 'Responsive Ready Sites', 'responsive-addons' ),
+                'manage_options',
+                'responsive-blocks-ready-sites',
+                array( &$this, 'menu_callback' )
+            );
+
+            add_submenu_page(
+                'responsive-addons',
+                esc_html__( 'Guttenberg Blocks', 'responsive-addons' ),
+                esc_html__( 'Guttenberg Blocks', 'responsive-addons' ),
+                'manage_options',
+                'responsive-guttenberg-block',
+                array( &$this, 'responsive_blocks_getting_started_page' )
+            );
+
 		}
 
-		/**
+        /**
+         * Renders the plugin settings page.
+         */
+        public function responsive_blocks_render_settings_page() {
+
+            $pages_dir = trailingslashit( dirname( __FILE__ ) ) . 'dist/getting-started/pages/';
+
+            include $pages_dir . 'settings-main.php';
+        }
+
+        function responsive_blocks_getting_started_page() {
+            $pages_dir = trailingslashit( dirname( __FILE__ ) ) . 'templates/';
+
+            include $pages_dir . 'getting-started.php';
+        }
+
+        /**
 		 * The settings page
 		 */
 		public function plugin_settings_page() {
@@ -455,7 +490,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function responsive_ready_sites_admin_enqueue_scripts( $hook ){
 
-            if( 'appearance_page_responsive_ready_sites' !== $hook ){
+            if( 'responsive-add-ons_page_responsive-blocks-ready-sites' !== $hook ){
                 return;
             }
             wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '1.0.7', true );
@@ -516,6 +551,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //Responsive Ready Sites admin styles.
             wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI.'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
             wp_enqueue_style( 'responsive-ready-sites-admin' );
+
+            // Getting Started styles.
+            wp_register_style( 'responsive-blocks-getting-started',  RESPONSIVE_ADDONS_URI.'admin/getting-started.css', false, '1.0.0' );
+            wp_enqueue_style( 'responsive-blocks-getting-started' );
         }
 
         /**
