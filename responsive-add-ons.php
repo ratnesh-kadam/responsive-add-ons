@@ -172,7 +172,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 					__( 'Responsive Add-Ons', 'responsive-addons' ),
 					'manage_options',
 					'responsive-addons',
-					array( &$this, 'responsive_blocks_render_settings_page' ),
+					array( &$this, 'plugin_settings_page' ),
                     'dashicons-admin-generic'
 				);
 
@@ -191,7 +191,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 esc_html__( 'Guttenberg Blocks', 'responsive-addons' ),
                 'manage_options',
                 'responsive-guttenberg-block',
-                array( &$this, 'plugin_settings_page' )
+                array( &$this, 'responsive_blocks_getting_started_page' )
             );
 
 		}
@@ -204,6 +204,12 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             $pages_dir = trailingslashit( dirname( __FILE__ ) ) . 'dist/getting-started/pages/';
 
             include $pages_dir . 'settings-main.php';
+        }
+
+        function responsive_blocks_getting_started_page() {
+            $pages_dir = trailingslashit( dirname( __FILE__ ) ) . 'templates/';
+
+            include $pages_dir . 'getting-started.php';
         }
 
         /**
@@ -545,6 +551,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //Responsive Ready Sites admin styles.
             wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI.'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
             wp_enqueue_style( 'responsive-ready-sites-admin' );
+
+            // Getting Started styles.
+            wp_register_style( 'responsive-blocks-getting-started',  RESPONSIVE_ADDONS_URI.'admin/getting-started.css', false, '1.0.0' );
+            wp_enqueue_style( 'responsive-blocks-getting-started' );
         }
 
         /**
