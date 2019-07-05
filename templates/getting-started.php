@@ -28,6 +28,7 @@
 
 					<div class="ab-block-features">
 						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-grid-view"></div>
 							<div class="ab-block-feature-text">
 								<h3><?php esc_html_e( 'Post Grid Block', 'responsive-addons' ); ?></h3>
 								<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-addons' ); ?></p>
@@ -35,6 +36,7 @@
 						</div>
 
 						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-editor-table"></div>
 							<div class="ab-block-feature-text">
 								<h3><?php esc_html_e( 'Container Block', 'responsive-addons' ); ?></h3>
 								<p><?php esc_html_e( 'Wrap several blocks into a section and add padding, margins, background colors and images.', 'responsive-addons' ); ?></p>
@@ -42,6 +44,7 @@
 						</div>
 
 						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-megaphone"></div>
 							<div class="ab-block-feature-text">
 								<h3><?php esc_html_e( 'Call-To-Action Block', 'responsive-addons' ); ?></h3>
 								<p><?php esc_html_e( 'Add an eye-catching, full-width section with a big title, paragraph text, and a customizable button.', 'responsive-addons' ); ?></p>
@@ -49,6 +52,7 @@
 						</div>
 
 						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-format-quote"></div>
 							<div class="ab-block-feature-text">
 								<h3><?php esc_html_e( 'Testimonial Block', 'responsive-addons' ); ?></h3>
 								<p><?php esc_html_e( 'Add a customer or client testimonial to your site with an avatar, text, citation and more.', 'responsive-addons' ); ?></p>
@@ -56,6 +60,7 @@
 						</div>
 
 						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-format-aside"></div>
 							<div class="ab-block-feature-text">
 								<h3><?php esc_html_e( 'Inline Notice Block', 'responsive-addons' ); ?></h3>
 								<p><?php esc_html_e( 'Add a colorful notice or message to your site with text, a title and a dismiss icon.', 'responsive-addons' ); ?></p>
@@ -63,9 +68,50 @@
 						</div>
 
 						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-admin-links"></div>
 							<div class="ab-block-feature-text">
 								<h3><?php esc_html_e( 'Sharing Icons Block', 'responsive-addons' ); ?></h3>
 								<p><?php esc_html_e( 'Add social sharing icons to your page with size, shape, color and style options.', 'responsive-addons' ); ?></p>
+							</div>
+						</div>
+
+						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-admin-users"></div>
+							<div class="ab-block-feature-text">
+								<h3><?php esc_html_e( 'Author Profile Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add a user profile box to your site with a title, bio info, an avatar and social media links.', 'responsive-addons' ); ?></p>
+							</div>
+						</div>
+
+						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-editor-ul"></div>
+							<div class="ab-block-feature-text">
+								<h3><?php esc_html_e( 'Accordion Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add an accordion text toggle with a title and descriptive text. Includes font size and toggle options.', 'responsive-addons' ); ?></p>
+							</div>
+						</div>
+
+						<div class="ab-block-feature">
+							<span class="ab-block-feature-icon dashicon dashicons-admin-links"></span>
+							<div class="ab-block-feature-text">
+								<h3><?php esc_html_e( 'Customizable Button', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add a fancy stylized button to your post or page with size, shape, target, and color options.', 'responsive-addons' ); ?></p>
+							</div>
+						</div>
+
+						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-format-quote"></div>
+							<div class="ab-block-feature-text">
+								<h3><?php esc_html_e( 'Drop Cap Block', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add a stylized drop cap to the beginning of your paragraph. Choose from three different styles.', 'responsive-addons' ); ?></p>
+							</div>
+						</div>
+
+						<div class="ab-block-feature">
+							<div class="ab-block-feature-icon dashicon dashicons-image-flip-vertical"></div>
+							<div class="ab-block-feature-text">
+								<h3><?php esc_html_e( 'Spacer & Divider', 'responsive-addons' ); ?></h3>
+								<p><?php esc_html_e( 'Add an adjustable spacer between your blocks with an optional divider with styling options.', 'responsive-addons' ); ?></p>
 							</div>
 						</div>
 
