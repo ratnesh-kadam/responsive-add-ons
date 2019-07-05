@@ -179,7 +179,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             add_submenu_page(
                 'responsive-addons',
                 esc_html__( 'Responsive Add-Ons', 'responsive-addons' ),
-                esc_html__( 'Responsive Ready Sites', 'responsive-addons' ),
+                esc_html__( 'Ready Websites', 'responsive-addons' ),
                 'manage_options',
                 'responsive-blocks-ready-sites',
                 array( &$this, 'menu_callback' )
