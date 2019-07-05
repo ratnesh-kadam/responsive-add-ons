@@ -32,40 +32,40 @@
 
 <script type="text/template" id="tmpl-responsive-sites-list">
 
-	<# if ( data[0].items.length ) { #>
-	<# for ( key in data[0].items ) { #>
+	<# if ( data.items.length ) { #>
+	<# for ( key in data.items ) { #>
 
-	<# if (data[0].items[ key ].active ) { #>
-		<div class="theme active responsive-theme site-single {{ data[0].items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
-		 data-demo-id="{{{ data[0].items[ key ].id }}}"
-		 data-demo-url="{{{ data[0].items[ key ]['responsive_site_url'] }}}"
-		 data-demo-slug="{{{  data[0].items[ key ].slug }}}"
-		 data-demo-name="{{{  data[0].items[ key ].name }}}"
-		 data-screenshot="{{{ data[0].items[ key ]['featured_image_url'] }}}"
-		 data-required-plugins="{{ JSON.stringify(data[0].items[ key ]['required_plugins']) }}">
+	<# if (data.items[ key ].active ) { #>
+		<div class="theme active responsive-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+		 data-demo-id="{{{ data.items[ key ].id }}}"
+		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
+		 data-demo-slug="{{{  data.items[ key ].slug }}}"
+		 data-demo-name="{{{  data.items[ key ].name }}}"
+		 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
+		 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
 
 		<# } else { #>
 
-		<div class="theme responsive-theme site-single {{ data[0].items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
-			 data-demo-id="{{{ data[0].items[ key ].id }}}"
-			 data-demo-url="{{{ data[0].items[ key ]['responsive_site_url'] }}}"
-			 data-demo-slug="{{{  data[0].items[ key ].slug }}}"
-			 data-demo-name="{{{  data[0].items[ key ].name }}}"
-			 data-screenshot="{{{ data[0].items[ key ]['featured_image_url'] }}}"
-			 data-required-plugins="{{ JSON.stringify(data[0].items[ key ]['required_plugins']) }}">
+		<div class="theme responsive-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+			 data-demo-id="{{{ data.items[ key ].id }}}"
+			 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
+			 data-demo-slug="{{{  data.items[ key ].slug }}}"
+			 data-demo-name="{{{  data.items[ key ].name }}}"
+			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
+			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
 			<# } #>
 		<div class="inner">
-					<span class="site-preview" data-href="{{ data[0].items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
-						<div class="theme-screenshot" style="background-image: url('{{ data[0].items[ key ]['featured_image_url'] }}');"></div>
+					<span class="site-preview" data-href="{{ data.items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
+						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured_image_url'] }}');"></div>
 					</span>
 			<div class="theme-id-container">
-				<# if (data[0].items[ key ].active ) { #>
-				<h3 class="theme-name" id="responsive-theme-name">{{ data[0].items[ key ].name }}</h3>
+				<# if (data.items[ key ].active ) { #>
+				<h3 class="theme-name" id="responsive-theme-name">{{ data.items[ key ].name }}</h3>
 				<div class="theme-actions">
 					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'UnInstall', 'responsive-addons' ); ?></button>
 				</div>
 				<# } else { #>
-				<h3 class="theme-name" id="responsive-theme-name">{{ data[0].items[ key ].name }}</h3>
+				<h3 class="theme-name" id="responsive-theme-name">{{ data.items[ key ].name }}</h3>
 				<div class="theme-actions">
 					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'responsive-addons' ); ?></button>
 				</div>
@@ -93,7 +93,7 @@
 <script type="text/template" id="tmpl-responsive-ready-site-preview">
 	<div class="responsive-ready-site-preview theme-install-overlay wp-full-overlay collapsed"
 		 data-demo-id="{{{data.id}}}"
-		 data-demo-url="{{{data.responsive_site_url}}}"
+		 data-demo-url="{{{data.site_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.demo_name}}}"
 		 data-demo-slug="{{{data.slug}}}"
@@ -119,7 +119,7 @@
 <script type="text/template" id="tmpl-responsive-ready-sites-import-options-page">
 	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
 		 data-demo-id="{{{data.id}}}"
-		 data-demo-url="{{{data.responsive_site_url}}}"
+		 data-demo-url="{{{data.site_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.demo_name}}}"
 		 data-demo-slug="{{{data.slug}}}"

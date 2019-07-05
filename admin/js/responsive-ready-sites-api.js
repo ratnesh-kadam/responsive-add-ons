@@ -27,39 +27,39 @@
 				params['headers'] = responsiveSitesRender.headers;
 			}
 
-			/*fetch( ResponsiveSitesAPI._api_url + args.slug, params).then(response => {
-				if ( response.status === 200 ) {
-					return response.json().then(items => ({
-						items 		: items,
-					}))
-				} else {
-					return response.json();
+			fetch( ResponsiveSitesAPI._api_url + args.slug, params ).then(
+				response => {
+					if ( response.status === 200 ) {
+						return response.json().then(
+							items => ({
+								items 		: items,
+								})
+							)
+					} else {
+						return response.json();
+                }
 				}
-			})
-				.then(data => {
-					if( 'object' === typeof data ) {
-						data.items = [
-							{id: 1, responsive_site_url: "https://ccdemos.cyberchimps.com", feature_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testone", status: "publish"},
-							{id: 2, responsive_site_url: "https://ccdemos.cyberchimps.com", feature_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testtwo", status: "publish"},
-							{id: 3, responsive_site_url: "https://ccdemos.cyberchimps.com", feature_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testthree", status: "publish"}
-						];
+			)
+				.then(
+					data => {
+                    if ( 'object' === typeof data ) {
 
-						console.log(data.items);
-						data['args'] = args;
-						if( data.args.id ) {
-							ResponsiveSitesAPI._stored_data[ args.id ] = $.merge( ResponsiveSitesAPI._stored_data[ data.args.id ], data.items );
-						}
+							data['args'] = args;
+							if ( data.args.id ) {
+								ResponsiveSitesAPI._stored_data[ args.id ] = $.merge( ResponsiveSitesAPI._stored_data[ data.args.id ], data.items );
+							}
 
-						if( 'undefined' !== typeof args.trigger && '' !== args.trigger ) {
-							$(document).trigger( args.trigger, [data] );
-						}
+							if ( 'undefined' !== typeof args.trigger && '' !== args.trigger ) {
+								$( document ).trigger( args.trigger, [data] );
+							}
 
-						if( callback && typeof callback == "function"){
-							callback( data );
+							if ( callback && typeof callback == "function") {
+								callback( data );
+							}
 						}
 					}
-				});*/
-			{}
+				);
+			/*
 			var data = [{items:[
 				{id: 1, responsive_site_url: "https://ccdemos.cyberchimps.com/", featured_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testone", status: "publish", name: "Test One", required_plugins: [{"slug":"elementor","init":"elementor\/elementor.php","name":"Elementor"},{"slug":"woocommerce","init":"woocommerce\/woocommerce.php","name":"WooCommerce"},{"slug":"wpforms-lite","init":"wpforms-lite\/wpforms.php","name":"WPForms Lite"}]},
 				{id: 2, responsive_site_url: "https://ccdemos.cyberchimps.com/", featured_image_url: "https://websitedemos.net/wp-content/uploads/2019/06/learn-dash-featured-image.jpg", link: "https://websitedemos.net/blog/astra-site/ecourse-3/", wpforms_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wpforms.json", xml_path: "https://websitedemos.net/wp-content/uploads/astra-sites/457/wxr.xml", slug: "testtwo", status: "publish", name: "Test Two", required_plugins: [{"slug":"elementor","init":"elementor\/elementor.php","name":"Elementor"},{"slug":"woocommerce","init":"woocommerce\/woocommerce.php","name":"WooCommerce"},{"slug":"wpforms-lite","init":"wpforms-lite\/wpforms.php","name":"WPForms Lite"}]},
@@ -77,7 +77,7 @@
 
 			if ( callback && typeof callback == "function") {
 				callback( data );
-			}
+			}*/
 
 		},
 

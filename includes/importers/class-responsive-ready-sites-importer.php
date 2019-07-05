@@ -464,13 +464,13 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			}
 
 			if ( ! isset( $data['code'] ) ) {
-				$remote_args['id']                   = $data[0]['id'];
-				$remote_args['xml_path']             = $data[0]['xml_path'];
-				$remote_args['wpforms_path']         = $data[0]['wpforms_path'];
-				$remote_args['site_customizer_data'] = $data[0]['site_customizer_data'];
-				$remote_args['required_plugins']     = $data[0]['required_plugins'];
-				$remote_args['site_widgets_data']    = $data[0]['site_widgets_data'];
-				$remote_args['slug']                 = $data[0]['slug'];
+				$remote_args['id']                   = $data['id'];
+				$remote_args['xml_path']             = $data['xml_path'];
+				$remote_args['wpforms_path']         = $data['wpforms_path'];
+				$remote_args['site_customizer_data'] = $data['site_customizer_data'];
+				$remote_args['required_plugins']     = $data['required_plugins'];
+				$remote_args['site_widgets_data']    = $data['site_widgets_data'];
+				$remote_args['slug']                 = $data['slug'];
 			}
 
 			// Merge remote demo and defaults.

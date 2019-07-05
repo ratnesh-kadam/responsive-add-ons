@@ -99,7 +99,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @since  1.0.0
          */
         public static function set_api_url() {
-            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
+            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'http://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites/' );
         }
 
 		/**
