@@ -383,6 +383,11 @@
 	padding: 4% 15% 4% 15%;
 	border-bottom: 5px solid #f1f2f3;
 }
+
 .wrap.ab-getting-started {
 	background-color: #fff;
+}
+
+.ab-block-feature-icon:before {
+	font: normal 30px/1 dashicons;
 }
