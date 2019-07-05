@@ -69,8 +69,8 @@
 
 			// API Request.
 			var api_post = {
-				id: 'responsive-sites',
-				slug: 'responsive-sites?' + decodeURIComponent( $.param( ResponsiveSitesRender._api_params ) ),
+				id: '',
+				slug: decodeURIComponent( $.param( ResponsiveSitesRender._api_params ) ),
 				trigger: trigger,
 			};
 
@@ -107,16 +107,16 @@
 
 			var active = ResponsiveSitesRender.active_site;
 
-			var temp = data[0].items[0];
+			var temp = data.items[0];
 			$.each(
-				data[0].items,
+				data.items,
 				function(i , val){
 					if (val.slug == active) {
-						data[0].items[i].active = true;
-						data[0].items[0]        = data[0].items[i];
-						data[0].items[i]        = temp;
+						data.items[i].active = true;
+						data.items[0]        = data.items[i];
+						data.items[i]        = temp;
 					} else {
-						data[0].items[i].active = false;
+						data.items[i].active = false;
 					}
 				}
 			);

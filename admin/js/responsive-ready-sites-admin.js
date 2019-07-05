@@ -851,7 +851,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_process_import: function() {
 
-			var apiURL = 'http://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites';
+			var apiURL = 'http://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites/22';
 			$.ajax(
 				{
 					url  : responsiveSitesAdmin.ajaxurl,
@@ -896,7 +896,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			)
 				.fail(
 					function( jqXHR ){
-						ResponsiveSitesAdmin._log_title( 'There was an error while processing import. Please try again.', true );
+						ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 					}
 				)
 				.done(
