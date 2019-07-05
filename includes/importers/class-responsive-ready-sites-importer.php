@@ -405,8 +405,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 */
 		public function import_end() {
 
-            $current_active_site = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
-            update_option('responsive_current_active_site', $current_active_site );
+			$current_active_site = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
+			update_option( 'responsive_current_active_site', $current_active_site );
 		}
 
 
@@ -430,7 +430,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				'site_customizer_data' => '',
 				'required_plugins'     => '',
 				'site_widgets_data'    => '',
-                'slug'                 => '',
+				'slug'                 => '',
 			);
 
 			$api_args = apply_filters(
@@ -463,16 +463,14 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$data = json_decode( wp_remote_retrieve_body( $response ), true );
 			}
 
-			$data = json_decode( wp_remote_retrieve_body( $response ), true );
-
 			if ( ! isset( $data['code'] ) ) {
-				$remote_args['id']                   = $data['id'];
-				$remote_args['xml_path']             = $data['xml_path'];
-				$remote_args['wpforms_path']         = $data['wpforms_path'];
-				$remote_args['site_customizer_data'] = $data['site_customizer_data'];
-				$remote_args['required_plugins']     = $data['required_plugins'];
-				$remote_args['site_widgets_data']    = $data['site_widget_data'];
-				$remote_args['slug']                 = $data['slug'];
+				$remote_args['id']                   = $data[0]['id'];
+				$remote_args['xml_path']             = $data[0]['xml_path'];
+				$remote_args['wpforms_path']         = $data[0]['wpforms_path'];
+				$remote_args['site_customizer_data'] = $data[0]['site_customizer_data'];
+				$remote_args['required_plugins']     = $data[0]['required_plugins'];
+				$remote_args['site_widgets_data']    = $data[0]['site_widgets_data'];
+				$remote_args['slug']                 = $data[0]['slug'];
 			}
 
 			// Merge remote demo and defaults.
