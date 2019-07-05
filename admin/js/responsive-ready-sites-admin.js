@@ -508,6 +508,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					}
 				);
+			// to be deleted
+			$( document ).trigger( 'responsive-ready-sites-import-options-done' );
 		},
 
 		/**
@@ -542,6 +544,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					}
 				);
+			// to be deleted
+			$( document ).trigger( 'responsive-ready-sites-import-widgets-done' );
 		},
 
 		/**
@@ -732,6 +736,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 							// 2. Fail - Import XML Data.
 							if (false === xml_data.success) {
 								// log.
+								// to be deleted.
+								$( document ).trigger( 'responsive-ready-sites-import-xml-done' );
 							} else {
 
 								// 2. Pass - Import XML Data.
@@ -845,7 +851,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_process_import: function() {
 
-			var apiURL = 'http://127.0.0.1:8081/astrademo/test.json';
+			var apiURL = 'http://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites';
 			$.ajax(
 				{
 					url  : responsiveSitesAdmin.ajaxurl,

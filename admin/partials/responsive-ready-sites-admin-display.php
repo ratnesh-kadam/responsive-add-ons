@@ -35,7 +35,8 @@
 	<# if ( data[0].items.length ) { #>
 	<# for ( key in data[0].items ) { #>
 
-	<div class="theme responsive-theme site-single {{ data[0].items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+	<# if (data[0].items[ key ].active ) { #>
+		<div class="theme active responsive-theme site-single {{ data[0].items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 		 data-demo-id="{{{ data[0].items[ key ].id }}}"
 		 data-demo-url="{{{ data[0].items[ key ]['responsive_site_url'] }}}"
 		 data-demo-slug="{{{  data[0].items[ key ].slug }}}"
@@ -43,15 +44,32 @@
 		 data-screenshot="{{{ data[0].items[ key ]['featured_image_url'] }}}"
 		 data-required-plugins="{{ JSON.stringify(data[0].items[ key ]['required_plugins']) }}">
 
+		<# } else { #>
+
+		<div class="theme responsive-theme site-single {{ data[0].items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+			 data-demo-id="{{{ data[0].items[ key ].id }}}"
+			 data-demo-url="{{{ data[0].items[ key ]['responsive_site_url'] }}}"
+			 data-demo-slug="{{{  data[0].items[ key ].slug }}}"
+			 data-demo-name="{{{  data[0].items[ key ].name }}}"
+			 data-screenshot="{{{ data[0].items[ key ]['featured_image_url'] }}}"
+			 data-required-plugins="{{ JSON.stringify(data[0].items[ key ]['required_plugins']) }}">
+			<# } #>
 		<div class="inner">
 					<span class="site-preview" data-href="{{ data[0].items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
 						<div class="theme-screenshot" style="background-image: url('{{ data[0].items[ key ]['featured_image_url'] }}');"></div>
 					</span>
 			<div class="theme-id-container">
+				<# if (data[0].items[ key ].active ) { #>
+				<h3 class="theme-name" id="responsive-theme-name">{{ data[0].items[ key ].name }}</h3>
+				<div class="theme-actions">
+					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'UnInstall', 'responsive-addons' ); ?></button>
+				</div>
+				<# } else { #>
 				<h3 class="theme-name" id="responsive-theme-name">{{ data[0].items[ key ].name }}</h3>
 				<div class="theme-actions">
 					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'responsive-addons' ); ?></button>
 				</div>
+				<# } #>
 			</div>
 		</div>
 	</div>
@@ -81,7 +99,7 @@
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
-        <input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
+		<input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.demo_name}}</span>
@@ -107,7 +125,7 @@
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
-        <input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
+		<input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
 
 		<div class="wp-full-overlay-header">
 			<div>
@@ -124,8 +142,8 @@
 
 			<div class="site-import-options">
 				<div class="responsive-ready-sites-advanced-options">
-                    <h2>Importing {{data.demo_name}}</h2>
-                    <p>Importing this ready site will &hellip;</p>
+					<h2>Importing {{data.demo_name}}</h2>
+					<p>Importing this ready site will &hellip;</p>
 					<ul class="responsive-ready-site-contents">
 						<li class="responsive-ready-sites-import-plugins">
 							<strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>

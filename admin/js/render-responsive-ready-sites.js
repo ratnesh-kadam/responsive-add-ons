@@ -105,8 +105,23 @@
 			$( 'body' ).removeClass( 'loading-content' );
 			$( '.filter-count .count' ).text( data.items_count );
 
-			jQuery( '#responsive-sites' ).show().html( template( data ) );
+			var active = ResponsiveSitesRender.active_site;
 
+			var temp = data[0].items[0];
+			$.each(
+				data[0].items,
+				function(i , val){
+					if (val.slug == active) {
+						data[0].items[i].active = true;
+						data[0].items[0]        = data[0].items[i];
+						data[0].items[i]        = temp;
+					} else {
+						data[0].items[i].active = false;
+					}
+				}
+			);
+
+			jQuery( '#responsive-sites' ).show().html( template( data ) );
 		},
 
 		// Returns if a value is an array.
@@ -114,7 +129,7 @@
 			return value && typeof value === 'object' && value.constructor === Array;
 		},
 
-		//Get active site.
+		// Get active site.
 		_getActiveSite: function() {
 			$.ajax(
 				{
@@ -131,7 +146,7 @@
 						if ( response.success ) {
 							ResponsiveSitesRender.active_site = response.data.active_site;
 						}
-						$( document).trigger('responsive-get-active-demo-site-done');
+						$( document ).trigger( 'responsive-get-active-demo-site-done' );
 					}
 				);
 
