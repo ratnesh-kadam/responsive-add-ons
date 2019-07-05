@@ -38,7 +38,7 @@
 	<# if (data.items[ key ].active ) { #>
 		<div class="theme active responsive-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 		 data-demo-id="{{{ data.items[ key ].id }}}"
-		 data-demo-url="{{{ data.items[ key ]['responsive_site_url'] }}}"
+		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 		 data-demo-slug="{{{  data.items[ key ].slug }}}"
 		 data-demo-name="{{{  data.items[ key ].name }}}"
 		 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
@@ -48,7 +48,7 @@
 
 		<div class="theme responsive-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 			 data-demo-id="{{{ data.items[ key ].id }}}"
-			 data-demo-url="{{{ data.items[ key ]['responsive_site_url'] }}}"
+			 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
 			 data-demo-name="{{{  data.items[ key ].name }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
@@ -93,7 +93,7 @@
 <script type="text/template" id="tmpl-responsive-ready-site-preview">
 	<div class="responsive-ready-site-preview theme-install-overlay wp-full-overlay collapsed"
 		 data-demo-id="{{{data.id}}}"
-		 data-demo-url="{{{data.responsive_site_url}}}"
+		 data-demo-url="{{{data.site_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.demo_name}}}"
 		 data-demo-slug="{{{data.slug}}}"
@@ -119,7 +119,7 @@
 <script type="text/template" id="tmpl-responsive-ready-sites-import-options-page">
 	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
 		 data-demo-id="{{{data.id}}}"
-		 data-demo-url="{{{data.responsive_site_url}}}"
+		 data-demo-url="{{{data.site_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.demo_name}}}"
 		 data-demo-slug="{{{data.slug}}}"
