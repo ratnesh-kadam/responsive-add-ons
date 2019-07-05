@@ -24,7 +24,7 @@
 		init: function()
 		{
 			this._bind();
-			this._loadFirstGrid();
+			this._getActiveSite();
 		},
 
 		/**
@@ -37,6 +37,7 @@
 		_bind: function()
 		{
 			$( document ).on( 'responsive-api-post-loaded'           , ResponsiveSitesRender._reinitGrid );
+			$( document ).on( 'responsive-get-active-demo-site-done' , ResponsiveSitesRender._loadFirstGrid );
 		},
 
 		_apiAddParam_site_url: function() {
@@ -52,23 +53,6 @@
 		 * @param  {String}  trigger         Filtered Trigger.
 		 */
 		_showSites: function( resetPagedCount, trigger ) {
-
-			$.ajax(
-				{
-					url  : responsiveSitesAdmin.ajaxurl,
-					type : 'POST',
-					data : {
-						action : 'responsive-ready-sites-get-active-site',
-					},
-				}
-			)
-				.done(
-					function ( response ) {
-						if ( response.success ) {
-							ResponsiveSitesRender.active_site = response.data;
-						}
-					}
-				);
 
 			if ( undefined === resetPagedCount ) {
 				resetPagedCount = true
@@ -123,13 +107,34 @@
 
 			jQuery( '#responsive-sites' ).show().html( template( data ) );
 
-			$( 'body' ).removeClass( 'listed-all-sites' );
-
 		},
 
 		// Returns if a value is an array.
 		_isArray: function(value) {
 			return value && typeof value === 'object' && value.constructor === Array;
+		},
+
+		//Get active site.
+		_getActiveSite: function() {
+			$.ajax(
+				{
+					url  : responsiveSitesAdmin.ajaxurl,
+					async: false,
+					type : 'POST',
+					data : {
+						action : 'responsive-ready-sites-get-active-site',
+					},
+				}
+			)
+				.done(
+					function ( response ) {
+						if ( response.success ) {
+							ResponsiveSitesRender.active_site = response.data.active_site;
+						}
+						$( document).trigger('responsive-get-active-demo-site-done');
+					}
+				);
+
 		}
 
 	};

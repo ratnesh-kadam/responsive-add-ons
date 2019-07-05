@@ -576,6 +576,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function get_active_site() {
             $current_active_site = get_option('responsive_current_active_site');
+            wp_send_json_success(
+                    array(
+                            'active_site'   => $current_active_site
+                    )
+            );
         }
 
         /**
