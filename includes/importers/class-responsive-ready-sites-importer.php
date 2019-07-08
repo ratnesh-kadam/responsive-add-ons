@@ -431,6 +431,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				'required_plugins'     => '',
 				'site_widgets_data'    => '',
 				'slug'                 => '',
+				'site_options_data'    => '',
 			);
 
 			$api_args = apply_filters(
@@ -470,6 +471,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$remote_args['site_customizer_data'] = $data['site_customizer_data'];
 				$remote_args['required_plugins']     = $data['required_plugins'];
 				$remote_args['site_widgets_data']    = $data['site_widgets_data'];
+				$remote_args['site_options_data']    = $data['site_options_data'];
 				$remote_args['slug']                 = $data['slug'];
 			}
 

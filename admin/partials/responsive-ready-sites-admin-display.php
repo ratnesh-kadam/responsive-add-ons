@@ -40,7 +40,7 @@
 		 data-demo-id="{{{ data.items[ key ].id }}}"
 		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 		 data-demo-slug="{{{  data.items[ key ].slug }}}"
-		 data-demo-name="{{{  data.items[ key ].name }}}"
+		 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 		 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 		 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
 
@@ -50,22 +50,23 @@
 			 data-demo-id="{{{ data.items[ key ].id }}}"
 			 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
-			 data-demo-name="{{{  data.items[ key ].name }}}"
+			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
 			<# } #>
+			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data.items[ key ][ 'site_options_data' ]) }}">
 		<div class="inner">
 					<span class="site-preview" data-href="{{ data.items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
 						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured_image_url'] }}');"></div>
 					</span>
 			<div class="theme-id-container">
 				<# if (data.items[ key ].active ) { #>
-				<h3 class="theme-name" id="responsive-theme-name">{{ data.items[ key ].name }}</h3>
+				<h3 class="theme-name" id="responsive-theme-name">{{{ data.items[ key ].title.rendered }}}</h3>
 				<div class="theme-actions">
 					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'UnInstall', 'responsive-addons' ); ?></button>
 				</div>
 				<# } else { #>
-				<h3 class="theme-name" id="responsive-theme-name">{{ data.items[ key ].name }}</h3>
+				<h3 class="theme-name" id="responsive-theme-name">{{{ data.items[ key ].title.rendered }}}</h3>
 				<div class="theme-actions">
 					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'responsive-addons' ); ?></button>
 				</div>
