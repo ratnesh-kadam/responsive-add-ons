@@ -510,6 +510,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     '_ajax_nonce'       => wp_create_nonce( 'responsive-addons' ),
                     'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
                     'required_plugins'   => array(),
+                    'ApiURL'  => self::$api_url,
                 )
             );
 
