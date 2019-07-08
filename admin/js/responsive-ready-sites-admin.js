@@ -850,7 +850,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_process_import: function() {
 
-			var apiURL = 'http://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites/22';
+			var site_id = $( '.responsive-ready-sites-advanced-options-wrap' ).find( '.demo_site_id' ).val();
+
+			var apiURL = responsiveSitesAdmin.ApiURL + site_id;
+
 			$.ajax(
 				{
 					url  : responsiveSitesAdmin.ajaxurl,

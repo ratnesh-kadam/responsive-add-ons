@@ -262,7 +262,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
             $widgets_data = ( isset( $_POST['widgets_data'] ) ) ? (object) json_decode( stripcslashes( $_POST['widgets_data'] ) ) : ''; //phpcs:ignore
 
-			$widgets_data = '';
 			if ( ! empty( $widgets_data ) ) {
 
 				$widgets_importer = Responsive_Ready_Sites_Widgets_Importer::instance();

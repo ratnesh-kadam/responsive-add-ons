@@ -100,7 +100,7 @@
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
-		<input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
+		<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
@@ -126,8 +126,8 @@
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
-		<input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
-
+		<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
+		<input type="hidden" class="demo_site_id" value="{{{ data.id }}}">
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
