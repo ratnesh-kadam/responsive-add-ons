@@ -189,7 +189,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_bind: function()
 		{
 			$( document ).on( 'click'                     , '.import-demo-data, .responsive-ready-site-import', ResponsiveSitesAdmin._importDemo );
-			$( document ).on( 'click'                     , '.theme-browser .theme-screenshot, .theme-browser .more-details, .theme-browser .install-theme-preview', ResponsiveSitesAdmin._preview );
+			$( document ).on( 'click'                     , '.theme-browser .inactive.ra-site-single .theme-screenshot, .theme-browser .inactive.ra-site-single .more-details, .theme-browser .inactive.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._preview );
+			$( document ).on( 'click'                     , '.theme-browser .active.ra-site-single .theme-screenshot, .theme-browser .active.ra-site-single .more-details, .theme-browser .active.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._doNothing );
 			$( document ).on( 'click'                     , '.close-full-overlay', ResponsiveSitesAdmin._closeFullOverlay );
 			$( document ).on( 'click', '.responsive-demo-import-options', ResponsiveSitesAdmin._importSiteOptionsScreen );
 			$( document ).on( 'click', '.responsive-ready-sites-tooltip-icon', ResponsiveSitesAdmin._toggle_tooltip );
@@ -213,6 +214,14 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'responsive-ready-sites-import-options-done' , ResponsiveSitesAdmin._importEnd );
 			$( document ).on( 'wp-plugin-installing'      , ResponsiveSitesAdmin._pluginInstalling );
 			$( document ).on( 'wp-plugin-install-success' , ResponsiveSitesAdmin._installSuccess );
+		},
+
+		/**
+		 * Do Nothing.
+		 *
+		 */
+		_doNothing: function( event ) {
+			event.preventDefault();
 		},
 
 		/**
@@ -582,7 +591,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			event.preventDefault();
 
-			var site_id = $( this ).parents( '.site-single' ).data( 'demo-id' ) || '';
+			var site_id = $( this ).parents( '.ra-site-single' ).data( 'demo-id' ) || '';
 
 			var self = $( this ).parents( '.theme' );
 			self.addClass( 'theme-preview-on' );

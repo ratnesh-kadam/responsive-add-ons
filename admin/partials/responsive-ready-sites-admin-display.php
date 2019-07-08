@@ -36,7 +36,7 @@
 	<# for ( key in data.items ) { #>
 
 	<# if (data.items[ key ].active ) { #>
-		<div class="theme active responsive-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+		<div class="theme active ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 		 data-demo-id="{{{ data.items[ key ].id }}}"
 		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 		 data-demo-slug="{{{  data.items[ key ].slug }}}"
@@ -46,7 +46,7 @@
 
 		<# } else { #>
 
-		<div class="theme responsive-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+		<div class="theme inactive ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 			 data-demo-id="{{{ data.items[ key ].id }}}"
 			 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
@@ -61,10 +61,7 @@
 					</span>
 			<div class="theme-id-container">
 				<# if (data.items[ key ].active ) { #>
-				<h3 class="theme-name" id="responsive-theme-name">{{{ data.items[ key ].title.rendered }}}</h3>
-				<div class="theme-actions">
-					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'UnInstall', 'responsive-addons' ); ?></button>
-				</div>
+				<h3 class="theme-name" id="responsive-theme-name">Active : {{{ data.items[ key ].title.rendered }}}</h3>
 				<# } else { #>
 				<h3 class="theme-name" id="responsive-theme-name">{{{ data.items[ key ].title.rendered }}}</h3>
 				<div class="theme-actions">
