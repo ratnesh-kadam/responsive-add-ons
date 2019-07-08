@@ -94,22 +94,22 @@
 <script type="text/template" id="tmpl-responsive-ready-site-preview">
 	<div class="responsive-ready-site-preview theme-install-overlay wp-full-overlay collapsed"
 		 data-demo-id="{{{data.id}}}"
-		 data-demo-url="{{{data.site_url}}}"
+		 data-demo-url="{{{data.demo_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
-		 data-demo-name="{{{data.demo_name}}}"
+		 data-demo-name="{{{data.name}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
 		<input type="hidden" class="responsive-ready-site-options" value="{{data.responsive_ready_site_options}}" >
 		<div class="wp-full-overlay-header">
 			<div>
-				<span class="responsive-site-demo-name">{{data.demo_name}}</span>
+				<span class="responsive-site-demo-name">{{data.name}}</span>
 				<a class="button hide-if-no-customize button-primary responsive-addons responsive-demo-import-options" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
 				<button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
 			</div>
 		</div>
 		<div class="wp-full-overlay-main">
-			<iframe src="{{{data.responsive_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'responsive-addons' ); ?>"></iframe>
+			<iframe src="{{{data.demo_url}}}" title="<?php esc_attr_e( 'Preview', 'responsive-addons' ); ?>"></iframe>
 		</div>
 	</div>
 </script>
@@ -120,9 +120,9 @@
 <script type="text/template" id="tmpl-responsive-ready-sites-import-options-page">
 	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
 		 data-demo-id="{{{data.id}}}"
-		 data-demo-url="{{{data.site_url}}}"
+		 data-demo-url="{{{data.demo_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
-		 data-demo-name="{{{data.demo_name}}}"
+		 data-demo-name="{{{data.name}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
@@ -130,7 +130,7 @@
 
 		<div class="wp-full-overlay-header">
 			<div>
-				<span class="responsive-site-demo-name">{{data.demo_name}}</span>
+				<span class="responsive-site-demo-name">{{data.name}}</span>
 				<button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
 			</div>
 		</div>

@@ -280,11 +280,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			templateData = [{
 				id: demoId,
-				responsive_demo_type: demoType,
-				responsive_demo_url: demoURL,
+				demo_type: demoType,
+				demo_url: demoURL,
 				demo_api: apiURL,
 				screenshot: screenshot,
-				demo_name: demo_name,
+				name: demo_name,
 				slug: demo_slug,
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
@@ -618,10 +618,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 			templateData = [{
 				id: demoId,
 				responsive_demo_type: demoType,
-				responsive_demo_url: demoURL,
+				demo_url: demoURL,
 				demo_api: apiURL,
 				screenshot: screenshot,
-				demo_name: demo_name,
+				name: demo_name,
 				slug: demo_slug,
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
