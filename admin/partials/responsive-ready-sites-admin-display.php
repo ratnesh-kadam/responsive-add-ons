@@ -54,6 +54,7 @@
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
 			<# } #>
+			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data.items[ key ][ 'site_options_data' ]) }}">
 		<div class="inner">
 					<span class="site-preview" data-href="{{ data.items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
 						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured_image_url'] }}');"></div>

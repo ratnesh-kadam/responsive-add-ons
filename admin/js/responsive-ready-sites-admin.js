@@ -161,6 +161,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		current_screen: '',
 		active_site: '',
 		widgets_data: '',
+		site_options_data: '',
 
 		templateData: {},
 
@@ -486,7 +487,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					dataType: 'json',
 					data : {
 						action       : 'responsive-ready-sites-import-options',
-						options_data : ResponsiveSitesAdmin.options_data,
+						options_data : ResponsiveSitesAdmin.site_options_data,
 					},
 				}
 			)
@@ -508,8 +509,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					}
 				);
-			// to be deleted
-			$( document ).trigger( 'responsive-ready-sites-import-options-done' );
 		},
 
 		/**
@@ -915,6 +914,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							ResponsiveSitesAdmin.site_customizer_data = JSON.stringify( demo_data.data['site_customizer_data'] ) || '';
 							ResponsiveSitesAdmin.required_plugins     = JSON.stringify( demo_data.data['required_plugins'] ) || '';
 							ResponsiveSitesAdmin.widgets_data         = JSON.stringify( demo_data.data['site_widgets_data'] ) || '';
+							ResponsiveSitesAdmin.site_options_data    = JSON.stringify( demo_data.data['site_options_data'] ) || '';
 
 							var requiredPlugins = JSON.parse( ResponsiveSitesAdmin.required_plugins );
 
