@@ -241,7 +241,12 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				update_option( '_responsive_sites_old_customizer_data', $customizer_data );
 
 				if ( isset( $customizer_data['responsive_settings'] ) ) {
-					update_option( 'responsive-settings', $customizer_data['responsive_settings'] );
+					update_option( 'responsive_settings', $customizer_data['responsive_settings'] );
+				}
+
+				// Add Custom CSS.
+				if ( isset( $options['custom_css'] ) ) {
+					wp_update_custom_css_post( $customizer_data['custom_css'] );
 				}
 
 				wp_send_json_success( $customizer_data );
@@ -262,7 +267,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
             $widgets_data = ( isset( $_POST['widgets_data'] ) ) ? (object) json_decode( stripcslashes( $_POST['widgets_data'] ) ) : ''; //phpcs:ignore
 
-			$widgets_data = '';
 			if ( ! empty( $widgets_data ) ) {
 
 				$widgets_importer = Responsive_Ready_Sites_Widgets_Importer::instance();
