@@ -150,16 +150,13 @@
 								<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
 							</div>
 						</li>
-						<li class="responsive-ready-sites-import-customizer">
+						<li class="responsive-ready-sites-reset-data">
 							<label>
-								<strong>Import Customizer Settings</strong>
+								<strong>Delete Previous Import</strong>
 							</label>
-							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
-							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-customizer-settings" style="display: none;">
-								<p><?php _e( 'Imports sample customizer settings including site identity, typography, colors and other theme options.', 'responsive-addons' ); ?></p>
-							</div>
-							<div class="responsive-ready-sites-import-customizer-process-wrap" style="display: none;">
-								<progress class="responsive-ready-sites-import-customizer-process" max="100" value="0"></progress>
+							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-reset-data"><span class="dashicons dashicons-editor-help"></span></span>
+							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-reset-data" style="display: none;">
+								<p><?php _e( 'Deletes previous import including customizer settings and content. Plugins are not deleted.', 'responsive-addons' ); ?></p>
 							</div>
 						</li>
 						<li class="responsive-ready-sites-import-xml">
@@ -174,13 +171,16 @@
 								<progress class="responsive-ready-sites-import-process" max="100" value="0"></progress>
 							</div>
 						</li>
-						<li class="responsive-ready-sites-reset-data">
+						<li class="responsive-ready-sites-import-customizer">
 							<label>
-								<strong>Delete Previous Import</strong>
+								<strong>Import Customizer Settings</strong>
 							</label>
-							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-reset-data"><span class="dashicons dashicons-editor-help"></span></span>
-							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-reset-data" style="display: none;">
-								<p><?php _e( 'Deletes previous import including customizer settings and content. Plugins are not deleted.', 'responsive-addons' ); ?></p>
+							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
+							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-customizer-settings" style="display: none;">
+								<p><?php _e( 'Imports sample customizer settings including site identity, typography, colors and other theme options.', 'responsive-addons' ); ?></p>
+							</div>
+							<div class="responsive-ready-sites-import-customizer-process-wrap" style="display: none;">
+								<progress class="responsive-ready-sites-import-customizer-process" max="100" value="0"></progress>
 							</div>
 						</li>
 					</ul>

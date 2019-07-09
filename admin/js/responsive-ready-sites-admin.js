@@ -218,7 +218,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Do Nothing.
-		 *
 		 */
 		_doNothing: function( event ) {
 			event.preventDefault();
@@ -248,7 +247,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							// log.
 						} else {
 
-							var	output = '<h2>Responsive Ready Site Import Complete</h2>';
+							var	output = '<h2>Responsive Ready Site import complete.</h2>';
 							output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">Launch Site</a></p>';
 
 							$( '.site-import-options' ).hide();

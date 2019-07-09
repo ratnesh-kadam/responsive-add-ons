@@ -202,3 +202,6 @@ responsive-ready-site-import.button.installing:before {
 	margin: 20px 20px 20px 0px;
 	font-size: 26px;
 }
+.theme-browser .theme.active {
+	cursor: default;
+}
