@@ -15,9 +15,10 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div id="responsive-ready-site-preview"></div>
 <div id="responsive-ready-sites-import-options"></div>
-<div class="wrap" id="responsive-ready-sites-admin-page">
+<div class="wrap" id="responsive-ready-sites-admin-page" style="display: none;">
 	<div class="responsive-sites-header">
-		<span>Responsive Ready Sites</span>
+		<span class="ready-site-list-title">Responsive Ready Websites</span>
+		<p class="ready-site-list-intro">Build your Responsive website in 3 simple steps - import a ready website, change content and launch.</p>
 	</div>
 	<div class="theme-browser rendered">
 		<div id="responsive-sites" class="themes wp-clearfix"></div>
@@ -83,6 +84,16 @@
 			</span>
 	</p>
 	<# } #>
+			<div class="theme inactive ra-site-single responsive-sites-suggestions">
+				<div class="inner">
+					<p>
+						<?php
+						/* translators: %1$s External Link */
+						printf( __( 'Can\'t find a Responsive Ready Site that suits your purpose ?<br><a target="_blank" href="%1$s">Suggest A Site</a>', 'responsive-addons' ), esc_url( 'http://ccreadysites.cyberchimps.com/yoga-instructor' ) );
+						?>
+					</p>
+				</div>
+			</div>
 </script>
 <?php
 /** Single Demo Preview */

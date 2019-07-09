@@ -121,6 +121,7 @@
 				}
 			);
 
+			jQuery( '#responsive-ready-sites-admin-page' ).show();
 			jQuery( '#responsive-sites' ).show().html( template( data ) );
 		},
 
