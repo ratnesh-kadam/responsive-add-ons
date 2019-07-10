@@ -210,14 +210,14 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 array( &$this, 'menu_callback' )
             );
 
-            add_submenu_page(
-                'responsive-addons',
-                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
-                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
-                'manage_options',
-                'responsive-gutenberg-block',
-                array( &$this, 'responsive_blocks_getting_started_page' )
-            );
+//            add_submenu_page(
+//                'responsive-addons',
+//                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
+//                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
+//                'manage_options',
+//                'responsive-gutenberg-block',
+//                array( &$this, 'responsive_blocks_getting_started_page' )
+//            );
 
 		}
 
