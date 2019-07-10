@@ -1027,6 +1027,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 									 // Reset not installed plugins list.
 									 responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( response.slug, pluginsList );
 
+									$( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 								}
 							}
 						);
@@ -1076,6 +1077,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_pluginInstalling: function(event, args) {
 			event.preventDefault();
+			$( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
 
 		},
 
