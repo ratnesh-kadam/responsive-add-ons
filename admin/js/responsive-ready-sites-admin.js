@@ -1006,13 +1006,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 			setTimeout(
 				function() {
 
+						var $init = $( '.plugin-card-' + response.slug ).data( 'init' );
+
 						$.ajax(
 							{
 								url: responsiveSitesAdmin.ajaxurl,
 								type: 'POST',
 								data: {
 									'action'            : 'responsive-ready-sites-required-plugin-activate',
-									'init'              : response.slug + '/' + response.slug + '.php',
+									'init'              : $init,
 								},
 							}
 						)
