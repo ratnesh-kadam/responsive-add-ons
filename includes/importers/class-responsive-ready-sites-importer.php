@@ -241,7 +241,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				update_option( '_responsive_sites_old_customizer_data', $customizer_data );
 
 				if ( isset( $customizer_data['responsive_settings'] ) ) {
-					update_option( 'responsive_settings', $customizer_data['responsive_settings'] );
+					update_option( 'responsive_theme_options', $customizer_data['responsive_settings'] );
 				}
 
 				// Add Custom CSS.
@@ -491,7 +491,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 */
 		public function reset_customizer_data() {
 
-			delete_option( 'responsive-settings' );
+			delete_option( 'responsive_theme_options' );
 
 			wp_send_json_success();
 		}
