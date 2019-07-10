@@ -822,20 +822,6 @@ if( class_exists( 'Responsive_Addons' ) ) {
 			}
 			register_activation_hook( __FILE__, 'responsive_blocks_activate' );
 
-
-			/**
-			 * Redirect to the Responsive Blocks Getting Started page on single plugin activation.
-			 */
-			function responsive_blocks_redirect() {
-				if ( get_option( 'responsive_blocks_do_activation_redirect', false ) ) {
-					delete_option( 'responsive_blocks_do_activation_redirect' );
-					wp_safe_redirect( esc_url( admin_url( 'options-general.php?page=responsive_addons' ) ) );
-					exit;
-				}
-			}
-			add_action( 'admin_init', 'responsive_blocks_redirect' );
-
-
 			/**
 			 * Add image sizes
 			 */
