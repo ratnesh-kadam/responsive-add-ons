@@ -3,7 +3,7 @@
 Plugin Name: Responsive Add Ons
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Added functionality for the responsive theme
-Version: 1.0.7
+Version: 2.0.0
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
@@ -476,7 +476,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Add Responsive Ready Sites Menu
          *
-         * @since 1.0.8
+         * @since 2.0.0
          */
         public function add_responsive_ready_sites_menu() {
             $page_title = apply_filters( 'responsive_ready_sites_menu_page_title', __( 'Responsive Ready Sites', 'responsive-addons' ) );
@@ -487,7 +487,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Menu callback
          *
-         * @since 1.0.8
+         * @since 2.0.0
          */
         public function menu_callback() {
             ?>
@@ -501,7 +501,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Load Responsive Ready Sites Importer
          *
-         * @since 1.0.8
+         * @since 2.0.0
          */
         public function load_responsive_sites_importer() {
             $responsive_blocks_includes_dir = plugin_dir_path( __FILE__ ) . 'includes/';
@@ -511,20 +511,20 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Include Admin JS
          *
-         * @since 1.0.8
+         * @since 2.0.0
          */
         public function responsive_ready_sites_admin_enqueue_scripts( $hook ){
 
             if( 'responsive-add-ons_page_responsive-blocks-ready-sites' !== $hook ){
                 return;
             }
-            wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '1.0.7', true );
+            wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '2.0.0', true );
 
-            wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '1.0.7', true );
+            wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '2.0.0', true );
 
-            wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI.'/admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '1.0.7', true );
+            wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI.'/admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '2.0.0', true );
 
-            wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI. 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '1.0.7', true );
+            wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI. 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '2.0.0', true );
 
             $data = apply_filters(
                 'responsive_sites_localize_vars',
@@ -571,7 +571,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Include Admin css
          *
-         * @since 1.0.8
+         * @since 2.0.0
          */
         public function responsive_ready_sites_admin_enqueue_styles() {
             //Responsive Ready Sites admin styles.
@@ -592,7 +592,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             }
 
             $file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
-            $old_settings = get_option( 'responsive-settings', array() );
+            $old_settings = get_option( 'responsive_theme_options', array() );
             update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
             wp_send_json_success();
         }

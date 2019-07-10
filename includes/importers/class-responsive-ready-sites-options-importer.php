@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Site options importer class.
  *
- * @since  1.0.8
+ * @since  2.0.0
  */
 class Responsive_Ready_Sites_Options_Importer {
 
@@ -40,7 +40,7 @@ class Responsive_Ready_Sites_Options_Importer {
 	/**
 	 * Site Options
 	 *
-	 * @since 1.0.8
+	 * @since 2.0.0
 	 *
 	 * @return array    List of defined array.
 	 */
@@ -110,7 +110,8 @@ class Responsive_Ready_Sites_Options_Importer {
 
 						// insert logo.
 						case 'custom_logo':
-							$this->insert_logo( $option_value );
+							$post_guid = get_post_field( 'guid', $option_value );
+							$this->insert_logo( $post_guid );
 							break;
 
 						default:
@@ -125,7 +126,7 @@ class Responsive_Ready_Sites_Options_Importer {
 	/**
 	 * Update post option
 	 *
-	 * @since 1.0.8
+	 * @since 2.0.0
 	 *
 	 * @param  string $option_name  Option name.
 	 * @param  mixed  $option_value Option value.
@@ -143,7 +144,7 @@ class Responsive_Ready_Sites_Options_Importer {
 	 * In export we send 'menu_slug' like ( 'menu_location' => 'menu_slug' );
 	 * In import we set 'menu_id' from menu slug like ( 'menu_location' => 'menu_id' );
 	 *
-	 * @since 1.0.8
+	 * @since 2.0.0
 	 * @param array $nav_menu_locations Array of nav menu locations.
 	 */
 	private function set_nav_menu_locations( $nav_menu_locations = array() ) {
@@ -169,7 +170,7 @@ class Responsive_Ready_Sites_Options_Importer {
 	/**
 	 * Insert Logo By URL
 	 *
-	 * @since 1.0.8
+	 * @since 2.0.0
 	 * @param  string $image_url Logo URL.
 	 * @return void
 	 */
@@ -183,7 +184,7 @@ class Responsive_Ready_Sites_Options_Importer {
 	/**
 	 * Download image by URL
 	 *
-	 * @since 1.0.8
+	 * @since 2.0.0
 	 *
 	 * @param  string $image_url Logo URL.
 	 * @return mixed false|Attachment ID
@@ -203,7 +204,7 @@ class Responsive_Ready_Sites_Options_Importer {
 	/**
 	 *  Download the image by URL
 	 *
-	 * @since 1.0.8
+	 * @since 2.0.0
 	 * @param string $file Image URL.
 	 * @return int|object|stdClass|string|WP_Error
 	 */

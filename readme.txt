@@ -42,6 +42,8 @@ that it was important to make it inclusive rather than exclusive.
 5. Even if you don't have the Responsive theme it will still add it's functionality to any other theme. You will be able to find the options in the settings tab
 
 == Changelog ==
+= 2.0.0 - 11 July 2019 =
+* Responsive Ready Sites Importer
 
 = 1.0.7 - 25 March 2016 =
 * Minor changes in theme options
@@ -71,6 +73,8 @@ that it was important to make it inclusive rather than exclusive.
 * Initial set up and release
 
 == Upgrade Notice ==
+= 2.0.0 =
+* Responsive Ready Site importer
 
 = 1.0.7 =
 * Minor changes in theme options
