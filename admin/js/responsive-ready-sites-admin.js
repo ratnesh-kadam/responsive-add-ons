@@ -551,8 +551,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					}
 				);
-			// to be deleted
-			$( document ).trigger( 'responsive-ready-sites-import-widgets-done' );
 		},
 
 		/**
@@ -743,8 +741,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 							// 2. Fail - Import XML Data.
 							if (false === xml_data.success) {
 								// log.
-								// to be deleted.
-								$( document ).trigger( 'responsive-ready-sites-import-xml-done' );
 							} else {
 
 								// 2. Pass - Import XML Data.
