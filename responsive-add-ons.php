@@ -115,6 +115,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     }
                 }
             }
+
+            delete_option('responsive_current_active_site');
         }
 
 
