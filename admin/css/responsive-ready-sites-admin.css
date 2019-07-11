@@ -265,3 +265,6 @@ responsive-ready-site-import.button.installing:before {
 	padding: 20px 35px 20px 35px;
 	background: #ffffff;
 }
+.responsive-ready-sites-advanced-options-wrap .result_preview {
+	margin-top: 15%;
+}
