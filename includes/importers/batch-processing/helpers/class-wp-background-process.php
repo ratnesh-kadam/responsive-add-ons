@@ -203,7 +203,8 @@ if ( ! class_exists( 'WP_Background_Process' ) ) {
 			SELECT COUNT(*)
 			FROM {$table}
 			WHERE {$column} LIKE %s
-		", $key
+		",
+					$key
 				)
 			);
 
@@ -284,7 +285,8 @@ if ( ! class_exists( 'WP_Background_Process' ) ) {
 			WHERE {$column} LIKE %s
 			ORDER BY {$key_column} ASC
 			LIMIT 1
-		", $key
+		",
+					$key
 				)
 			);
 

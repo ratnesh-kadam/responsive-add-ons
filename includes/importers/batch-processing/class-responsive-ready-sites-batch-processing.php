@@ -58,7 +58,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			// Once we implement our logic for updating elementor data then we'll delete this file.
 			require_once ABSPATH . 'wp-admin/includes/image.php';
 
-            $responsive_ready_sites_batch_processing = plugin_dir_path( __FILE__ );
+			$responsive_ready_sites_batch_processing = plugin_dir_path( __FILE__ );
 
 			// Core Helpers - Batch Processing.
 			require_once $responsive_ready_sites_batch_processing . 'helpers/class-wp-async-request.php';
@@ -152,6 +152,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 	/**
 	 * Kicking this off by calling 'get_instance()' method
 	 */
-    Responsive_Ready_Sites_Batch_Processing::get_instance();
+	Responsive_Ready_Sites_Batch_Processing::get_instance();
 
 endif;
