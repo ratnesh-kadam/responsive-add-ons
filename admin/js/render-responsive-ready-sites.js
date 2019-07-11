@@ -92,7 +92,7 @@
 		},
 
 		/**
-		 * Update Astra sites list.
+		 * Update Responsive sites list.
 		 *
 		 * @param  {object} event Object.
 		 * @param  {object} data  API response data.
