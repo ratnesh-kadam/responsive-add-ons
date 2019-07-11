@@ -89,7 +89,7 @@
 					<p>
 						<?php
 						/* translators: %1$s External Link */
-						printf( __( 'Can\'t find a Responsive Ready Site that suits your purpose ?<br><a target="_blank" href="%1$s">Suggest A Site</a>', 'responsive-addons' ), esc_url( 'http://ccreadysites.cyberchimps.com/yoga-instructor' ) );
+						printf( __( 'Can\'t find a Responsive Ready Site that suits your purpose ?<br><a target="_blank" href="%1$s">Suggest A Site</a>', 'responsive-addons' ), esc_url( 'mailto:support@cyberchimps.com?Subject=New%20Site%20Suggestion' ) );
 						?>
 					</p>
 				</div>
