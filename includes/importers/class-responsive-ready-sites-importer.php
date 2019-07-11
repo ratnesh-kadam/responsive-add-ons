@@ -62,6 +62,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			add_action( 'wp_ajax_responsive-ready-sites-import-options', array( $this, 'import_options' ) );
 			add_action( 'wp_ajax_responsive-ready-sites-import-end', array( $this, 'import_end' ) );
 
+			require_once  $responsive_ready_sites_importers_dir . 'batch-processing/class-responsive-ready-sites-batch-processing.php';
+
 			// Reset Customizer Data.
 			add_action( 'wp_ajax_responsive-ready-sites-reset-customizer-data', array( $this, 'reset_customizer_data' ) );
 			add_action( 'wp_ajax_responsive-ready-sites-reset-site-options', array( $this, 'reset_site_options' ) );
@@ -341,7 +343,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Gives us access to the download_url() and wp_handle_sideload() functions.
 			require_once ABSPATH . 'wp-admin/includes/file.php';
 
-			$timeout_seconds = 5;
+			$timeout_seconds = 20;
 
 			// Download file to temp dir.
 			$temp_file = download_url( $file, $timeout_seconds );
@@ -411,6 +413,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 			$current_active_site = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
 			update_option( 'responsive_current_active_site', $current_active_site );
+
+            do_action( 'responsive_ready_sites_import_complete' );
 		}
 
 
