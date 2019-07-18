@@ -176,7 +176,7 @@
 							</label>
 							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
-								<p><?php _e( 'Imports sample pages, posts, images and menus.', 'responsive-addons' ); ?></p>
+								<p><?php _e( 'Imports sample pages, posts, images and menus. Depending on your internet speed this may take 2-10 minutes.', 'responsive-addons' ); ?></p>
 							</div>
 							<div class="responsive-ready-sites-import-process-wrap" style="display: none;">
 								<progress class="responsive-ready-sites-import-process" max="100" value="0"></progress>

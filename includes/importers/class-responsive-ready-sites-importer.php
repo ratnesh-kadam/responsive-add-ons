@@ -85,7 +85,6 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
         public function load_importer()
         {
             include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-            include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
             $responsive_ready_sites_importers_dir = plugin_dir_path(__FILE__);
 
             include_once $responsive_ready_sites_importers_dir . 'wxr-importer/class-responsive-ready-sites-wxr-importer.php';
