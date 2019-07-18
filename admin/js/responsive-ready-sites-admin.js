@@ -197,7 +197,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			$( document ).on( 'responsive-ready-sites-install-start'       , ResponsiveSitesAdmin._process_import );
 
-			$( document ).on( 'responsive-ready-sites-import-set-site-data-done'   		, ResponsiveSitesAdmin._resetData );
+			$( document ).on( 'responsive-ready-sites-import-set-site-data-done'   		, ResponsiveSitesAdmin._installRequiredPlugins );
+			$( document ).on( 'responsive-ready-sites-install-and-activate-required-plugins-done', ResponsiveSitesAdmin._resetData );
 			$( document ).on( 'responsive-ready-sites-reset-data'							, ResponsiveSitesAdmin._backup_before_rest_options );
 			$( document ).on( 'responsive-ready-sites-backup-settings-before-reset-done'	, ResponsiveSitesAdmin._reset_customizer_data );
 			$( document ).on( 'responsive-ready-sites-reset-customizer-data-done'			, ResponsiveSitesAdmin._reset_site_options );
@@ -575,8 +576,19 @@ var ResponsiveSitesAjaxQueue = (function() {
 				ResponsiveSitesAdmin._activateAllPlugins( activate_plugins );
 			}
 
-			$( document ).trigger( 'responsive-ready-sites-install-required-plugins-done' );
+			if ( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
+				ResponsiveSitesAdmin._ready_for_import_site();
+			}
 
+		},
+
+		_ready_for_import_site: function () {
+			var notinstalled = responsiveSitesAdmin.required_plugins.notinstalled || 0;
+			var inactive     = responsiveSitesAdmin.required_plugins.inactive || 0;
+
+			if ( notinstalled.length === inactive.length ) {
+				$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
+			}
 		},
 
 		/**
@@ -663,7 +675,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 									// Reset not installed plugins list.
 									responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( single_plugin.slug, pluginsList );
 
-									// Enable Demo Import Button.
+									ResponsiveSitesAdmin._ready_for_import_site();
+
 								}
 							}
 						}
@@ -923,39 +936,43 @@ var ResponsiveSitesAjaxQueue = (function() {
 							ResponsiveSitesAdmin.widgets_data         = JSON.stringify( demo_data.data['site_widgets_data'] ) || '';
 							ResponsiveSitesAdmin.site_options_data    = JSON.stringify( demo_data.data['site_options_data'] ) || '';
 
-							var requiredPlugins = JSON.parse( ResponsiveSitesAdmin.required_plugins );
-
-							if ( $.isArray( requiredPlugins ) ) {
-
-								// Required Required.
-								$.ajax(
-									{
-										url  : responsiveSitesAdmin.ajaxurl,
-										type : 'POST',
-										data : {
-											action           : 'responsive-ready-sites-required-plugins',
-											_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
-											required_plugins : requiredPlugins
-										},
-									}
-								)
-									.done(
-										function ( response ) {
-											var required_plugins = response.data['required_plugins'] || '';
-
-											responsiveSitesAdmin.required_plugins = required_plugins;
-											ResponsiveSitesAdmin._bulkPluginInstallActivate();
-											$( document ).trigger( 'responsive-ready-sites-import-set-site-data-done' );
-										}
-									);
-
-							} else {
-								// log message.
-							}
+							$( document ).trigger( 'responsive-ready-sites-import-set-site-data-done' );
 						}
 
 					}
 				);
+		},
+
+		_installRequiredPlugins: function( event ){
+
+			var requiredPlugins = JSON.parse( ResponsiveSitesAdmin.required_plugins );
+
+			if ( $.isArray( requiredPlugins ) ) {
+
+				// Required Required.
+				$.ajax(
+					{
+						url  : responsiveSitesAdmin.ajaxurl,
+						type : 'POST',
+						data : {
+							action           : 'responsive-ready-sites-required-plugins',
+							_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+							required_plugins : requiredPlugins
+						},
+					}
+				)
+					.done(
+						function ( response ) {
+							var required_plugins = response.data['required_plugins'] || '';
+
+							responsiveSitesAdmin.required_plugins = required_plugins;
+							ResponsiveSitesAdmin._bulkPluginInstallActivate();
+						}
+					);
+
+			} else {
+				$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
+			}
 		},
 
 		_resetData: function( event ) {
@@ -1023,7 +1040,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 									 // Reset not installed plugins list.
 									 responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( response.slug, pluginsList );
 
-									$( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
+									 $( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
+									ResponsiveSitesAdmin._ready_for_import_site();
 								}
 							}
 						);
