@@ -198,13 +198,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 					__( 'Responsive Add-Ons', 'responsive-addons' ),
 					__( 'Responsive Add-Ons', 'responsive-addons' ),
 					'manage_options',
-					'responsive-addons',
-					array( &$this, 'plugin_settings_page' ),
+					'responsive-blocks-ready-sites',
+					array( &$this, 'menu_callback' ),
                     'dashicons-admin-generic'
 				);
 
             add_submenu_page(
-                'responsive-addons',
+                'responsive-blocks-ready-sites',
                 esc_html__( 'Responsive Add-Ons', 'responsive-addons' ),
                 esc_html__( 'Ready Websites', 'responsive-addons' ),
                 'manage_options',
@@ -517,7 +517,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function responsive_ready_sites_admin_enqueue_scripts( $hook ){
 
-            if( 'responsive-add-ons_page_responsive-blocks-ready-sites' !== $hook ){
+            if( 'toplevel_page_responsive-blocks-ready-sites' !== $hook ){
                 return;
             }
             wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '2.0.0', true );
