@@ -1,47 +1,46 @@
-=== Plugin Name ===
+=== Responsive Add Ons ===
 Contributors: cyberchimps
 Donate Link: http://cyberchimps.com
 Tags: google, yahoo, bing, analytics, verification
-Requires at least: 3.4
-Tested up to: 4.4.2
+Requires at least: 5.0
+Tested up to: 5.2.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds Google, Yahoo and Bing verification codes and adds Site Statistics scripts to your site
+Extends the functionality of the popular Responsive theme (https://wordpress.org/themes/responsive/) by adding the ready site importer feature.
 
 == Description ==
 
-This plugin has been designed specifically for <a href="http://wordpress.org/themes/responsive" title="Responsive">Responsive</a> but will also work on any theme. Wordpress is working with theme
-developers like <a href="http://cyberchimps.com" title="CyberChimps">CyberChimps.com</a> to make sure that the theme's functionality is limited to design,
-layout and structure and that anything that falls outside of this is developed as a plugin. Hence the reason why this plugin has been developed.
+The Responsive Add Ons plugin extends the functionality of the popular Responsive theme (https://wordpress.org/themes/responsive/) by adding the ready site importer feature.
+
+= Ready Site Importer =
+
+Launching a new website was never so easy. All you have to do is import a Responsive Ready Site and change the demo content to match your business.
+
+The Ready Site Importer feature allows you to import ready-made website demos, complete with:
+- demo pages designed using Elementor page builder,
+- demo images and media, and
+- demo content
 
 == Installation ==
 
 1. Upload `responsive-add-ons.php` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
-== Frequently Asked Questions ==
-
-= Why have the Webmaster options moved to a plugin? =
-
-Wordpress is very keen (as we are) to separate functionality from design. Among other things it keeps themes from being bloated, it's cleaner code wise and allows users to choose what features they
- want.
-
-= Will it work for any theme? =
-
-The short answer is yes. The long answer is that whilst we have created this primarily for our <a href="http://wordpress.org/themes/responsive" title="Responsive">Responsive</a> theme we decided
-that it was important to make it inclusive rather than exclusive.
-
 == Screenshots ==
 
-1. Responsive Add Ons plugin is recommended when you have the <a href="http://wordpress.org/themes/responsive" title="Responsive">Responsive Theme</a> installed and active
-2. After clicking on the install plugin you are taken to the suggested plugin installer, just click on "Install" below the plugin name
-3. The plugin gets downloaded and installed automatically
-4. Responsive Add Ons places it's options inside <a href="http://wordpress.org/themes/responsive" title="Responsive">Responsive's</a> theme options
-5. Even if you don't have the Responsive theme it will still add it's functionality to any other theme. You will be able to find the options in the settings tab
+1. Responsive Ready Site importer in action
 
 == Changelog ==
+= 2.0.2 - 19 July 2019 =
+* Improved screenshot and readme text
+
+= 2.0.1 - 19 July 2019 =
+* Backward compatibility with WordPress
+
+= 2.0.0 - 11 July 2019 =
+* Responsive Ready Sites Importer
 
 = 1.0.7 - 25 March 2016 =
 * Minor changes in theme options
@@ -71,6 +70,8 @@ that it was important to make it inclusive rather than exclusive.
 * Initial set up and release
 
 == Upgrade Notice ==
+= 2.0.0 =
+* Responsive Ready Site importer
 
 = 1.0.7 =
 * Minor changes in theme options
