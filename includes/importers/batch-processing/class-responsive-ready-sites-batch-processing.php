@@ -68,6 +68,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			// Prepare Page Builders.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-elementor.php';
 
+			//Menu fix
+            require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
+
 			self::$process_all = new WP_Background_Process_Responsive();
 
 			// Start image importing after site import complete.
@@ -92,7 +95,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 				}
 			}
 
-			// Dispatch Queue.
+            // Add "misc" in import [queue].
+            self::$process_all->push_to_queue( Responsive_Ready_Sites_Batch_Processing_Menu::get_instance() );
+
+            // Dispatch Queue.
 			self::$process_all->save()->dispatch();
 		}
 
