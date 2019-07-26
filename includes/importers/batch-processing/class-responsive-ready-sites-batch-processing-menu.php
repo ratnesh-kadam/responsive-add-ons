@@ -62,7 +62,12 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Menu' ) ) :
          * @return object
          */
         public static function fix_nav_menus() {
-
+            $term_id_menu = term_exists('Menu1');
+            if($term_id_menu){
+                $theme_nav_menu_locations = get_theme_mod( 'nav_menu_locations' );
+                $theme_nav_menu_locations['header-menu'] = $term_id_menu;
+                set_theme_mod('nav_menu_locations', $theme_nav_menu_locations);
+            }
         }
 
     }
