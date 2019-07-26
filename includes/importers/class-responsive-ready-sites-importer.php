@@ -65,6 +65,8 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
             add_action('wp_ajax_responsive-ready-sites-import-options', array( $this, 'import_options' ));
             add_action('wp_ajax_responsive-ready-sites-import-end', array( $this, 'import_end' ));
 
+            add_action('responsive_ready_sites_import_complete', array( $this, 'clear_cache'));
+
             include_once  $responsive_ready_sites_importers_dir . 'batch-processing/class-responsive-ready-sites-batch-processing.php';
 
             // Reset Customizer Data.
@@ -77,6 +79,65 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
             add_action('wp_ajax_responsive-ready-sites-delete-wp-forms', array( $this, 'delete_imported_wp_forms' ));
             add_action('wp_ajax_responsive-ready-sites-delete-terms', array( $this, 'delete_imported_terms' ));
 
+            if ( version_compare( get_bloginfo( 'version' ), '5.0.0', '>=' ) ) {
+                add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
+            }
+        }
+
+        /**
+         * Clear Cache.
+         *
+         * @since  2.0.3
+         */
+        public function clear_cache() {
+            // Clear 'Elementor' file cache.
+            if ( class_exists( '\Elementor\Plugin' ) ) {
+                Elementor\Plugin::$instance->posts_css_manager->clear_cache();
+            }
+        }
+
+        /**
+         * Set the timeout for the HTTP request by request URL.
+         *
+         * E.g. If URL is images (jpg|png|gif|jpeg) are from the domain `https://websitedemos.net` then we have set the timeout by 30 seconds. Default 5 seconds.
+         *
+         * @since 2.0.3
+         *
+         * @param int    $timeout_value Time in seconds until a request times out. Default 5.
+         * @param string $url           The request URL.
+         */
+        function set_timeout_for_images( $timeout_value, $url ) {
+
+            // URL not contain `https://ccreadysites.cyberchimps.com` then return $timeout_value.
+            if ( strpos( $url, 'https://ccreadysites.cyberchimps.com' ) === false ) {
+                return $timeout_value;
+            }
+
+            // Check is image URL of type jpg|png|gif|jpeg.
+            if ( self::is_image_url( $url ) ) {
+                $timeout_value = 30;
+            }
+            return $timeout_value;
+        }
+
+        /**
+         * Is Image URL
+         *
+         * @since 2.0.3
+         *
+         * @param  string $url URL.
+         * @return boolean
+         */
+        function is_image_url( $url = '' ) {
+            if ( empty( $url ) ) {
+                return false;
+            }
+
+            if ( preg_match( '/^((https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|svg|gif|jpeg)\/?$/i', $url ) ) {
+                return true;
+            }
+
+            return false;
         }
 
         /**
