@@ -65,6 +65,8 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
             add_action('wp_ajax_responsive-ready-sites-import-options', array( $this, 'import_options' ));
             add_action('wp_ajax_responsive-ready-sites-import-end', array( $this, 'import_end' ));
 
+            add_action('responsive_ready_sites_import_complete', array( $this, 'clear_cache'));
+
             include_once  $responsive_ready_sites_importers_dir . 'batch-processing/class-responsive-ready-sites-batch-processing.php';
 
             // Reset Customizer Data.
@@ -79,6 +81,18 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
 
             if ( version_compare( get_bloginfo( 'version' ), '5.0.0', '>=' ) ) {
                 add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
+            }
+        }
+
+        /**
+         * Clear Cache.
+         *
+         * @since  2.0.3
+         */
+        public function clear_cache() {
+            // Clear 'Elementor' file cache.
+            if ( class_exists( '\Elementor\Plugin' ) ) {
+                Elementor\Plugin::$instance->posts_css_manager->clear_cache();
             }
         }
 
