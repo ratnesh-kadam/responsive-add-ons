@@ -51,6 +51,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		public function __construct() {
 
 			add_action( 'admin_init', array( &$this, 'admin_init' ) );
+            add_action( 'wp_ajax_responsive-ready-sites-activate-theme', array( $this, 'activate_theme' ) );
 			add_action( 'after_setup_theme', array( &$this, 'after_setup_theme' ) );
 			add_action( 'admin_menu', array( &$this, 'add_menu' ) );
 			add_action( 'wp_head', array( &$this, 'responsive_head' ) );
@@ -71,8 +72,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             //get Active Site
             add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
-
-
+            
             $this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
 
@@ -80,6 +80,66 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             self::set_api_url();
 		}
+
+        /**
+         * Add Admin Notice.
+         */
+        function add_notice() {
+
+            $theme = wp_get_theme();
+            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme ) {
+                return;
+            }
+            $class = 'notice notice-error is-dismissible';
+
+            $theme_status = 'responsive-sites-theme-' . $this->get_theme_status();
+            printf( '<div class="%2$s"><p>Responsive Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="responsive">Install & Activate Now</a></p></div>', 'Responsive Addons', esc_attr( $class ), $theme_status );
+
+        }
+
+        /**
+         * Activate theme
+         *
+         * @since 2.0.3
+         * @return void
+         */
+        function activate_theme() {
+
+            switch_theme( 'responsive' );
+
+            wp_send_json_success(
+                array(
+                    'success' => true,
+                    'message' => __( 'Theme Activated', 'responsive-addons' ),
+                )
+            );
+        }
+
+        /**
+         * Get theme install, active or inactive status.
+         *
+         * @since 1.3.2
+         *
+         * @return string Theme status
+         */
+        function get_theme_status() {
+
+            $theme = wp_get_theme();
+
+            // Theme installed and activate.
+            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme ) {
+                return 'installed-and-active';
+            }
+
+            // Theme installed but not activate.
+            foreach ( (array) wp_get_themes() as $theme_dir => $theme ) {
+                if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme ) {
+                    return 'installed-but-inactive';
+                }
+            }
+
+            return 'not-installed';
+        }
 
 		/**
 		 * Stuff to do when you activate
@@ -516,6 +576,20 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @since 2.0.0
          */
         public function responsive_ready_sites_admin_enqueue_scripts( $hook ){
+
+            wp_enqueue_script('install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/js/install-responsive-theme.js', array( 'jquery', 'updates' ), '2.0.2', true);
+            wp_enqueue_style( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/css/install-responsive-theme.css', null, '2.0.2', 'all' );
+            $data = apply_filters(
+                'responsive_sites_install_theme_localize_vars',
+                array(
+                    'installed'  => __( 'Installed! Activating..', 'responsive-addons' ),
+                    'activating' => __( 'Activating..', 'responsive-addons' ),
+                    'activated'  => __( 'Activated! Reloading..', 'responsive-addons' ),
+                    'installing' => __( 'Installing..', 'responsive-addons' ),
+                    'ajaxurl'    => esc_url( admin_url( 'admin-ajax.php' ) ),
+                )
+            );
+            wp_localize_script( 'install-responsive-theme', 'ResponsiveInstallThemeVars', $data );
 
             if( 'toplevel_page_responsive-blocks-ready-sites' !== $hook ){
                 return;
