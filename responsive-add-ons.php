@@ -51,6 +51,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		public function __construct() {
 
 			add_action( 'admin_init', array( &$this, 'admin_init' ) );
+			add_action('admin_notices', array( &$this, 'add_theme_installation_notice'), 1);
             add_action( 'wp_ajax_responsive-ready-sites-activate-theme', array( $this, 'activate_theme' ) );
 			add_action( 'after_setup_theme', array( &$this, 'after_setup_theme' ) );
 			add_action( 'admin_menu', array( &$this, 'add_menu' ) );
@@ -70,6 +71,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array(&$this, 'set_reset_data'));
             add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array(&$this, 'backup_settings'));
 
+            //Dismiss admin notice
+            add_action( 'wp_ajax_responsive-notice-dismiss', array(&$this, 'dismiss_notice'));
+
             //get Active Site
             add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
             
@@ -84,18 +88,57 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         /**
          * Add Admin Notice.
          */
-        function add_notice() {
+        function add_theme_installation_notice() {
 
             $theme = wp_get_theme();
-            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme ) {
+
+            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired()) {
                 return;
             }
-            $class = 'notice notice-error is-dismissible';
+            $class = 'responsive-notice notice notice-error is-dismissible';
 
             $theme_status = 'responsive-sites-theme-' . $this->get_theme_status();
-            printf( '<div class="%2$s"><p>Responsive Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="responsive">Install & Activate Now</a></p></div>', 'Responsive Addons', esc_attr( $class ), $theme_status );
+            printf( '<div id="responsive-theme-activation" class="%2$s"><p>Responsive Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="responsive">Install & Activate Now</a></p></div>', 'Responsive Addons', esc_attr( $class ), $theme_status );
 
         }
+
+        /**
+         * Is notice expired?
+         *
+         * @since 2.0.3
+         *
+         * @return boolean
+         */
+        public static function is_activation_theme_notice_expired() {
+
+            // Check the user meta status if current notice is dismissed.
+            $meta_status = get_user_meta( get_current_user_id(), 'responsive-theme-activation', true );
+
+            if ( empty( $meta_status ) ) {
+                return false;
+            }
+
+            return true;
+        }
+
+        /**
+         * Dismiss Notice.
+         *
+         * @since 2.0.3
+         * @return void
+         */
+        public function dismiss_notice() {
+            $notice_id           = ( isset( $_POST['notice_id'] ) ) ? sanitize_key( $_POST['notice_id'] ) : '';
+
+            // check for Valid input
+            if ( ! empty( $notice_id ) ) {
+                update_user_meta( get_current_user_id(), $notice_id, 'notice-dismissed' );
+                wp_send_json_success();
+            }
+
+            wp_send_json_error();
+        }
+
 
         /**
          * Activate theme
