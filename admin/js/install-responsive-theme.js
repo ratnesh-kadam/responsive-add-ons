@@ -12,7 +12,7 @@
         /**
          * Binds events for the Responsive Theme Installation.
          *
-         * @since 1.3.2
+         * @since 2.0.3
          *
          * @access private
          * @method _bind
@@ -22,12 +22,13 @@
             $( document ).on( 'click', '.responsive-sites-theme-not-installed', InstallResponsiveTheme._install_and_activate );
             $( document ).on( 'click', '.responsive-sites-theme-installed-but-inactive', InstallResponsiveTheme._activateTheme );
             $( document ).on('wp-theme-install-success' , InstallResponsiveTheme._activateTheme);
+            $( document ).on('click', '.responsive-notice .notice-dismiss', InstallResponsiveTheme._dismissNotice );
         },
 
         /**
          * Activate Theme
          *
-         * @since 1.3.2
+         * @since 2.0.3
          */
         _activateTheme: function( event, response ) {
             event.preventDefault();
@@ -68,7 +69,7 @@
         /**
          * Install and activate
          *
-         * @since 1.3.2
+         * @since 2.0.3
          *
          * @param  {object} event Current event.
          * @return void
@@ -91,7 +92,33 @@
             wp.updates.installTheme( {
                 slug: theme_slug
             });
-        }
+        },
+
+        /**
+         * Dismiss notice if user has clicked on dismiss
+         *
+         * @since 2.0.3
+         *
+         */
+        _dismissNotice: function( event ) {
+            event.preventDefault();
+
+            var notice_id = $( this ).parents('.responsive-notice').attr( 'id' ) || '';
+
+            if( '' === notice_id ) {
+                return;
+            }
+
+            $.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: {
+                    action            : 'responsive-notice-dismiss',
+                    notice_id         : notice_id,
+                },
+            });
+
+        },
 
     };
 
