@@ -1168,13 +1168,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_closeFullOverlay: function (event) {
 			event.preventDefault();
-
-			$( 'body' ).removeClass( 'importing-site' );
-			$( '.theme-install-overlay' ).css( 'display', 'none' );
-			$( '.theme-install-overlay' ).remove();
-			$( '.responsive-ready-sites-advanced-options-wrap' ).hide();
-			$( '#responsive-sites' ).show();
-			$( '.theme-preview-on' ).removeClass( 'theme-preview-on' );
+			location.reload();
 		},
 
 		_reset_posts: function() {
