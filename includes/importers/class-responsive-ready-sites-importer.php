@@ -109,7 +109,7 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
         function set_timeout_for_images( $timeout_value, $url ) {
 
             // URL not contain `https://ccreadysites.cyberchimps.com` then return $timeout_value.
-            if ( strpos( $url, 'https://ccreadysites.cyberchimps.com' ) === false ) {
+            if ( strpos( $url, 'ccreadysites.cyberchimps.com' ) === false ) {
                 return $timeout_value;
             }
 
@@ -133,7 +133,7 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
                 return false;
             }
 
-            if ( preg_match( '/^((https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|svg|gif|jpeg)\/?$/i', $url ) ) {
+            if ( preg_match( '/^((http?:\/\/)|(https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|svg|gif|jpeg)\/?$/i', $url ) ) {
                 return true;
             }
 
