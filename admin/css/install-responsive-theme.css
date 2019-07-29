@@ -15,7 +15,7 @@
     -moz-osx-font-smoothing: grayscale;
     vertical-align: top;
 }
-#responsive-theme-activation-nag a {
+#responsive-theme-activation a {
     box-shadow: none;
     outline: none;
 }

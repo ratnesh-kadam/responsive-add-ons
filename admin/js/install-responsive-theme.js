@@ -33,12 +33,12 @@
         _activateTheme: function( event, response ) {
             event.preventDefault();
 
-            $('#responsive-theme-activation-nag a').addClass('processing');
+            $('#responsive-theme-activation a').addClass('processing');
 
             if( response ) {
-                $('#responsive-theme-activation-nag a').text( ResponsiveInstallThemeVars.installed );
+                $('#responsive-theme-activation a').text( ResponsiveInstallThemeVars.installed );
             } else {
-                $('#responsive-theme-activation-nag a').text( ResponsiveInstallThemeVars.activating );
+                $('#responsive-theme-activation a').text( ResponsiveInstallThemeVars.activating );
             }
 
             // WordPress adds "Activate" button after waiting for 1000ms. So we will run our activation after that.
@@ -53,7 +53,7 @@
                 })
                     .done(function (result) {
                         if( result.success ) {
-                            $('#responsive-theme-activation-nag a').text( ResponsiveInstallThemeVars.activated );
+                            $('#responsive-theme-activation a').text( ResponsiveInstallThemeVars.activated );
 
                             setTimeout(function() {
                                 location.reload();
