@@ -3,7 +3,7 @@
 Plugin Name: Responsive Add Ons
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Added functionality for the responsive theme
-Version: 2.0.2
+Version: 2.0.3
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
@@ -620,8 +620,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function responsive_ready_sites_admin_enqueue_scripts( $hook ){
 
-            wp_enqueue_script('install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/js/install-responsive-theme.js', array( 'jquery', 'updates' ), '2.0.2', true);
-            wp_enqueue_style( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/css/install-responsive-theme.css', null, '2.0.2', 'all' );
+            wp_enqueue_script('install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/js/install-responsive-theme.js', array( 'jquery', 'updates' ), '2.0.3', true);
+            wp_enqueue_style( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/css/install-responsive-theme.css', null, '2.0.3', 'all' );
             $data = apply_filters(
                 'responsive_sites_install_theme_localize_vars',
                 array(
