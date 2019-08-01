@@ -77,7 +77,7 @@ function responsive_blocks_getting_started_menu() {
 	}
 
 }
-add_action( 'admin_menu', 'responsive_blocks_getting_started_menu' );
+//add_action( 'admin_menu', 'responsive_blocks_getting_started_menu' );
 
 function responsive_blocks_getting_started_page_temp(){
 	$str = dirname( __FILE__ );

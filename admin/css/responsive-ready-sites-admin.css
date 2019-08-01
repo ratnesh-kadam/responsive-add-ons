@@ -1,0 +1,270 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+.responsive-ready-sites-import-process-wrap {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	z-index: 999999;
+	position: relative;
+	border-radius: 3px;
+	overflow: hidden;
+}
+.responsive-ready-sites-import-xml .responsive-ready-sites-import-process-wrap progress {
+	background: #eeeeee;
+}
+.responsive-ready-sites-import-process-wrap progress {
+	padding: 0px;
+	border: 0 none;
+	background: #0085bd;
+	border-radius: 5px;
+	height: 4px;
+	flex: 1;
+}
+.responsive-ready-sites-import-process-wrap progress::-webkit-progress-value {
+	background: #00679b;
+}
+.responsive-ready-sites-import-process-wrap progress::-webkit-progress-bar {
+	background: transparent;
+}
+.current-importing-status-wrap {
+	font-size: 1rem;
+}
+.current-importing-status-wrap hr {
+	border-color: #f1f1f1;
+}
+.current-importing-status {
+	font-size: 1rem;
+	background: #eeeeee;
+	padding: 1em 1.5em;
+}
+.current-importing-status-title {
+	margin-bottom: .5em;
+}
+.current-importing-status p {
+	margin: 0;
+}
+.theme-browser .theme .site-preview > .theme-screenshot {
+	transition: all linear 5s;
+	background-position: center top;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.theme-browser .theme .site-preview > .theme-screenshot:hover {
+	background-position: center bottom;
+	background-size: cover;
+}
+.responsive-ready-site-preview .wp-full-overlay-main {
+	top: 70px;
+}
+.responsive-ready-site-preview .wp-full-overlay-header {
+	background-color: #f1f1f1;
+	height: 70px;
+}
+.close-full-overlay.responsive-addons {
+	float: right;
+	width: 70px;
+	height: 70px;
+	background: inherit;
+}
+.close-full-overlay.responsive-addons:before {
+	font: normal 30px/1 dashicons;
+}
+.wp-full-overlay-header .button.responsive-addons{
+	float: none;
+}
+.wp-full-overlay-header .button.responsive-demo-import-options{
+	margin: 20px 20px 20px 20px;
+	font-size: 14px;
+	height: 30px;
+}
+.wp-full-overlay-header .responsive-site-demo-name{
+	display: inline-block;
+	margin: 10px 8px 10px 20px;
+	font-size: 25px;
+	font-weight: 500;
+	line-height: 2em;
+}
+.responsive-ready-sites-advanced-options-wrap.wp-full-overlay{
+	background: #fff;
+}
+.responsive-ready-sites-advanced-options-wrap .site-import-options{
+	color: #000000;
+	width: 35%;
+	padding: 15px;
+	z-index: 5000;
+	display: inline-block;
+}
+.responsive-ready-sites-advanced-options-wrap .sites-import-process-errors{
+	color: #000000;
+	padding: 15px;
+	z-index: 5000;
+}
+.responsive-ready-site-contents > li{
+	background: #f1f1f1;
+	padding: 10px;
+	text-align: left;
+}
+.responsive-ready-sites-advanced-options-wrap .wp-full-overlay-main {
+	top: 10%;
+	background: #ffffff;
+	text-align: center;
+}
+.responsive-ready-sites-advanced-options-wrap .wp-full-overlay-header {
+	background-color: #f1f1f1;
+	height: 70px;
+}
+.responsive-ready-sites-tooltip-icon{
+	float: right;
+}
+.responsive-ready-sites-tooltip-message{
+	margin-left: 20px;
+}
+responsive-ready-site-import.button.updating-message:before,
+responsive-ready-site-import.button.installing:before {
+	-webkit-animation: cssAnimation .72s ease infinite;
+	-moz-animation: cssAnimation .72s ease infinite;
+	-o-animation: cssAnimation .72s ease infinite;
+	-ms-animation: cssAnimation .72s ease infinite;
+	animation: cssAnimation .72s ease infinite;
+}
+.button.updating-message.responsive-ready-site-import:before {
+	vertical-align: text-bottom;
+	margin: 10px 5px 0 -2px;
+}
+.site-import-options .responsive-ready-sites-import-button-wrap {
+	text-align: left;
+}
+.responsive-ready-sites-advanced-options-wrap .close-full-overlay{
+	display: block;
+	position: relative;
+	padding-right: 2px;
+	color: #444;
+	cursor: pointer;
+	text-decoration: none;
+	transition: color .1s ease-in-out, background .1s ease-in-out;
+	border-left: 0;
+	border-top: 0;
+	border-bottom: 0;
+}
+.responsive-ready-sites-advanced-options-wrap .close-full-overlay:before{
+	font: normal 30px/1 dashicons;
+	content: "\f335";
+	position: relative;
+}
+.required-plugins-list {
+	margin-left: 2em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	list-style-type: disc;
+}
+.required-plugins-list .plugin-card {
+	background: transparent;
+	border: none;
+	margin: 0;
+	line-height: 2;
+	float: none;
+	width: 100%;
+}
+.required-plugins-list .spinner {
+	float: none;
+	margin: 0;
+}
+.processing-import:before{
+	margin: -2px 10px 0 0;
+	color: green;
+	animation: rotation 2s infinite linear;
+	content: "\f463";
+	display: inline-block;
+	font: normal 25px/1 dashicons;
+	-webkit-font-smoothing: antialiased;
+	vertical-align: top;
+}
+.processed-import:before{
+	margin: -2px 10px 0 0;
+	color: green;
+	animation: none;
+	content: "\f147";
+	display: inline-block;
+	font: normal 30px/1 dashicons;
+	-webkit-font-smoothing: antialiased;
+	vertical-align: top;
+}
+.sites-import-process-errors .import-process-error{
+	width: 35%;
+	text-align: center;
+	display: inline-block;
+	border: 2px solid #ff0000;
+	border-radius: 5px;
+}
+#responsive-ready-sites-admin-page .responsive-sites-header {
+	margin: 20px 20px 40px 20px;
+	font-size: 26px;
+}
+.theme-browser .theme.active {
+	cursor: default;
+}
+.responsive-sites-suggestions:before {
+	border: 5px dashed #ccc;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0px;
+}
+
+.responsive-sites-suggestions {
+	min-height: 255px;
+	border: none !important;
+}
+
+.responsive-sites-suggestions a {
+	border: none;
+	outline: none;
+}
+
+.responsive-sites-suggestions .inner {
+	padding: 27% 10% 50% 10%;
+	text-align: center;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	background: #f4f4f4;
+	bottom: 0;
+	color: #000000;
+	cursor: auto;
+}
+
+.responsive-sites-suggestions .inner a {
+	color: #00b9eb;
+}
+
+.responsive-sites-suggestions p {
+	font-size: 1rem;
+	margin: 0;
+}
+.responsive-sites-header {
+	text-align: center;
+}
+.responsive-sites-header .ready-site-list-title {
+	font-size: 35px;
+	font-weight: 500;
+	line-height: 1.2;
+	padding: 9px 0 4px 0;
+}
+.responsive-sites-header .ready-site-list-intro{
+	font-size: 16px;
+	line-height: 1.7;
+	text-align: center;
+}
+#responsive-ready-sites-admin-page {
+	margin-top: 25px;
+	margin-right: 25px;
+	padding: 20px 35px 20px 35px;
+	background: #ffffff;
+}
+.responsive-ready-sites-advanced-options-wrap .result_preview {
+	margin-top: 15%;
+}
