@@ -65,12 +65,16 @@
 			// Add Params for API request.
 			ResponsiveSitesRender._api_params = {};
 
+			var per_page_val = 50;
+
+			ResponsiveSitesRender._api_params['per_page'] = per_page_val;
+
 			ResponsiveSitesRender._apiAddParam_site_url();
 
 			// API Request.
 			var api_post = {
 				id: '',
-				slug: decodeURIComponent( $.param( ResponsiveSitesRender._api_params ) ),
+				slug: '?' + decodeURIComponent( $.param( ResponsiveSitesRender._api_params ) ),
 				trigger: trigger,
 			};
 
