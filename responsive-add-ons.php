@@ -3,7 +3,7 @@
 Plugin Name: Responsive Add Ons
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Added functionality for the responsive theme
-Version: 2.0.3
+Version: 2.0.4
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
@@ -314,27 +314,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 'responsive-blocks-ready-sites',
                 array( &$this, 'menu_callback' )
             );
-
-//            add_submenu_page(
-//                'responsive-addons',
-//                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
-//                esc_html__( 'Gutenberg Blocks', 'responsive-addons' ),
-//                'manage_options',
-//                'responsive-gutenberg-block',
-//                array( &$this, 'responsive_blocks_getting_started_page' )
-//            );
-
 		}
-
-        /**
-         * Renders the plugin settings page.
-         */
-        public function responsive_blocks_render_settings_page() {
-
-            $pages_dir = trailingslashit( dirname( __FILE__ ) ) . 'dist/getting-started/pages/';
-
-            include $pages_dir . 'settings-main.php';
-        }
 
         function responsive_blocks_getting_started_page() {
             $pages_dir = trailingslashit( dirname( __FILE__ ) ) . 'templates/';
@@ -696,10 +676,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //Responsive Ready Sites admin styles.
             wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI.'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
             wp_enqueue_style( 'responsive-ready-sites-admin' );
-
-            // Getting Started styles.
-            wp_register_style( 'responsive-blocks-getting-started',  RESPONSIVE_ADDONS_URI.'admin/css/getting-started.css', false, '1.0.0' );
-            wp_enqueue_style( 'responsive-blocks-getting-started' );
         }
 
         /**
@@ -856,130 +832,6 @@ if( class_exists( 'Responsive_Addons' ) ) {
 	// Initialise Class
 	$responsive = new Responsive_Addons();
 }
-
-/*RESPONSIVE BLOCKS CODE STARTS HERE*/
-
-			/**
-			 * Exit if accessed directly
-			 */
-			if ( ! defined( 'ABSPATH' ) ) {
-				exit;
-			}
-
-			/**
-			 * Initialize the blocks
-			 */
-			function responsive_blocks_loader() {
-
-				$responsive_blocks_includes_dir = plugin_dir_path( __FILE__ ) . 'includes/';
-				$responsive_blocks_src_dir      = plugin_dir_path( __FILE__ ) . 'src/';
-				$responsive_blocks_dist_dir     = plugin_dir_path( __FILE__ ) . 'dist/';
-
-				/**
-				 * Load the blocks functionality
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'dist/init.php';
-
-				/**
-				 * Load Getting Started page
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'dist/getting-started/getting-started.php';
-
-				/**
-				 * Load Social Block PHP
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'src/blocks/block-sharing/index.php';
-
-				/**
-				 * Load Post Grid PHP
-				 */
-				require_once plugin_dir_path( __FILE__ ) . 'src/blocks/block-post-grid/index.php';
-
-				/**
-				 * Load the newsletter block and related dependencies.
-				 */
-				if ( PHP_VERSION_ID >= 50600 ) {
-					if ( ! class_exists( '\DrewM\MailChimp\MailChimp' ) ) {
-						require_once $responsive_blocks_includes_dir . 'libraries/drewm/mailchimp-api/MailChimp.php';
-					}
-
-					require_once $responsive_blocks_includes_dir . 'exceptions/class-api-error-exception.php';
-					require_once $responsive_blocks_includes_dir . 'exceptions/class-mailchimp-api-error-exception.php';
-					require_once $responsive_blocks_includes_dir . 'interfaces/newsletter-provider-interface.php';
-					require_once $responsive_blocks_includes_dir . 'classes/class-mailchimp.php';
-					require_once $responsive_blocks_includes_dir . 'newsletter/newsletter-functions.php';
-					require_once $responsive_blocks_src_dir . 'blocks/block-newsletter/index.php';
-				}
-
-				/**
-				 * Compatibility functionality.
-				 */
-				require_once $responsive_blocks_includes_dir . 'compat.php';
-			}
-
-			/*
-			 * Include atomic block if WordPress greater than 5.0
-			 */
-			if(check_wordpress_compatibility()){
-                add_action( 'plugins_loaded', 'responsive_blocks_loader' );
-            }
-
-			/*
-			 * Check if compatible with wordpress greater than 5.0
-			 */
-            function check_wordpress_compatibility(){
-                global $wp_version;
-                if ( version_compare($wp_version,'5.0') >= 0) {
-                    return true;
-                }
-                return false;
-            }
-
-			/**
-			 * Load the plugin textdomain
-			 */
-			function responsive_blocks_init() {
-				load_plugin_textdomain( 'responsive-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
-			}
-			add_action( 'init', 'responsive_blocks_init' );
-
-
-			/**
-			 * Adds a redirect option during plugin activation on non-multisite installs.
-			 *
-			 * @param bool $network_wide Whether or not the plugin is being network activated.
-			 */
-			function responsive_blocks_activate( $network_wide = false ) {
-				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Only used to do a redirect. False positive.
-				if ( ! $network_wide && ! isset( $_GET['activate-multi'] ) ) {
-					add_option( 'responsive_blocks_do_activation_redirect', true );
-				}
-			}
-			register_activation_hook( __FILE__, 'responsive_blocks_activate' );
-
-			/**
-			 * Add image sizes
-			 */
-			function responsive_blocks_image_sizes() {
-				// Post Grid Block.
-				add_image_size( 'ra-block-post-grid-landscape', 600, 400, true );
-				add_image_size( 'ra-block-post-grid-square', 600, 600, true );
-			}
-			add_action( 'after_setup_theme', 'responsive_blocks_image_sizes' );
-
-			/**
-			 * Returns the full path and filename of the main Responsive Blocks plugin file.
-			 *
-			 * @return string
-			 */
-			function responsive_blocks_main_plugin_file() {
-				return __FILE__;
-			}
-
-
-
-
-		/*****RESPONSIVE BLOCKS CODE ENDS HERE******/
 
 
 

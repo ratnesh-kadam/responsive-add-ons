@@ -33,6 +33,9 @@ The Ready Site Importer feature allows you to import ready-made website demos, c
 1. Responsive Ready Site importer in action
 
 == Changelog ==
+= 2.0.4 - 31st July 2019 =
+* Removed guttenberg blocks
+
 = 2.0.3 - 31st July 2019 =
 * Bug Fixes - Images are not rendered, menu is not set as header menu
 
