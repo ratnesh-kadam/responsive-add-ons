@@ -79,6 +79,11 @@
 	font-size: 14px;
 	height: 30px;
 }
+.wp-full-overlay-header .button.responsive-buy-premium{
+	margin: 20px 20px 20px 20px;
+	font-size: 14px;
+	height: 30px;
+}
 .wp-full-overlay-header .responsive-site-demo-name{
 	display: inline-block;
 	margin: 10px 8px 10px 20px;

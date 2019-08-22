@@ -623,19 +623,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var demoId                = anchor.data( 'demo-id' ) || '',
 				apiURL                = anchor.data( 'demo-api' ) || '',
-				demoType              = anchor.data( 'demo-type' ) || '',
 				demoURL               = anchor.data( 'demo-url' ) || '',
 				screenshot            = anchor.data( 'screenshot' ) || '',
 				demo_name             = anchor.data( 'demo-name' ) || '',
 				demo_slug             = anchor.data( 'demo-slug' ) || '',
 				requiredPlugins       = anchor.data( 'required-plugins' ) || '',
-				responsiveSiteOptions = anchor.find( '.responsive-site-options' ).val() || '';
+				responsiveSiteOptions = anchor.find( '.responsive-site-options' ).val() || '',
+				demo_type			  = anchor.data( 'demo-type' ) || '';
 
 			var template = wp.template( 'responsive-ready-site-preview' );
 
 			templateData = [{
 				id: demoId,
-				responsive_demo_type: demoType,
 				demo_url: demoURL,
 				demo_api: apiURL,
 				screenshot: screenshot,
@@ -643,6 +642,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				slug: demo_slug,
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
+				demo_type: demo_type,
 			}];
 			$( '#responsive-ready-site-preview' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
