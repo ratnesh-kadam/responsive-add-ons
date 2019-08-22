@@ -42,6 +42,7 @@
 		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 		 data-demo-slug="{{{  data.items[ key ].slug }}}"
 		 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
+			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 		 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 		 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
 
@@ -52,6 +53,7 @@
 			 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
 			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
+			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
 			<# } #>
@@ -105,6 +107,7 @@
 		 data-demo-url="{{{data.demo_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
+		 data-demo-type="{{{data.demo_type}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
@@ -112,7 +115,15 @@
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
-				<a class="button hide-if-no-customize button-primary responsive-addons responsive-demo-import-options" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
+				<# if ( data.demo_type == "premium" ) { #>
+
+					<a class="button button-primary responsive-addons responsive-buy-premium" href="https://www.cyberchimps.com/responsive/"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
+
+				<# } else { #>
+
+					<a class="button button-primary responsive-addons responsive-demo-import-options" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
+
+				<# } #>
 				<button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
 			</div>
 		</div>
@@ -131,6 +142,7 @@
 		 data-demo-url="{{{data.demo_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
+		 data-demo-type="{{{data.demo_type}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}">
@@ -197,7 +209,7 @@
 					</ul>
 				</div>
 				<div class="responsive-ready-sites-import-button-wrap">
-					<a class="button button-hero hide-if-no-customize button-primary responsive-ready-site-import" href="#">
+					<a class="button button-hero button-primary responsive-ready-site-import" href="#">
 					<?php esc_html_e( 'Import Site', 'responsive-addons' ); ?>
 					</a>
 				</div>
