@@ -72,6 +72,27 @@ class Responsive_Ready_Sites_Options_Importer {
 			'elementor_space_between_widgets',
 			'elementor_stretched_section_container',
 
+			// Plugin: WooCommerce.
+			// Pages.
+			'woocommerce_shop_page_title',
+			'woocommerce_cart_page_title',
+			'woocommerce_checkout_page_title',
+			'woocommerce_myaccount_page_title',
+			'woocommerce_edit_address_page_title',
+			'woocommerce_view_order_page_title',
+			'woocommerce_change_password_page_title',
+			'woocommerce_logout_page_title',
+
+			// Account & Privacy.
+			'woocommerce_enable_guest_checkout',
+			'woocommerce_enable_checkout_login_reminder',
+			'woocommerce_enable_signup_and_login_from_checkout',
+			'woocommerce_enable_myaccount_registration',
+			'woocommerce_registration_generate_username',
+
+			// Categories.
+			'woocommerce_product_cat',
+
 		);
 	}
 
@@ -103,15 +124,27 @@ class Responsive_Ready_Sites_Options_Importer {
 							$this->update_page_id_by_option_value( $option_name, $option_value );
 							break;
 
-						// nav menu locations.
-						// case 'nav_menu_locations':
-						// $this->set_nav_menu_locations( $option_value );
-						// break;
-
 						// insert logo.
 						case 'custom_logo':
 							$post_guid = get_post_field( 'guid', $option_value );
 							$this->insert_logo( $post_guid );
+							break;
+
+						// Set WooCommerce page ID by page Title.
+						case 'woocommerce_shop_page_title':
+						case 'woocommerce_cart_page_title':
+						case 'woocommerce_checkout_page_title':
+						case 'woocommerce_myaccount_page_title':
+						case 'woocommerce_edit_address_page_title':
+						case 'woocommerce_view_order_page_title':
+						case 'woocommerce_change_password_page_title':
+						case 'woocommerce_logout_page_title':
+							$this->update_woocommerce_page_id_by_option_value( $option_name, $option_value );
+							break;
+
+						// import WooCommerce category images.
+						case 'woocommerce_product_cat':
+							$this->set_woocommerce_product_cat( $option_value );
 							break;
 
 						default:
@@ -253,4 +286,52 @@ class Responsive_Ready_Sites_Options_Importer {
 		return $data;
 	}
 
+	/**
+	 * Update WooCommerce page ids.
+	 *
+	 * @since 2.0.5
+	 *
+	 * @param  string $option_name  Option name.
+	 * @param  mixed  $option_value Option value.
+	 * @return void
+	 */
+	private function update_woocommerce_page_id_by_option_value( $option_name, $option_value ) {
+		$option_name = str_replace( '_title', '_id', $option_name );
+		$this->update_page_id_by_option_value( $option_name, $option_value );
+	}
+
+	/**
+	 * Set WooCommerce category images.
+	 *
+	 * @since 2.0.5
+	 *
+	 * @param array $cats Array of categories.
+	 */
+	private function set_woocommerce_product_cat( $cats = array() ) {
+
+		$menu_locations = array();
+
+		if ( isset( $cats ) ) {
+
+			foreach ( $cats as $key => $cat ) {
+
+				if ( ! empty( $cat['slug'] ) && ! empty( $cat['thumbnail_src'] ) ) {
+
+					$image = (object) self::_sideload_image( $cat['thumbnail_src'] );
+
+					if ( ! is_wp_error( $image ) ) {
+
+						if ( isset( $image->attachment_id ) && ! empty( $image->attachment_id ) ) {
+
+							$term = get_term_by( 'slug', $cat['slug'], 'product_cat' );
+
+							if ( is_object( $term ) ) {
+								update_term_meta( $term->term_id, 'thumbnail_id', $image->attachment_id );
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
