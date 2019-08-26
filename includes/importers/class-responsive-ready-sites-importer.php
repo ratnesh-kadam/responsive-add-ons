@@ -51,13 +51,11 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
             add_action('init', array( $this, 'load_importer' ));
 
             $responsive_ready_sites_importers_dir = plugin_dir_path(__FILE__);
-            include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-plugin-installer.php';
             include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-widgets-importer.php';
             include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-options-importer.php';
 
             // Import AJAX.
             add_action('wp_ajax_responsive-ready-sites-import-set-site-data', array( $this, 'import_start' ));
-            add_action('wp_ajax_responsive-ready-sites-install-required-plugins', array( $this, 'install_required_plugins' ));
             add_action('wp_ajax_responsive-ready-sites-import-xml', array( $this, 'import_xml_data' ));
             add_action('wp_ajax_responsive-ready-sites-import-wpforms', array( $this, 'import_wpforms' ));
             add_action('wp_ajax_responsive-ready-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ));
@@ -385,26 +383,6 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
                 wp_send_json_error(__('Site options are empty!', 'responsive-addons'));
             }
 
-        }
-
-        /**
-         * Install required plugins
-         *
-         * @since 1.0.0
-         *
-         * @return void
-         */
-        public function install_required_plugins()
-        {
-            $required_plugins = ( isset( $_POST['required_plugins'] ) ) ? (array) json_decode( stripcslashes( $_POST['required_plugins'] ), 1 ) : array(); //phpcs:ignore
-            if (! empty($required_plugins) ) {
-
-                Responsive_Ready_Sites_Plugin_Installer::instance()->install_plugins($required_plugins);
-
-                wp_send_json_success($required_plugins);
-            } else {
-                wp_send_json_error($required_plugins);
-            }
         }
 
         /**
