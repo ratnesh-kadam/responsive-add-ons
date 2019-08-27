@@ -604,9 +604,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_ready_for_import_site: function () {
 			var notinstalled = responsiveSitesAdmin.required_plugins.notinstalled || 0;
 			var inactive     = responsiveSitesAdmin.required_plugins.inactive || 0;
-			var proplugins	 = responsiveSitesAdmin.required_plugins.proplugins || 0;
 
-			if ( ResponsiveSitesAdmin._areEqual( notinstalled.length, inactive.length, proplugins.length ) ) {
+			if ( ResponsiveSitesAdmin._areEqual( notinstalled.length, inactive.length ) ) {
 				$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
 			}
 		},
