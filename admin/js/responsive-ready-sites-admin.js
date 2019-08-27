@@ -349,6 +349,20 @@ var ResponsiveSitesAjaxQueue = (function() {
 							var remaining_plugins = 0;
 
 							/**
+							 * Pro Plugins
+							 *
+							 * List of required Pro plugins.
+							 */
+							if ( typeof required_plugins.proplugins !== 'undefined' ) {
+
+								$( required_plugins.proplugins ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
 							 * Not Installed
 							 *
 							 * List of not installed required plugins.
@@ -371,7 +385,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 							 * List of not inactive required plugins.
 							 */
 							if ( typeof required_plugins.inactive !== 'undefined' ) {
-
 								// Add inactive plugins count.
 								remaining_plugins += parseInt( required_plugins.inactive.length );
 
@@ -565,18 +578,24 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var not_installed 	 = responsiveSitesAdmin.required_plugins.notinstalled || '';
 			var activate_plugins = responsiveSitesAdmin.required_plugins.inactive || '';
+			var pro_plugins		 = responsiveSitesAdmin.required_plugins.proplugins || '';
 
-			// First Install Bulk.
+			// Install Pro Plugins.
+			if ( pro_plugins.length > 0 ) {
+				ResponsiveSitesAdmin._installProPlugins( pro_plugins );
+			}
+
+			// Install wordpress.org plugins.
 			if ( not_installed.length > 0 ) {
 				ResponsiveSitesAdmin._installAllPlugins( not_installed );
 			}
 
-			// Second Activate Bulk.
+			// Activate wordpress.org plugins.
 			if ( activate_plugins.length > 0 ) {
 				ResponsiveSitesAdmin._activateAllPlugins( activate_plugins );
 			}
 
-			if ( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
+			if ( activate_plugins.length <= 0 && not_installed.length <= 0 && pro_plugins.length <= 0 ) {
 				ResponsiveSitesAdmin._ready_for_import_site();
 			}
 
@@ -585,10 +604,21 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_ready_for_import_site: function () {
 			var notinstalled = responsiveSitesAdmin.required_plugins.notinstalled || 0;
 			var inactive     = responsiveSitesAdmin.required_plugins.inactive || 0;
+			var proplugins	 = responsiveSitesAdmin.required_plugins.proplugins || 0;
 
-			if ( notinstalled.length === inactive.length ) {
+			if ( ResponsiveSitesAdmin._areEqual( notinstalled.length, inactive.length, proplugins.length ) ) {
 				$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
 			}
+		},
+
+		_areEqual:function () {
+			var len = arguments.length;
+			for (var i = 1; i < len; i++) {
+				if (arguments[i] === null || arguments[i] !== arguments[i - 1]) {
+					return false;
+				}
+			}
+			return true;
 		},
 
 		/**
@@ -684,6 +714,42 @@ var ResponsiveSitesAjaxQueue = (function() {
 				}
 			);
 			ResponsiveSitesAjaxQueue.run();
+		},
+
+		/**
+		 * Install Pro Plugins.
+		 */
+		_installProPlugins: function( pro_plugins ) {
+
+			$( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
+
+			$.each(
+				pro_plugins,
+				function(index, single_plugin) {
+
+					$.ajax(
+						{
+							url: responsiveSitesAdmin.ajaxurl,
+							type: 'POST',
+							data: {
+								'action': 'responsive-ready-sites-install-required-pro-plugins',
+								'init': single_plugin.init,
+							}
+						}
+					)
+						.done(
+							function (result) {
+
+									var pluginsList = responsiveSitesAdmin.required_plugins.proplugins;
+
+									// Reset not installed plugins list.
+									responsiveSitesAdmin.required_plugins.proplugins = ResponsiveSitesAdmin._removePluginFromQueue( single_plugin.slug, pluginsList );
+
+									ResponsiveSitesAdmin._ready_for_import_site();
+							}
+						);
+				}
+			);
 		},
 
 		/**
@@ -938,7 +1004,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 							$( document ).trigger( 'responsive-ready-sites-import-set-site-data-done' );
 						}
-
 					}
 				);
 		},
