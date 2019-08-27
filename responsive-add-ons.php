@@ -76,6 +76,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             //get Active Site
             add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
+
+            //Check if Responsive Addons pro plugin is active
+            add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed') );
             
             $this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
@@ -827,6 +830,23 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 )
             );
 
+        }
+
+        /**
+         * Check if Responsive Addons Pro is installed.
+         */
+        public function is_responsive_pro_is_installed() {
+            $responsive_pro_slug = 'responsive-addons-pro/responsive-addons-pro.php';
+            if ( ! function_exists( 'get_plugins' ) ) {
+                require_once ABSPATH . 'wp-admin/includes/plugin.php';
+            }
+            $all_plugins = get_plugins();
+
+            if ( ! empty( $all_plugins[ $responsive_pro_slug ] ) ) {
+                wp_send_json_success();
+            } else {
+                wp_send_json_error();
+            }
         }
 	}
 }

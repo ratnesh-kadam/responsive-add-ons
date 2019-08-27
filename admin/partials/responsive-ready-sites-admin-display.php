@@ -37,8 +37,7 @@
 	<# for ( key in data.items ) { #>
 
 	<# if (data.items[ key ].active ) { #>
-		<div class="theme active ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
-		 data-demo-id="{{{ data.items[ key ].id }}}"
+		<div class="theme active ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name" data-demo-id="{{{ data.items[ key ].id }}}"
 		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 		 data-demo-slug="{{{  data.items[ key ].slug }}}"
 		 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
@@ -115,13 +114,13 @@
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
-				<# if ( data.demo_type == "premium" ) { #>
+				<# if ( data.demo_type == "free" || data.is_responsive_addons_pro_installed ) { #>
 
-					<a class="button button-primary responsive-addons responsive-buy-premium" href="https://www.cyberchimps.com/responsive/"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
+				<a class="button button-primary responsive-addons responsive-demo-import-options" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
 
 				<# } else { #>
 
-					<a class="button button-primary responsive-addons responsive-demo-import-options" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
+				<a class="button button-primary responsive-addons responsive-buy-premium" href="https://www.cyberchimps.com/responsive/"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
 
 				<# } #>
 				<button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>

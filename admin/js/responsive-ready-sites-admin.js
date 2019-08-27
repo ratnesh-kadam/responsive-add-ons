@@ -651,15 +651,16 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_renderDemoPreview: function(anchor) {
 
-			var demoId                = anchor.data( 'demo-id' ) || '',
-				apiURL                = anchor.data( 'demo-api' ) || '',
-				demoURL               = anchor.data( 'demo-url' ) || '',
-				screenshot            = anchor.data( 'screenshot' ) || '',
-				demo_name             = anchor.data( 'demo-name' ) || '',
-				demo_slug             = anchor.data( 'demo-slug' ) || '',
-				requiredPlugins       = anchor.data( 'required-plugins' ) || '',
-				responsiveSiteOptions = anchor.find( '.responsive-site-options' ).val() || '',
-				demo_type			  = anchor.data( 'demo-type' ) || '';
+			var demoId                         = anchor.data( 'demo-id' ) || '',
+				apiURL                         = anchor.data( 'demo-api' ) || '',
+				demoURL                        = anchor.data( 'demo-url' ) || '',
+				screenshot                     = anchor.data( 'screenshot' ) || '',
+				demo_name                      = anchor.data( 'demo-name' ) || '',
+				demo_slug                      = anchor.data( 'demo-slug' ) || '',
+				requiredPlugins                = anchor.data( 'required-plugins' ) || '',
+				responsiveSiteOptions          = anchor.find( '.responsive-site-options' ).val() || '',
+				demo_type                      = anchor.data( 'demo-type' ) || '',
+				isResponsiveAddonsProInstalled = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled();
 
 			var template = wp.template( 'responsive-ready-site-preview' );
 
@@ -673,10 +674,40 @@ var ResponsiveSitesAjaxQueue = (function() {
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
 				demo_type: demo_type,
+				is_responsive_addons_pro_installed: isResponsiveAddonsProInstalled,
 			}];
 			$( '#responsive-ready-site-preview' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
 
+		},
+
+		/**
+		 * Check if Responsive Addons Pro is installed or not
+		 */
+		_checkResponsiveAddonsProInstalled: function() {
+			var is_pro_installed;
+			$.ajax(
+				{
+					url: responsiveSitesAdmin.ajaxurl,
+					async: false,
+					type : 'POST',
+					dataType: 'json',
+					data: {
+						'action': 'check-responsive-add-ons-pro-installed',
+					}
+				}
+			)
+				.done(
+					function ( response ) {
+						is_pro_installed = response;
+					}
+				);
+
+			if (is_pro_installed.success) {
+				return true;
+			} else {
+				return false;
+			}
 		},
 
 		/**
@@ -1100,12 +1131,12 @@ var ResponsiveSitesAjaxQueue = (function() {
 							function (result) {
 
 								if ( result.success ) {
-									 var pluginsList = responsiveSitesAdmin.required_plugins.inactive;
+									var pluginsList = responsiveSitesAdmin.required_plugins.inactive;
 
-									 // Reset not installed plugins list.
-									 responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( response.slug, pluginsList );
+									// Reset not installed plugins list.
+									responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( response.slug, pluginsList );
 
-									 $( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
+									$( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 									ResponsiveSitesAdmin._ready_for_import_site();
 								}
 							}
