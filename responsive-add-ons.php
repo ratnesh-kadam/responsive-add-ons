@@ -76,6 +76,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             //get Active Site
             add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
+
+            //Check if Responsive Addons pro plugin is active
+            add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed') );
             
             $this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
@@ -742,6 +745,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 'active'       => array(),
                 'inactive'     => array(),
                 'notinstalled' => array(),
+                'proplugins'   => array(),
             );
 
             if ( ! current_user_can( 'customize' ) ) {
@@ -750,20 +754,30 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             $required_plugins             = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
 
+            $third_party_plugins          = array(
+                'elementor-pro' => array(
+                    'init' => 'elementor-pro/elementor-pro.php',
+                    'name' => 'Elementor Pro',
+                    'link' => 'https://cyberchimps.com/',
+                ),
+            );
+
+
             if ( count( $required_plugins ) > 0 ) {
                 foreach ( $required_plugins as $key => $plugin ) {
 
-                    // Lite - Installed but Inactive.
-                    if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
+                    if ( array_key_exists( $plugin['slug'] , $third_party_plugins ) ) {
+
+                        $response['proplugins'][] = $third_party_plugins[ $plugin['slug'] ];
+
+                    } elseif ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
 
                         $response['inactive'][] = $plugin;
 
-                        // Lite - Not Installed.
                     } elseif ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) ) {
 
                         $response['notinstalled'][] = $plugin;
 
-                        // Lite - Active.
                     } else {
                         $response['active'][] = $plugin;
                     }
@@ -816,6 +830,23 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 )
             );
 
+        }
+
+        /**
+         * Check if Responsive Addons Pro is installed.
+         */
+        public function is_responsive_pro_is_installed() {
+            $responsive_pro_slug = 'responsive-addons-pro/responsive-addons-pro.php';
+            if ( ! function_exists( 'get_plugins' ) ) {
+                require_once ABSPATH . 'wp-admin/includes/plugin.php';
+            }
+            $all_plugins = get_plugins();
+
+            if ( ! empty( $all_plugins[ $responsive_pro_slug ] ) ) {
+                wp_send_json_success();
+            } else {
+                wp_send_json_error();
+            }
         }
 	}
 }
