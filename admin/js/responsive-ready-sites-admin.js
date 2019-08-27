@@ -349,20 +349,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 							var remaining_plugins = 0;
 
 							/**
-							 * Pro Plugins
-							 *
-							 * List of required Pro plugins.
-							 */
-							if ( typeof required_plugins.proplugins !== 'undefined' ) {
-
-								$( required_plugins.proplugins ).each(
-									function( index, plugin ) {
-										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
-									}
-								);
-							}
-
-							/**
 							 * Not Installed
 							 *
 							 * List of not installed required plugins.
@@ -578,12 +564,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var not_installed 	 = responsiveSitesAdmin.required_plugins.notinstalled || '';
 			var activate_plugins = responsiveSitesAdmin.required_plugins.inactive || '';
-			var pro_plugins		 = responsiveSitesAdmin.required_plugins.proplugins || '';
-
-			// Install Pro Plugins.
-			if ( pro_plugins.length > 0 ) {
-				ResponsiveSitesAdmin._installProPlugins( pro_plugins );
-			}
 
 			// Install wordpress.org plugins.
 			if ( not_installed.length > 0 ) {
@@ -595,7 +575,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				ResponsiveSitesAdmin._activateAllPlugins( activate_plugins );
 			}
 
-			if ( activate_plugins.length <= 0 && not_installed.length <= 0 && pro_plugins.length <= 0 ) {
+			if ( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
 				ResponsiveSitesAdmin._ready_for_import_site();
 			}
 
@@ -604,9 +584,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_ready_for_import_site: function () {
 			var notinstalled = responsiveSitesAdmin.required_plugins.notinstalled || 0;
 			var inactive     = responsiveSitesAdmin.required_plugins.inactive || 0;
-			var proplugins	 = responsiveSitesAdmin.required_plugins.proplugins || 0;
 
-			if ( ResponsiveSitesAdmin._areEqual( notinstalled.length, inactive.length, proplugins.length ) ) {
+			if ( ResponsiveSitesAdmin._areEqual( notinstalled.length, inactive.length ) ) {
 				$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
 			}
 		},

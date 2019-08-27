@@ -745,7 +745,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 'active'       => array(),
                 'inactive'     => array(),
                 'notinstalled' => array(),
-                'proplugins'   => array(),
             );
 
             if ( ! current_user_can( 'customize' ) ) {
@@ -754,23 +753,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             $required_plugins             = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
 
-            $third_party_plugins          = array(
-                'elementor-pro' => array(
-                    'init' => 'elementor-pro/elementor-pro.php',
-                    'name' => 'Elementor Pro',
-                    'link' => 'https://cyberchimps.com/',
-                ),
-            );
-
-
             if ( count( $required_plugins ) > 0 ) {
                 foreach ( $required_plugins as $key => $plugin ) {
 
-                    if ( array_key_exists( $plugin['slug'] , $third_party_plugins ) ) {
-
-                        $response['proplugins'][] = $third_party_plugins[ $plugin['slug'] ];
-
-                    } elseif ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
+                    if ( file_exists( WP_PLUGIN_DIR . '/' . $plugin['init'] ) && is_plugin_inactive( $plugin['init'] ) ) {
 
                         $response['inactive'][] = $plugin;
 
