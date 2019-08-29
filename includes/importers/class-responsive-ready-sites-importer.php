@@ -55,7 +55,7 @@ if (! class_exists('Responsive_Ready_Sites_Importer') ) :
             include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-options-importer.php';
 
             // Import AJAX.
-            add_action('wp_ajax_responsive-ready-sites-import-set-site-data', array( $this, 'import_start' ));
+            add_action('wp_ajax_responsive-ready-sites-import-set-site-data-free', array( $this, 'import_start' ));
             add_action('wp_ajax_responsive-ready-sites-import-xml', array( $this, 'import_xml_data' ));
             add_action('wp_ajax_responsive-ready-sites-import-wpforms', array( $this, 'import_wpforms' ));
             add_action('wp_ajax_responsive-ready-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ));
