@@ -43,7 +43,8 @@
 		 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 		 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
-		 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
+		 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
+		 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
 
 		<# } else { #>
 
@@ -54,7 +55,8 @@
 			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
-			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}">
+			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
+			 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
 			<# } #>
 			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data.items[ key ][ 'site_options_data' ]) }}">
 		<div class="inner">
@@ -109,14 +111,15 @@
 		 data-demo-type="{{{data.demo_type}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
-		 data-required-plugins="{{data.required_plugins}}">
+		 data-required-plugins="{{data.required_plugins}}"
+		 data-required-pro-plugins="{{data.required_pro_plugins}}">
 		<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
 				<# if ( data.demo_type == "free" || data.is_responsive_addons_pro_installed ) { #>
 
-				<a class="button button-primary responsive-addons responsive-demo-import-options" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
+				<a class="button button-primary responsive-addons responsive-demo-import-options-{{{data.demo_type}}}" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
 
 				<# } else { #>
 
@@ -144,7 +147,8 @@
 		 data-demo-type="{{{data.demo_type}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
-		 data-required-plugins="{{data.required_plugins}}">
+		 data-required-plugins="{{data.required_plugins}}"
+		 data-required-pro-plugins="{{data.required_pro_plugins}}">
 		<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
 		<input type="hidden" class="demo_site_id" value="{{{ data.id }}}">
 		<div class="wp-full-overlay-header">
@@ -208,7 +212,7 @@
 					</ul>
 				</div>
 				<div class="responsive-ready-sites-import-button-wrap">
-					<a class="button button-hero button-primary responsive-ready-site-import" href="#">
+					<a class="button button-hero button-primary responsive-ready-site-import-{{{data.demo_type}}}" href="#">
 					<?php esc_html_e( 'Import Site', 'responsive-addons' ); ?>
 					</a>
 				</div>
