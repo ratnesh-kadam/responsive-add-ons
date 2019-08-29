@@ -74,7 +74,7 @@
 .wp-full-overlay-header .button.responsive-addons{
 	float: none;
 }
-.wp-full-overlay-header .button.responsive-demo-import-options{
+.wp-full-overlay-header .button.responsive-demo-import-options-free{
 	margin: 20px 20px 20px 20px;
 	font-size: 14px;
 	height: 30px;
@@ -126,15 +126,15 @@
 .responsive-ready-sites-tooltip-message{
 	margin-left: 20px;
 }
-responsive-ready-site-import.button.updating-message:before,
-responsive-ready-site-import.button.installing:before {
+responsive-ready-site-import-free.button.updating-message:before,
+responsive-ready-site-import-free.button.installing:before {
 	-webkit-animation: cssAnimation .72s ease infinite;
 	-moz-animation: cssAnimation .72s ease infinite;
 	-o-animation: cssAnimation .72s ease infinite;
 	-ms-animation: cssAnimation .72s ease infinite;
 	animation: cssAnimation .72s ease infinite;
 }
-.button.updating-message.responsive-ready-site-import:before {
+.button.updating-message.responsive-ready-site-import-free:before {
 	vertical-align: text-bottom;
 	margin: 10px 5px 0 -2px;
 }
