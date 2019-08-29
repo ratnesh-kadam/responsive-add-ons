@@ -1049,6 +1049,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_installSuccess: function( event, response ) {
 
+			if ( typeof responsiveSitesAdmin.required_plugins.notinstalled !== 'undefined' && responsiveSitesAdmin.required_plugins.notinstalled ) {
 				event.preventDefault();
 
 				// Reset not installed plugins list.
@@ -1089,7 +1090,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					},
 					1200
 				);
-
+			}
 		},
 
 		_backup_before_rest_options: function() {
