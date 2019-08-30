@@ -63,6 +63,7 @@
 					<span class="site-preview" data-href="{{ data.items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
 						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured_image_url'] }}');"></div>
 					</span>
+			<span class="demo-type {{{ data.items[ key ].demo_type }}}">{{{ data.items[ key ].demo_type }}}</span>
 			<div class="theme-id-container">
 				<# if (data.items[ key ].active ) { #>
 				<h3 class="theme-name" id="responsive-theme-name">Active : {{{ data.items[ key ].title.rendered }}}</h3>
