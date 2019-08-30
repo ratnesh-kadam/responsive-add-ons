@@ -273,3 +273,16 @@ responsive-ready-site-import-free.button.installing:before {
 .responsive-ready-sites-advanced-options-wrap .result_preview {
 	margin-top: 15%;
 }
+.demo-type.premium{
+	position: absolute;
+	right: -0.5em;
+	top: -0.5em;
+	background: #0073aa;
+	z-index: 1;
+	color: #fff;
+	padding: 0.5em 1em;
+	text-transform: uppercase;
+}
+.demo-type.free{
+	display:none;
+}
