@@ -265,8 +265,6 @@ responsive-ready-site-import-free.button.installing:before {
 	text-align: center;
 }
 #responsive-ready-sites-admin-page {
-	margin-top: 25px;
-	margin-right: 25px;
 	padding: 20px 35px 20px 35px;
 	background: #ffffff;
 }
@@ -285,4 +283,94 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .demo-type.free{
 	display:none;
+}
+
+#responsive-addons-go-pro{
+	background: #fff;
+	display: flex;
+	flex-direction: row;
+}
+
+#responsive-addons-go-pro .column-4 {
+	display: inline-block;
+	padding: 40px;
+	width: 35%;
+}
+#responsive-addons-go-pro .column-8 {
+	display: inline-block;
+	width:50%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+@media screen and ( max-width : 768px ){
+
+	#responsive-addons-go-pro {
+		padding: 20px;
+		display: block;
+	}
+
+	#responsive-addons-go-pro .column-4 {
+		width: auto;
+		padding: 20px;
+	}
+
+	#responsive-addons-go-pro .column-8 {
+		width: auto;
+	}
+
+}
+#responsive-addons-support{
+	background: #fff;
+	display: flex;
+	flex-direction: row;
+}
+
+#responsive-addons-support .column-4 {
+	display: inline-block;
+	padding: 40px;
+	width: 35%;
+}
+
+@media screen and ( max-width : 768px ){
+
+	#responsive-addons-support {
+		padding: 20px;
+		display: block;
+	}
+
+	#responsive-addons-support .column-4 {
+		width: auto;
+		padding: 20px;
+	}
+}
+
+.features-table{
+	width: 100%;
+	border-collapse: collapse;
+}
+.features th{
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px;
+}
+.featureyes{
+	text-align: center;
+}
+.features-table .feature{
+	font-size: 15px;
+}
+.features-table td{
+	padding: 10px;
+}
+
+.featureno{
+	text-align: center;
+}
+.features-table .dashicons-yes{
+	color: #259e58;
+}
+.features-table .dashicons-yes:before{
+	font-size: 30px;
 }

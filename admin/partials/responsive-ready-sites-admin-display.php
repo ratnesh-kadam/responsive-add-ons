@@ -15,7 +15,7 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div id="responsive-ready-site-preview"></div>
 <div id="responsive-ready-sites-import-options"></div>
-<div class="wrap" id="responsive-ready-sites-admin-page" style="display: none;">
+<div id="responsive-ready-sites-admin-page" style="display: none;">
 	<div class="responsive-sites-header">
 		<span class="ready-site-list-title">Responsive Ready Websites</span>
 		<p class="ready-site-list-intro">Build your Responsive website in 3 simple steps - import a ready website, change content and launch.</p>
