@@ -118,7 +118,7 @@
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
-				<# if ( data.demo_type == "free" || data.is_responsive_addons_pro_installed ) { #>
+				<# if ( data.demo_type == "free" || ( data.is_responsive_addons_pro_installed && data.is_responsive_addons_pro_license_active ) ) { #>
 
 				<a class="button button-primary responsive-addons responsive-demo-import-options-{{{data.demo_type}}}" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
 

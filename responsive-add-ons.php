@@ -80,8 +80,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //Check if Responsive Addons pro plugin is active
             add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed') );
 
+            //Check if Responsive Addons pro license is active
+            add_action('wp_ajax_check-responsive-add-ons-pro-license-active', array( $this, 'is_responsive_pro_license_is_active'));
+
             //Responsive Addons Page
-            add_action( 'admin_menu', array( $this, 'responsive_addons_admin_page' ) );
+            add_action( 'admin_menu', array( $this, 'responsive_addons_admin_page' ), 100 );
 
             $this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
@@ -841,6 +844,22 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         }
 
         /**
+         * Check if Responsive Addons Pro License is Active.
+         */
+        public function is_responsive_pro_license_is_active() {
+            $responsice_license_status = get_option('wc_am_client_93_activated');
+
+            if ( ! empty( $responsice_license_status ) ) {
+                if($responsice_license_status === 'Activated')
+                    wp_send_json_success();
+                else
+                    wp_send_json_error();
+            } else {
+                wp_send_json_error();
+            }
+        }
+
+        /**
          * Adding the theme menu page
          */
         public function responsive_addons_admin_page() {
@@ -878,8 +897,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     <?php } ?>
                         <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'pro_support' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab<?php if ( $responsive_addon_pro_support_screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Support' ); ?></a>
                 </h2>
-
-                <form method="post" action="options.php">
                     <?php
                     if ( $responsive_addons_go_pro_screen ) {
 
@@ -896,7 +913,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                         do_action('responsive_addons_importer_page');
                     }
                     ?>
-                </form>
             </div>
 
             <?php

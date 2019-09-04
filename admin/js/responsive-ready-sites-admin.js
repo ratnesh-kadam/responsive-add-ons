@@ -630,16 +630,17 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_renderDemoPreview: function(anchor) {
 
-			var demoId                         = anchor.data( 'demo-id' ) || '',
-				apiURL                         = anchor.data( 'demo-api' ) || '',
-				demoURL                        = anchor.data( 'demo-url' ) || '',
-				screenshot                     = anchor.data( 'screenshot' ) || '',
-				demo_name                      = anchor.data( 'demo-name' ) || '',
-				demo_slug                      = anchor.data( 'demo-slug' ) || '',
-				requiredPlugins                = anchor.data( 'required-plugins' ) || '',
-				responsiveSiteOptions          = anchor.find( '.responsive-site-options' ).val() || '',
-				demo_type                      = anchor.data( 'demo-type' ) || '',
-				isResponsiveAddonsProInstalled = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled();
+			var demoId                             = anchor.data( 'demo-id' ) || '',
+				apiURL                             = anchor.data( 'demo-api' ) || '',
+				demoURL                            = anchor.data( 'demo-url' ) || '',
+				screenshot                         = anchor.data( 'screenshot' ) || '',
+				demo_name                          = anchor.data( 'demo-name' ) || '',
+				demo_slug                          = anchor.data( 'demo-slug' ) || '',
+				requiredPlugins                    = anchor.data( 'required-plugins' ) || '',
+				responsiveSiteOptions              = anchor.find( '.responsive-site-options' ).val() || '',
+				demo_type                          = anchor.data( 'demo-type' ) || '',
+				isResponsiveAddonsProInstalled     = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled(),
+				isResponsiceAddonsProLicenseActive = ResponsiveSitesAdmin._checkRespomsiveAddonsProLicenseActive();
 
 			var template = wp.template( 'responsive-ready-site-preview' );
 
@@ -664,6 +665,32 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 * Check if Responsive Addons Pro is installed or not
 		 */
 		_checkResponsiveAddonsProInstalled: function() {
+			var is_pro_license_active;
+			$.ajax(
+				{
+					url: responsiveSitesAdmin.ajaxurl,
+					async: false,
+					type : 'POST',
+					dataType: 'json',
+					data: {
+						'action': 'check-responsive-add-ons-pro-license-active',
+					}
+				}
+			)
+				.done(
+					function ( response ) {
+						is_pro_license_active = response;
+					}
+				);
+
+			if (is_pro_license_active.success) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+
+		_checkRespomsiveAddonsProLicenseActive: function() {
 			var is_pro_installed;
 			$.ajax(
 				{
