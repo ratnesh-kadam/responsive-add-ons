@@ -54,7 +54,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			add_action('admin_notices', array( &$this, 'add_theme_installation_notice'), 1);
             add_action( 'wp_ajax_responsive-ready-sites-activate-theme', array( $this, 'activate_theme' ) );
 			add_action( 'after_setup_theme', array( &$this, 'after_setup_theme' ) );
-			add_action( 'admin_menu', array( &$this, 'add_menu' ) );
 			add_action( 'wp_head', array( &$this, 'responsive_head' ) );
 			add_action( 'plugins_loaded', array( &$this, 'responsive_addons_translations' ) );
 			$plugin = plugin_basename( __FILE__ );
@@ -300,31 +299,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 				array( &$this, 'responsive_addons_sanitize' )
 			);
 
-		}
-
-		/**
-		 * Add the menu
-		 */
-		public function add_menu() {
-			// Hides Menu options if the current theme is responsive
-
-            add_menu_page(
-					__( 'Responsive Add-Ons', 'responsive-addons' ),
-					__( 'Responsive Add-Ons', 'responsive-addons' ),
-					'manage_options',
-					'responsive-blocks-ready-sites',
-					array( &$this, 'menu_callback' ),
-                    'dashicons-admin-generic'
-				);
-
-            add_submenu_page(
-                'responsive-blocks-ready-sites',
-                esc_html__( 'Responsive Add-Ons', 'responsive-addons' ),
-                esc_html__( 'Ready Websites', 'responsive-addons' ),
-                'manage_options',
-                'responsive-blocks-ready-sites',
-                array( &$this, 'menu_callback' )
-            );
 		}
 
         function responsive_blocks_getting_started_page() {
