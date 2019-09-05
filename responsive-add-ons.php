@@ -821,13 +821,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Check if Responsive Addons Pro License is Active.
          */
         public function is_responsive_pro_license_is_active() {
-            $responsice_license_status = get_option('wc_am_client_93_activated');
+            global $wcam_lib;
+            $license_status = $wcam_lib->license_key_status();
 
-            if ( ! empty( $responsice_license_status ) ) {
-                if($responsice_license_status === 'Activated')
-                    wp_send_json_success();
-                else
-                    wp_send_json_error();
+            if ( ! empty( $license_status[ 'data' ][ 'activated' ] ) && $license_status[ 'data' ][ 'activated' ] ) {
+                wp_send_json_success();
             } else {
                 wp_send_json_error();
             }
@@ -861,13 +859,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 <h2 class="nav-tab-wrapper">
                     <a href="<?php echo esc_url( admin_url( 'admin.php?page=responsive-add-ons' ) ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Ready Site Importer' ); ?></a>
                     <?php
-                    if ( $this->is_responsive_addons_pro_is_active( ) ) { ?>
+                    if ( !$this->is_responsive_addons_pro_is_active( ) ) { ?>
 
                         <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'go_pro' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab<?php if ( $responsive_addons_go_pro_screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Go Pro' ); ?></a>
 
-                    <?php } ?>
-                    <?php if ( $this->is_responsive_addons_pro_is_active( ) ) { ?>
-                        <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'license' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab<?php if ( $responsive_addon_license_screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'License' ); ?></a>
                     <?php } ?>
                         <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'pro_support' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab<?php if ( $responsive_addon_pro_support_screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Support' ); ?></a>
                 </h2>
