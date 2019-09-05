@@ -821,13 +821,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Check if Responsive Addons Pro License is Active.
          */
         public function is_responsive_pro_license_is_active() {
-            $responsice_license_status = get_option('wc_am_client_93_activated');
+            global $wcam_lib;
+            $license_status = $wcam_lib->license_key_status();
 
-            if ( ! empty( $responsice_license_status ) ) {
-                if($responsice_license_status === 'Activated')
-                    wp_send_json_success();
-                else
-                    wp_send_json_error();
+            if ( ! empty( $license_status[ 'data' ][ 'activated' ] ) && $license_status[ 'data' ][ 'activated' ] ) {
+                wp_send_json_success();
             } else {
                 wp_send_json_error();
             }
