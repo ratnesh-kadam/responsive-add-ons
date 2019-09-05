@@ -533,11 +533,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 * @return mixed
 		 */
 		public function plugin_settings_link( $links ) {
-			if ( $this->is_responsive() ) {
-				$settings_link = '<a href="themes.php?page=theme_options">' . __( 'Settings', 'responsive-addons' ) . '</a>';
-			} else {
-				$settings_link = '<a href="options-general.php?page=responsive_addons">' . __( 'Settings', 'responsive-addons' ) . '</a>';
-			}
+			$settings_link = '<a href="themes.php?page=responsive-add-ons">' . __( 'Settings', 'responsive-addons' ) . '</a>';
 			array_unshift( $links, $settings_link );
 
 			return $links;
@@ -835,9 +831,16 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Adding the theme menu page
          */
         public function responsive_addons_admin_page() {
+
+            if(  $this->is_responsive() ){
+                $menu_title = 'Add Ons';
+            } else {
+                $menu_title = 'Responsive Add Ons';
+            }
+
             add_theme_page(
                 'Responsive Add Ons',
-                'Responsive Add Ons',
+                $menu_title,
                 'administrator',
                 'responsive-add-ons',
                 array( $this, 'responsive_add_ons')
