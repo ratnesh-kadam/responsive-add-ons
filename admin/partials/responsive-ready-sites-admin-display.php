@@ -15,6 +15,9 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div id="responsive-ready-site-preview"></div>
 <div id="responsive-ready-sites-import-options"></div>
+<div class="spinner-wrap">
+	<span class="spinner is-active"></span>
+</div>
 <div id="responsive-ready-sites-admin-page" style="display: none;">
 	<div class="responsive-sites-header">
 		<span class="ready-site-list-title">Responsive Ready Websites</span>

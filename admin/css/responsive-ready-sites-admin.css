@@ -374,3 +374,10 @@ responsive-ready-site-import-free.button.installing:before {
 .features-table .dashicons-yes:before{
 	font-size: 30px;
 }
+.spinner-wrap{
+	text-align: center;
+	margin-top: 20%;
+}
+.spinner-wrap .spinner.is-active{
+	float:none;
+}
