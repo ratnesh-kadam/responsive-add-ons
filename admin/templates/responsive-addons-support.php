@@ -35,6 +35,9 @@
 	 */
 function is_resp_pro_license_is_active() {
 	global $wcam_lib;
+	if ( is_null( $wcam_lib ) ) {
+		return false;
+	}
 	$license_status = $wcam_lib->license_key_status();
 
 	if ( ! empty( $license_status['data']['activated'] ) && $license_status['data']['activated'] ) {
