@@ -1,61 +1,562 @@
+# Copyright (C) 2019 CyberChimps
+# This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: Responsive Addons\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-01 15:16:04 UTC\n"
-"PO-Revision-Date: 2013-10-10 14:07-0000\n"
-"Last-Translator: CyberChimps <support@cyberchimps.com>\n"
-"Language-Team: English, United States\n"
+"Project-Id-Version: Responsive Add Ons 2.0.4\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/responsive-add-ons\n"
+"POT-Creation-Date: 2019-08-29 09:24:57+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
 
-#: ../responsive-addons.php
+#: admin/partials/responsive-ready-sites-admin-display.php:70
+#: admin/partials/responsive-ready-sites-admin-display.php:130
+msgid "Preview"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:79
+msgid "No Demos found"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:83
+#. translators: %1$s External Link
+msgid "No More Sites"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:93
+#. translators: %1$s External Link
+msgid ""
+"Can't find a Responsive Ready Site that suits your purpose ?<br><a "
+"target=\"_blank\" href=\"%1$s\">Suggest A Site</a>"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:119
+#: admin/partials/responsive-ready-sites-admin-display.php:212
+msgid "Import Site"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:123
+msgid "Buy Responsive Pro"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:126
+#: admin/partials/responsive-ready-sites-admin-display.php:153
+msgid "Close"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:169
+msgid "Install Required Plugins"
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:181
+msgid ""
+"Deletes previous import including customizer settings and content. Plugins "
+"are not deleted."
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:190
+msgid ""
+"Imports sample pages, posts, images and menus. Depending on your internet "
+"speed this may take 2-10 minutes."
+msgstr ""
+
+#: admin/partials/responsive-ready-sites-admin-display.php:202
+msgid ""
+"Imports sample customizer settings including site identity, typography, "
+"colors and other theme options."
+msgstr ""
+
+#: includes/importers/batch-processing/helpers/class-wp-background-process.php:435
+msgid "Every %d Minutes"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-importer.php:178
+msgid "Request site API URL is empty. Try again!"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-importer.php:194
+msgid ""
+"If XMLReader is not available, it imports all other settings and only skips "
+"XML import. This creates an incomplete website. We should bail early and "
+"not import anything if this is not present."
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-importer.php:210
+msgid "There was an error downloading the XML file."
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-importer.php:216
+msgid "Invalid site XML file!"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-importer.php:327
+msgid "Customizer data is empty!"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-importer.php:356
+msgid "Widget data is empty!"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-importer.php:383
+msgid "Site options are empty!"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-widgets-importer.php:89
+msgid "Import data could not be read. Please try a different file."
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-widgets-importer.php:133
+msgid "Widget area does not exist in theme (using Inactive)"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-widgets-importer.php:156
+msgid "Site does not support widget"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-widgets-importer.php:192
+msgid "Widget already exists"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-widgets-importer.php:261
+msgid "Imported"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-widgets-importer.php:264
+msgid "Imported to Inactive"
+msgstr ""
+
+#: includes/importers/class-responsive-ready-sites-widgets-importer.php:270
+msgid "No Title"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-responsive-ready-sites-wxr-importer.php:248
+msgid "Import complete!"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:131
+msgid "Could not open the file for parsing"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:167
+#: includes/importers/wxr-importer/class-wxr-importer.php:283
+#: includes/importers/wxr-importer/class-wxr-importer.php:356
+msgid ""
+"This WXR file (version %1$s) is newer than the importer (version %2$s) and "
+"may not be supported. Please consider updating."
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:504
+msgid "The file does not exist, please try again."
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:564
+msgid "Invalid author mapping"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:665
+msgid "Cannot import auto-draft posts"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:753
+msgid "Failed to import \"%1$s\": Invalid post type %2$s"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:763
+msgid "%1$s \"%2$s\" already exists."
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:857
+msgid "Skipping attachment \"%s\", fetching attachments disabled"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:878
+msgid "Failed to import \"%1$s\" (%2$s)"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:910
+#: includes/importers/wxr-importer/class-wxr-importer.php:1755
+msgid "Imported \"%1$s\" (%2$s)"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:915
+msgid "Post %1$d remapped to %2$d"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1062
+msgid "Invalid file type"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1560
+msgid "Failed to import user \"%s\""
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1581
+msgid "Imported user \"%s\""
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1585
+msgid "User %1$d remapped to %2$d"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1731
+msgid "Failed to import %1$s %2$s"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1760
+msgid "Term %1$d remapped to %2$d"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1813
+msgid "Remote server returned %1$d %2$s for %3$s"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1826
+msgid "Remote file is incorrect size"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1831
+msgid "Zero size file downloaded"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1837
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1859
+msgid "Running post-processing for post %d"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1872
+msgid "Could not find the post parent for \"%1$s\" (post #%2$d)"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1877
+msgid "Post %1$d was imported with parent %2$d, but could not be found"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1891
+msgid "Could not find the author for \"%1$s\" (post #%2$d)"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1896
+msgid "Post %1$d was imported with author \"%2$s\", but could not be found"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1922
+msgid "Post %d was marked for post-processing, but none was required."
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1933
+msgid "Could not update \"%1$s\" (post #%2$d) with mapped data"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1978
+msgid "Could not find the menu object for \"%1$s\" (post #%2$d)"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:1983
+msgid ""
+"Post %1$d was imported with object \"%2$d\" of type \"%3$s\", but could not "
+"be found"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:2005
+msgid "Could not find the comment parent for comment #%d"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:2009
+msgid "Comment %1$d was imported with parent %2$d, but could not be found"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:2023
+msgid "Could not find the author for comment #%d"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:2027
+msgid "Comment %1$d was imported with author %2$d, but could not be found"
+msgstr ""
+
+#: includes/importers/wxr-importer/class-wxr-importer.php:2044
+msgid "Could not update comment #%d with mapped data"
+msgstr ""
+
+#: responsive-add-ons.php:159
+msgid "Theme Activated"
+msgstr ""
+
+#: responsive-add-ons.php:304 responsive-add-ons.php:305
+#: responsive-add-ons.php:314
+msgid "Responsive Add-Ons"
+msgstr ""
+
+#: responsive-add-ons.php:315
+msgid "Ready Websites"
+msgstr ""
+
+#: responsive-add-ons.php:333
 msgid "You do not have sufficient permissions to access this page."
-msgstr "You do not have sufficient permissions to access this page."
+msgstr ""
 
-#: ../responsive-addons.php
+#: responsive-add-ons.php:358 responsive-add-ons.php:439
 msgid "Webmaster Tools"
-msgstr "Webmaster Tools"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:376 responsive-add-ons.php:442
+#: templates/settings.php:35
 msgid "Google Site Verification"
-msgstr "Google Site Verification"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:381 responsive-add-ons.php:447
+#: templates/settings.php:38
 msgid "Enter your Google ID number only"
-msgstr "Enter your Google ID number only"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:385 responsive-add-ons.php:453
+#: templates/settings.php:42
 msgid "Bing Site Verification"
-msgstr "Bing Site Verification"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:390 responsive-add-ons.php:458
+#: templates/settings.php:45
 msgid "Enter your Bing ID number only"
-msgstr "Enter your Bing ID number only"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:394 responsive-add-ons.php:464
+#: templates/settings.php:49
 msgid "Yahoo Site Verification"
-msgstr "Yahoo Site Verification"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:399 responsive-add-ons.php:469
+#: templates/settings.php:52
 msgid "Enter your Yahoo ID number only"
-msgstr "Enter your Yahoo ID number only"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:403 responsive-add-ons.php:475
+#: templates/settings.php:57
 msgid "Site Statistics Tracker"
-msgstr "Site Statistics Tracker"
+msgstr ""
 
-#: ../responsive-addons.php
+#: responsive-add-ons.php:404 responsive-add-ons.php:476
 msgid "Leave blank if plugin handles your webmaster tools"
-msgstr "Leave blank if plugin handles your webmaster tools"
+msgstr ""
 
-#: ../responsive-addons.php ../templates/settings.php
+#: responsive-add-ons.php:404 responsive-add-ons.php:476
+msgid "Guide"
+msgstr ""
+
+#: responsive-add-ons.php:409 responsive-add-ons.php:481
+#: templates/settings.php:63
 msgid "Google Analytics, StatCounter, any other or all of them."
-msgstr "Google Analytics, StatCounter, any other or all of them."
+msgstr ""
 
-#: ../responsive-addons.php
+#: responsive-add-ons.php:555 responsive-add-ons.php:557
 msgid "Settings"
-msgstr "Settings"
+msgstr ""
+
+#: responsive-add-ons.php:570
+msgid "Responsive Ready Sites"
+msgstr ""
+
+#: responsive-add-ons.php:611
+msgid "Installed! Activating.."
+msgstr ""
+
+#: responsive-add-ons.php:612
+msgid "Activating.."
+msgstr ""
+
+#: responsive-add-ons.php:613
+msgid "Activated! Reloading.."
+msgstr ""
+
+#: responsive-add-ons.php:614
+msgid "Installing.."
+msgstr ""
+
+#: responsive-add-ons.php:793
+msgid "No plugin specified"
+msgstr ""
+
+#: responsive-add-ons.php:815
+msgid "Plugin Activated"
+msgstr ""
+
+#: templates/getting-started.php:12
+msgid "Responsive Gutenberg Block Add-ons"
+msgstr ""
+
+#: templates/getting-started.php:17
+msgid ""
+"Responsive Addon also has a collection of ready-to-use blocks for the new "
+"WordPress editor(aka Gutenberg)."
+msgstr ""
+
+#: templates/getting-started.php:26
+msgid "Available blocks"
+msgstr ""
+
+#: templates/getting-started.php:27
+msgid "The following editor blocks are available in Responsive Add-ons."
+msgstr ""
+
+#: templates/getting-started.php:33
+msgid "Post Grid Block"
+msgstr ""
+
+#: templates/getting-started.php:34 templates/getting-started.php:50
+msgid ""
+"Add an eye-catching, full-width section with a big title, paragraph text, "
+"and a customizable button."
+msgstr ""
+
+#: templates/getting-started.php:41
+msgid "Container Block"
+msgstr ""
+
+#: templates/getting-started.php:42
+msgid ""
+"Wrap several blocks into a section and add padding, margins, background "
+"colors and images."
+msgstr ""
+
+#: templates/getting-started.php:49
+msgid "Call-To-Action Block"
+msgstr ""
+
+#: templates/getting-started.php:57
+msgid "Testimonial Block"
+msgstr ""
+
+#: templates/getting-started.php:58
+msgid ""
+"Add a customer or client testimonial to your site with an avatar, text, "
+"citation and more."
+msgstr ""
+
+#: templates/getting-started.php:65
+msgid "Inline Notice Block"
+msgstr ""
+
+#: templates/getting-started.php:66
+msgid ""
+"Add a colorful notice or message to your site with text, a title and a "
+"dismiss icon."
+msgstr ""
+
+#: templates/getting-started.php:73
+msgid "Sharing Icons Block"
+msgstr ""
+
+#: templates/getting-started.php:74
+msgid ""
+"Add social sharing icons to your page with size, shape, color and style "
+"options."
+msgstr ""
+
+#: templates/getting-started.php:81
+msgid "Author Profile Block"
+msgstr ""
+
+#: templates/getting-started.php:82
+msgid ""
+"Add a user profile box to your site with a title, bio info, an avatar and "
+"social media links."
+msgstr ""
+
+#: templates/getting-started.php:89
+msgid "Accordion Block"
+msgstr ""
+
+#: templates/getting-started.php:90
+msgid ""
+"Add an accordion text toggle with a title and descriptive text. Includes "
+"font size and toggle options."
+msgstr ""
+
+#: templates/getting-started.php:97
+msgid "Customizable Button"
+msgstr ""
+
+#: templates/getting-started.php:98
+msgid ""
+"Add a fancy stylized button to your post or page with size, shape, target, "
+"and color options."
+msgstr ""
+
+#: templates/getting-started.php:105
+msgid "Drop Cap Block"
+msgstr ""
+
+#: templates/getting-started.php:106
+msgid ""
+"Add a stylized drop cap to the beginning of your paragraph. Choose from "
+"three different styles."
+msgstr ""
+
+#: templates/getting-started.php:113
+msgid "Spacer & Divider"
+msgstr ""
+
+#: templates/getting-started.php:114
+msgid ""
+"Add an adjustable spacer between your blocks with an optional divider with "
+"styling options."
+msgstr ""
+
+#: templates/getting-started.php:131
+msgid "Get more block"
+msgstr ""
+
+#: templates/getting-started.php:134
+msgid ""
+"Join our newsletter to receive emails when we add new blocks, release "
+"updates."
+msgstr ""
+
+#: templates/getting-started.php:135
+msgid "Subscribe"
+msgstr ""
+
+#: templates/settings.php:24
+msgid "Responsive Settings"
+msgstr ""
+
+#: templates/settings.php:32
+msgid "Webmaster Settings"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Responsive Add Ons"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/responsive-add-ons/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Added functionality for the responsive theme"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "CyberChimps"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.cyberchimps.com"
+msgstr ""
