@@ -19,7 +19,7 @@
 			<?php if ( is_resp_pro_license_is_active() ) { ?>
 				<a href="https://cyberchimps.com/my-account/support/" target="_blank"><?php esc_html_e( 'Request Support' ); ?></a>
 			<?php } else { ?>
-				<a href="https://cyberchimps.com/responsive-premium/" target="_blank"><?php esc_html_e( 'Upgrade To Responsive Premium' ); ?></a>
+				<a href="https://cyberchimps.com/responsive-pricing/" target="_blank"><?php esc_html_e( 'Upgrade To Responsive Pro' ); ?></a>
 			<?php } ?>
 		</div>
 		<div class="column-4">

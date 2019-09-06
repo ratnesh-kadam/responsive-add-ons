@@ -11,7 +11,7 @@
 		<div class="column-4">
 			<h3><?php esc_html_e( 'Get Responsive Add Ons Pro' ); ?></h3>
 			<p><?php esc_html_e( 'Upgrade to Responsive Add Ons Pro and get premium Ready sites, more customizer options & premium support.' ); ?></p>
-			<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'go_pro' ), admin_url( 'themes.php?page=responsive-options' ) ) ); ?>" class='button button-primary'><?php esc_html_e( 'Upgrade To Pro' ); ?></a>
+			<a href="https://cyberchimps.com/responsive-pricing/" class='button button-primary'><?php esc_html_e( 'Upgrade To Pro' ); ?></a>
 		</div>
 		<div class="column-8 features">
 			<table class="features-table" border="1">

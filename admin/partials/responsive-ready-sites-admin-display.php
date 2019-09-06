@@ -127,7 +127,7 @@
 
 				<# } else { #>
 
-				<a class="button button-primary responsive-addons responsive-buy-premium" href="https://www.cyberchimps.com/responsive/"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
+				<a class="button button-primary responsive-addons responsive-buy-premium" href="https://www.cyberchimps.com/responsive-pricing/"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
 
 				<# } #>
 				<button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
