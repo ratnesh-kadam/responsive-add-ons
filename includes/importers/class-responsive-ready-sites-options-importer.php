@@ -311,7 +311,7 @@ class Responsive_Ready_Sites_Options_Importer {
 
 		$menu_locations = array();
 
-		if ( isset( $cats ) ) {
+		if ( isset( $cats ) && is_array( $cats ) ) {
 
 			foreach ( $cats as $key => $cat ) {
 
