@@ -2,8 +2,8 @@
 /*
 Plugin Name: Responsive Add Ons
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
-Description: Added functionality for the responsive theme
-Version: 2.0.4
+Description: Import Responsive Ready Sites that help you launch your website quickly. Just import, update & hit the launch button.
+Version: 2.0.5
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
@@ -54,14 +54,12 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 			add_action('admin_notices', array( &$this, 'add_theme_installation_notice'), 1);
             add_action( 'wp_ajax_responsive-ready-sites-activate-theme', array( $this, 'activate_theme' ) );
 			add_action( 'after_setup_theme', array( &$this, 'after_setup_theme' ) );
-			add_action( 'admin_menu', array( &$this, 'add_menu' ) );
 			add_action( 'wp_head', array( &$this, 'responsive_head' ) );
 			add_action( 'plugins_loaded', array( &$this, 'responsive_addons_translations' ) );
 			$plugin = plugin_basename( __FILE__ );
 			add_filter( "plugin_action_links_$plugin", array( &$this, 'plugin_settings_link' ) );
 
 			// Responsive Ready Site Importer Menu
-            //add_action('admin_menu', array( &$this, 'add_responsive_ready_sites_menu' ) );
             add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
 
             add_action('admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_styles' ) );
@@ -79,11 +77,19 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             //Check if Responsive Addons pro plugin is active
             add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed') );
-            
+
+            //Check if Responsive Addons pro license is active
+            add_action('wp_ajax_check-responsive-add-ons-pro-license-active', array( $this, 'is_responsive_pro_license_is_active'));
+
+            //Responsive Addons Page
+            add_action( 'admin_menu', array( $this, 'responsive_addons_admin_page' ), 100 );
+
             $this->options        = get_option( 'responsive_theme_options' );
 			$this->plugin_options = get_option( 'responsive_addons_options' );
 
 			$this->load_responsive_sites_importer();
+
+			add_action( 'responsive_addons_importer_page', array($this, 'menu_callback'));
 
             self::set_api_url();
 		}
@@ -292,31 +298,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 				array( &$this, 'responsive_addons_sanitize' )
 			);
 
-		}
-
-		/**
-		 * Add the menu
-		 */
-		public function add_menu() {
-			// Hides Menu options if the current theme is responsive
-
-            add_menu_page(
-					__( 'Responsive Add-Ons', 'responsive-addons' ),
-					__( 'Responsive Add-Ons', 'responsive-addons' ),
-					'manage_options',
-					'responsive-blocks-ready-sites',
-					array( &$this, 'menu_callback' ),
-                    'dashicons-admin-generic'
-				);
-
-            add_submenu_page(
-                'responsive-blocks-ready-sites',
-                esc_html__( 'Responsive Add-Ons', 'responsive-addons' ),
-                esc_html__( 'Ready Websites', 'responsive-addons' ),
-                'manage_options',
-                'responsive-blocks-ready-sites',
-                array( &$this, 'menu_callback' )
-            );
 		}
 
         function responsive_blocks_getting_started_page() {
@@ -551,11 +532,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 * @return mixed
 		 */
 		public function plugin_settings_link( $links ) {
-			if ( $this->is_responsive() ) {
-				$settings_link = '<a href="themes.php?page=theme_options">' . __( 'Settings', 'responsive-addons' ) . '</a>';
-			} else {
-				$settings_link = '<a href="options-general.php?page=responsive_addons">' . __( 'Settings', 'responsive-addons' ) . '</a>';
-			}
+			$settings_link = '<a href="themes.php?page=responsive-add-ons">' . __( 'Settings', 'responsive-addons' ) . '</a>';
 			array_unshift( $links, $settings_link );
 
 			return $links;
@@ -617,57 +594,57 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             );
             wp_localize_script( 'install-responsive-theme', 'ResponsiveInstallThemeVars', $data );
 
-            if( 'toplevel_page_responsive-blocks-ready-sites' !== $hook ){
-                return;
+            if( 'appearance_page_responsive-add-ons' === $hook && empty($_GET['action'] ) ) {
+
+                wp_enqueue_script('responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array('jquery'), '2.0.0', true);
+
+                wp_enqueue_script('responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array('jquery', 'responsive-ready-sites-fetch'), '2.0.0', true);
+
+                wp_enqueue_script('responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-admin.js', array('jquery', 'wp-util', 'updates'), '2.0.0', true);
+
+                wp_enqueue_script('render-responsive-ready-sites', RESPONSIVE_ADDONS_URI . 'admin/js/render-responsive-ready-sites.js', array('wp-util', 'responsive-ready-sites-api', 'jquery'), '2.0.0', true);
+
+                $data = apply_filters(
+                    'responsive_sites_localize_vars',
+                    array(
+                        'debug' => ((defined('WP_DEBUG') && WP_DEBUG) || isset($_GET['debug'])) ? true : false, //phpcs:ignore
+                        'ajaxurl' => esc_url(admin_url('admin-ajax.php')),
+                        'siteURL' => site_url(),
+                        '_ajax_nonce' => wp_create_nonce('responsive-addons'),
+                        'XMLReaderDisabled' => !class_exists('XMLReader') ? true : false,
+                        'required_plugins' => array(),
+                        'ApiURL' => self::$api_url,
+                    )
+                );
+
+                wp_localize_script('responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data);
+
+                $data = apply_filters(
+                    'responsive_sites_localize_vars',
+                    array(
+                        'ApiURL' => self::$api_url,
+                    )
+                );
+
+                // Use this for premium demos.
+                $request_params = apply_filters(
+                    'responsive_sites_api_params',
+                    array(
+                        'site_url' => '',
+                    )
+                );
+
+                wp_localize_script('responsive-ready-sites-api', 'responsiveSitesApi', $data);
+                $data = apply_filters(
+                    'responsive_sites_render_localize_vars',
+                    array(
+                        'sites' => $request_params,
+                        'settings' => array(),
+                    )
+                );
+
+                wp_localize_script('render-responsive-ready-sites', 'responsiveSitesRender', $data);
             }
-            wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '2.0.0', true );
-
-            wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '2.0.0', true );
-
-            wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI.'/admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '2.0.0', true );
-
-            wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI. 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '2.0.0', true );
-
-            $data = apply_filters(
-                'responsive_sites_localize_vars',
-                array(
-                    'debug'             => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false, //phpcs:ignore
-                    'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
-                    'siteURL'           => site_url(),
-                    '_ajax_nonce'       => wp_create_nonce( 'responsive-addons' ),
-                    'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
-                    'required_plugins'   => array(),
-                    'ApiURL'  => self::$api_url,
-                )
-            );
-
-            wp_localize_script( 'responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data );
-
-            $data = apply_filters(
-                'responsive_sites_localize_vars',
-                array(
-                    'ApiURL'  => self::$api_url,
-                )
-            );
-
-            // Use this for premium demos.
-            $request_params = apply_filters(
-                'responsive_sites_api_params',
-                array(
-                    'site_url'     => '',
-                )
-            );
-
-            wp_localize_script( 'responsive-ready-sites-api', 'responsiveSitesApi', $data );
-            $data = apply_filters(
-                'responsive_sites_render_localize_vars',
-                array(
-                    'sites'                => $request_params,
-                    'settings'             => array(),
-                )
-            );
-
-            wp_localize_script( 'render-responsive-ready-sites', 'responsiveSitesRender', $data );
         }
 
         /**
@@ -834,6 +811,103 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 wp_send_json_error();
             }
         }
+
+        /**
+         * Check if Responsive Addons Pro License is Active.
+         */
+        public function is_responsive_pro_license_is_active() {
+            global $wcam_lib;
+            if( is_null( $wcam_lib ) ){
+                wp_send_json_error();
+            }
+            $license_status = $wcam_lib->license_key_status();
+
+            if ( ! empty( $license_status[ 'data' ][ 'activated' ] ) && $license_status[ 'data' ][ 'activated' ] ) {
+                wp_send_json_success();
+            } else {
+                wp_send_json_error();
+            }
+        }
+
+        /**
+         * Adding the theme menu page
+         */
+        public function responsive_addons_admin_page() {
+
+            if(  $this->is_responsive() ){
+                $menu_title = 'Add Ons';
+            } else {
+                $menu_title = 'Responsive Add Ons';
+            }
+
+            add_theme_page(
+                'Responsive Add Ons',
+                $menu_title,
+                'administrator',
+                'responsive-add-ons',
+                array( $this, 'responsive_add_ons')
+            );
+        }
+
+        /**
+         * Responsive Addons Admin Page
+         */
+        public function responsive_add_ons() {
+
+            $responsive_addon_dir = plugin_dir_path( __FILE__ );
+            $responsive_addons_go_pro_screen = ( isset( $_GET['action'] ) && 'go_pro' === $_GET['action'] ) ? true : false; //phpcs:ignore
+
+            $responsive_addon_license_screen = ( isset( $_GET['action'] ) && 'license' === $_GET['action'] ) ? true : false; //phpcs:ignore
+            $responsive_addon_pro_support_screen = ( isset( $_GET['action'] ) && 'pro_support' === $_GET['action'] ) ? true : false; //phpcs:ignore?>
+            <div class="wrap">
+                <h1><?php esc_html_e( 'Responsive Options' ); ?></h1>
+                <h2 class="nav-tab-wrapper">
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=responsive-add-ons' ) ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Ready Site Importer' ); ?></a>
+                    <?php
+                    if ( !$this->is_responsive_addons_pro_is_active( ) ) { ?>
+
+                        <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'go_pro' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab<?php if ( $responsive_addons_go_pro_screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Go Pro' ); ?></a>
+
+                    <?php } ?>
+                        <a href="<?php echo esc_url( add_query_arg( array( 'action' => 'pro_support' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab<?php if ( $responsive_addon_pro_support_screen ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Support' ); ?></a>
+                </h2>
+                    <?php
+                    if ( $responsive_addons_go_pro_screen ) {
+
+                        require_once $responsive_addon_dir.'admin/templates/responsive-addons-go-pro.php';
+
+                    } elseif ( $responsive_addon_license_screen ) {
+
+                        do_action('responsive_addons_pro_license_page');
+                    } elseif ( $responsive_addon_pro_support_screen ) {
+
+                        require_once $responsive_addon_dir.'admin/templates/responsive-addons-support.php';
+                    } else {
+
+                        do_action('responsive_addons_importer_page');
+                    }
+                    ?>
+            </div>
+
+            <?php
+        }
+
+        /**
+         * Check if Responsive Addons Pro is installed.
+         */
+        public function is_responsive_addons_pro_is_active() {
+            $responsive_pro_slug = 'responsive-addons-pro/responsive-addons-pro.php';
+            if ( ! function_exists( 'get_plugins' ) ) {
+                require_once ABSPATH . 'wp-admin/includes/plugin.php';
+            }
+
+            if ( is_plugin_active( $responsive_pro_slug ) ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
 	}
 }
 
