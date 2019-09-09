@@ -10,7 +10,7 @@
 	<div id="responsive-addons-go-pro" class="tab-content active">
 		<div class="column-4">
 			<h3><?php esc_html_e( 'Get Responsive Add Ons Pro' ); ?></h3>
-			<p><?php esc_html_e( 'Upgrade to Responsive Add Ons Pro and get premium Ready sites, more customizer options & premium support.' ); ?></p>
+			<p><?php esc_html_e( 'Upgrade to Responsive Add Ons Pro and get pro Ready sites, more customizer options & premium support.' ); ?></p>
 			<a href="https://cyberchimps.com/responsive-pricing/" class='button button-primary'><?php esc_html_e( 'Upgrade To Pro' ); ?></a>
 		</div>
 		<div class="column-8 features">
@@ -64,7 +64,7 @@
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Premium Ready Sites</td>
+						<td class="feature">Pro Ready Sites</td>
 						<td class="featureno">-</td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
