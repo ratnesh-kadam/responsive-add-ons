@@ -19,13 +19,13 @@
 			<?php if ( is_resp_pro_license_is_active() ) { ?>
 				<a href="https://cyberchimps.com/my-account/support/" target="_blank"><?php esc_html_e( 'Request Support' ); ?></a>
 			<?php } else { ?>
-				<a href="https://cyberchimps.com/responsive-pricing/" target="_blank"><?php esc_html_e( 'Upgrade To Responsive Pro' ); ?></a>
+				<a href="https://cyberchimps.com/responsive-pricing/?utm_source=responsive-add-ons&utm_medium=upgrade-to-responsive-pro&utm_campaign=upgrade-to-responsive-pro" target="_blank"><?php esc_html_e( 'Upgrade To Responsive Pro' ); ?></a>
 			<?php } ?>
 		</div>
 		<div class="column-4">
 			<h3><?php esc_html_e( 'Documentation' ); ?></h3>
 			<p><?php esc_html_e( 'Free Responsive user? Use the WordPress.org support forums to get help from our experts and other Responsive users.' ); ?></p>
-			<a href="https://docs.cyberchimps.com/responsive/" target="_blank"><?php esc_html_e( 'See Documentation' ); ?></a>
+			<a href="https://docs.cyberchimps.com/responsive/?utm_source=responsive-add-ons&utm_medium=see-documentation&utm_campaign=responsive-documentation" target="_blank"><?php esc_html_e( 'See Documentation' ); ?></a>
 		</div>
 	</div>
 </div>
