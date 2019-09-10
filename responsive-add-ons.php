@@ -104,11 +104,28 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired()) {
                 return;
             }
-            $class = 'responsive-notice notice notice-error is-dismissible';
+            $class = 'responsive-notice notice notice-error';
 
             $theme_status = 'responsive-sites-theme-' . $this->get_theme_status();
-            printf( '<div id="responsive-theme-activation" class="%2$s"><p>Responsive Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="responsive">Install & Activate Now</a></p></div>', 'Responsive Addons', esc_attr( $class ), $theme_status );
 
+            $image_path           =  RESPONSIVE_ADDONS_URI . 'admin/images/responsive-thumbnail.jpg';
+            ?>
+            <div id="responsive-theme-activation" class="<?php echo $class; ?>">
+                <div class="responsive-addons-message-inner">
+                    <div class="responsive-addons-message-icon">
+                        <div class="">
+                            <img src="<?php echo $image_path; ?>" alt="Responsive Addons">
+                        </div>
+                    </div>
+                    <div class="responsive-addons-message-content">
+                        <p><?php echo esc_html( 'Responsive theme needs to be active to use the Responsive Addons plugin.' ); ?> </p>
+                        <p class="responsive-addons-message-actions">
+                            <a href="#" class="<?php echo $theme_status; ?> button button-primary" data-theme-slug="responsive">Install & Activate Now</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <?php
         }
 
         /**
