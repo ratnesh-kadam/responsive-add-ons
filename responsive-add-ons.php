@@ -75,6 +75,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //get Active Site
             add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
 
+            add_action( 'wp_ajax_responsive-ready-sites-get-sites-data-transient', array( $this, 'get_sites_data_from_transient') );
+
             //Check if Responsive Addons pro plugin is active
             add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed') );
 
@@ -91,6 +93,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			add_action( 'responsive_addons_importer_page', array($this, 'menu_callback'));
 
+			add_action( 'wp_ajax_responsive-set-sites-data-transient', array( $this, 'set_sites_data_transient' ) );
+
             self::set_api_url();
 		}
 
@@ -101,9 +105,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             $theme = wp_get_theme();
 
-            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired()) {
+            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired() || is_plugin_active( 'responsive-addons-pro/responsive-addons-pro.php' )) {
                 return;
             }
+
             $class = 'responsive-notice notice notice-error';
 
             $theme_status = 'responsive-sites-theme-' . $this->get_theme_status();
@@ -640,6 +645,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     'responsive_sites_localize_vars',
                     array(
                         'ApiURL' => self::$api_url,
+                        'ajaxurl'    => esc_url( admin_url( 'admin-ajax.php' ) ),
                     )
                 );
 
@@ -699,6 +705,37 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                             'active_site'   => $current_active_site
                     )
             );
+        }
+
+        /**
+         * Get Sites data from Transient
+         */
+        public function get_sites_data_from_transient() {
+            $sites_data = get_transient( 'responsive_sites_data' );
+
+            if(false === $sites_data) {
+                wp_send_json_success(
+                        array()
+                );
+            } else {
+                wp_send_json_success(
+                    array(
+                        'sites_data'   => $sites_data,
+                    )
+                );
+            }
+        }
+
+        /**
+         * Set sites data into transient
+         */
+        public function set_sites_data_transient() {
+
+            $sites_data             = ( isset( $_POST['responsive_sites_data'] ) ) ? $_POST['responsive_sites_data'] : array();
+
+            set_transient('responsive_sites_data', $sites_data, 60*60*24 );
+            // Send response.
+            wp_send_json_success();
         }
 
         /**
