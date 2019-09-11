@@ -24,7 +24,6 @@
 		init: function()
 		{
 			this._bind();
-			this._getSitesDataTransient();
 			this._getActiveSite();
 		},
 
@@ -63,27 +62,23 @@
 				trigger = 'responsive-api-post-loaded';
 			}
 
-			if ( typeof ResponsiveSitesRender.sites_data !== 'undefined' ) {
-				$( document ).trigger( trigger, [ResponsiveSitesRender.sites_data] );
-			} else {
-				// Add Params for API request.
-				ResponsiveSitesRender._api_params = {};
+			// Add Params for API request.
+			ResponsiveSitesRender._api_params = {};
 
-				var per_page_val = 50;
+			var per_page_val = 50;
 
-				ResponsiveSitesRender._api_params['per_page'] = per_page_val;
+			ResponsiveSitesRender._api_params['per_page'] = per_page_val;
 
-				ResponsiveSitesRender._apiAddParam_site_url();
+			ResponsiveSitesRender._apiAddParam_site_url();
 
-				// API Request.
-				var api_post = {
-					id: '',
-					slug: '?' + decodeURIComponent( $.param( ResponsiveSitesRender._api_params ) ),
-					trigger: trigger,
-				};
+			// API Request.
+			var api_post = {
+				id: '',
+				slug: '?' + decodeURIComponent( $.param( ResponsiveSitesRender._api_params ) ),
+				trigger: trigger,
+			};
 
-				ResponsiveSitesAPI._api_request( api_post );
-			}
+			ResponsiveSitesAPI._api_request( api_post );
 		},
 
 		/**
@@ -161,33 +156,6 @@
 				);
 
 		},
-
-		/**
-		 * Get Sites data stored in transient
-		 */
-		_getSitesDataTransient: function() {
-			$.ajax(
-				{
-					url  : responsiveSitesAdmin.ajaxurl,
-					async: false,
-					type : 'POST',
-					data : {
-						action : 'responsive-ready-sites-get-sites-data-transient',
-					},
-				}
-			)
-				.done(
-					function ( response ) {
-						if ( response.success ) {
-							if (typeof response.data.sites_data !== 'undefined') {
-								ResponsiveSitesRender.sites_data = response.data.sites_data;
-							}
-						}
-					}
-				);
-
-		}
-
 	};
 
 	/**
