@@ -273,13 +273,14 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .demo-type.pro{
 	position: absolute;
-	right: -0.5em;
-	top: -0.5em;
-	background: #0073aa;
+	right: 0;
+	top: 0;
+	background: #ff793f;
 	z-index: 1;
 	color: #fff;
 	padding: 0.5em 1em;
 	text-transform: uppercase;
+	box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
 }
 .demo-type.free{
 	display:none;
@@ -380,4 +381,32 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .spinner-wrap .spinner.is-active{
 	float:none;
+}
+#responsive-theme-activation {
+	border: none;
+	padding: 20px;
+}
+#responsive-theme-activation .responsive-addons-message-inner {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+}
+#responsive-theme-activation .responsive-addons-message-icon {
+	font-size: 20px;
+}
+#responsive-theme-activation .responsive-addons-message-content {
+	padding: 0 20px;
+}
+#responsive-theme-activation .responsive-addons-message-content .responsive-addons-message-actions {
+	margin-top: 10px;
+}
+#responsive-theme-activation .responsive-addons-message-content p{
+	padding: 0px;
+	margin: 0px;
+}
+@media screen and (max-width: 768px ) {
+	#responsive-theme-activation .responsive-addons-message-inner {
+		display: block;
+		text-align: center;
+	}
 }

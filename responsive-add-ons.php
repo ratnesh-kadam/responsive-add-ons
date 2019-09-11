@@ -75,6 +75,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //get Active Site
             add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
 
+            add_action( 'wp_ajax_responsive-ready-sites-get-sites-data-transient', array( $this, 'get_sites_data_from_transient') );
+
             //Check if Responsive Addons pro plugin is active
             add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed') );
 
@@ -91,6 +93,8 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			add_action( 'responsive_addons_importer_page', array($this, 'menu_callback'));
 
+			add_action( 'wp_ajax_responsive-set-sites-data-transient', array( $this, 'set_sites_data_transient' ) );
+
             self::set_api_url();
 		}
 
@@ -101,14 +105,32 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             $theme = wp_get_theme();
 
-            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired()) {
+            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired() || is_plugin_active( 'responsive-addons-pro/responsive-addons-pro.php' )) {
                 return;
             }
-            $class = 'responsive-notice notice notice-error is-dismissible';
+
+            $class = 'responsive-notice notice notice-error';
 
             $theme_status = 'responsive-sites-theme-' . $this->get_theme_status();
-            printf( '<div id="responsive-theme-activation" class="%2$s"><p>Responsive Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="responsive">Install & Activate Now</a></p></div>', 'Responsive Addons', esc_attr( $class ), $theme_status );
 
+            $image_path           =  RESPONSIVE_ADDONS_URI . 'admin/images/responsive-thumbnail.jpg';
+            ?>
+            <div id="responsive-theme-activation" class="<?php echo $class; ?>">
+                <div class="responsive-addons-message-inner">
+                    <div class="responsive-addons-message-icon">
+                        <div class="">
+                            <img src="<?php echo $image_path; ?>" alt="Responsive Addons">
+                        </div>
+                    </div>
+                    <div class="responsive-addons-message-content">
+                        <p><?php echo esc_html( 'Responsive theme needs to be active to use the Responsive Addons plugin.' ); ?> </p>
+                        <p class="responsive-addons-message-actions">
+                            <a href="#" class="<?php echo $theme_status; ?> button button-primary" data-theme-slug="responsive">Install & Activate Now</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <?php
         }
 
         /**
@@ -623,6 +645,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     'responsive_sites_localize_vars',
                     array(
                         'ApiURL' => self::$api_url,
+                        'ajaxurl'    => esc_url( admin_url( 'admin-ajax.php' ) ),
                     )
                 );
 
@@ -682,6 +705,37 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                             'active_site'   => $current_active_site
                     )
             );
+        }
+
+        /**
+         * Get Sites data from Transient
+         */
+        public function get_sites_data_from_transient() {
+            $sites_data = get_transient( 'responsive_sites_data' );
+
+            if(false === $sites_data) {
+                wp_send_json_success(
+                        array()
+                );
+            } else {
+                wp_send_json_success(
+                    array(
+                        'sites_data'   => $sites_data,
+                    )
+                );
+            }
+        }
+
+        /**
+         * Set sites data into transient
+         */
+        public function set_sites_data_transient() {
+
+            $sites_data             = ( isset( $_POST['responsive_sites_data'] ) ) ? $_POST['responsive_sites_data'] : array();
+
+            set_transient('responsive_sites_data', $sites_data, 60*60*24 );
+            // Send response.
+            wp_send_json_success();
         }
 
         /**

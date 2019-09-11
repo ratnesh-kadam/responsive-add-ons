@@ -49,6 +49,19 @@
 								ResponsiveSitesAPI._stored_data[ args.id ] = $.merge( ResponsiveSitesAPI._stored_data[ data.args.id ], data.items );
 							}
 
+							$.ajax(
+							{
+								url: responsiveSitesApi.ajaxurl,
+								async: false,
+								type : 'POST',
+								dataType: 'json',
+								data: {
+									'action': 'responsive-set-sites-data-transient',
+									'responsive_sites_data': data,
+								}
+								}
+							);
+
 							if ( 'undefined' !== typeof args.trigger && '' !== args.trigger ) {
 								$( document ).trigger( args.trigger, [data] );
 							}
