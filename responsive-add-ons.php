@@ -848,6 +848,23 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         }
 
         /**
+         * Check if Responsive Addons Pro License is Active.
+         */
+        public function responsive_pro_license_is_active() {
+            global $wcam_lib;
+            if( is_null( $wcam_lib ) ){
+                return false;
+            }
+            $license_status = $wcam_lib->license_key_status();
+
+            if ( ! empty( $license_status[ 'data' ][ 'activated' ] ) && $license_status[ 'data' ][ 'activated' ] ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        /**
          * Adding the theme menu page
          */
         public function responsive_addons_admin_page() {
@@ -872,13 +889,18 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function responsive_add_ons() {
 
+            if( $this->is_responsive_addons_pro_is_active() && !$this->responsive_pro_license_is_active() ){
+                wp_redirect( admin_url( '/options-general.php?page=wc_am_client_responsive_addons_pro_dashboard' ) );
+                exit;
+            }
+
             $responsive_addon_dir = plugin_dir_path( __FILE__ );
             $responsive_addons_go_pro_screen = ( isset( $_GET['action'] ) && 'go_pro' === $_GET['action'] ) ? true : false; //phpcs:ignore
 
             $responsive_addon_license_screen = ( isset( $_GET['action'] ) && 'license' === $_GET['action'] ) ? true : false; //phpcs:ignore
             $responsive_addon_pro_support_screen = ( isset( $_GET['action'] ) && 'pro_support' === $_GET['action'] ) ? true : false; //phpcs:ignore?>
             <div class="wrap">
-                <h1><?php esc_html_e( 'Responsive Options' ); ?></h1>
+                <h1><?php esc_html_e( 'Responsive Add Ons' ); ?></h1>
                 <h2 class="nav-tab-wrapper">
                     <a href="<?php echo esc_url( admin_url( 'admin.php?page=responsive-add-ons' ) ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Ready Site Importer' ); ?></a>
                     <?php
