@@ -37,7 +37,9 @@
 		_bind: function()
 		{
 			$( document ).on( 'responsive-api-post-loaded'           , ResponsiveSitesRender._reinitGrid );
+			$( document ).on('responsive-api-post-loaded-on-scroll' , ResponsiveSitesRender._reinitGridScrolled );
 			$( document ).on( 'responsive-get-active-demo-site-done' , ResponsiveSitesRender._loadFirstGrid );
+			$( document ).on( 'scroll'                          , ResponsiveSitesRender._scroll );
 		},
 
 		_apiAddParam_site_url: function() {
@@ -65,7 +67,7 @@
 			// Add Params for API request.
 			ResponsiveSitesRender._api_params = {};
 
-			var per_page_val = 50;
+			var per_page_val = 10;
 
 			ResponsiveSitesRender._api_params['per_page'] = per_page_val;
 
@@ -156,6 +158,49 @@
 				);
 
 		},
+
+		/**
+		 * On Scroll
+		 */
+		_scroll: function(event) {
+
+				ajaxLoading = false;
+
+				if ( ajaxLoading == false) {
+
+					jQuery('body').data('scrolling', true);
+
+					/**
+					 * @see _reinitGridScrolled() which called in trigger 'responsive-api-post-loaded-on-scroll'
+					 */
+					ResponsiveSitesRender._showSites( false, 'responsive-api-post-loaded-on-scroll' );
+				}
+		},
+
+		/**
+		 * Append sites on scroll.
+		 *
+		 * @param  {object} event Object.
+		 * @param  {object} data  API response data.
+		 */
+		_reinitGridScrolled: function( event, data ) {
+
+			var template = wp.template('responsive-sites-list');
+
+			if( data.items.length > 0 ) {
+
+				$( 'body' ).removeClass( 'loading-content' );
+
+				setTimeout(function() {
+					jQuery( '#responsive-sites' ).append(template( data ));
+
+				}, 800);
+			} else {
+				$( 'body' ).addClass( 'listed-all-sites' );
+			}
+
+		},
+
 	};
 
 	/**
