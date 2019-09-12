@@ -256,7 +256,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @since  1.0.0
          */
         public static function set_api_url() {
-            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites/' );
+            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/' );
         }
 
 		/**
@@ -649,6 +649,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     'responsive_sites_api_params',
                     array(
                         'site_url' => '',
+                        'per_page' => 6,
                     )
                 );
 

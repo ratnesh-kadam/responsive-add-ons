@@ -10,7 +10,7 @@
 
 		_api_url      : responsiveSitesApi.ApiURL,
 		_stored_data  : {
-			'responsive-ready-sites' : [],
+			'cyberchimps-sites' : [],
 		},
 
 		/**
@@ -36,6 +36,7 @@
 								})
 							)
 					} else {
+						$( document ).trigger( 'cyberchimps-sites-api-request-error' );
 						return response.json();
                 }
 				}

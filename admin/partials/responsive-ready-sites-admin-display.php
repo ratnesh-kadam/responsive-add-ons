@@ -15,10 +15,7 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div id="responsive-ready-site-preview"></div>
 <div id="responsive-ready-sites-import-options"></div>
-<div class="spinner-wrap">
-	<span class="spinner is-active"></span>
-</div>
-<div id="responsive-ready-sites-admin-page" style="display: none;">
+<div id="responsive-ready-sites-admin-page">
 	<div class="responsive-sites-header">
 		<span class="ready-site-list-title">Responsive Ready Websites</span>
 		<p class="ready-site-list-intro">Build your Responsive website in 3 simple steps - import a ready website, change content and launch.</p>
@@ -26,6 +23,10 @@
 	<div class="theme-browser rendered">
 		<div id="responsive-sites" class="themes wp-clearfix"></div>
 	</div>
+	<div class="spinner-wrap">
+		<span class="spinner"></span>
+	</div>
+
 </div>
 
 <?php
@@ -39,7 +40,8 @@
 	<# if ( data.items.length ) { #>
 	<# for ( key in data.items ) { #>
 
-	<# if (data.items[ key ].active ) { #>
+	<# console.log(data.active_site); #>
+	<# if (data.items[ key ].slug == "food" ) { #>
 		<div class="theme active ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name" data-demo-id="{{{ data.items[ key ].id }}}"
 		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 		 data-demo-slug="{{{  data.items[ key ].slug }}}"
@@ -91,16 +93,21 @@
 			</span>
 	</p>
 	<# } #>
-			<div class="theme inactive ra-site-single responsive-sites-suggestions">
-				<div class="inner">
-					<p>
-						<?php
-						/* translators: %1$s External Link */
-						printf( __( 'Can\'t find a Responsive Ready Site that suits your purpose ?<br><a target="_blank" href="%1$s">Suggest A Site</a>', 'responsive-addons' ), esc_url( 'mailto:support@cyberchimps.com?Subject=New%20Site%20Suggestion' ) );
-						?>
-					</p>
-				</div>
-			</div>
+</script>
+<?php
+/** Site suggestion block */
+?>
+<script type="text/template" id="tmpl-responsive-sites-suggestions">
+	<div class="theme inactive ra-site-single responsive-sites-suggestions">
+		<div class="inner">
+			<p>
+				<?php
+				/* translators: %1$s External Link */
+				printf( __( 'Can\'t find a Responsive Ready Site that suits your purpose ?<br><a target="_blank" href="%1$s">Suggest A Site</a>', 'responsive-addons' ), esc_url( 'mailto:support@cyberchimps.com?Subject=New%20Site%20Suggestion' ) );
+				?>
+			</p>
+		</div>
+	</div>
 </script>
 <?php
 /** Single Demo Preview */

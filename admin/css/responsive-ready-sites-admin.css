@@ -377,7 +377,6 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .spinner-wrap{
 	text-align: center;
-	margin-top: 20%;
 }
 .spinner-wrap .spinner.is-active{
 	float:none;
