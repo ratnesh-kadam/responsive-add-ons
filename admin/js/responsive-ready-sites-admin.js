@@ -176,6 +176,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		init: function()
 		{
+			this._resetPagedCount();
 			this._bind();
 		},
 
@@ -259,6 +260,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					}
 				);
+		},
+
+		/**
+		 * Reset Page Count.
+		 */
+		_resetPagedCount: function() {
+
+			$( 'body' ).addClass( 'loading-content' );
+			$( 'body' ).attr( 'data-responsive-demo-last-request', '1' );
+			$( 'body' ).attr( 'data-responsive-demo-paged', '1' );
+			$( 'body' ).attr( 'data-scrolling', false );
+
 		},
 
 		/**
@@ -936,7 +949,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var site_id = $( '.responsive-ready-sites-advanced-options-wrap' ).find( '.demo_site_id' ).val();
 
-			var apiURL = responsiveSitesAdmin.ApiURL + site_id;
+			var apiURL = responsiveSitesAdmin.ApiURL + 'cyberchimps-sites/' + site_id;
 
 			$.ajax(
 				{

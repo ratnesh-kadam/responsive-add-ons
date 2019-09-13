@@ -91,6 +91,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
 			add_action( 'responsive_addons_importer_page', array($this, 'menu_callback'));
 
+            //Add rating links to the Responsive Addons Admin Page
+            add_filter( 'admin_footer_text', array( $this, 'responsive_addons_admin_rate_us' ) );
+
             self::set_api_url();
 		}
 
@@ -256,7 +259,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @since  1.0.0
          */
         public static function set_api_url() {
-            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites/' );
+            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/' );
         }
 
 		/**
@@ -649,6 +652,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     'responsive_sites_api_params',
                     array(
                         'site_url' => '',
+                        'per_page' => 6,
                     )
                 );
 
@@ -945,6 +949,33 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 return true;
             } else {
                 return false;
+            }
+        }
+
+        /**
+         * Add rating links to the Responsive Addons Admin Page
+         *
+         * @param string $footer_text The existing footer text
+         *
+         * @return string
+         * @since 2.0.6
+         * @global string $typenow
+         *
+         */
+        function responsive_addons_admin_rate_us( $footer_text ) {
+            $page        = isset( $_GET['page'] ) ? $_GET['page'] : '';
+            $show_footer = array( 'responsive-add-ons' );
+
+            if ( in_array( $page, $show_footer ) ) {
+                $rate_text = sprintf(
+                /* translators: %s: Link to 5 star rating */
+                    __( 'If you like the <strong>Responsive Add Ons</strong> plugin please leave us a %s rating. It takes a minute and helps a lot. Thanks in advance!', 'responsive-add-ons' ),
+                    '<a href="https://wordpress.org/support/view/plugin-reviews/responsive-add-ons?filter=5#postform" target="_blank" class="responsive-rating-link" style="text-decoration:none;" data-rated="' . esc_attr__( 'Thanks :)', 'responsive-add-ons' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
+                );
+
+                return $rate_text;
+            } else {
+                return $footer_text;
             }
         }
 
