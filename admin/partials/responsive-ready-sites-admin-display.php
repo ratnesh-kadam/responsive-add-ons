@@ -38,20 +38,24 @@
 <script type="text/template" id="tmpl-responsive-sites-list">
 
 	<# if ( data.items.length ) { #>
+
+	<# if ( data.active_site_data !== "" ) {#>
+	<div class="theme active ra-site-single" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name">
+		 <div class="inner">
+			<span class="site-preview">
+				<div class="theme-screenshot" style="background-image: url('{{ data.active_site_data.featured_image_url }}');"></div>
+			</span>
+			<div class="theme-id-container">
+				<h3 class="theme-name" id="responsive-theme-name">Active : {{{ data.active_site_data.title }}}</h3>
+			</div>
+		</div>
+	</div>
+	<# } #>
 	<# for ( key in data.items ) { #>
 
-	<# console.log(data.active_site); #>
-	<# if (data.items[ key ].slug == "food" ) { #>
-		<div class="theme active ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name" data-demo-id="{{{ data.items[ key ].id }}}"
-		 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
-		 data-demo-slug="{{{  data.items[ key ].slug }}}"
-		 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
-			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
-		 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
-		 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
-		 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
-
-		<# } else { #>
+	<# if (data.items[ key ].slug === data.active_site ) { #>
+	<# continue; #>
+	<# } #>
 
 		<div class="theme inactive ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 			 data-demo-id="{{{ data.items[ key ].id }}}"
@@ -62,7 +66,6 @@
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
 			 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
-			<# } #>
 			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data.items[ key ][ 'site_options_data' ]) }}">
 		<div class="inner">
 					<span class="site-preview" data-href="{{ data.items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
@@ -70,14 +73,10 @@
 					</span>
 			<span class="demo-type {{{ data.items[ key ].demo_type }}}">{{{ data.items[ key ].demo_type }}}</span>
 			<div class="theme-id-container">
-				<# if (data.items[ key ].active ) { #>
-				<h3 class="theme-name" id="responsive-theme-name">Active : {{{ data.items[ key ].title.rendered }}}</h3>
-				<# } else { #>
 				<h3 class="theme-name" id="responsive-theme-name">{{{ data.items[ key ].title.rendered }}}</h3>
 				<div class="theme-actions">
 					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'responsive-addons' ); ?></button>
 				</div>
-				<# } #>
 			</div>
 		</div>
 	</div>

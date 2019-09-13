@@ -159,7 +159,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		current_site: [],
 		current_screen: '',
-		active_site: '',
+		active_site_slug: '',
+		active_site_title: '',
+		active_site_featured_image_url: '',
 		widgets_data: '',
 		site_options_data: '',
 
@@ -237,7 +239,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 					dataType: 'json',
 					data : {
 						action : 'responsive-ready-sites-import-end',
-						slug: ResponsiveSitesAdmin.active_site,
+						slug: ResponsiveSitesAdmin.active_site_slug,
+						title: ResponsiveSitesAdmin.active_site_title,
+						featured_image_url: ResponsiveSitesAdmin.active_site_featured_image_url,
 					}
 				}
 			)
@@ -1008,14 +1012,16 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 						} else {
 
-							ResponsiveSitesAdmin.xml_path             = encodeURI( demo_data.data['xml_path'] ) || '';
-							ResponsiveSitesAdmin.wpforms_path         = encodeURI( demo_data.data['wpforms_path'] ) || '';
-							ResponsiveSitesAdmin.active_site		  = demo_data.data['slug'] || '';
-							ResponsiveSitesAdmin.site_customizer_data = JSON.stringify( demo_data.data['site_customizer_data'] ) || '';
-							ResponsiveSitesAdmin.required_plugins     = JSON.stringify( demo_data.data['required_plugins'] ) || '';
-							ResponsiveSitesAdmin.required_pro_plugins = JSON.stringify( demo_data.data['required_pro_plugins'] || '' );
-							ResponsiveSitesAdmin.widgets_data         = JSON.stringify( demo_data.data['site_widgets_data'] ) || '';
-							ResponsiveSitesAdmin.site_options_data    = JSON.stringify( demo_data.data['site_options_data'] ) || '';
+							ResponsiveSitesAdmin.xml_path                       = encodeURI( demo_data.data['xml_path'] ) || '';
+							ResponsiveSitesAdmin.wpforms_path                   = encodeURI( demo_data.data['wpforms_path'] ) || '';
+							ResponsiveSitesAdmin.active_site_slug               = demo_data.data['slug'] || '';
+							ResponsiveSitesAdmin.active_site_title              = demo_data.data['title'];
+							ResponsiveSitesAdmin.active_site_featured_image_url = demo_data.data['featured_image_url'];
+							ResponsiveSitesAdmin.site_customizer_data           = JSON.stringify( demo_data.data['site_customizer_data'] ) || '';
+							ResponsiveSitesAdmin.required_plugins               = JSON.stringify( demo_data.data['required_plugins'] ) || '';
+							ResponsiveSitesAdmin.required_pro_plugins           = JSON.stringify( demo_data.data['required_pro_plugins'] || '' );
+							ResponsiveSitesAdmin.widgets_data                   = JSON.stringify( demo_data.data['site_widgets_data'] ) || '';
+							ResponsiveSitesAdmin.site_options_data              = JSON.stringify( demo_data.data['site_options_data'] ) || '';
 
 							$( document ).trigger( 'responsive-ready-sites-import-set-site-data-done' );
 						}

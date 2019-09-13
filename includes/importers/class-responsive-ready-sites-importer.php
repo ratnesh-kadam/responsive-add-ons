@@ -454,8 +454,17 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 */
 		public function import_end() {
 
-			$current_active_site = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
-			update_option( 'responsive_current_active_site', $current_active_site );
+			$current_active_site_slug               = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
+			$current_active_site_title              = isset( $_REQUEST['title'] ) ? $_REQUEST['title'] : '';
+			$current_active_site_featured_image_url = isset( $_REQUEST['featured_image_url'] ) ? $_REQUEST['featured_image_url'] : '';
+
+			$current_active_site_data = array(
+				'slug'               => $current_active_site_slug,
+				'title'              => $current_active_site_title,
+				'featured_image_url' => $current_active_site_featured_image_url,
+			);
+
+			update_option( 'responsive_current_active_site', $current_active_site_data );
 
 			do_action( 'responsive_ready_sites_import_complete' );
 		}
@@ -524,6 +533,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$remote_args['site_widgets_data']    = json_decode( $data['site_widgets_data'] );
 				$remote_args['site_options_data']    = $data['site_options_data'];
 				$remote_args['slug']                 = $data['slug'];
+				$remote_args['featured_image_url']   = $data['featured_image_url'];
+				$remote_args['title']                = $data['title']['rendered'];
 			}
 
 			// Merge remote demo and defaults.

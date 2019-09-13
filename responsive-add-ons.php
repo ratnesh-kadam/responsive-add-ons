@@ -72,9 +72,6 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //Dismiss admin notice
             add_action( 'wp_ajax_responsive-notice-dismiss', array(&$this, 'dismiss_notice'));
 
-            //get Active Site
-            add_action( 'wp_ajax_responsive-ready-sites-get-active-site', array( $this, 'get_active_site' ) );
-
             //Check if Responsive Addons pro plugin is active
             add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed') );
 
@@ -662,6 +659,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     array(
                         'sites' => $request_params,
                         'settings' => array(),
+                        'active_site_data' => $this->get_active_site_data(),
                     )
                 );
 
@@ -695,15 +693,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         }
 
         /**
-         * Get Active Site
+         * Get Active site data
          */
-        public function get_active_site() {
+        public function get_active_site_data() {
             $current_active_site = get_option('responsive_current_active_site');
-            wp_send_json_success(
-                    array(
-                            'active_site'   => $current_active_site
-                    )
-            );
+            return $current_active_site;
         }
 
         /**
