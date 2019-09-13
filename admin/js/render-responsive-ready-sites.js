@@ -21,11 +21,13 @@
 
 		active_site 	: '',
 
+		active_site_data: {},
+
 		init: function()
 		{
-			this._getActiveSite();
 			this._bind();
-
+			this._setActiveSite();
+			this._loadFirstGrid();
 		},
 
 		/**
@@ -107,17 +109,33 @@
 
 			var template = wp.template( 'responsive-sites-list' );
 
-			$( 'body' ).addClass( 'page-builder-selected' );
 			$( 'body' ).removeClass( 'loading-content' );
-			$( '.filter-count .count' ).text( data.items_count );
 
-			var active       = ResponsiveSitesRender.active_site;
+			if ( responsiveSitesRender.active_site_data !== "" ) {
+				jQuery( 'body' ).attr( 'data-responsive-active-site-data', JSON.stringify( responsiveSitesRender.active_site_data ) );
+				data.active_site_data = JSON.parse( jQuery( 'body' ).attr( 'data-responsive-active-site-data' ) );
+				jQuery( 'body' ).attr( 'data-responsive-active-site', ResponsiveSitesRender.active_site );
+			} else {
+				data.active_site_data = "";
+				jQuery( 'body' ).attr( 'data-responsive-active-site',"" );
+			}
+
 			data.active_site = jQuery( 'body' ).attr( 'data-responsive-active-site' );
+
+			// Reset active site data during grid initialization.
+			jQuery( 'body' ).attr( 'data-responsive-active-site-data','' );
 
 			jQuery( '#responsive-ready-sites-admin-page' ).show();
 			jQuery( '#responsive-sites' ).show().html( template( data ) );
 
-			$( '#responsive-ready-sites-admin-page' ).find( '.spinner' ).removeClass( 'is-active' );
+			var items_count = data.items.length;
+			if ( items_count <= 0 ) {
+				$( '#responsive-ready-sites-admin-page' ).find( '.spinner' ).removeClass( 'is-active' );
+				$( '.responsive-sites-suggestions' ).remove();
+
+			} else {
+				$( 'body' ).removeClass( 'listed-all-sites' );
+			}
 		},
 
 		// Returns if a value is an array.
@@ -125,28 +143,10 @@
 			return value && typeof value === 'object' && value.constructor === Array;
 		},
 
-		// Get active site.
-		_getActiveSite: function() {
-			$.ajax(
-				{
-					url  : responsiveSitesAdmin.ajaxurl,
-					async: false,
-					type : 'POST',
-					data : {
-						action : 'responsive-ready-sites-get-active-site',
-					},
-				}
-			)
-				.done(
-					function ( response ) {
-						if ( response.success ) {
-							ResponsiveSitesRender.active_site = response.data.active_site;
-							jQuery( 'body' ).attr( 'data-responsive-active-site', response.data.active_site );
-						}
-						$( document ).trigger( 'responsive-get-active-demo-site-done' );
-					}
-				);
-
+		// Set active site.
+		_setActiveSite: function() {
+			var active                        = responsiveSitesRender.active_site_data;
+			ResponsiveSitesRender.active_site = responsiveSitesRender.active_site_data.slug;
 		},
 
 		/**
@@ -158,8 +158,8 @@
 
 				var scrollDistance = jQuery( window ).scrollTop();
 
-				var responsiveSitesBottom = Math.abs( jQuery( window ).height() - jQuery( '#responsive-sites' ).offset().top - jQuery( '#responsive-ready-sites-admin-page' ).height() );
-				responsiveSitesBottom     = responsiveSitesBottom - 1;
+				var responsiveSitesBottom = Math.abs( jQuery( window ).height() - jQuery( '#responsive-ready-sites-admin-page' ).offset().top - jQuery( '#responsive-ready-sites-admin-page' ).height() );
+				responsiveSitesBottom     = responsiveSitesBottom - 100;
 				ajaxLoading               = jQuery( 'body' ).data( 'scrolling' );
 
 				if (scrollDistance > responsiveSitesBottom && ajaxLoading == false) {
@@ -184,7 +184,9 @@
 		 */
 		_reinitGridScrolled: function( event, data ) {
 
-			var template = wp.template( 'responsive-sites-list' );
+			var template          = wp.template( 'responsive-sites-list' );
+			data.active_site      = jQuery( 'body' ).attr( 'data-responsive-active-site' );
+			data.active_site_data = jQuery( 'body' ).attr( 'data-responsive-active-site-data' );
 
 			if ( data.items.length > 0 ) {
 
@@ -211,9 +213,11 @@
 			jQuery( 'body' ).attr( 'data-responsive-demo-last-request', '1' );
 			jQuery( 'body' ).attr( 'data-responsive-demo-paged', '1' );
 			jQuery( 'body' ).attr( 'data-scrolling', false );
+			jQuery( 'body' ).attr( 'data-responsive-active-site-data', '' );
 			jQuery( 'body' ).attr( 'data-responsive-active-site', '' );
 
 		},
+
 		/**
 		 * Add 'page' to api request.
 		 *
