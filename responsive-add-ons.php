@@ -91,6 +91,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             //Add rating links to the Responsive Addons Admin Page
             add_filter( 'admin_footer_text', array( $this, 'responsive_addons_admin_rate_us' ) );
 
+            add_action( 'init', array( $this, 'app_output_buffer' ) );
             self::set_api_url();
 		}
 
@@ -973,7 +974,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             }
         }
 
-	}
+        /**
+         * Output buffer
+         */
+        public function app_output_buffer() {
+          ob_start();
+        }
+    }
 }
 
 /**
