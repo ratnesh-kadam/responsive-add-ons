@@ -258,6 +258,7 @@
 		_addReadySiteSuggestionBlock: function() {
 			$( '#responsive-ready-sites-admin-page' ).find( '.spinner' ).removeClass( 'is-active' ).addClass( 'hide-me' );
 
+			$( 'body' ).addClass( 'listed-all-sites' );
 			var template = wp.template( 'responsive-sites-suggestions' );
 			if ( ! $( '.responsive-sites-suggestions' ).length ) {
 				$( '#responsive-sites' ).append( template );
