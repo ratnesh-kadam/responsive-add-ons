@@ -46,7 +46,7 @@
                     if ( 'object' === typeof data ) {
 
 							data['args'] = args;
-							if ( data.args.id ) {
+							if ( data.args.id && 'undefined' !== typeof data.items ) {
 								ResponsiveSitesAPI._stored_data[ args.id ] = $.merge( ResponsiveSitesAPI._stored_data[ data.args.id ], data.items );
 							}
 
