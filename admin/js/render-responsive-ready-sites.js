@@ -188,7 +188,7 @@
 			data.active_site      = jQuery( 'body' ).attr( 'data-responsive-active-site' );
 			data.active_site_data = jQuery( 'body' ).attr( 'data-responsive-active-site-data' );
 
-			if ( data.items.length > 0 ) {
+			if ( 'undefined' !== typeof data.items && data.items.length > 0 ) {
 
 				$( 'body' ).removeClass( 'loading-content' );
 
