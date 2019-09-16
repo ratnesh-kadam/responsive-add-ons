@@ -3,7 +3,7 @@
 Plugin Name: Responsive Add Ons
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Import Responsive Ready Sites that help you launch your website quickly. Just import, update & hit the launch button.
-Version: 2.0.5
+Version: 2.0.6
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2

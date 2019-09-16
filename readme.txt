@@ -33,6 +33,9 @@ The Ready Site Importer feature allows you to import ready-made website demos, c
 1. Responsive Ready Site importer in action
 
 == Changelog ==
+= 2.0.6 - 16th September 2019 =
+* Rendered ready sites on scroll, Added ratings link on responsive-add-ons page
+
 = 2.0.5 - 9th September 2019 =
 * Added Pro Templates, Support Links
 
