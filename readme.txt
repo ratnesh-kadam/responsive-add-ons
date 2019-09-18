@@ -1,7 +1,7 @@
 === Responsive Add Ons ===
 Contributors: cyberchimps
 Donate Link: http://cyberchimps.com
-Tags: google, yahoo, bing, analytics, verification
+Tags: Elementor, Demo Importer, Templates, Starter Sites, Ready Websites
 Requires at least: 5.0
 Tested up to: 5.2.2
 Stable tag: trunk
