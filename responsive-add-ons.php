@@ -222,34 +222,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 * Clean up after Deactivation
 		 */
 		public static function deactivate() {
-            if ( ! current_user_can( 'manage_options' ) ) {
-                return;
-            }
-            global $wpdb;
-
-            $post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_post'" );
-            foreach($post_ids as $post_id){
-                wp_delete_post( $post_id, true );
-            }
-
-            $form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_responsive_ready_sites_imported_wp_forms'" );
-            foreach($form_ids as $form_id){
-                wp_delete_post( $form_id, true );
-            }
-
-            $term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_responsive_ready_sites_imported_term'" );
-            foreach($term_ids as $term_id){
-                if ( $term_id ) {
-                    $term = get_term( $term_id );
-                    if ( $term ) {
-                        wp_delete_term( $term_id, $term->taxonomy );
-                    }
-                }
-            }
-
-            delete_option('responsive_current_active_site');
-        }
-
+		}
 
         /**
          * Setter for $api_url
