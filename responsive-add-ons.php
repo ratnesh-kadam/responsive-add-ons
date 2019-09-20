@@ -216,12 +216,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 * Stuff to do when you activate
 		 */
 		public static function activate() {
+		    register_uninstall_hook( __FILE__, array( 'Responsive_Addons', 'responsive_add_ons_uninstall' ) );
 		}
 
 		/**
-		 * Clean up after Deactivation
-		 */
-		public static function deactivate() {
+         * Responsive Addons Uninstall function
+         */
+		public function responsive_add_ons_uninstall() {
             if ( ! current_user_can( 'manage_options' ) ) {
                 return;
             }
@@ -250,6 +251,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             delete_option('responsive_current_active_site');
         }
 
+		/**
+		 * Clean up after Deactivation
+		 */
+		public static function deactivate() {
+		}
 
         /**
          * Setter for $api_url
