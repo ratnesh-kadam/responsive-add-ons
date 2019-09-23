@@ -245,7 +245,7 @@
 		 * Add per page Parameter.
 		 */
 		_apiAddParam_per_page: function() {
-			var per_page_val = 6;
+			var per_page_val = 15;
 			if ( responsiveSitesRender.sites && responsiveSitesRender.sites["per_page"] ) {
 				per_page_val = parseInt( responsiveSitesRender.sites["per_page"] );
 			}

@@ -623,7 +623,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                     'responsive_sites_api_params',
                     array(
                         'site_url' => '',
-                        'per_page' => 6,
+                        'per_page' => 15,
                     )
                 );
 
