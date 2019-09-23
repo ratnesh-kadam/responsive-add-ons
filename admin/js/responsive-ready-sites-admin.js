@@ -681,7 +681,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		/**
 		 * Check if Responsive Addons Pro is installed or not
 		 */
-		_checkResponsiveAddonsProInstalled: function() {
+		_checkRespomsiveAddonsProLicenseActive: function() {
 			var is_pro_license_active;
 			$.ajax(
 				{
@@ -707,7 +707,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			}
 		},
 
-		_checkRespomsiveAddonsProLicenseActive: function() {
+		_checkResponsiveAddonsProInstalled: function() {
 			var is_pro_installed;
 			$.ajax(
 				{
