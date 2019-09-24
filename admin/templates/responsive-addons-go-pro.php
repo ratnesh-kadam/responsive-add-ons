@@ -9,8 +9,8 @@
 <div class="responsive-addons-tabs">
 	<div id="responsive-addons-go-pro" class="tab-content active">
 		<div class="column-4">
-			<h3><?php esc_html_e( 'Get Responsive Add Ons Pro' ); ?></h3>
-			<p><?php esc_html_e( 'Upgrade to Responsive Add Ons Pro and get Pro Ready sites, more customizer options & premium support.' ); ?></p>
+			<h3><?php esc_html_e( 'Get Responsive Ready Sites Importer Pro' ); ?></h3>
+			<p><?php esc_html_e( 'Upgrade to Responsive Ready Sites Importer Pro and get Pro Ready sites, more customizer options & premium support.' ); ?></p>
 			<a href="https://cyberchimps.com/responsive-pricing/?utm_source=responsive-add-ons&utm_medium=upgrade-pro&utm_campaign=upgrade-to-responsive-pro" target="_blank" class='button button-primary'><?php esc_html_e( 'Upgrade To Pro' ); ?></a>
 		</div>
 		<div class="column-8 features">

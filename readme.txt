@@ -1,11 +1,11 @@
-=== Responsive Add Ons ===
+=== Responsive Ready Sites Importer ===
 Contributors: cyberchimps
 Donate Link: http://cyberchimps.com
 Tags: Elementor, Demo Importer, Templates, Starter Sites, Ready Websites
 Requires at least: 5.0
 Tested up to: 5.2.2
 Requires PHP: 5.3
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,15 +13,16 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 [youtube https://www.youtube.com/watch?v=JNeQKg1QJhk&t=2s]
 
->[Ready Sites](https://cyberchimps.com/responsive-ready-websites/)  |  [Docs](https://docs.cyberchimps.com/responsive/responsive-sites)  |  [Responsive Pro](https://cyberchimps.com/responsive-pricing/)
+[Ready Sites](https://cyberchimps.com/responsive-ready-websites/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-ready-sites&utm_content=ready-sites)  |  [Docs](https://docs.cyberchimps.com/responsive/responsive-sites?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-documentation&utm_content=docs)  |  [Responsive Pro](https://cyberchimps.com/responsive-pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=responsive-pro)
 
-The Responsive Add Ons plugin extends the functionality of the popular [Responsive theme](https://wordpress.org/themes/responsive/) by adding the ready site importer feature. It comes with free ready to use websites, that can be easily customize using the Elementor page builder.
+The Responsive Ready Sites Importer plugin extends the functionality of the popular [Responsive theme](https://cyberchimps.com/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-home&utm_content=responsive-theme) by adding the ready site importer feature. It comes with free ready to use websites, that can be easily customize using the Elementor page builder.
 
 #### READY SITE IMPORTER
 
 Launching a new website was never so easy. All you have to do is import a Responsive Ready Site and change the demo content to match your business.
 
 The Ready Site Importer feature allows you to import ready-made website demos, complete with:
+
 * demo pages designed using Elementor page builder,
 * demo images and media, and
 * demo content
@@ -31,15 +32,15 @@ The Ready Site Importer feature allows you to import ready-made website demos, c
 * Highlight your content with carousel & sliders
 * Pricing tables
 * Various portfolio widgets
-* [Full list of PRO features](https://cyberchimps.com/responsive-pricing/)
+* [Full list of PRO features](https://cyberchimps.com/responsive-pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=full-list-of-pro-features)
 
 == Frequently Asked Questions ==
 
-= 1. Are all the starter sites free? =
-We have 22+ free and Pro Ready Sites. With Responsive add ons you will get access to all free sites. To import Pro templates, you will have to install [Responsive Pro](https://cyberchimps.com/responsive-pricing/).
+= 1. Are all the ready sites free? =
+We have 22+ free and Pro Ready Sites. With Responsive Ready Sites Importer, you will get access to all free sites. To import Pro templates, you will have to install [Responsive Pro](https://cyberchimps.com/responsive-pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=faq-responsive-pro).
 
-= 2. Will Responsive Add ons work on my theme? =
-The templates are built with customizer settings of Responsive Theme to provide maximum control to you. Hence, to use Responsive Add ons, you will have to install Responsive Theme.
+= 2. Will Responsive Ready Sites Importer work on my theme? =
+The templates are built with customizer settings of Responsive Theme to provide maximum control to you. Hence, to use Responsive Ready Sites Importer, you will have to install Responsive Theme.
 
 = 3. Do I need to install any other plugins? =
 Absolutely not! Once you install the plugin, it will take care of all other dependencies. You can sit back and let importer do the job.
@@ -54,7 +55,8 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 
 1. Go to Appearance > Responsive Options > AddOns to see all ready sites.
 2. Preview & click on Import site to import.
-
+3. You will be able to see the import process
+4. Your website is ready
 
 == Changelog ==
 = 2.0.7 - 23rd September 2019 =
