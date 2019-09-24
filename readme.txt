@@ -59,6 +59,9 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
+= 2.0.8 - 24th September 2019 =
+* Changed plugin name, updated readme
+
 = 2.0.7 - 23rd September 2019 =
 * Fix - Deletes the Ready site imported data on Responsive Add Ons deactivation, All Ready web-sites are not showing on large screen
 
