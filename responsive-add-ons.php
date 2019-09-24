@@ -102,7 +102,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             $theme = wp_get_theme();
 
-            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired() || is_plugin_active( 'responsive-addons-pro/responsive-addons-pro.php' )) {
+            if ( 'Responsive' === $theme->name || 'Responsive' === $theme->parent_theme || $this->is_activation_theme_notice_expired() || is_plugin_active( 'responsive-pro/responsive-pro.php' )) {
                 return;
             }
 
@@ -789,7 +789,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Check if Responsive Addons Pro is installed.
          */
         public function is_responsive_pro_is_installed() {
-            $responsive_pro_slug = 'responsive-addons-pro/responsive-addons-pro.php';
+            $responsive_pro_slug = 'responsive-pro/responsive-pro.php';
             if ( ! function_exists( 'get_plugins' ) ) {
                 require_once ABSPATH . 'wp-admin/includes/plugin.php';
             }
@@ -862,7 +862,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         public function responsive_add_ons() {
 
             if( $this->is_responsive_addons_pro_is_active() && !$this->responsive_pro_license_is_active() ){
-                wp_redirect( admin_url( '/options-general.php?page=wc_am_client_responsive_addons_pro_dashboard' ) );
+                wp_redirect( admin_url( '/options-general.php?page=wc_am_client_responsive_pro_dashboard' ) );
                 exit;
             }
 
@@ -908,7 +908,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Check if Responsive Addons Pro is installed.
          */
         public function is_responsive_addons_pro_is_active() {
-            $responsive_pro_slug = 'responsive-addons-pro/responsive-addons-pro.php';
+            $responsive_pro_slug = 'responsive-pro/responsive-pro.php';
             if ( ! function_exists( 'get_plugins' ) ) {
                 require_once ABSPATH . 'wp-admin/includes/plugin.php';
             }
