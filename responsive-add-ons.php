@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Responsive Add Ons
+Plugin Name: Responsive Ready Sites Importer
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Import Responsive Ready Sites that help you launch your website quickly. Just import, update & hit the launch button.
-Version: 2.0.7
+Version: 2.0.8
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
@@ -116,11 +116,11 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 <div class="responsive-addons-message-inner">
                     <div class="responsive-addons-message-icon">
                         <div class="">
-                            <img src="<?php echo $image_path; ?>" alt="Responsive Addons">
+                            <img src="<?php echo $image_path; ?>" alt="Responsive Ready Sites Importer">
                         </div>
                     </div>
                     <div class="responsive-addons-message-content">
-                        <p><?php echo esc_html( 'Responsive theme needs to be active to use the Responsive Addons plugin.' ); ?> </p>
+                        <p><?php echo esc_html( 'Responsive theme needs to be active to use the Responsive Ready Sites Importer plugin.' ); ?> </p>
                         <p class="responsive-addons-message-actions">
                             <a href="#" class="<?php echo $theme_status; ?> button button-primary" data-theme-slug="responsive">Install & Activate Now</a>
                         </p>
@@ -842,13 +842,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
         public function responsive_addons_admin_page() {
 
             if(  $this->is_responsive() ){
-                $menu_title = 'Add Ons';
+                $menu_title = 'Ready Sites';
             } else {
-                $menu_title = 'Responsive Add Ons';
+                $menu_title = 'Responsive Ready Sites';
             }
 
             add_theme_page(
-                'Responsive Add Ons',
+                'Responsive Ready Sites Importer',
                 $menu_title,
                 'administrator',
                 'responsive-add-ons',
@@ -872,9 +872,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             $responsive_addon_license_screen = ( isset( $_GET['action'] ) && 'license' === $_GET['action'] ) ? true : false; //phpcs:ignore
             $responsive_addon_pro_support_screen = ( isset( $_GET['action'] ) && 'pro_support' === $_GET['action'] ) ? true : false; //phpcs:ignore?>
             <div class="wrap">
-                <h1><?php esc_html_e( 'Responsive Add Ons' ); ?></h1>
+                <h1><?php esc_html_e( 'Responsive Ready Sites Importer' ); ?></h1>
                 <h2 class="nav-tab-wrapper">
-                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=responsive-add-ons' ) ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Ready Site Importer' ); ?></a>
+                    <a href="<?php echo esc_url( admin_url( 'admin.php?page=responsive-add-ons' ) ); ?>" class="nav-tab<?php if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) echo ' nav-tab-active'; ?>"><?php esc_html_e( 'Ready Sites Importer' ); ?></a>
                     <?php
                     if ( !$this->is_responsive_addons_pro_is_active( ) ) { ?>
 
@@ -937,7 +937,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             if ( in_array( $page, $show_footer ) ) {
                 $rate_text = sprintf(
                 /* translators: %s: Link to 5 star rating */
-                    __( 'If you like the <strong>Responsive Add Ons</strong> plugin please leave us a %s rating. It takes a minute and helps a lot. Thanks in advance!', 'responsive-add-ons' ),
+                    __( 'If you like the <strong>Responsive Ready Sites Importer</strong> plugin please leave us a %s rating. It takes a minute and helps a lot. Thanks in advance!', 'responsive-add-ons' ),
                     '<a href="https://wordpress.org/support/view/plugin-reviews/responsive-add-ons?filter=5#postform" target="_blank" class="responsive-rating-link" style="text-decoration:none;" data-rated="' . esc_attr__( 'Thanks :)', 'responsive-add-ons' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
                 );
 
