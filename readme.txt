@@ -3,7 +3,7 @@ Contributors: cyberchimps
 Donate Link: http://cyberchimps.com
 Tags: Elementor, Demo Importer, Templates, Starter Sites, Ready Websites
 Requires at least: 5.0
-Tested up to: 5.2.2
+Tested up to: 5.2.4
 Requires PHP: 5.3
 Stable tag: 2.0.8
 License: GPLv2 or later
