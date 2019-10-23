@@ -9,6 +9,8 @@ Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+Build your website with 30+ ready-to-use website templates (more coming soon). Simply edit templates with the drag-n-drop Elementor page builder and hit launch!
+
 == Description ==
 
 [youtube https://www.youtube.com/watch?v=JNeQKg1QJhk&t=2s]
