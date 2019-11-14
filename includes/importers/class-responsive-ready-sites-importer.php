@@ -305,7 +305,13 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				}
 
 				if ( isset( $customizer_data['theme_mods_responsive'] ) ) {
-					update_option( 'theme_mods_responsive', $customizer_data['theme_mods_responsive'] );
+					$current_theme = wp_get_theme();
+					if ( is_child_theme() && 'Responsive' === $current_theme->parent()->get( 'Name' ) ) {
+						$current_theme = str_replace( ' ', '-', strtolower( $current_theme ) );
+						update_option( 'theme_mods_' . $current_theme, $customizer_data['theme_mods_responsive'] );
+					} else {
+						update_option( 'theme_mods_responsive', $customizer_data['theme_mods_responsive'] );
+					}
 				}
 
 				// Add Custom CSS.
