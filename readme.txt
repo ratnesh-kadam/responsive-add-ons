@@ -61,7 +61,7 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
-= 2.0.9 - 14th November 2019 =
+= 2.0.9 - 15th November 2019 =
 * Added - Feedback form on plugin deactivation
 
 = 2.0.8 - 24th September 2019 =
