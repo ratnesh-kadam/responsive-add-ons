@@ -511,6 +511,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			$request_params = apply_filters(
 				'responsive_sites_api_params',
 				array(
+					'api_key'  => '',
 					'site_url' => site_url(),
 				)
 			);
