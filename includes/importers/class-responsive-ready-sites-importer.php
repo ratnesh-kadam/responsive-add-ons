@@ -159,6 +159,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			if ( ! empty( $demo_api_uri ) ) {
 
 				$demo_data = self::get_responsive_single_demo( $demo_api_uri );
+				if ( ! $demo_data ) {
+					wp_send_json_error( __( 'Request site API URL is empty. Try again!', 'responsive-addons' ) );
+				}
 
 				update_option( 'responsive_ready_sites_import_data', $demo_data );
 
@@ -521,11 +524,11 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// API Call.
 			$response = wp_remote_get( $demo_api_uri, $api_args );
 
-			if ( is_wp_error( $response ) || ( isset( $response->status ) && 0 === $response->status ) ) {
+			if ( is_wp_error( $response ) || ( ! isset( $response->status ) ) ) {
 				if ( isset( $response->status ) ) {
 					$data = json_decode( $response, true );
 				} else {
-					return new WP_Error( 'api_invalid_response_code', $response->get_error_message() );
+					return false;
 				}
 			} else {
 				$data = json_decode( wp_remote_retrieve_body( $response ), true );
