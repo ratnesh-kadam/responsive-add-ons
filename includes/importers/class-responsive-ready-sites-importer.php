@@ -524,7 +524,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// API Call.
 			$response = wp_remote_get( $demo_api_uri, $api_args );
 
-			if ( is_wp_error( $response ) || ( ! isset( $response->status ) ) ) {
+			if ( is_wp_error( $response ) || ( isset( $response->status ) && 0 === $response->status ) ) {
 				if ( isset( $response->status ) ) {
 					$data = json_decode( $response, true );
 				} else {
@@ -532,6 +532,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				}
 			} else {
 				$data = json_decode( wp_remote_retrieve_body( $response ), true );
+				if ( ! $data['success'] ) {
+					return false;
+				}
 			}
 
 			if ( ! isset( $data['code'] ) ) {
