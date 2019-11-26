@@ -61,7 +61,7 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
-= 2.1.0 - 26th November 2019 =
+= 2.1.0 - 27th November 2019 =
 * Fix - Fatal Error when Analytics SDK is included in more than two plugins installed on same instance
 
 = 2.0.9 - 15th November 2019 =
