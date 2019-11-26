@@ -5,7 +5,7 @@ Tags: Elementor, Demo Importer, Templates, Starter Sites, Ready Websites
 Requires at least: 5.0
 Tested up to: 5.3
 Requires PHP: 5.3
-Stable tag: 2.0.9
+Stable tag: 2.1.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,9 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
+= 2.1.0 - 26th November 2019 =
+* Fix - Fatal Error when Analytics SDK is included in more than two plugins installed on same instance
+
 = 2.0.9 - 15th November 2019 =
 * Added - Feedback form on plugin deactivation
 
