@@ -96,6 +96,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
             add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array(&$this, 'required_plugin_activate'));
             add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array(&$this, 'set_reset_data'));
             add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array(&$this, 'backup_settings'));
+            add_action( 'wp_ajax_responsive-is-theme-active', array(&$this, 'check_responsive_theme_active' ) );
 
             //Dismiss admin notice
             add_action( 'wp_ajax_responsive-notice-dismiss', array(&$this, 'dismiss_notice'));
@@ -980,6 +981,23 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function app_output_buffer() {
           ob_start();
+        }
+
+        /**
+         * Check if Responsive theme or Child theme of Responsive is Active
+         * @since 2.1.1
+         */
+        public function check_responsive_theme_active() {
+            $current_theme = wp_get_theme();
+            if ( ( 'Responsive' === $current_theme->get( 'Name' ) ) || ( is_child_theme() && 'Responsive' === $current_theme->parent()->get( 'Name' ) ) ) {
+                wp_send_json_success(
+                    array( 'success' => true )
+                );
+            } else {
+                wp_send_json_error(
+                    array( 'success' => false )
+                );
+            }
         }
     }
 }
