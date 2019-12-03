@@ -198,6 +198,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'click', '.responsive-demo-import-options-free', ResponsiveSitesAdmin._importSiteOptionsScreen );
 			$( document ).on( 'click', '.responsive-ready-sites-tooltip-icon', ResponsiveSitesAdmin._toggle_tooltip );
 
+			$( document ).on( 'responsive-get-active-theme' , ResponsiveSitesAdmin._is_responsive_theme_active );
 			$( document ).on( 'responsive-ready-sites-install-start'       , ResponsiveSitesAdmin._process_import );
 
 			$( document ).on( 'responsive-ready-sites-import-set-site-data-done'   		, ResponsiveSitesAdmin._installRequiredPlugins );
@@ -917,7 +918,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var output = '<div class="current-importing-status-title"></div><div class="current-importing-status-description"></div>';
 			$( '.current-importing-status' ).html( output );
 
-			$( document ).trigger( 'responsive-ready-sites-install-start' );
+			$( document ).trigger( 'responsive-get-active-theme' );
 
 		},
 
@@ -1537,6 +1538,27 @@ var ResponsiveSitesAjaxQueue = (function() {
 				ResponsiveSitesAjaxQueue.run();
 
 			}
+		},
+
+		_is_responsive_theme_active: function() {
+			$.ajax(
+				{
+					url: responsiveSitesAdmin.ajaxurl,
+					type: 'POST',
+					data: {
+						'action': 'responsive-is-theme-active',
+					},
+				}
+			)
+				.done(
+					function (result) {
+						if (result.success) {
+							$( document ).trigger( 'responsive-ready-sites-install-start' );
+						} else {
+							ResponsiveSitesAdmin._log_error( 'Please make sure you have Responsive Theme active.', true );
+						}
+					}
+				);
 		},
 	};
 
