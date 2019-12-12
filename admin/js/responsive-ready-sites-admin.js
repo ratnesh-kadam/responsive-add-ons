@@ -1555,7 +1555,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						if (result.success) {
 							$( document ).trigger( 'responsive-ready-sites-install-start' );
 						} else {
-							ResponsiveSitesAdmin._log_error( 'Please make sure you have Responsive Theme active.', true );
+							ResponsiveSitesAdmin._log_error( 'Responsive Ready Sites Importer plugin requires the Responsive theme. Please ensures that the Responsive theme is active.', true );
 						}
 					}
 				);
