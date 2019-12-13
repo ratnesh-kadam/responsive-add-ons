@@ -245,6 +245,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 		 * Stuff to do when you activate
 		 */
 		public static function activate() {
+		    add_option( 'analytics_activation_redirect_responsive-add-ons', true );
 		}
 
 		/**
