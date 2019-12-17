@@ -41,7 +41,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		 */
 		public static function get_instance() {
 			if ( ! isset( self::$instance ) ) {
-				self::$instance = new self;
+				self::$instance = new self();
 			}
 			return self::$instance;
 		}
@@ -68,8 +68,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			// Prepare Page Builders.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-elementor.php';
 
-			//Menu fix
-            require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
+			// Menu fix.
+			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
 
 			self::$process_all = new WP_Background_Process_Responsive();
 
@@ -86,6 +86,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		 */
 		public function start_process() {
 
+			Responsive_Ready_Sites_Importer_Log::add( 'Batch Process Started!' );
+
 			// Add "elementor" in import [queue].
 			// @todo Remove required `allow_url_fopen` support.
 			if ( ini_get( 'allow_url_fopen' ) ) {
@@ -95,10 +97,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 				}
 			}
 
-            // Add "misc" in import [queue].
-            self::$process_all->push_to_queue( Responsive_Ready_Sites_Batch_Processing_Menu::get_instance() );
+			// Add "misc" in import [queue].
+			self::$process_all->push_to_queue( Responsive_Ready_Sites_Batch_Processing_Menu::get_instance() );
 
-            // Dispatch Queue.
+			// Dispatch Queue.
 			self::$process_all->save()->dispatch();
 		}
 

@@ -56,8 +56,10 @@ if ( class_exists( 'WP_Background_Process' ) ) :
 
 			parent::complete();
 
+			Responsive_Ready_Sites_Importer_Log::add( 'Batch Process Complete!' );
+
 			// Delete Log file.
-			delete_option( 'responsive_sites_recent_import_log_file' );
+			delete_option( 'responsive_ready_sites_recent_import_log_file' );
 
 		}
 

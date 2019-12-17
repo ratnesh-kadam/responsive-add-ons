@@ -692,7 +692,17 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             $file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
             $old_settings = get_option( 'responsive_theme_options', array() );
-            update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
+
+            $upload_dir   = Responsive_Ready_Sites_Importer_Log::get_instance()->log_dir();
+            $upload_path  = trailingslashit( $upload_dir['path'] );
+            $log_file     = $upload_path . $file_name;
+            $file_system  = Responsive_Ready_Sites_Importer_Log::get_instance()->get_filesystem();
+
+            // If file Write fails
+            if ( false === $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
+                update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
+            }
+
             wp_send_json_success();
         }
 

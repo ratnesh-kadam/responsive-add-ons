@@ -49,6 +49,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			add_action( 'init', array( $this, 'load_importer' ) );
 
 			$responsive_ready_sites_importers_dir = plugin_dir_path( __FILE__ );
+			require_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-importer-log.php';
 			include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-widgets-importer.php';
 			include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-options-importer.php';
 
@@ -90,6 +91,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			if ( class_exists( '\Elementor\Plugin' ) ) {
 				Elementor\Plugin::$instance->posts_css_manager->clear_cache();
 			}
+			Responsive_Ready_Sites_Importer_Log::add( 'Complete ' );
 		}
 
 		/**
@@ -196,6 +198,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 			if ( isset( $wxr_url ) ) {
 
+				Responsive_Ready_Sites_Importer_Log::add( 'Importing from XML ' . $wxr_url );
+
 				// Download XML file.
 				$xml_path = self::download_file( $wxr_url );
 
@@ -260,6 +264,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 										// Set meta for tracking the form imported from demo site.
 										update_post_meta( $new_id, '_responsive_ready_sites_imported_wp_forms', true );
+
+										Responsive_Ready_Sites_Importer_Log::add( 'Inserted WP Form ' . $new_id );
 									}
 
 									if ( $new_id ) {
@@ -299,6 +305,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
             $customizer_data = ( isset( $_POST['site_customizer_data'] ) ) ? (array) json_decode( stripcslashes( $_POST['site_customizer_data'] ), 1 ) : array(); //phpcs:ignore
 
 			if ( ! empty( $customizer_data ) ) {
+
+				Responsive_Ready_Sites_Importer_Log::add( 'Imported Customizer Settings ' . wp_json_encode( $customizer_data ) );
 
 				// Set meta for tracking the post.
 				update_option( '_responsive_sites_old_customizer_data', $customizer_data );
@@ -340,6 +348,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
             $widgets_data = ( isset( $_POST['widgets_data'] ) ) ? (object) json_decode( stripcslashes( $_POST['widgets_data'] ) ) : ''; //phpcs:ignore
 
+			Responsive_Ready_Sites_Importer_Log::add( 'Imported - Widgets ' . wp_json_encode( $widgets_data ) );
+
 			if ( ! empty( $widgets_data ) ) {
 
 				$widgets_importer = Responsive_Ready_Sites_Widgets_Importer::instance();
@@ -372,6 +382,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 				// Set meta for tracking the post.
 				if ( is_array( $options_data ) ) {
+					Responsive_Ready_Sites_Importer_Log::add( 'Imported - Site Options ' . wp_json_encode( $options_data ) );
 					update_option( '_responsive_ready_sites_old_site_options', $options_data );
 				}
 
@@ -562,6 +573,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 */
 		public function reset_customizer_data() {
 
+			Responsive_Ready_Sites_Importer_Log::add( 'Deleted customizer Settings ' . wp_json_encode( get_option( 'responsive_theme_options', array() ) ) );
+
 			delete_option( 'responsive_theme_options' );
 
 			wp_send_json_success();
@@ -576,6 +589,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		public function reset_site_options() {
 
 			$options = get_option( '_responsive_ready_sites_old_site_options', array() );
+
+			Responsive_Ready_Sites_Importer_Log::add( 'Deleted - Site Options ' . wp_json_encode( $options ) );
 
 			if ( $options ) {
 				foreach ( $options as $option_key => $option_value ) {
