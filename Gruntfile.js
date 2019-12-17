@@ -61,7 +61,7 @@ module.exports = function (grunt) {
 
 			addtextdomain: {
 				options: {
-					textdomain: 'responsive-add-ons',
+					textdomain: 'responsive-addons',
 				},
 				update_all_domains: {
 					options: {
