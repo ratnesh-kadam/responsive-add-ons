@@ -639,11 +639,16 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * @since  1.3.0
 		 * @return void
 		 */
-		public function delete_imported_posts() {
-			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
-			$message = 'Deleted - Post ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+		public function delete_imported_posts( $post_id = 0 ) {
+			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : $post_id;
 
-			wp_delete_post( $post_id, true );
+			$message = '';
+			if ( $post_id ) {
+				$message = 'Deleted - Post ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+
+				Responsive_Ready_Sites_Importer_Log::add( $message );
+				wp_delete_post( $post_id, true );
+			}
 
 			/* translators: %s is the post ID */
 			wp_send_json_success( $message );
@@ -655,13 +660,15 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * @since  1.3.0
 		 * @return void
 		 */
-		public function delete_imported_wp_forms() {
-			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
+		public function delete_imported_wp_forms( $post_id = 0 ) {
+			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : $post_id;
 
-			$message = 'Deleted - Form ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
-
-			wp_delete_post( $post_id, true );
-
+			$message = '';
+			if ( $post_id ) {
+				$message = 'Deleted - Form ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+				Responsive_Ready_Sites_Importer_Log::add( $message );
+				wp_delete_post( $post_id, true );
+			}
 			/* translators: %s is the form ID */
 			wp_send_json_success( $message );
 		}
@@ -672,9 +679,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * @since  1.3.0
 		 * @return void
 		 */
-		public function delete_imported_terms() {
+		public function delete_imported_terms( $term_id = 0 ) {
 
-			$term_id = isset( $_REQUEST['term_id'] ) ? absint( $_REQUEST['term_id'] ) : '';
+			$term_id = isset( $_REQUEST['term_id'] ) ? absint( $_REQUEST['term_id'] ) : $term_id;
 
 			$message = '';
 
@@ -682,6 +689,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$term = get_term( $term_id );
 				if ( $term ) {
 					$message = 'Deleted - Term ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
+					Responsive_Ready_Sites_Importer_Log::add( $message );
 					wp_delete_term( $term_id, $term->taxonomy );
 				}
 			}
