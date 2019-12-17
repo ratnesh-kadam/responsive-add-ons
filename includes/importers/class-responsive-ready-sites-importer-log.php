@@ -255,10 +255,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		 */
 		public static function get_debug_mode() {
 			if ( WP_DEBUG ) {
-				return __( 'Enabled', 'responsive-add-ons' );
+				return __( 'Enabled', 'responsive-addons' );
 			}
 
-			return __( 'Disabled', 'responsive-add-ons' );
+			return __( 'Disabled', 'responsive-addons' );
 		}
 
 		/**
@@ -276,7 +276,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 			if ( $memory_limit_in_bytes_current < $memory_limit_in_bytes_required ) {
 				return sprintf(
 				/* translators: %1$s Memory Limit, %2$s Recommended memory limit. */
-					_x( 'Current memory limit %1$s. We recommend setting memory to at least %2$s.', 'Recommended Memory Limit', 'responsive-add-ons' ),
+					_x( 'Current memory limit %1$s. We recommend setting memory to at least %2$s.', 'Recommended Memory Limit', 'responsive-addons' ),
 					WP_MEMORY_LIMIT,
 					$required_memory
 				);
@@ -312,10 +312,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		public static function get_xmlreader_status() {
 
 			if ( class_exists( 'XMLReader' ) ) {
-				return __( 'Yes', 'responsive-add-ons' );
+				return __( 'Yes', 'responsive-addons' );
 			}
 
-			return __( 'No', 'responsive-add-ons' );
+			return __( 'No', 'responsive-addons' );
 		}
 
 		/**
@@ -357,7 +357,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		 */
 		public static function get_php_version() {
 			if ( version_compare( PHP_VERSION, '5.4', '<' ) ) {
-				return _x( 'We recommend to use php 5.4 or higher', 'PHP Version', 'responsive-add-ons' );
+				return _x( 'We recommend to use php 5.4 or higher', 'PHP Version', 'responsive-addons' );
 			}
 			return PHP_VERSION;
 		}
@@ -400,10 +400,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		 */
 		public static function get_php_extension_gd() {
 			if ( extension_loaded( 'gd' ) ) {
-				return __( 'Yes', 'responsive-add-ons' );
+				return __( 'Yes', 'responsive-addons' );
 			}
 
-			return __( 'No', 'responsive-add-ons' );
+			return __( 'No', 'responsive-addons' );
 		}
 
 	}
