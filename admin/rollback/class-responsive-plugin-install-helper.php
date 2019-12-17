@@ -9,7 +9,6 @@
 /**
  * Class Responsive_Plugin_Install_Helper
  */
-
 class Responsive_Plugin_Install_Helper {
 	/**
 	 * Instance of class.
@@ -28,7 +27,6 @@ class Responsive_Plugin_Install_Helper {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Responsive_Plugin_Install_Helper ) ) {
 			self::$instance = new Responsive_Plugin_Install_Helper();
 		}
-		error_log('instance12');
 		return self::$instance;
 	}
 

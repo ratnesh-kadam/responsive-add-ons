@@ -7,6 +7,7 @@
  */
 
 namespace ResponsiveSDK;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

@@ -141,7 +141,7 @@ class Product {
 	 *
 	 * @return string $name         The normalized string.
 	 */
-	static function key_ready_name( $string ) {
+	public static function key_ready_name( $string ) {
 		return str_replace( '-', '_', strtolower( trim( $string ) ) );
 	}
 

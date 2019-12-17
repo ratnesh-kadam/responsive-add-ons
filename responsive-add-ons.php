@@ -1033,16 +1033,21 @@ if ( ! function_exists( 'responsive_sdk_load_latest' ) ) :
 endif;
 add_action( 'init', 'responsive_sdk_load_latest' );
 
-/**
- * Loads products array.
- *
- * @param array $products All products.
- *
- * @return array Products array.
- */
-function responsive_load_sdk( $products ) {
-	$products[] = get_template_directory() . '/style.css';
 
-	return $products;
+if ( ! function_exists( 'responsive_addon_load_sdk' ) ) {
+	/**
+	 * Loads products array.
+	 *
+	 * @param array $products All products.
+	 *
+	 * @return array Products array.
+	 */
+	function responsive_addon_load_sdk( $products ) {
+		$theme_name = wp_get_theme();
+		if ( 'Responsive' === $theme_name ) {
+			$products[] = get_template_directory() . '/style.css';
+		}
+		return $products;
+	}
 }
-add_filter( 'responsive_sdk_products', 'responsive_load_sdk' );
+add_filter( 'responsive_sdk_products', 'responsive_addon_load_sdk' );
