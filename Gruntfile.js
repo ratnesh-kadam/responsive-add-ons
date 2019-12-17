@@ -67,7 +67,7 @@ module.exports = function (grunt) {
 					options: {
 						updateDomains: true
 					},
-					src: ['*.php', '**/*.php', '!\.git/**/*', '!bin/**/*', '!node_modules/**/*', '!config/**/*', '!tests/**/*', '!scripts/**/*', '!vendor/**/*', '!includes/libraries/acf/**/*', '!includer/importers/wxr-importer/*']
+					src: ['*.php', '**/*.php', '!\.git/**/*', '!bin/**/*', '!node_modules/**/*', '!config/**/*', '!tests/**/*', '!scripts/**/*', '!vendor/**/*', '!includes/libraries/acf/**/*', '!includes/importers/wxr-importer/*']
 				}
 			},
 
