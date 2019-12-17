@@ -182,14 +182,22 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 				'url'  => $upload_dir['baseurl'] . '/' . $dir_name . '/',
 			);
 
-			// Create the upload dir if it doesn't exist.
-			if ( ! file_exists( $dir_info['path'] ) ) {
+			$files = array(
+				array(
+					'base'    => $upload_dir['basedir'] . '/' . $dir_name,
+					'file'    => '.htaccess',
+					'content' => 'deny from all',
+				),
+			);
 
-				// Create the directory.
-				wp_mkdir_p( $dir_info['path'] );
-
-				// Add an index file for security.
-				self::get_filesystem()->put_contents( $dir_info['path'] . 'index.html', '' );
+			foreach ( $files as $file ) {
+				if ( wp_mkdir_p( $file['base'] ) && ! file_exists( trailingslashit( $file['base'] ) . $file['file'] ) ) {
+					$file_handle = @fopen( trailingslashit( $file['base'] ) . $file['file'], 'w' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.file_system_read_fopen
+					if ( $file_handle ) {
+						fwrite( $file_handle, $file['content'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fwrite
+						fclose( $file_handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_fclose
+					}
+				}
 			}
 
 			return $dir_info;
