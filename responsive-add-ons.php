@@ -3,7 +3,7 @@
 Plugin Name: Responsive Ready Sites Importer
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Import Responsive Ready Sites that help you launch your website quickly. Just import, update & hit the launch button.
-Version: 2.1.1
+Version: 2.2.0
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
@@ -52,7 +52,7 @@ if ( ! function_exists( 'ra_fs' ) ) {
                 'slug'                => 'responsive-add-ons',
                 'product_name'        => 'Responsive Ready Sites Importer',
                 'module_type'         => 'plugin',
-                'version'             => '2.1.1',
+                'version'             => '2.2.0',
                 'plugin_basename'     => 'responsive-add-ons/responsive-add-ons.php',
             ) );
         }
@@ -122,6 +122,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             add_action( 'init', array( $this, 'app_output_buffer' ) );
             self::set_api_url();
+
 		}
 
         /**
@@ -692,7 +693,17 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             $file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
             $old_settings = get_option( 'responsive_theme_options', array() );
-            update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
+
+            $upload_dir   = Responsive_Ready_Sites_Importer_Log::get_instance()->log_dir();
+            $upload_path  = trailingslashit( $upload_dir['path'] );
+            $log_file     = $upload_path . $file_name;
+            $file_system  = Responsive_Ready_Sites_Importer_Log::get_instance()->get_filesystem();
+
+            // If file Write fails
+            if ( false === $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
+                update_option( 'responsive_ready_sites_' . $file_name, $old_settings );
+            }
+
             wp_send_json_success();
         }
 
@@ -1016,6 +1027,38 @@ if( class_exists( 'Responsive_Addons' ) ) {
 	$responsive = new Responsive_Addons();
 }
 
+// load the latest sdk version from the active Responsive theme.
+if ( ! function_exists( 'responsive_sdk_load_latest' ) ) :
+	/**
+	 * Always load the latest sdk version.
+	 */
+	function responsive_sdk_load_latest() {
+		/**
+		 * Don't load the library if we are on < 5.4.
+		 */
+		if ( version_compare( PHP_VERSION, '5.4.32', '<' ) ) {
+			return;
+		}
+		require_once dirname( __FILE__ ) . '/admin/rollback/start.php';
+	}
+endif;
+add_action( 'init', 'responsive_sdk_load_latest' );
 
 
-
+if ( ! function_exists( 'responsive_addon_load_sdk' ) ) {
+	/**
+	 * Loads products array.
+	 *
+	 * @param array $products All products.
+	 *
+	 * @return array Products array.
+	 */
+	function responsive_addon_load_sdk( $products ) {
+		$theme_name = wp_get_theme();
+		if ( 'Responsive' === $theme_name ) {
+			$products[] = get_template_directory() . '/style.css';
+		}
+		return $products;
+	}
+}
+add_filter( 'responsive_sdk_products', 'responsive_addon_load_sdk' );

@@ -49,6 +49,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			add_action( 'init', array( $this, 'load_importer' ) );
 
 			$responsive_ready_sites_importers_dir = plugin_dir_path( __FILE__ );
+			require_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-importer-log.php';
 			include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-widgets-importer.php';
 			include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-options-importer.php';
 
@@ -90,6 +91,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			if ( class_exists( '\Elementor\Plugin' ) ) {
 				Elementor\Plugin::$instance->posts_css_manager->clear_cache();
 			}
+			Responsive_Ready_Sites_Importer_Log::add( 'Complete ' );
 		}
 
 		/**
@@ -196,6 +198,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 			if ( isset( $wxr_url ) ) {
 
+				Responsive_Ready_Sites_Importer_Log::add( 'Importing from XML ' . $wxr_url );
+
 				// Download XML file.
 				$xml_path = self::download_file( $wxr_url );
 
@@ -260,6 +264,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 										// Set meta for tracking the form imported from demo site.
 										update_post_meta( $new_id, '_responsive_ready_sites_imported_wp_forms', true );
+
+										Responsive_Ready_Sites_Importer_Log::add( 'Inserted WP Form ' . $new_id );
 									}
 
 									if ( $new_id ) {
@@ -299,6 +305,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
             $customizer_data = ( isset( $_POST['site_customizer_data'] ) ) ? (array) json_decode( stripcslashes( $_POST['site_customizer_data'] ), 1 ) : array(); //phpcs:ignore
 
 			if ( ! empty( $customizer_data ) ) {
+
+				Responsive_Ready_Sites_Importer_Log::add( 'Imported Customizer Settings ' . wp_json_encode( $customizer_data ) );
 
 				// Set meta for tracking the post.
 				update_option( '_responsive_sites_old_customizer_data', $customizer_data );
@@ -340,6 +348,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
             $widgets_data = ( isset( $_POST['widgets_data'] ) ) ? (object) json_decode( stripcslashes( $_POST['widgets_data'] ) ) : ''; //phpcs:ignore
 
+			Responsive_Ready_Sites_Importer_Log::add( 'Imported - Widgets ' . wp_json_encode( $widgets_data ) );
+
 			if ( ! empty( $widgets_data ) ) {
 
 				$widgets_importer = Responsive_Ready_Sites_Widgets_Importer::instance();
@@ -372,6 +382,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 				// Set meta for tracking the post.
 				if ( is_array( $options_data ) ) {
+					Responsive_Ready_Sites_Importer_Log::add( 'Imported - Site Options ' . wp_json_encode( $options_data ) );
 					update_option( '_responsive_ready_sites_old_site_options', $options_data );
 				}
 
@@ -562,6 +573,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 */
 		public function reset_customizer_data() {
 
+			Responsive_Ready_Sites_Importer_Log::add( 'Deleted customizer Settings ' . wp_json_encode( get_option( 'responsive_theme_options', array() ) ) );
+
 			delete_option( 'responsive_theme_options' );
 
 			wp_send_json_success();
@@ -576,6 +589,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		public function reset_site_options() {
 
 			$options = get_option( '_responsive_ready_sites_old_site_options', array() );
+
+			Responsive_Ready_Sites_Importer_Log::add( 'Deleted - Site Options ' . wp_json_encode( $options ) );
 
 			if ( $options ) {
 				foreach ( $options as $option_key => $option_value ) {
@@ -624,11 +639,16 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * @since  1.3.0
 		 * @return void
 		 */
-		public function delete_imported_posts() {
-			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
-			$message = 'Deleted - Post ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+		public function delete_imported_posts( $post_id = 0 ) {
+			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : $post_id;
 
-			wp_delete_post( $post_id, true );
+			$message = '';
+			if ( $post_id ) {
+				$message = 'Deleted - Post ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+
+				Responsive_Ready_Sites_Importer_Log::add( $message );
+				wp_delete_post( $post_id, true );
+			}
 
 			/* translators: %s is the post ID */
 			wp_send_json_success( $message );
@@ -640,13 +660,15 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * @since  1.3.0
 		 * @return void
 		 */
-		public function delete_imported_wp_forms() {
-			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
+		public function delete_imported_wp_forms( $post_id = 0 ) {
+			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : $post_id;
 
-			$message = 'Deleted - Form ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
-
-			wp_delete_post( $post_id, true );
-
+			$message = '';
+			if ( $post_id ) {
+				$message = 'Deleted - Form ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+				Responsive_Ready_Sites_Importer_Log::add( $message );
+				wp_delete_post( $post_id, true );
+			}
 			/* translators: %s is the form ID */
 			wp_send_json_success( $message );
 		}
@@ -657,9 +679,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * @since  1.3.0
 		 * @return void
 		 */
-		public function delete_imported_terms() {
+		public function delete_imported_terms( $term_id = 0 ) {
 
-			$term_id = isset( $_REQUEST['term_id'] ) ? absint( $_REQUEST['term_id'] ) : '';
+			$term_id = isset( $_REQUEST['term_id'] ) ? absint( $_REQUEST['term_id'] ) : $term_id;
 
 			$message = '';
 
@@ -667,6 +689,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$term = get_term( $term_id );
 				if ( $term ) {
 					$message = 'Deleted - Term ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
+					Responsive_Ready_Sites_Importer_Log::add( $message );
 					wp_delete_term( $term_id, $term->taxonomy );
 				}
 			}
