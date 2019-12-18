@@ -61,6 +61,10 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
+= 2.2.0 - 18th December 2019 =
+* Added - Responsive theme Rollback
+* Added - Import Process status Log
+
 = 2.1.1 - 12th December 2019 =
 * Fix - Responsive Ready Sites Importer plugin only works with Responsive theme
 

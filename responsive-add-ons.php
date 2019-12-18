@@ -52,7 +52,7 @@ if ( ! function_exists( 'ra_fs' ) ) {
                 'slug'                => 'responsive-add-ons',
                 'product_name'        => 'Responsive Ready Sites Importer',
                 'module_type'         => 'plugin',
-                'version'             => '2.1.1',
+                'version'             => '2.2.0',
                 'plugin_basename'     => 'responsive-add-ons/responsive-add-ons.php',
             ) );
         }
