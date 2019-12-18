@@ -2,7 +2,7 @@
 /**
  * Responsive Ready Sites Importer Log
  *
- * @since   2.1.2
+ * @since   2.2.0
  * @package Responsive Ready Sites
  */
 
@@ -17,7 +17,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Instance
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @var (Object) Class object
 		 */
 		private static $_instance = null;
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Log File
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @var (Object) Class object
 		 */
 		private static $log_file = null;
@@ -33,7 +33,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Set Instance
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 *
 		 * @return object Class object.
 		 */
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 */
 		private function __construct() {
 
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Check file read/write permissions and process.
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return null
 		 */
 		function has_file_read_write() {
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Add log file URL in UI response.
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 */
 		public static function add_log_file_url() {
 
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Current Time for log.
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current time with time zone.
 		 */
 		public static function current_time() {
@@ -110,7 +110,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Import Start
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @param  array  $data         Import Data.
 		 * @param  string $demo_api_uri Import site API URL.
 		 * @return void
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Get an instance of WP_Filesystem_Direct.
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return object A WP_Filesystem_Direct instance.
 		 */
 		public static function get_filesystem() {
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Get Log File
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string log file URL.
 		 */
 		public static function get_log_file() {
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Log file directory
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @param  string $dir_name Directory Name.
 		 * @return array    Uploads directory array.
 		 */
@@ -206,7 +206,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Set log file
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 */
 		public static function set_log_file() {
 
@@ -225,7 +225,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Write content to a file.
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @param string $content content to be saved to the file.
 		 */
 		public static function add( $content ) {
@@ -250,7 +250,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Debug Mode
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Enabled for Debug mode ON and Disabled for Debug mode Off.
 		 */
 		public static function get_debug_mode() {
@@ -264,7 +264,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Memory Limit
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Memory limit.
 		 */
 		public static function get_memory_limit() {
@@ -288,7 +288,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Timezone
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @see https://codex.wordpress.org/Option_Reference/
 		 *
 		 * @return string Current timezone.
@@ -306,7 +306,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * XML Reader
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current XML Reader status.
 		 */
 		public static function get_xmlreader_status() {
@@ -321,7 +321,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Operating System
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current Operating System.
 		 */
 		public static function get_os() {
@@ -331,7 +331,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * Server Software
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current Server Software.
 		 */
 		public static function get_software() {
@@ -341,7 +341,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * MySql Version
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current MySql Version.
 		 */
 		public static function get_mysql_version() {
@@ -352,7 +352,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * PHP Version
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current PHP Version.
 		 */
 		public static function get_php_version() {
@@ -365,7 +365,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * PHP Max Input Vars
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current PHP Max Input Vars
 		 */
 		public static function get_php_max_input_vars() {
@@ -375,7 +375,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * PHP Max Post Size
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current PHP Max Post Size
 		 */
 		public static function get_php_max_post_size() {
@@ -385,7 +385,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * PHP Max Execution Time
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current Max Execution Time
 		 */
 		public static function get_max_execution_time() {
@@ -395,7 +395,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer_Log' ) ) :
 		/**
 		 * PHP GD Extension
 		 *
-		 * @since 2.1.2
+		 * @since 2.2.0
 		 * @return string Current PHP GD Extension
 		 */
 		public static function get_php_extension_gd() {
