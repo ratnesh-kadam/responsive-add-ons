@@ -1055,7 +1055,7 @@ if ( ! function_exists( 'responsive_addon_load_sdk' ) ) {
 	 */
 	function responsive_addon_load_sdk( $products ) {
 		$theme_name = wp_get_theme();
-		if ( 'Responsive' === $theme_name ) {
+		if ( 'Responsive' === $theme_name->get( 'Name' ) ) {
 			$products[] = get_template_directory() . '/style.css';
 		}
 		return $products;
