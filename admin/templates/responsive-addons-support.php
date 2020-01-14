@@ -19,7 +19,7 @@
 			<?php if ( is_resp_pro_license_is_active() ) { ?>
 				<a href="https://cyberchimps.com/my-account/orders/?utm_source=responsive-add-ons&utm_medium=request-support&utm_campaign=responsive-support" target="_blank"><?php esc_html_e( 'Request Support' ); ?></a>
 			<?php } else { ?>
-				<a href="https://cyberchimps.com/responsive-pricing/?utm_source=responsive-add-ons&utm_medium=upgrade-to-responsive-pro&utm_campaign=upgrade-to-responsive-pro" target="_blank"><?php esc_html_e( 'Upgrade To Responsive Pro' ); ?></a>
+				<a href="https://cyberchimps.com/responsive-go-pro/?utm_source=free-to-pro&utm_medium=responsive-add-ons&utm_campaign=responsive-pro&utm_content=premium-support" target="_blank"><?php esc_html_e( 'Upgrade To Responsive Pro' ); ?></a>
 			<?php } ?>
 		</div>
 		<div class="column-4">

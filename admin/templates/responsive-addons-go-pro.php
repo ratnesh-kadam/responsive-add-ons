@@ -11,7 +11,7 @@
 		<div class="column-4">
 			<h3><?php esc_html_e( 'Get Responsive Ready Sites Importer Pro' ); ?></h3>
 			<p><?php esc_html_e( 'Upgrade to Responsive Ready Sites Importer Pro and get Pro Ready sites, more customizer options & premium support.' ); ?></p>
-			<a href="https://cyberchimps.com/responsive-pricing/?utm_source=responsive-add-ons&utm_medium=upgrade-pro&utm_campaign=upgrade-to-responsive-pro" target="_blank" class='button button-primary'><?php esc_html_e( 'Upgrade To Pro' ); ?></a>
+			<a href="https://cyberchimps.com/responsive-go-pro/?utm_source=free-to-pro&utm_medium=responsive-add-ons&utm_campaign=responsive-pro&utm_content=go-pro-tab" target="_blank" class='button button-primary'><?php esc_html_e( 'Upgrade To Pro' ); ?></a>
 		</div>
 		<div class="column-8 features">
 			<table class="features-table" border="1">
