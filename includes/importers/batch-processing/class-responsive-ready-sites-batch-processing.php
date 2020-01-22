@@ -67,6 +67,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			// Prepare Page Builders.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-elementor.php';
+			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-gutenberg.php';
 
 			// Menu fix.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
@@ -87,6 +88,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		public function start_process() {
 
 			Responsive_Ready_Sites_Importer_Log::add( 'Batch Process Started!' );
+
+			// Add "gutenberg" in import [queue].
+			self::$process_all->push_to_queue( Responsive_Ready_Sites_Batch_Processing_Gutenberg::get_instance() );
 
 			// Add "elementor" in import [queue].
 			// @todo Remove required `allow_url_fopen` support.
