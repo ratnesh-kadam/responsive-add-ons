@@ -62,7 +62,7 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 
 == Changelog ==
 = 2.2.1 - 23rd January 2020 =
-* Added - Compatibility to WP Forms for Gutenberg demo site
+* Added - Compatibility to WP Forms for Gutenberg ready site
 
 = 2.2.0 - 18th December 2019 =
 * Added - Responsive theme Rollback
