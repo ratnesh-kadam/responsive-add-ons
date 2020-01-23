@@ -86,7 +86,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Gutenberg' ) ) :
 
 			$post_types = array( 'page' );
 
-			$post_ids = \Responsive_Ready_Sites_Batch_Processing::get_pages( $post_types );
+			$post_ids = Responsive_Ready_Sites_Batch_Processing::get_pages( $post_types );
 			if ( empty( $post_ids ) && ! is_array( $post_ids ) ) {
 				return;
 			}
