@@ -116,9 +116,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Gutenberg' ) ) :
 				}
 			}
 
-			// Converted '&amp;' with 'u0026amp;'.
-			$content = str_replace( '&amp;', "\u0026amp;", $content );
-
 			// Update content.
 			wp_update_post(
 				array(
