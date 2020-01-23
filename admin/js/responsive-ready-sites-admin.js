@@ -664,7 +664,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			templateData = [{
 				id: demoId,
-				demo_url: demoURL,
+				demo_url: demoURL + '/?utm_source=free-to-pro&utm_medium=responsive-ready-site-importer&utm_campaign=responsive-pro&utm_content=preview',
 				demo_api: apiURL,
 				screenshot: screenshot,
 				name: demo_name,
