@@ -1,7 +1,7 @@
-=== Responsive Ready Sites Importer ===
+=== Gutenberg & Elementor Templates Importer For Responsive ===
 Contributors: cyberchimps
-Donate Link: http://cyberchimps.com
-Tags: Elementor, Demo Importer, Templates, Starter Sites, Ready Websites
+Donate Link: https://cyberchimps.com
+Tags: one click demo import, gutenberg, elementor, templates
 Requires at least: 5.0
 Tested up to: 5.3
 Requires PHP: 5.3
@@ -9,32 +9,77 @@ Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Build your website with 30+ ready-to-use website templates (more coming soon). Simply edit templates with the drag-n-drop Elementor page builder and hit launch!
+Import Gutenberg & Elementor Templates for the Responsive WordPress theme.
 
 == Description ==
 
+Import Gutenberg & Elementor Templates for the Responsive WordPress theme.
+
+Get fully working ready-to-use website templates built for the Elementor page builder and the new WordPress blocks editor (Gutenberg). All you have to do is import a website template, edit the content and launch your website.
+
+This plugin extends the popular [Responsive theme](https://wordpress.org/themes/responsive/). It adds the following features:
+
+- One click demo import of ready-to-use, Gutenberg & Elementor templates
+- Ability to rollback the Responsive theme to a previous version
+
+= What are ready-to-use website templates? =
+The Responsive theme comes with ready-to-use [website templates](https://cyberchimps.com/responsive-ready-websites/).
+
+Website templates help you save time designing your website. All you have to do is import a template, edit it with a drag & drop editor and launch.
+
+These website templates have the following features:
+
+- Pre-designed pages such as homepage, about, services and contact.
+- Responsive designs that work on all devices.
+- Designed with Elementor page builder for easy drag & drop editing.
+- Copyright free stock images, that you can use on your website.
+- Automatically installs all necessary plugins.
+
+= What website templates can I import? =
+Responsive comes with 30+ ready-to-use WordPress [website templates](https://cyberchimps.com/responsive-ready-websites/).
+
+**Business Website Templates For Responsive Theme**
+
+- Startup WordPress Template
+- Business WordPress Template
+- Corporate WordPress Template
+
+**Health & Fitness Website Templates For Responsive Theme**
+
+- Health Coach WordPress Template
+- Gym WordPress Template
+- Yoga WordPress Template
+
+**Local Business Website Templates For Responsive Theme**
+
+- Accountant WordPress Template
+- Lawyer WordPress Template
+- Restaurant WordPress Template
+- Photography WordPress Template
+- Tattoo Studio WordPress Templates
+
+**Real Estate Website Templates For Responsive Theme**
+
+- Construction WordPress Template
+- Real Estate WordPress Template
+- Interior Decorator WordPress Template
+
+**Blogs Templates For Responsive Theme**
+
+- Cooking & Recipe Blog WordPress Templates
+- Travel Blog WordPress Templates
+- Lifestyle Blog WordPress Templates
+
+**WooCommerce WordPress Templates**
+
+- General store website templates
+- Fashion & jewellery website templates
+- Furniture store website templates
+
+= How to import ready sites? =
+Here's how it works:
+
 [youtube https://www.youtube.com/watch?v=JNeQKg1QJhk&t=2s]
-
-[Ready Sites](https://cyberchimps.com/responsive-ready-websites/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-ready-sites&utm_content=ready-sites)  |  [Docs](https://docs.cyberchimps.com/responsive/responsive-sites?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-documentation&utm_content=docs)  |  [Responsive Pro](https://cyberchimps.com/responsive-pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=responsive-pro)
-
-The Responsive Ready Sites Importer plugin extends the functionality of the popular [Responsive theme](https://cyberchimps.com/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-home&utm_content=responsive-theme) by adding the ready site importer feature. It comes with free ready to use websites, that can be easily customize using the Elementor page builder.
-
-#### READY SITE IMPORTER
-
-Launching a new website was never so easy. All you have to do is import a Responsive Ready Site and change the demo content to match your business.
-
-The Ready Site Importer feature allows you to import ready-made website demos, complete with:
-
-* demo pages designed using Elementor page builder,
-* demo images and media, and
-* demo content
-
-#### Responsive Pro features:
-* Premium templates
-* Highlight your content with carousel & sliders
-* Pricing tables
-* Various portfolio widgets
-* [Full list of PRO features](https://cyberchimps.com/responsive-pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=full-list-of-pro-features)
 
 == Frequently Asked Questions ==
 
