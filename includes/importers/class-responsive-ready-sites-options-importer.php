@@ -93,6 +93,8 @@ class Responsive_Ready_Sites_Options_Importer {
 			// Categories.
 			'woocommerce_product_cat',
 
+			// Plugin: EventOn
+			'evcal_options_evcal_1',
 		);
 	}
 
