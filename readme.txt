@@ -106,7 +106,7 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
-= 2.2.2 - 30th January 2020 =
+= 2.2.2 - 3rd February 2020 =
 * Added - Compatibility with EventOn plugin
 
 = 2.2.1 - 23rd January 2020 =
