@@ -38,6 +38,10 @@ if ( ! defined( 'RESPONSIVE_ADDONS_URI' ) ) {
     define( 'RESPONSIVE_ADDONS_URI', plugins_url( '/', RESPONSIVE_ADDONS_FILE ) );
 }
 
+if ( ! defined( 'RESPONSIVE_ADDONS_VER' ) ) {
+    define( 'RESPONSIVE_ADDONS_VER', '2.2.2' );
+}
+
 if ( ! function_exists( 'ra_fs' ) ) {
     // Helper function to access SDK
     function ra_fs() {
