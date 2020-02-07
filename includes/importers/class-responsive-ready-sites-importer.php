@@ -528,7 +528,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 					'api_key'               => '',
 					'site_url'              => site_url(),
 					'responsive_addons_ver' => RESPONSIVE_ADDONS_VER,
-					'version_compare'       => true,
 				)
 			);
 
