@@ -161,7 +161,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			if ( ! empty( $demo_api_uri ) ) {
 
 				$demo_data = self::get_responsive_single_demo( $demo_api_uri );
-				if ( ! $demo_data->success ) {
+				if ( ! $demo_data['success'] ) {
 					wp_send_json( $demo_data );
 				}
 
@@ -560,6 +560,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$remote_args['slug']                 = $data['slug'];
 				$remote_args['featured_image_url']   = $data['featured_image_url'];
 				$remote_args['title']                = $data['title']['rendered'];
+				$remote_args['success']              = true;
 			}
 
 			// Merge remote demo and defaults.
