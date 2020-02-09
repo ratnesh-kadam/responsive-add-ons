@@ -1010,7 +1010,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 						// 1. Fail - Request Site Import.
 						if ( false === demo_data.success ) {
-							ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
+							ResponsiveSitesAdmin._log_error( demo_data.data, true );
 						} else {
 
 							ResponsiveSitesAdmin.xml_path                       = encodeURI( demo_data.data['xml_path'] ) || '';
