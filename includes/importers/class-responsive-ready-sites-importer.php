@@ -161,8 +161,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			if ( ! empty( $demo_api_uri ) ) {
 
 				$demo_data = self::get_responsive_single_demo( $demo_api_uri );
-				if ( ! $demo_data ) {
-					wp_send_json_error( __( 'Request site API URL is empty. Try again!', 'responsive-addons' ) );
+				if ( ! $demo_data['success'] ) {
+					wp_send_json( $demo_data );
 				}
 
 				update_option( 'responsive_ready_sites_import_data', $demo_data );
@@ -525,8 +525,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			$request_params = apply_filters(
 				'responsive_sites_api_params',
 				array(
-					'api_key'  => '',
-					'site_url' => site_url(),
+					'api_key'               => '',
+					'site_url'              => site_url(),
+					'responsive_addons_ver' => RESPONSIVE_ADDONS_VER,
 				)
 			);
 
@@ -544,7 +545,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			} else {
 				$data = json_decode( wp_remote_retrieve_body( $response ), true );
 				if ( ! $data['success'] ) {
-					return false;
+					return $data;
 				}
 			}
 
@@ -559,6 +560,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$remote_args['slug']                 = $data['slug'];
 				$remote_args['featured_image_url']   = $data['featured_image_url'];
 				$remote_args['title']                = $data['title']['rendered'];
+				$remote_args['success']              = true;
 			}
 
 			// Merge remote demo and defaults.
