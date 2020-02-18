@@ -5,7 +5,7 @@ Tags: one click demo import, gutenberg, elementor, templates
 Requires at least: 5.0
 Tested up to: 5.3
 Requires PHP: 5.3
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,10 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
+= 2.2.3 - 18th February 2020 =
+* Added - API request parameters
+* Added - Updated analytics library
+
 = 2.2.2 - 3rd February 2020 =
 * Added - Compatibility with EventOn plugin
 
