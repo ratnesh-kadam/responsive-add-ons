@@ -53,28 +53,30 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-widgets-importer.php';
 			include_once $responsive_ready_sites_importers_dir . 'class-responsive-ready-sites-options-importer.php';
 
-			// Import AJAX.
-			add_action( 'wp_ajax_responsive-ready-sites-import-set-site-data-free', array( $this, 'import_start' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-import-xml', array( $this, 'import_xml_data' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-import-wpforms', array( $this, 'import_wpforms' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-import-widgets', array( $this, 'import_widgets' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-import-options', array( $this, 'import_options' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-import-end', array( $this, 'import_end' ) );
+			if ( is_admin() ) {
+				// Import AJAX.
+				add_action( 'wp_ajax_responsive-ready-sites-import-set-site-data-free', array( $this, 'import_start' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-import-xml', array( $this, 'import_xml_data' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-import-wpforms', array( $this, 'import_wpforms' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-import-widgets', array( $this, 'import_widgets' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-import-options', array( $this, 'import_options' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-import-end', array( $this, 'import_end' ) );
+
+				// Reset Customizer Data.
+				add_action( 'wp_ajax_responsive-ready-sites-reset-customizer-data', array( $this, 'reset_customizer_data' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-reset-site-options', array( $this, 'reset_site_options' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-reset-widgets-data', array( $this, 'reset_widgets_data' ) );
+
+				// Reset Post & Terms.
+				add_action( 'wp_ajax_responsive-ready-sites-delete-posts', array( $this, 'delete_imported_posts' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-delete-wp-forms', array( $this, 'delete_imported_wp_forms' ) );
+				add_action( 'wp_ajax_responsive-ready-sites-delete-terms', array( $this, 'delete_imported_terms' ) );
+			}
 
 			add_action( 'responsive_ready_sites_import_complete', array( $this, 'clear_cache' ) );
 
 			include_once $responsive_ready_sites_importers_dir . 'batch-processing/class-responsive-ready-sites-batch-processing.php';
-
-			// Reset Customizer Data.
-			add_action( 'wp_ajax_responsive-ready-sites-reset-customizer-data', array( $this, 'reset_customizer_data' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-reset-site-options', array( $this, 'reset_site_options' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-reset-widgets-data', array( $this, 'reset_widgets_data' ) );
-
-			// Reset Post & Terms.
-			add_action( 'wp_ajax_responsive-ready-sites-delete-posts', array( $this, 'delete_imported_posts' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-delete-wp-forms', array( $this, 'delete_imported_wp_forms' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-delete-terms', array( $this, 'delete_imported_terms' ) );
 
 			if ( version_compare( get_bloginfo( 'version' ), '5.0.0', '>=' ) ) {
 				add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
@@ -685,7 +687,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 							if ( isset( $sidebars_widgets['wp_inactive_widgets'] ) ) {
 								if ( ! in_array( $widget_key, $sidebars_widgets['wp_inactive_widgets'], true ) ) {
-											 $sidebars_widgets['wp_inactive_widgets'][] = $widget_key;
+									$sidebars_widgets['wp_inactive_widgets'][] = $widget_key;
 								}
 							}
 						}
@@ -702,6 +704,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * Delete imported posts
 		 *
 		 * @since  1.3.0
+		 * @param int $post_id Post Id.
 		 * @return void
 		 */
 		public function delete_imported_posts( $post_id = 0 ) {
@@ -730,6 +733,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * Delete imported WP forms
 		 *
 		 * @since  1.3.0
+		 * @param int $post_id Post Id.
 		 * @return void
 		 */
 		public function delete_imported_wp_forms( $post_id = 0 ) {
@@ -757,6 +761,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		 * Delete imported terms
 		 *
 		 * @since  1.3.0
+		 * @param int $term_id Term Id.
 		 * @return void
 		 */
 		public function delete_imported_terms( $term_id = 0 ) {
