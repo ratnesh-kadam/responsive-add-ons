@@ -511,9 +511,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		public function import_end() {
 
 			// Verify Nonce.
-			check_ajax_referer( 'astra-sites', '_ajax_nonce' );
+			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 			if ( ! current_user_can( 'customize' ) ) {
-				wp_send_json_error( __( 'You are not allowed to perform this action', 'astra-sites' ) );
+				wp_send_json_error( __( 'You are not allowed to perform this action', 'resposnive-addons' ) );
 			}
 
 			$current_active_site_slug               = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
