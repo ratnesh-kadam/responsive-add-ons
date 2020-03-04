@@ -1,6 +1,6 @@
 {
   "name": "responsive-addons",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "main": "Gruntfile.js",
   "author": "CyberChimps",
   "devDependencies": {

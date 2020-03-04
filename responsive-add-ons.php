@@ -3,7 +3,7 @@
 Plugin Name: Responsive Ready Sites Importer
 Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
 Description: Import Responsive Ready Sites that help you launch your website quickly. Just import, update & hit the launch button.
-Version: 2.2.3
+Version: 2.2.4
 Author: CyberChimps
 Author URI: http://www.cyberchimps.com
 License: GPL2
@@ -39,7 +39,7 @@ if ( ! defined( 'RESPONSIVE_ADDONS_URI' ) ) {
 }
 
 if ( ! defined( 'RESPONSIVE_ADDONS_VER' ) ) {
-    define( 'RESPONSIVE_ADDONS_VER', '2.2.3' );
+    define( 'RESPONSIVE_ADDONS_VER', '2.2.4' );
 }
 
 if ( ! function_exists( 'ra_fs' ) ) {
@@ -56,7 +56,7 @@ if ( ! function_exists( 'ra_fs' ) ) {
                 'slug'                => 'responsive-add-ons',
                 'product_name'        => 'Responsive Ready Sites Importer',
                 'module_type'         => 'plugin',
-                'version'             => '2.2.3',
+                'version'             => '2.2.4',
                 'plugin_basename'     => 'responsive-add-ons/responsive-add-ons.php',
                 'plugin_url'          => RESPONSIVE_ADDONS_DIR,
             ) );
@@ -210,6 +210,12 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @return void
          */
         function activate_theme() {
+
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
+            if ( ! current_user_can( 'switch_themes' ) ) {
+                wp_send_json_error( __( 'You are not allowed to activate the Theme', 'responsive-addons' ) );
+            }
 
             switch_theme( 'responsive' );
 
@@ -691,8 +697,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Backup existing settings.
          */
         public function backup_settings() {
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
             if ( ! current_user_can( 'manage_options' ) ) {
-                return;
+                wp_send_json_error( __( 'User does not have permission!', 'responsive-addons' ) );
             }
 
             $file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
@@ -723,6 +731,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Set reset data
          */
         public function set_reset_data() {
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
             if ( ! current_user_can( 'manage_options' ) ) {
                 return;
             }
@@ -759,7 +768,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 'notinstalled' => array(),
             );
 
-            if ( ! current_user_can( 'customize' ) ) {
+            if ( ! current_user_can( 'install_plugins' ) ) {
                 wp_send_json_error( $response );
             }
 
@@ -798,11 +807,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function required_plugin_activate() {
 
-            if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
+            if ( ! current_user_can( 'activate_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
                 wp_send_json_error(
                     array(
                         'success' => false,
-                        'message' => __( 'No plugin specified', 'responsive-addons' ),
+                        'message' => __( 'Error: You don\'t have the required permissions to install plugins.', 'responsive-addons' ),
                     )
                 );
             }
@@ -1004,6 +1015,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @since 2.1.1
          */
         public function check_responsive_theme_active() {
+
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
             $current_theme = wp_get_theme();
             if ( ( 'Responsive' === $current_theme->get( 'Name' ) ) || ( is_child_theme() && 'Responsive' === $current_theme->parent()->get( 'Name' ) ) ) {
                 wp_send_json_success(
