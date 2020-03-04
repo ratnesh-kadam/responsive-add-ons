@@ -213,7 +213,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-            if ( ! current_user_can( 'customize' ) ) {
+            if ( ! current_user_can( 'switch_themes' ) ) {
                 wp_send_json_error( __( 'You are not allowed to activate the Theme', 'responsive-addons' ) );
             }
 
@@ -768,7 +768,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
                 'notinstalled' => array(),
             );
 
-            if ( ! current_user_can( 'customize' ) ) {
+            if ( ! current_user_can( 'install_plugins' ) ) {
                 wp_send_json_error( $response );
             }
 
@@ -809,7 +809,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
 
             check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-            if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+            if ( ! current_user_can( 'activate_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
                 wp_send_json_error(
                     array(
                         'success' => false,

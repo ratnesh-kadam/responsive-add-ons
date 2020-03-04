@@ -195,7 +195,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -241,7 +241,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -321,7 +321,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -371,7 +371,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -408,7 +408,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -512,7 +512,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'resposnive-addons' ) );
 			}
 
@@ -620,7 +620,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -642,7 +642,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -669,7 +669,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -709,7 +709,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : $post_id;
@@ -737,7 +737,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
@@ -764,7 +764,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
-			if ( ! current_user_can( 'customize' ) ) {
+			if ( ! current_user_can( 'install_plugins' ) ) {
 				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
