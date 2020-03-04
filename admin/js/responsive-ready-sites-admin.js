@@ -243,6 +243,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						slug: ResponsiveSitesAdmin.active_site_slug,
 						title: ResponsiveSitesAdmin.active_site_title,
 						featured_image_url: ResponsiveSitesAdmin.active_site_featured_image_url,
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					}
 				}
 			)
@@ -446,6 +447,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						action	: 'responsive-ready-sites-import-wpforms',
 						wpforms_path : ResponsiveSitesAdmin.wpforms_path,
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -477,6 +479,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						data: {
 							action: 'responsive-ready-sites-import-customizer-settings',
 							site_customizer_data: ResponsiveSitesAdmin.site_customizer_data,
+							_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 						},
 						beforeSend: function () {
 							$( '.responsive-ready-sites-import-customizer .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
@@ -514,6 +517,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						action       : 'responsive-ready-sites-import-options',
 						options_data : ResponsiveSitesAdmin.site_options_data,
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -549,6 +553,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						action       : 'responsive-ready-sites-import-widgets',
 						widgets_data : ResponsiveSitesAdmin.widgets_data,
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -692,6 +697,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					dataType: 'json',
 					data: {
 						'action': 'check-responsive-add-ons-pro-license-active',
+						'_ajax_nonce'      : responsiveSitesAdmin._ajax_nonce,
 					}
 				}
 			)
@@ -718,6 +724,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					dataType: 'json',
 					data: {
 						'action': 'check-responsive-add-ons-pro-installed',
+						'_ajax_nonce'      : responsiveSitesAdmin._ajax_nonce,
 					}
 				}
 			)
@@ -750,6 +757,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							data: {
 								'action'            : 'responsive-ready-sites-required-plugin-activate',
 								'init'              : single_plugin.init,
+								'_ajax_nonce'      : responsiveSitesAdmin._ajax_nonce,
 							},
 							success: function( result ){
 
@@ -822,6 +830,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						data: {
 							action: 'responsive-ready-sites-import-xml',
 							xml_path: ResponsiveSitesAdmin.xml_path,
+							_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 						},
 						beforeSend: function () {
 							$( '.responsive-ready-sites-import-process-wrap' ).show();
@@ -962,6 +971,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					type : 'POST',
 					data : {
 						action : 'responsive-ready-sites-set-reset-data',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -995,6 +1005,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					data : {
 						'action'  : 'responsive-ready-sites-import-set-site-data-free',
 						'api_url' : apiURL,
+						'_ajax_nonce'      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -1116,6 +1127,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								data: {
 									'action': 'responsive-ready-sites-required-plugin-activate',
 									'init': $init,
+									'_ajax_nonce'      : responsiveSitesAdmin._ajax_nonce,
 								},
 							}
 						)
@@ -1157,6 +1169,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 					type : 'POST',
 					data : {
 						action : 'responsive-ready-sites-backup-settings',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+
 					},
 				}
 			)
@@ -1189,7 +1203,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 					url  : responsiveSitesAdmin.ajaxurl,
 					type : 'POST',
 					data : {
-						action : 'responsive-ready-sites-reset-customizer-data'
+						action : 'responsive-ready-sites-reset-customizer-data',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -1212,7 +1227,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 					url  : responsiveSitesAdmin.ajaxurl,
 					type : 'POST',
 					data : {
-						action : 'responsive-ready-sites-reset-site-options'
+						action : 'responsive-ready-sites-reset-site-options',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -1235,7 +1251,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 					url  : responsiveSitesAdmin.ajaxurl,
 					type : 'POST',
 					data : {
-						action : 'responsive-ready-sites-reset-widgets-data'
+						action : 'responsive-ready-sites-reset-widgets-data',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -1276,6 +1293,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								data: {
 									action  : 'responsive-ready-sites-delete-posts',
 									post_id : post_id,
+									_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 								},
 								success: function( result ){
 
@@ -1319,6 +1337,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								data: {
 									action  : 'responsive-ready-sites-delete-wp-forms',
 									post_id : post_id,
+									_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 								},
 								success: function( result ){
 
@@ -1358,6 +1377,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								data: {
 									action  : 'responsive-ready-sites-delete-terms',
 									term_id : term_id,
+									_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 								},
 								success: function( result ){
 									if ( ResponsiveSitesAdmin.reset_processed_terms < ResponsiveSitesAdmin.site_imported_data['reset_terms'].length ) {
@@ -1388,7 +1408,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 					url  : responsiveSitesAdmin.ajaxurl,
 					type : 'POST',
 					data : {
-						action : 'responsive-ready-sites-reset-customizer-data'
+						action : 'responsive-ready-sites-reset-customizer-data',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+
 					},
 				}
 			)
@@ -1409,7 +1431,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 					url  : responsiveSitesAdmin.ajaxurl,
 					type : 'POST',
 					data : {
-						action : 'responsive-ready-sites-reset-site-options'
+						action : 'responsive-ready-sites-reset-site-options',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -1430,7 +1453,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 					url  : responsiveSitesAdmin.ajaxurl,
 					type : 'POST',
 					data : {
-						action : 'responsive-ready-sites-reset-widgets-data'
+						action : 'responsive-ready-sites-reset-widgets-data',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)
@@ -1461,6 +1485,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								data: {
 									action  : 'responsive-ready-sites-delete-posts',
 									post_id : post_id,
+									_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 								},
 								success: function( result ){
 
@@ -1492,6 +1517,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								data: {
 									action  : 'responsive-ready-sites-delete-wp-forms',
 									post_id : post_id,
+									_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 								},
 								success: function( result ){
 
@@ -1523,6 +1549,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								data: {
 									action  : 'responsive-ready-sites-delete-terms',
 									term_id : term_id,
+									_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 								},
 								success: function( result ){
 									if ( ResponsiveSitesAdmin.reset_processed_terms < ResponsiveSitesAdmin.site_imported_data['reset_terms'].length ) {
@@ -1547,6 +1574,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					type: 'POST',
 					data: {
 						'action': 'responsive-is-theme-active',
+						'_ajax_nonce'      : responsiveSitesAdmin._ajax_nonce,
 					},
 				}
 			)

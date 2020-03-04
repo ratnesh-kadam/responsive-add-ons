@@ -211,6 +211,12 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         function activate_theme() {
 
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
+            if ( ! current_user_can( 'customize' ) ) {
+                wp_send_json_error( __( 'You are not allowed to activate the Theme', 'responsive-addons' ) );
+            }
+
             switch_theme( 'responsive' );
 
             wp_send_json_success(
@@ -691,8 +697,10 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Backup existing settings.
          */
         public function backup_settings() {
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
             if ( ! current_user_can( 'manage_options' ) ) {
-                return;
+                wp_send_json_error( __( 'User does not have permission!', 'responsive-addons' ) );
             }
 
             $file_name    = 'responsive-ready-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
@@ -723,6 +731,7 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * Set reset data
          */
         public function set_reset_data() {
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
             if ( ! current_user_can( 'manage_options' ) ) {
                 return;
             }
@@ -798,11 +807,13 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          */
         public function required_plugin_activate() {
 
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
             if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
                 wp_send_json_error(
                     array(
                         'success' => false,
-                        'message' => __( 'No plugin specified', 'responsive-addons' ),
+                        'message' => __( 'Error: You don\'t have the required permissions to install plugins.', 'responsive-addons' ),
                     )
                 );
             }
@@ -1004,6 +1015,9 @@ if( !class_exists( 'Responsive_Addons' ) ) {
          * @since 2.1.1
          */
         public function check_responsive_theme_active() {
+
+            check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
             $current_theme = wp_get_theme();
             if ( ( 'Responsive' === $current_theme->get( 'Name' ) ) || ( is_child_theme() && 'Responsive' === $current_theme->parent()->get( 'Name' ) ) ) {
                 wp_send_json_success(
