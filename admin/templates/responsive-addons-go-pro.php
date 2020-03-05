@@ -18,53 +18,53 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th>Free</th>
-						<th>Pro</th>
+						<th><?php esc_html_e( 'Free', 'responsive-addons' ); ?></th>
+						<th><?php esc_html_e( 'Pro', 'responsive-addons' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td class="feature">Ready Sites</td>
+						<td class="feature"><?php esc_html_e( 'Ready Sites', 'responsive-addons' ); ?></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Compatible with Elementor Page Builder</td>
+						<td class="feature"><?php esc_html_e( 'Compatible with Elementor Page Builder', 'responsive-addons' ); ?></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Mobile Friendly</td>
+						<td class="feature"><?php esc_html_e( 'Mobile Friendly', 'responsive-addons' ); ?></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">WooCommerce Compatible</td>
+						<td class="feature"><?php esc_html_e( 'WooCommerce Compatible', 'responsive-addons' ); ?></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Layout Customizer</td>
+						<td class="feature"><?php esc_html_e( 'Layout Customizer', 'responsive-addons' ); ?></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Color Customizer</td>
+						<td class="feature"><?php esc_html_e( 'Color Customizer', 'responsive-addons' ); ?></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Typography Customizer</td>
+						<td class="feature"><?php esc_html_e( 'Typography Customizer', 'responsive-addons' ); ?></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Premium Support</td>
+						<td class="feature"><?php esc_html_e( 'Premium Support', 'responsive-addons' ); ?></td>
 						<td class="featureno">-</td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>
 					<tr>
-						<td class="feature">Pro Ready Sites</td>
+						<td class="feature"><?php esc_html_e( 'Pro Ready Sites', 'responsive-addons' ); ?></td>
 						<td class="featureno">-</td>
 						<td class="featureyes"><span class='dashicons-before dashicons-yes'></span></td>
 					</tr>

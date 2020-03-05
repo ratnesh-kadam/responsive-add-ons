@@ -319,7 +319,7 @@ class Responsive_Ready_Sites_Options_Importer {
 
 				if ( ! empty( $cat['slug'] ) && ! empty( $cat['thumbnail_src'] ) ) {
 
-					$image = (object) self::_sideload_image( $cat['thumbnail_src'] );
+					$image = (object) self::sideload_image( $cat['thumbnail_src'] );
 
 					if ( ! is_wp_error( $image ) ) {
 
