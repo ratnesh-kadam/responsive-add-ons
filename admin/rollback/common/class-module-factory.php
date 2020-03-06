@@ -25,7 +25,7 @@ class Module_Factory {
 	 *
 	 * @var array Mapping array.
 	 */
-	private static $modules_attached = [];
+	private static $modules_attached = array();
 
 	/**
 	 * Load availabe modules for the selected product.
@@ -36,7 +36,7 @@ class Module_Factory {
 	public static function attach( $product, $modules ) {
 
 		if ( ! isset( self::$modules_attached[ $product->get_slug() ] ) ) {
-			self::$modules_attached[ $product->get_slug() ] = [];
+			self::$modules_attached[ $product->get_slug() ] = array();
 		}
 
 		foreach ( $modules as $module ) {
