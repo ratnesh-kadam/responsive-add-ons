@@ -48,7 +48,8 @@
                     url: ResponsiveInstallThemeVars.ajaxurl,
                     type: 'POST',
                     data: {
-                        'action' : 'responsive-ready-sites-activate-theme'
+                        'action' : 'responsive-ready-sites-activate-theme',
+                        '_ajax_nonce' : ResponsiveInstallThemeVars._ajax_nonce,
                     },
                 })
                     .done(function (result) {
@@ -115,6 +116,7 @@
                 data: {
                     action            : 'responsive-notice-dismiss',
                     notice_id         : notice_id,
+                    _ajax_nonce       : ResponsiveInstallThemeVars._ajax_nonce,
                 },
             });
 

@@ -160,6 +160,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				wp_send_json_error( __( 'User does not have permission!', 'responsive-addons' ) );
+			}
+
             $demo_api_uri = isset( $_POST['api_url'] ) ? esc_url( $_POST['api_url'] ) : ''; //phpcs:ignore
 
 			if ( ! empty( $demo_api_uri ) ) {

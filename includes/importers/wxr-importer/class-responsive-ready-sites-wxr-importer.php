@@ -127,6 +127,11 @@ if ( ! class_exists( 'Responsive_Ready_Sites_WXR_Importer' ) ) :
 		 */
 		public function stream_import() {
 
+			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				wp_send_json_error( __( 'User does not have permission!', 'responsive-addons' ) );
+			}
 			// Start the event stream.
 			header( 'Content-Type: text/event-stream, charset=UTF-8' );
 
@@ -227,9 +232,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_WXR_Importer' ) ) :
 		public function get_xml_data( $path ) {
 
 			$args = array(
-				'action'   => 'responsive-wxr-import',
-				'id'       => '1',
-				'xml_path' => $path,
+				'action'      => 'responsive-wxr-import',
+				'id'          => '1',
+				'xml_path'    => $path,
+				'_ajax_nonce' => wp_create_nonce( 'responsive-addons' ),
 			);
 			$url  = add_query_arg( urlencode_deep( $args ), admin_url( 'admin-ajax.php' ) );
 

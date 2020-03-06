@@ -36,16 +36,16 @@ final class Loader {
 	 *
 	 * @var array The products which use the SDK.
 	 */
-	private static $products = [];
+	private static $products = array();
 	/**
 	 * Holds available modules to load.
 	 *
 	 * @var array The modules which SDK will be using.
 	 */
-	private static $available_modules = [
+	private static $available_modules = array(
 		'rollback',
 
-	];
+	);
 
 	/**
 	 * Initialize the sdk logic.
@@ -53,7 +53,7 @@ final class Loader {
 	public static function init() {
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Loader ) ) {
 			self::$instance          = new Loader();
-			$modules                 = array_merge( self::$available_modules, apply_filters( 'responsive_sdk_modules', [] ) );
+			$modules                 = array_merge( self::$available_modules, apply_filters( 'responsive_sdk_modules', array() ) );
 			self::$available_modules = $modules;
 		}
 	}
