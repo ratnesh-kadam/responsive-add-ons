@@ -709,7 +709,6 @@ class Responsive_Add_Ons {
 			exit();
 		}
 
-		$responsive_addon_dir            = plugin_dir_path( __FILE__ );
 		$responsive_addons_go_pro_screen = ( isset( $_GET['action'] ) && 'go_pro' === $_GET['action'] ) ? true : false; //phpcs:ignore
 
 		$responsive_addon_license_screen = ( isset( $_GET['action'] ) && 'license' === $_GET['action'] ) ? true : false; //phpcs:ignore
@@ -745,14 +744,14 @@ class Responsive_Add_Ons {
 					<?php
 					if ( $responsive_addons_go_pro_screen ) {
 
-						require_once $responsive_addon_dir . 'admin/templates/responsive-addons-go-pro.php';
+						require_once RESPONSIVE_ADDONS_DIR . 'admin/templates/responsive-addons-go-pro.php';
 
 					} elseif ( $responsive_addon_license_screen ) {
 
 						do_action( 'responsive_addons_pro_license_page' );
 					} elseif ( $responsive_addon_pro_support_screen ) {
 
-						require_once $responsive_addon_dir . 'admin/templates/responsive-addons-support.php';
+						require_once RESPONSIVE_ADDONS_DIR . 'admin/templates/responsive-addons-support.php';
 					} else {
 
 						do_action( 'responsive_addons_importer_page' );
