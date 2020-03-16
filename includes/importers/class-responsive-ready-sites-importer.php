@@ -793,6 +793,99 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			/* translators: %s is the term ID */
 			wp_send_json_success( $message );
 		}
+
+		/**
+		 * Import Single Page.
+		 *
+		 * @since  2.3.0
+		 */
+		public function import_single_page() {
+
+			// Verify Nonce.
+			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
+
+			if ( ! current_user_can( 'install_plugins' ) ) {
+				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
+			}
+
+			$data = isset( $_POST['data'] ) ? $_POST['data'] : array();
+
+			if ( empty( $data ) ) {
+				wp_send_json_error( 'Page Data is empty.' );
+			}
+
+			$page_id = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
+			$title   = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
+			$excerpt = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
+			$content = isset( $_POST['data']['original_content'] ) ? $_POST['data']['original_content'] : ( isset( $_POST['data']['content']['rendered'] ) ? $_POST['data']['content']['rendered'] : '' );
+
+			$post_args = array(
+				'post_type'    => 'page',
+				'post_status'  => 'draft',
+				'post_title'   => $title,
+				'post_content' => $content,
+				'post_excerpt' => $excerpt,
+			);
+
+			$new_page_id = wp_insert_post( $post_args );
+			$post_meta   = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
+
+			if ( ! empty( $post_meta ) ) {
+				$this->import_post_meta( $new_page_id, $post_meta );
+			}
+
+			update_post_meta( $new_page_id, '_wp_page_template', 'elementor_header_footer' );
+
+			wp_send_json_success(
+				array(
+					'remove-page-id' => $page_id,
+					'id'             => $new_page_id,
+					'link'           => get_permalink( $new_page_id ),
+				)
+			);
+		}
+
+		/**
+		 * Import Post Meta
+		 *
+		 * @since 2.3.0
+		 *
+		 * @param  integer $post_id  Post ID.
+		 * @param  array   $metadata  Post meta.
+		 * @return void
+		 */
+		public function import_post_meta( $post_id, $metadata ) {
+
+			$metadata = (array) $metadata;
+
+			foreach ( $metadata as $meta_key => $meta_value ) {
+
+				if ( $meta_value ) {
+
+					if ( '_elementor_data' === $meta_key ) {
+
+						$raw_data = json_decode( stripslashes( $meta_value ), true );
+
+						if ( is_array( $raw_data ) ) {
+							$raw_data = wp_slash( wp_json_encode( $raw_data ) );
+						} else {
+							$raw_data = wp_slash( $raw_data );
+						}
+					} else {
+
+						if ( is_serialized( $meta_value, true ) ) {
+							$raw_data = maybe_unserialize( stripslashes( $meta_value ) );
+						} elseif ( is_array( $meta_value ) ) {
+							$raw_data = json_decode( stripslashes( $meta_value ), true );
+						} else {
+							$raw_data = $meta_value;
+						}
+					}
+
+					update_post_meta( $post_id, $meta_key, $raw_data );
+				}
+			}
+		}
 	}
 
 	/**
