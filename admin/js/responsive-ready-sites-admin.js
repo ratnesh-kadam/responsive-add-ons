@@ -196,6 +196,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'click'                     , '.theme-browser .active.ra-site-single .theme-screenshot, .theme-browser .active.ra-site-single .more-details, .theme-browser .active.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._doNothing );
 			$( document ).on( 'click'                     , '.close-full-overlay', ResponsiveSitesAdmin._closeFullOverlay );
 			$( document ).on( 'click', '.responsive-demo-import-options-free', ResponsiveSitesAdmin._importSiteOptionsScreen );
+			$( document ).on( 'click', '.responsive-page-import-options-free', ResponsiveSitesAdmin._importPageOptionsScreen );
 			$( document ).on( 'click', '.responsive-ready-sites-tooltip-icon', ResponsiveSitesAdmin._toggle_tooltip );
 
 			$( document ).on( 'responsive-get-active-theme' , ResponsiveSitesAdmin._is_responsive_theme_active );
@@ -314,6 +315,142 @@ var ResponsiveSitesAjaxQueue = (function() {
 				screenshot: screenshot,
 				name: demo_name,
 				slug: demo_slug,
+				required_plugins: JSON.stringify( requiredPlugins ),
+				responsive_site_options: responsiveSiteOptions,
+			}];
+			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
+			$( '.theme-install-overlay' ).css( 'display', 'block' );
+
+			if ( $.isArray( requiredPlugins ) ) {
+				// or.
+				var $pluginsFilter = $( '#plugin-filter' ),
+					data           = {
+						action           : 'responsive-ready-sites-required-plugins',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+						required_plugins : requiredPlugins
+				};
+
+				// Add disabled class from import button.
+				$( '.responsive-demo-import' )
+					.addClass( 'disabled not-click-able' )
+					.removeAttr( 'data-import' );
+
+				$( '.required-plugins' ).addClass( 'loading' ).html( '<span class="spinner is-active"></span>' );
+
+				// Required Required.
+				$.ajax(
+					{
+						url  : responsiveSitesAdmin.ajaxurl,
+						type : 'POST',
+						data : data,
+					}
+				)
+					.fail(
+						function( jqXHR ){
+
+							// Remove loader.
+							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+
+						}
+					)
+					.done(
+						function ( response ) {
+							required_plugins = response.data['required_plugins'];
+
+							// Remove loader.
+							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+							$( '.required-plugins-list' ).html( '' );
+
+							/**
+							 * Count remaining plugins.
+							 *
+							 * @type number
+							 */
+							var remaining_plugins = 0;
+
+							/**
+							 * Not Installed
+							 *
+							 * List of not installed required plugins.
+							 */
+							if ( typeof required_plugins.notinstalled !== 'undefined' ) {
+
+								// Add not have installed plugins count.
+								remaining_plugins += parseInt( required_plugins.notinstalled.length );
+
+								$( required_plugins.notinstalled ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Inactive
+							 *
+							 * List of not inactive required plugins.
+							 */
+							if ( typeof required_plugins.inactive !== 'undefined' ) {
+								// Add inactive plugins count.
+								remaining_plugins += parseInt( required_plugins.inactive.length );
+
+								$( required_plugins.inactive ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Active
+							 *
+							 * List of not active required plugins.
+							 */
+							if ( typeof required_plugins.active !== 'undefined' ) {
+
+								$( required_plugins.active ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Enable Demo Import Button
+							 *
+							 * @type number
+							 */
+							responsiveSitesAdmin.requiredPlugins = required_plugins;
+						}
+					);
+
+			}
+		},
+
+		/**
+		 * Import Page options Screen
+		 */
+		_importPageOptionsScreen: function(event) {
+			event.preventDefault();
+
+			var self = $( this ).parents( '.responsive-ready-site-preview' );
+
+			$( '#responsive-ready-site-preview' ).hide();
+
+			$( '#responsive-ready-sites-import-options' ).show();
+
+			var apiURL                = self.data( 'demo-api' ) || '',
+				demoType              = self.data( 'demo-type' ) || '',
+				demo_name             = self.data( 'demo-name' ) || '',
+				requiredPlugins       = self.data( 'required-plugins' ) || '',
+				responsiveSiteOptions = self.find( '.responsive-site-options' ).val() || '';
+
+			var template = wp.template( 'responsive-ready-sites-import-page-options-page' );
+
+			templateData = [{
+				demo_type: demoType,
+				demo_api: apiURL,
+				name: demo_name,
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
 			}];
@@ -654,7 +791,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_renderDemoPreview: function(anchor) {
 
 			var demoId                             = anchor.data( 'demo-id' ) || '',
-				apiURL                             = anchor.data( 'demo-api' ) || '',
 				demoURL                            = anchor.data( 'demo-url' ) || '',
 				screenshot                         = anchor.data( 'screenshot' ) || '',
 				demo_name                          = anchor.data( 'demo-name' ) || '',
@@ -670,7 +806,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			templateData = [{
 				id: demoId,
 				demo_url: demoURL + '/?utm_source=free-to-pro&utm_medium=responsive-ready-site-importer&utm_campaign=responsive-pro&utm_content=preview',
-				demo_api: apiURL,
+				demo_api: demoURL,
 				screenshot: screenshot,
 				name: demo_name,
 				slug: demo_slug,
