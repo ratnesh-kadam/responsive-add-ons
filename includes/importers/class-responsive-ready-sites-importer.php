@@ -72,6 +72,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				add_action( 'wp_ajax_responsive-ready-sites-delete-posts', array( $this, 'delete_imported_posts' ) );
 				add_action( 'wp_ajax_responsive-ready-sites-delete-wp-forms', array( $this, 'delete_imported_wp_forms' ) );
 				add_action( 'wp_ajax_responsive-ready-sites-delete-terms', array( $this, 'delete_imported_terms' ) );
+
+				// Import single page
+				add_action( 'wp_ajax_responsive-sites-create-page', array( $this, 'import_single_page' ) );
 			}
 
 			add_action( 'responsive_ready_sites_import_complete', array( $this, 'clear_cache' ) );
@@ -560,6 +563,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				'site_widgets_data'    => '',
 				'slug'                 => '',
 				'site_options_data'    => '',
+				'all_pages'            => '',
 			);
 
 			$api_args = apply_filters(
@@ -603,6 +607,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$remote_args['wpforms_path']         = $data['wpforms_path'];
 				$remote_args['site_customizer_data'] = $data['site_customizer_data'];
 				$remote_args['required_plugins']     = $data['required_plugins'];
+				$remote_args['all_pages']            = $data['all_pages'];
 				$remote_args['site_widgets_data']    = json_decode( $data['site_widgets_data'] );
 				$remote_args['site_options_data']    = $data['site_options_data'];
 				$remote_args['slug']                 = $data['slug'];

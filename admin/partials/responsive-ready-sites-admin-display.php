@@ -65,6 +65,7 @@
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
+			 data-all-pages="{{ JSON.stringify(data.items[ key ]['all_pages'] )}}"
 			 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
 			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data.items[ key ][ 'site_options_data' ]) }}">
 		<div class="inner">
@@ -122,7 +123,8 @@
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}"
-		 data-required-pro-plugins="{{data.required_pro_plugins}}">
+		 data-required-pro-plugins="{{data.required_pro_plugins}}"
+		 data-all-pages="{{data.all_pages}}">
 		<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
 		<div class="wp-full-overlay-header">
 			<div>
@@ -133,6 +135,12 @@
 
 				<a class="button button-primary responsive-addons responsive-page-import-options-{{{data.demo_type}}}" href="#"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></a>
 
+                <select id="all_pages">
+                    <# all_pages = JSON.parse(data.all_pages) #>
+                    <# for ( key in all_pages ) { #>
+                    <option value="{{{all_pages[key].page_id}}}">{{all_pages[key].page_title}}</option>
+                    <# } #>
+                </select>
 				<# } else { #>
 
 				<a class="button button-primary responsive-addons responsive-buy-pro" href="https://cyberchimps.com/responsive-go-pro/?utm_source=free-to-pro&utm_medium=responsive-add-ons&utm_campaign=responsive-pro&utm_content=preview-ready-site" target="_blank"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
@@ -160,6 +168,7 @@
 			 data-demo-slug="{{{data.slug}}}"
 			 data-screenshot="{{{data.screenshot}}}"
 			 data-required-plugins="{{data.required_plugins}}"
+			 data-all-pages="{{data.all_pages}}"
 			 data-required-pro-plugins="{{data.required_pro_plugins}}">
 			<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
 			<input type="hidden" class="demo_site_id" value="{{{ data.id }}}">
@@ -296,7 +305,7 @@
 					</ul>
 				</div>
 				<div class="responsive-ready-sites-import-button-wrap">
-					<a class="button button-hero button-primary responsive-ready-site-import-{{{data.demo_type}}}" href="#">
+					<a class="button button-hero button-primary responsive-ready-page-import-{{{data.demo_type}}}" href="#">
 						<?php esc_html_e( 'Import Page', 'responsive-addons' ); ?>
 					</a>
 				</div>
