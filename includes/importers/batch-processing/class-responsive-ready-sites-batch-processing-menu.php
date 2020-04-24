@@ -57,13 +57,20 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Menu' ) ) :
 		}
 
 		/**
-		 * Import Module Images.
+		 * Fix Menu.
 		 */
 		public static function fix_nav_menus() {
-			$term_id_menu = term_exists( 'menu1' );
-			if ( $term_id_menu ) {
+			$header_menu_term_id = term_exists( 'menu1' );
+			if ( $header_menu_term_id ) {
 				$theme_nav_menu_locations                = get_theme_mod( 'nav_menu_locations' );
-				$theme_nav_menu_locations['header-menu'] = $term_id_menu;
+				$theme_nav_menu_locations['header-menu'] = $header_menu_term_id;
+				set_theme_mod( 'nav_menu_locations', $theme_nav_menu_locations );
+			}
+
+			$footer_menu_term_id = term_exists( 'footer-menu' );
+			if ( $footer_menu_term_id ) {
+				$theme_nav_menu_locations                = get_theme_mod( 'nav_menu_locations' );
+				$theme_nav_menu_locations['footer-menu'] = $footer_menu_term_id;
 				set_theme_mod( 'nav_menu_locations', $theme_nav_menu_locations );
 			}
 		}
