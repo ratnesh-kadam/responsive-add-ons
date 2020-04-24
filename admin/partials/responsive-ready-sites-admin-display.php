@@ -17,7 +17,7 @@
 <div id="responsive-ready-sites-import-options"></div>
 <div id="responsive-ready-sites-admin-page">
 	<div class="responsive-sites-header">
-		<span class="ready-site-list-title">Responsive Ready Websites</span>
+		<span class="ready-site-list-title">Responsive Website Templates</span>
 		<p class="ready-site-list-intro">Build your Responsive website in 3 simple steps - import a ready website, change content and launch.</p>
 	</div>
 	<div class="theme-browser rendered">

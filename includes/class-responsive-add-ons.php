@@ -694,7 +694,7 @@ class Responsive_Add_Ons {
 		}
 
 		add_theme_page(
-			'Responsive Ready Sites Importer',
+			'Responsive Website Templates',
 			$menu_title,
 			'administrator',
 			'responsive-add-ons',
@@ -711,54 +711,19 @@ class Responsive_Add_Ons {
 			wp_redirect( admin_url( '/options-general.php?page=wc_am_client_responsive_addons_pro_dashboard' ) );
 			exit();
 		}
-
-		$responsive_addons_go_pro_screen = ( isset( $_GET['action'] ) && 'go_pro' === $_GET['action'] ) ? true : false; //phpcs:ignore
-
-		$responsive_addon_license_screen = ( isset( $_GET['action'] ) && 'license' === $_GET['action'] ) ? true : false; //phpcs:ignore
-		$responsive_addon_pro_support_screen = ( isset( $_GET['action'] ) && 'pro_support' === $_GET['action'] ) ? true : false; //phpcs:ignore?>
+		?>
 			<div class="wrap">
-				<h1><?php esc_html_e( 'Responsive Ready Sites Importer' ); ?></h1>
+				<h1><?php esc_html_e( 'Responsive Importer Options' ); ?></h1>
 				<h2 class="nav-tab-wrapper">
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=responsive-add-ons' ) ); ?>" class="nav-tab
+					<span class="nav-tab
 										<?php
 										if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) {
 											echo ' nav-tab-active';}
 										?>
-					"><?php esc_html_e( 'Ready Sites Importer' ); ?></a>
-					<?php
-					if ( ! $this->is_responsive_addons_pro_is_active() ) {
-						?>
-
-						<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'go_pro' ), admin_url( 'admin.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab
-											<?php
-											if ( $responsive_addons_go_pro_screen ) {
-												echo ' nav-tab-active';}
-											?>
-						"><?php esc_html_e( 'Go Pro' ); ?></a>
-
-					<?php } ?>
-						<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'pro_support' ), admin_url( 'admin.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab
-											<?php
-											if ( $responsive_addon_pro_support_screen ) {
-												echo ' nav-tab-active';}
-											?>
-						"><?php esc_html_e( 'Support' ); ?></a>
+					"><?php esc_html_e( 'Templates' ); ?></span>
 				</h2>
 					<?php
-					if ( $responsive_addons_go_pro_screen ) {
-
-						require_once RESPONSIVE_ADDONS_DIR . 'admin/templates/responsive-addons-go-pro.php';
-
-					} elseif ( $responsive_addon_license_screen ) {
-
-						do_action( 'responsive_addons_pro_license_page' );
-					} elseif ( $responsive_addon_pro_support_screen ) {
-
-						require_once RESPONSIVE_ADDONS_DIR . 'admin/templates/responsive-addons-support.php';
-					} else {
-
 						do_action( 'responsive_addons_importer_page' );
-					}
 					?>
 			</div>
 
@@ -852,7 +817,7 @@ class Responsive_Add_Ons {
 			'manage_options',
 			'responsive_add_ons',
 			array( $this, 'responsive_add_ons_getting_started' ),
-			RESPONSIVE_ADDONS_URI . '/admin/images/responsive-thumbnail.jpg',
+			RESPONSIVE_ADDONS_URI . '/admin/images/responsive-add-ons-menu-icon.jpg',
 			59.5,
 		);
 
@@ -862,26 +827,41 @@ class Responsive_Add_Ons {
 			__( 'Getting Started', 'responsive-addons' ),
 			'manage_options',
 			'responsive_add_ons',
-			array( $this, 'responsive_pro_getting_started' )
-		);
-
-		add_submenu_page(
-			'responsive_add_ons',
-			'',
-			__( 'Get Help', 'responsive-addons' ),
-			'manage_options',
-			'responsive_add_ons_get_help',
-			array( $this, 'responsive_add_ons_get_help' )
+			array( $this, 'responsive_pro_getting_started' ),
+			10
 		);
 
 		add_submenu_page(
 			'responsive_add_ons',
 			'Responsive Ready Sites Importer',
-			__( 'Ready Templates', 'responsive-addons' ),
+			__( 'Site Templates', 'responsive-addons' ),
 			'manage_options',
 			'responsive-add-ons',
-			array( $this, 'responsive_add_ons' )
+			array( $this, 'responsive_add_ons' ),
+			20
 		);
+
+		add_submenu_page(
+			'responsive_add_ons',
+			'',
+			__( 'Community Support', 'responsive-addons' ),
+			'manage_options',
+			'responsive_add_ons_community_support',
+			array( $this, 'responsive_add_ons_community_support' ),
+			30
+		);
+
+		if ( ! class_exists( 'Responsive_Addons_Pro' ) ) {
+			add_submenu_page(
+				'responsive_add_ons',
+				'',
+				__( 'Go Pro', 'responsive-addons' ),
+				'manage_options',
+				'responsive_add_ons_go_pro',
+				array( $this, 'responsive_add_ons_go_pro' ),
+				60
+			);
+		}
 	}
 
 	/**
@@ -930,12 +910,22 @@ class Responsive_Add_Ons {
 	 * @since 2.2.8
 	 * @access public
 	 */
-	public function responsive_add_ons_get_help() {
+	public function responsive_add_ons_community_support() {
 		if ( empty( $_GET['page'] ) ) {
 			return;
 		}
-		wp_redirect( 'https://cyberchimps.com/my-account/orders/' );
+		wp_redirect( 'https://www.facebook.com/groups/responsive.theme' );
 		die;
+	}
+
+	/**
+	 * Free vs Pro features listing.
+	 *
+	 * @since 2.0.5
+	 * @access public
+	 */
+	public function responsive_add_ons_go_pro() {
+		require_once RESPONSIVE_ADDONS_DIR . 'admin/templates/free-vs-pro.php';
 	}
 
 	/**
