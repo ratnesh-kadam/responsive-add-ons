@@ -245,6 +245,7 @@
 	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
+		 data-screenshot="{{{data.screenshot}}}"
 		 data-demo-type="{{{data.demo_type}}}"
 		 data-required-plugins="{{data.required_plugins}}"
 		 data-required-pro-plugins="{{data.required_pro_plugins}}">
@@ -263,37 +264,39 @@
 				</div>
 			</div>
 
-            <div class="single-site-wrap">
-                <div class="single-site">
-                    <div class="single-site-preview-wrap">
-                        <div class="single-site-pages-header">
-                            <h3 class="responsive-site-title">{{{data['title']}}}</h3>
-                            <span class="count" style="display: none"></span>
-                        </div>
-                        <div class="single-site-preview">
-                            <img class="theme-screenshot" data-src="" src="https://ccreadysites.cyberchimps.com/wp-content/uploads/2020/04/insurance-screenshot.jpg" />
-                        </div>
-                    </div>
-                    <div class="single-site-pages-wrap">
-                        <div class="responsive-pages-title-wrap">
-                            <span class="responsive-pages-title"><?php esc_html_e( 'Page Templates', 'responsive-addons' ); ?></span>
-                        </div>
-                        <div class="single-site-pages">
-                            <div id="single-pages">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-site-footer">
-                        <div class="site-action-buttons-wrap">
-                            <a href="#" class="button button-hero site-preview-button" target="_blank">Preview "{{data.name}}" Site <i class="dashicons dashicons-external"></i></a>
-                            <div class="site-action-buttons-right">
-                                <div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<div class="single-site-wrap">
+				<div class="single-site">
+					<div class="single-site-preview-wrap">
+						<div class="single-site-pages-header">
+							<h3 class="responsive-site-title">{{{data['title']}}}</h3>
+							<span class="count" style="display: none"></span>
+						</div>
+						<div class="single-site-preview">
+							<img class="theme-screenshot" data-src="" src="{{data.screenshot}}" />
+						</div>
+					</div>
+					<div class="single-site-pages-wrap">
+						<div class="responsive-pages-title-wrap">
+							<span class="responsive-pages-title"><?php esc_html_e( 'Page Templates', 'responsive-addons' ); ?></span>
+						</div>
+						<div class="single-site-pages">
+							<div id="single-pages">
+								<# for ( page_id in data.pages ) { #>
+									console.log({{data.pages}});
+								<# } #>
+							</div>
+						</div>
+					</div>
+					<div class="single-site-footer">
+						<div class="site-action-buttons-wrap">
+							<a href="#" class="button button-hero site-preview-button" target="_blank">Preview "{{data.name}}" Site <i class="dashicons dashicons-external"></i></a>
+							<div class="site-action-buttons-right">
+								<div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="result_preview" style="display: none">
 			</div>
 		</div>

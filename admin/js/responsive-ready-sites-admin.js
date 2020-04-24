@@ -443,6 +443,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var apiURL                = self.data( 'demo-api' ) || '',
 				demoType              = self.data( 'demo-type' ) || '',
 				demo_name             = self.data( 'demo-name' ) || '',
+				screenshot             = self.data( 'screenshot' ) || '',
 				requiredPlugins       = self.data( 'required-plugins' ) || '',
 				pages			  = self.data( 'pages' ) || '',
 				responsiveSiteOptions = self.find( '.responsive-site-options' ).val() || '';
@@ -456,8 +457,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
 				pages: JSON.stringify( pages ),
+				screenshot: screenshot
 			}];
-			$( '#responsive-ready-sites-import-options' ).html( template( templateData ) );
+			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) )
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
 
 			if ( $.isArray( requiredPlugins ) ) {
@@ -803,6 +805,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				responsiveSiteOptions              = anchor.find( '.responsive-site-options' ).val() || '',
 				demo_type                          = anchor.data( 'demo-type' ) || '',
 				isResponsiveAddonsProInstalled     = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled(),
+				isResponsiceAddonsProLicenseActive = ResponsiveSitesAdmin._checkRespomsiveAddonsProLicenseActive();
 				isResponsiceAddonsProLicenseActive = ResponsiveSitesAdmin._checkRespomsiveAddonsProLicenseActive();
 
 			var template = wp.template( 'responsive-ready-site-preview' );
