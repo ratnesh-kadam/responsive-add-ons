@@ -883,7 +883,7 @@ class Responsive_Add_Ons {
 				<div class="responsive-add-ons-getting-started__box postbox">
 					<div class="responsive-add-ons-getting-started__header">
 						<div class="responsive-add-ons-getting-started__title">
-							<?php echo __( 'Getting Started', 'responsive-addons-pro' ); ?>
+							<?php echo __( 'Getting Started', 'responsive-addons' ); ?>
 						</div>
 						<a class="responsive-add-ons-getting-started__skip" href="<?php echo esc_url( admin_url() ); ?>">
 							<span class="responsive-add-ons-getting-started__skip_button"><span class="screen-reader-text">Skip</span></span>
@@ -891,8 +891,8 @@ class Responsive_Add_Ons {
 					</div>
 					<div class="responsive-add-ons-getting-started__content">
 						<div class="responsive-add-ons-getting-started__content--narrow">
-							<h2><?php echo __( 'Welcome to Responsive Pro', 'responsive-addons-pro' ); ?></h2>
-							<p><?php echo __( 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the in.', 'responsive-addons-pro' ); ?></p>
+							<h2><?php echo __( 'Welcome to Responsive Pro', 'responsive-addons' ); ?></h2>
+							<p><?php echo __( 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the in.', 'responsive-addons' ); ?></p>
 						</div>
 
 						<div class="responsive-add-ons-getting-started__video">
