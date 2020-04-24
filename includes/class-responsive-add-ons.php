@@ -820,7 +820,7 @@ class Responsive_Add_Ons {
 			'manage_options',
 			'responsive_add_ons',
 			array( $this, 'responsive_add_ons_getting_started' ),
-			RESPONSIVE_ADDONS_URI . '/admin/images/responsive-add-ons-menu-icon.jpg',
+			RESPONSIVE_ADDONS_URI . '/admin/images/responsive-add-ons-menu-icon.png',
 			59.5,
 		);
 
