@@ -286,9 +286,9 @@
                     </div>
                     <div class="single-site-footer">
                         <div class="site-action-buttons-wrap">
-                            <a href="{{data['astra-site-url']}}/" class="button button-hero site-preview-button" target="_blank">Preview "{{{data['title']}}}" Site <i class="dashicons dashicons-external"></i></a>
+                            <a href="#" class="button button-hero site-preview-button" target="_blank">Preview "{{data.name}}" Site <i class="dashicons dashicons-external"></i></a>
                             <div class="site-action-buttons-right">
-                                <div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Import Template', 'astra-sites' ); ?></div>
+                                <div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></div>
                             </div>
                         </div>
                     </div>
