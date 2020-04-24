@@ -563,7 +563,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				'site_widgets_data'    => '',
 				'slug'                 => '',
 				'site_options_data'    => '',
-				'all_pages'            => '',
+				'pages'                => '',
 			);
 
 			$api_args = apply_filters(
@@ -607,7 +607,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$remote_args['wpforms_path']         = $data['wpforms_path'];
 				$remote_args['site_customizer_data'] = $data['site_customizer_data'];
 				$remote_args['required_plugins']     = $data['required_plugins'];
-				$remote_args['all_pages']            = $data['all_pages'];
+				$remote_args['pages']                = $data['pages'];
 				$remote_args['site_widgets_data']    = json_decode( $data['site_widgets_data'] );
 				$remote_args['site_options_data']    = $data['site_options_data'];
 				$remote_args['slug']                 = $data['slug'];

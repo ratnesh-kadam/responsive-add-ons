@@ -74,7 +74,7 @@
 .wp-full-overlay-header .button.responsive-addons{
 	float: none;
 }
-.wp-full-overlay-header .button.responsive-demo-import-options-free{
+.wp-full-overlay-header .button.responsive-demo-import-options-free, .wp-full-overlay-header .button.responsive-page-import-options-template-free {
 	margin: 20px 20px 20px 20px;
 	font-size: 14px;
 	height: 30px;
@@ -408,9 +408,62 @@ responsive-ready-site-import-free.button.installing:before {
 	padding: 0px;
 	margin: 0px;
 }
+.single-site {
+	display: flex;
+}
+.single-site-preview-wrap {
+	width: 55%
+}
+.single-site-pages-wrap {
+	width: 45%;
+}
+.single-site-pages-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 0 32px 0;
+}
+.single-site-preview {
+	margin-right: 4em;
+	max-height: calc(100vh - 280px);
+	height: 100vh;
+	overflow-y: auto;
+	border-radius: 2px;
+	box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.12);
+	margin-left: 5%;
+}
+.single-site-pages {
+	overflow-y: auto;
+	height: 100vh;
+	max-height: calc(100vh - 280px);
+}
+.single-site-preview img {
+	width: 100%;
+	vertical-align: middle;
+}
+.single-site-footer {
+	position: fixed;
+	padding: 15px 50px 15px 35px;
+	bottom: 0;
+	background: #fff;
+	right: 0;
+	left: 0;
+	z-index: 88;
+	box-shadow: 0 -2px 8px rgba( 0, 0, 0, 0.05);
+}
+.site-action-buttons-wrap {
+	display: flex;
+	justify-content: space-between;
+}
+.site-action-buttons-wrap .dashicons {
+	vertical-align: sub;
+	font-size: 1rem;
+	margin-left: .2em;
+}
 @media screen and (max-width: 768px ) {
 	#responsive-theme-activation .responsive-addons-message-inner {
 		display: block;
 		text-align: center;
 	}
 }
+

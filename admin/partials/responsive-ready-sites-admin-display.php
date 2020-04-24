@@ -65,7 +65,7 @@
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
-			 data-all-pages="{{ JSON.stringify(data.items[ key ]['all_pages'] )}}"
+			 data-pages="{{ JSON.stringify(data.items[ key ]['pages'] )}}"
 			 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
 			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data.items[ key ][ 'site_options_data' ]) }}">
 		<div class="inner">
@@ -124,7 +124,7 @@
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}"
 		 data-required-pro-plugins="{{data.required_pro_plugins}}"
-		 data-all-pages="{{data.all_pages}}">
+		 data-pages="{{data.pages}}">
 		<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
 		<div class="wp-full-overlay-header">
 			<div>
@@ -135,12 +135,6 @@
 
 				<a class="button button-primary responsive-addons responsive-page-import-options-{{{data.demo_type}}}" href="#"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></a>
 
-                <select id="all_pages">
-                    <# all_pages = JSON.parse(data.all_pages) #>
-                    <# for ( key in all_pages ) { #>
-                    <option value="{{{all_pages[key].page_id}}}">{{all_pages[key].page_title}}</option>
-                    <# } #>
-                </select>
 				<# } else { #>
 
 				<a class="button button-primary responsive-addons responsive-buy-pro" href="https://cyberchimps.com/responsive-go-pro/?utm_source=free-to-pro&utm_medium=responsive-add-ons&utm_campaign=responsive-pro&utm_content=preview-ready-site" target="_blank"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
@@ -168,7 +162,7 @@
 			 data-demo-slug="{{{data.slug}}}"
 			 data-screenshot="{{{data.screenshot}}}"
 			 data-required-plugins="{{data.required_plugins}}"
-			 data-all-pages="{{data.all_pages}}"
+			 data-pages="{{data.pages}}"
 			 data-required-pro-plugins="{{data.required_pro_plugins}}">
 			<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
 			<input type="hidden" class="demo_site_id" value="{{{ data.id }}}">
@@ -269,50 +263,42 @@
 				</div>
 			</div>
 
-			<div class="site-import-options">
-				<div class="responsive-ready-sites-advanced-options">
-					<h2>Importing {{data.demo_name}}</h2>
-					<p><?php esc_html_e( 'Importing this Template will &hellip;', 'responsive-addons' ); ?></p>
-					<ul class="responsive-ready-site-contents">
-						<li class="responsive-ready-sites-import-plugins">
-							<strong><?php esc_html_e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
-							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
-							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
-								<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
-							</div>
-						</li>
-						<li class="responsive-ready-sites-reset-data">
-							<label>
-								<strong><?php esc_html_e( 'Delete Previous Import', 'responsive-addons' ); ?></strong>
-							</label>
-							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-reset-data"><span class="dashicons dashicons-editor-help"></span></span>
-							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-reset-data" style="display: none;">
-								<p><?php esc_html_e( 'Deletes previous import including customizer settings and content. Plugins are not deleted.', 'responsive-addons' ); ?></p>
-							</div>
-						</li>
-						<li class="responsive-ready-sites-import-xml">
-							<label>
-								<strong><?php esc_html_e( 'Import Content', 'responsive-addons' ); ?></strong>
-							</label>
-							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
-							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
-								<p><?php esc_html_e( 'Imports sample pages, posts, images and menus. Depending on your internet speed this may take 2-10 minutes.', 'responsive-addons' ); ?></p>
-							</div>
-							<div class="responsive-ready-sites-import-process-wrap" style="display: none;">
-								<progress class="responsive-ready-sites-import-process" max="100" value="0"></progress>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="responsive-ready-sites-import-button-wrap">
-					<a class="button button-hero button-primary responsive-ready-page-import-{{{data.demo_type}}}" href="#">
-						<?php esc_html_e( 'Import Page', 'responsive-addons' ); ?>
-					</a>
-				</div>
-			</div>
+            <div class="single-site-wrap">
+                <div class="single-site">
+                    <div class="single-site-preview-wrap">
+                        <div class="single-site-pages-header">
+                            <h3 class="responsive-site-title">{{{data['title']}}}</h3>
+                            <span class="count" style="display: none"></span>
+                        </div>
+                        <div class="single-site-preview">
+                            <img class="theme-screenshot" data-src="" src="https://ccreadysites.cyberchimps.com/wp-content/uploads/2020/04/insurance-screenshot.jpg" />
+                        </div>
+                    </div>
+                    <div class="single-site-pages-wrap">
+                        <div class="responsive-pages-title-wrap">
+                            <span class="responsive-pages-title"><?php esc_html_e( 'Page Templates', 'responsive-addons' ); ?></span>
+                        </div>
+                        <div class="single-site-pages">
+                            <div id="single-pages">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-site-footer">
+                        <div class="site-action-buttons-wrap">
+                            <a href="{{data['astra-site-url']}}/" class="button button-hero site-preview-button" target="_blank">Preview "{{{data['title']}}}" Site <i class="dashicons dashicons-external"></i></a>
+                            <div class="site-action-buttons-right">
+                                <div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Import Template', 'astra-sites' ); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 			<div class="result_preview" style="display: none">
 			</div>
 		</div>
 	</div>
 </script>
+
+
 
