@@ -80,6 +80,9 @@ class Responsive_Add_Ons {
 		// Remove all admin notices from specific pages.
 		add_action( 'admin_init', array( $this, 'responsive_add_ons_on_admin_init' ) );
 
+		// Redirect to Getting Started Page on Plugin Activation
+		add_action( 'admin_init', array( $this, 'responsive_add_ons_maybe_redirect_to_getting_started' ) );
+
 		$this->options        = get_option( 'responsive_theme_options' );
 		$this->plugin_options = get_option( 'responsive_addons_options' );
 
@@ -959,5 +962,29 @@ class Responsive_Add_Ons {
 		}
 
 		remove_all_actions( 'admin_notices' );
+	}
+
+	/**
+	 * @since 2.2.8
+	 * @access public
+	 */
+	public function responsive_add_ons_maybe_redirect_to_getting_started() {
+		if ( ! get_transient( 'responsive_add_ons_activation_redirect' ) ) {
+			return;
+		}
+
+		if ( wp_doing_ajax() ) {
+			return;
+		}
+
+		delete_transient( 'responsive_add_ons_activation_redirect' );
+
+		if ( is_network_admin() || isset( $_GET['activate-multi'] ) ) {
+			return;
+		}
+
+		wp_safe_redirect( admin_url( 'admin.php?page=responsive_add_ons' ) );
+
+		exit;
 	}
 }
