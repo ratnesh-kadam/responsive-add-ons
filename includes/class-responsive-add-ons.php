@@ -74,8 +74,11 @@ class Responsive_Add_Ons {
 			add_action( 'wp_ajax_check-responsive-add-ons-pro-license-active', array( $this, 'is_responsive_pro_license_is_active' ) );
 		}
 
-		// Responsive Addons Page.
-		add_action( 'admin_menu', array( $this, 'responsive_addons_admin_page' ), 100 );
+		// Responsive Addons Menu.
+		add_action( 'admin_menu', array( $this, 'responsive_add_ons_admin_menu' ) );
+
+		// Remove all admin notices from specific pages.
+		add_action( 'admin_init', array( $this, 'responsive_add_ons_on_admin_init' ) );
 
 		$this->options        = get_option( 'responsive_theme_options' );
 		$this->plugin_options = get_option( 'responsive_addons_options' );
@@ -405,7 +408,7 @@ class Responsive_Add_Ons {
 		);
 		wp_localize_script( 'install-responsive-theme', 'ResponsiveInstallThemeVars', $data );
 
-		if ( 'appearance_page_responsive-add-ons' === $hook && empty( $_GET['action'] ) ) {
+		if ( 'responsive_page_responsive-add-ons' === $hook && empty( $_GET['action'] ) ) {
 
 			wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '2.0.0', true );
 
@@ -726,7 +729,7 @@ class Responsive_Add_Ons {
 					if ( ! $this->is_responsive_addons_pro_is_active() ) {
 						?>
 
-						<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'go_pro' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab
+						<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'go_pro' ), admin_url( 'admin.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab
 											<?php
 											if ( $responsive_addons_go_pro_screen ) {
 												echo ' nav-tab-active';}
@@ -734,7 +737,7 @@ class Responsive_Add_Ons {
 						"><?php esc_html_e( 'Go Pro' ); ?></a>
 
 					<?php } ?>
-						<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'pro_support' ), admin_url( 'themes.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab
+						<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'pro_support' ), admin_url( 'admin.php?page=responsive-add-ons' ) ) ); ?>" class="nav-tab
 											<?php
 											if ( $responsive_addon_pro_support_screen ) {
 												echo ' nav-tab-active';}
@@ -834,5 +837,137 @@ class Responsive_Add_Ons {
 				array( 'success' => false )
 			);
 		}
+	}
+
+	/**
+	 * Register the menu for the plugin.
+	 *
+	 * @since 2.2.8
+	 */
+	public function responsive_add_ons_admin_menu() {
+		// Create Menu for Responsive Pro.
+		add_menu_page(
+			__( 'Responsive', 'responsive-addons' ),
+			__( 'Responsive', 'responsive-addons' ),
+			'manage_options',
+			'responsive_add_ons',
+			array( $this, 'responsive_add_ons_getting_started' ),
+			RESPONSIVE_ADDONS_URI . '/admin/images/responsive-thumbnail.jpg',
+			59.5,
+		);
+
+		add_submenu_page(
+			'responsive_add_ons',
+			__( 'Getting Started', 'responsive-addons' ),
+			__( 'Getting Started', 'responsive-addons' ),
+			'manage_options',
+			'responsive_add_ons',
+			array( $this, 'responsive_pro_getting_started' )
+		);
+
+		add_submenu_page(
+			'responsive_add_ons',
+			'',
+			__( 'Get Help', 'responsive-addons' ),
+			'manage_options',
+			'responsive_add_ons_get_help',
+			array( $this, 'responsive_add_ons_get_help' )
+		);
+
+		add_submenu_page(
+			'responsive_add_ons',
+			'Responsive Ready Sites Importer',
+			__( 'Ready Templates', 'responsive-addons' ),
+			'manage_options',
+			'responsive-add-ons',
+			array( $this, 'responsive_add_ons' )
+		);
+	}
+
+	/**
+	 * Display Getting Started Page.
+	 *
+	 * Output the content for the getting started page.
+	 *
+	 * @since 2.2.8
+	 * @access public
+	 */
+	public function responsive_add_ons_getting_started() {
+
+		?>
+		<div class="wrap">
+			<div class="responsive-add-ons-getting-started">
+				<div class="responsive-add-ons-getting-started__box postbox">
+					<div class="responsive-add-ons-getting-started__header">
+						<div class="responsive-add-ons-getting-started__title">
+							<?php echo __( 'Getting Started', 'responsive-addons-pro' ); ?>
+						</div>
+						<a class="responsive-add-ons-getting-started__skip" href="<?php echo esc_url( admin_url() ); ?>">
+							<span class="responsive-add-ons-getting-started__skip_button"><span class="screen-reader-text">Skip</span></span>
+						</a>
+					</div>
+					<div class="responsive-add-ons-getting-started__content">
+						<div class="responsive-add-ons-getting-started__content--narrow">
+							<h2><?php echo __( 'Welcome to Responsive Pro', 'responsive-addons-pro' ); ?></h2>
+							<p><?php echo __( 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the in.', 'responsive-addons-pro' ); ?></p>
+						</div>
+
+						<div class="responsive-add-ons-getting-started__video">
+							<iframe width="620" height="350" src="https://www.youtube-nocookie.com/embed/1eKjI0qjXPI?rel=0&amp;controls=1&amp;modestbranding=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.wrap -->
+		<?php
+	}
+
+	/**
+	 * Go to Responsive Pro support.
+	 *
+	 * Fired by `admin_init` action.
+	 *
+	 * @since 2.2.8
+	 * @access public
+	 */
+	public function responsive_add_ons_get_help() {
+		if ( empty( $_GET['page'] ) ) {
+			return;
+		}
+		wp_redirect( 'https://cyberchimps.com/my-account/orders/' );
+		die;
+	}
+
+	/**
+	 * On admin init.
+	 *
+	 * Preform actions on WordPress admin initialization.
+	 *
+	 * Fired by `admin_init` action.
+	 *
+	 * @since 2.2.8
+	 * @access public
+	 */
+	public function responsive_add_ons_on_admin_init() {
+
+		$this->responsive_add_ons_remove_all_admin_notices();
+	}
+
+	/**
+	 * @since 2.2.8
+	 * @access private
+	 */
+	private function responsive_add_ons_remove_all_admin_notices() {
+		$responsive_add_ons_pages = array(
+			'responsive_add_ons',
+			'responsive-add-ons',
+			'responsive_addons_pro_system_info',
+		);
+
+		if ( empty( $_GET['page'] ) || ! in_array( $_GET['page'], $responsive_add_ons_pages, true ) ) {
+			return;
+		}
+
+		remove_all_actions( 'admin_notices' );
 	}
 }
