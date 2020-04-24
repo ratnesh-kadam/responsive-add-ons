@@ -922,9 +922,9 @@ class Responsive_Add_Ons {
 	}
 
 	/**
-	 * Free vs Pro features listing.
+	 * Free vs Pro features list.
 	 *
-	 * @since 2.0.5
+	 * @since 2.2.8
 	 * @access public
 	 */
 	public function responsive_add_ons_go_pro() {
