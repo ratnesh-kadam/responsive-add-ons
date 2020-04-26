@@ -803,11 +803,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 				demo_name                          = anchor.data( 'demo-name' ) || '',
 				demo_slug                          = anchor.data( 'demo-slug' ) || '',
 				requiredPlugins                    = anchor.data( 'required-plugins' ) || '',
+				allow_pages                    	   = anchor.data( 'allow-pages' ) || false,
 				pages                    	   = anchor.data( 'pages' ) || '',
 				responsiveSiteOptions              = anchor.find( '.responsive-site-options' ).val() || '',
 				demo_type                          = anchor.data( 'demo-type' ) || '',
 				isResponsiveAddonsProInstalled     = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled(),
-				isResponsiceAddonsProLicenseActive = ResponsiveSitesAdmin._checkRespomsiveAddonsProLicenseActive();
 				isResponsiceAddonsProLicenseActive = ResponsiveSitesAdmin._checkRespomsiveAddonsProLicenseActive();
 
 			var template = wp.template( 'responsive-ready-site-preview' );
@@ -823,6 +823,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				responsive_site_options: responsiveSiteOptions,
 				demo_type: demo_type,
 				is_responsive_addons_pro_installed: isResponsiveAddonsProInstalled,
+				allow_pages: allow_pages,
 				pages: JSON.stringify( pages ),
 			}];
 
@@ -1844,7 +1845,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			$( '.site-import-layout-button' ).removeClass( 'disabled' );
 			if( page_name ) {
-				var title = "text";
+				var title = responsiveSitesAdmin.importSingleTemplateButtonTitle.replace( '%s', page_name.trim() );
 				$( '.site-import-layout-button' ).text( title );
 			}
 

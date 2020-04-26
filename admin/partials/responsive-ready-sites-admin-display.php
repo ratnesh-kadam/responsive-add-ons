@@ -63,6 +63,7 @@
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
 			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
+			 data-allow-pages="{{{ data.items[ key ].allow_pages }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
 			 data-pages="{{ JSON.stringify(data.items[ key ]['pages'] )}}"
@@ -133,8 +134,11 @@
 
 				<a class="button button-primary responsive-addons responsive-demo-import-options-{{{data.demo_type}}}" href="#"><?php esc_html_e( 'Import Site', 'responsive-addons' ); ?></a>
 
-				<a class="button button-primary responsive-addons responsive-page-import-options-{{{data.demo_type}}}" href="#"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></a>
+					<# if ( data.allow_pages ) { #>
 
+					<a class="button button-primary responsive-addons responsive-page-import-options-{{{data.demo_type}}}" href="#"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></a>
+
+					<# } #>
 				<# } else { #>
 
 				<a class="button button-primary responsive-addons responsive-buy-pro" href="https://cyberchimps.com/responsive-go-pro/?utm_source=free-to-pro&utm_medium=responsive-add-ons&utm_campaign=responsive-pro&utm_content=preview-ready-site" target="_blank"><?php esc_html_e( 'Buy Responsive Pro', 'responsive-addons' ); ?></a>
@@ -280,7 +284,7 @@
 						<div class="single-site-pages">
 							<div id="single-pages">
 								<# for (page_id in data.pages)  { #>
-								<div class="theme astra-theme site-single" data-page-id="{{page_id}}" data-dynamic-page="" >
+								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-dynamic-page="" >
 									<div class="inner">
 										<#
 										var featured_image_class = '';
@@ -313,7 +317,7 @@
 						<div class="site-action-buttons-wrap">
 							<a href="#" class="button button-hero site-preview-button" target="_blank">Preview "{{data.name}}" Site <i class="dashicons dashicons-external"></i></a>
 							<div class="site-action-buttons-right">
-								<div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Import Template', 'responsive-addons' ); ?></div>
+								<div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Select Template', 'responsive-addons' ); ?></div>
 							</div>
 						</div>
 					</div>
