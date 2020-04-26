@@ -264,13 +264,11 @@
 				</div>
 			</div>
 
+			<div class="theme-browser rendered">
+				<div id="site-pages" class="themes wp-clearfix">
 			<div class="single-site-wrap">
 				<div class="single-site">
 					<div class="single-site-preview-wrap">
-						<div class="single-site-pages-header">
-							<h3 class="responsive-site-title">{{{data['title']}}}</h3>
-							<span class="count" style="display: none"></span>
-						</div>
 						<div class="single-site-preview">
 							<img class="theme-screenshot" data-src="" src="{{data.screenshot}}" />
 						</div>
@@ -281,8 +279,32 @@
 						</div>
 						<div class="single-site-pages">
 							<div id="single-pages">
-								<# for ( page_id in data.pages ) { #>
-									console.log({{data.pages}});
+								<# for (page_id in data.pages)  { #>
+								<div class="theme astra-theme site-single" data-page-id="{{page_id}}" data-dynamic-page="" >
+									<div class="inner">
+										<#
+										var featured_image_class = '';
+										var featured_image = data.pages[page_id]['featured_image'] || '';
+										if( '' === featured_image ) {
+										featured_image = '<?php echo esc_url( RESPONSIVE_ADDONS_DIR . 'inc/assets/images/placeholder.png' ); ?>';
+										featured_image_class = ' no-featured-image ';
+										}
+
+										var thumbnail_image = data.pages[page_id]['thumbnail-image-url'] || '';
+										if( '' === thumbnail_image ) {
+										thumbnail_image = featured_image;
+										}
+										#>
+										<span class="site-preview" data-title="{{ data.pages[page_id]['page_tile'] }}">
+										<div class="theme-screenshot one loading {{ featured_image_class }}" data-src="{{ featured_image }}" data-featured-src="{{ featured_image }}" style="background-image: url('{{ featured_image }}');"></div>
+									</span>
+										<div class="theme-id-container">
+											<h3 class="theme-name">
+												{{{ data.pages[page_id]['page_tile'] }}}
+											</h3>
+										</div>
+									</div>
+								</div>
 								<# } #>
 							</div>
 						</div>
@@ -295,6 +317,8 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
 				</div>
 			</div>
 			<div class="result_preview" style="display: none">

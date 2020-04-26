@@ -200,6 +200,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'click', '.responsive-page-import-options-free', ResponsiveSitesAdmin._importPageOptionsScreen );
 			$( document ).on( 'click', '.responsive-ready-sites-tooltip-icon', ResponsiveSitesAdmin._toggle_tooltip );
 
+			$( document ).on('click'                     , '#single-pages .site-single', ResponsiveSitesAdmin._change_site_preview_screenshot);
+
 			$( document ).on( 'responsive-get-active-theme' , ResponsiveSitesAdmin._is_responsive_theme_active );
 			$( document ).on( 'responsive-ready-sites-install-start'       , ResponsiveSitesAdmin._process_import );
 
@@ -456,7 +458,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				name: demo_name,
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
-				pages: JSON.stringify( pages ),
+				pages:  pages,
 				screenshot: screenshot
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) )
@@ -823,6 +825,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				is_responsive_addons_pro_installed: isResponsiveAddonsProInstalled,
 				pages: JSON.stringify( pages ),
 			}];
+
 			$( '#responsive-ready-site-preview' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
 
@@ -1810,6 +1813,55 @@ var ResponsiveSitesAjaxQueue = (function() {
 					}
 				);
 		},
+
+		/**
+		 * Preview Templates for the Site
+		 *
+		 * @since 2.0.8
+		 * @return null
+		 */
+		_change_site_preview_screenshot: function( event ) {
+			event.preventDefault();
+
+			var item = $(this);
+
+			ResponsiveSitesAdmin._set_preview_screenshot_by_page( item );
+		},
+
+		/**
+		 * Set Preview Image for the Template
+		 *
+		 * @since 2.0.8
+		 * @return null
+		 */
+		_set_preview_screenshot_by_page: function( element ) {
+			var large_img_url = $(element).find( '.theme-screenshot' ).attr( 'data-featured-src' ) || '';
+			var url = $(element).find( '.theme-screenshot' ).attr( 'data-src' ) || '';
+			var page_name = $(element).find('.theme-name').text() || '';
+
+			$( element ).siblings().removeClass( 'current_page' );
+			$( element ).addClass( 'current_page' );
+
+			$( '.site-import-layout-button' ).removeClass( 'disabled' );
+			if( page_name ) {
+				var title = "text";
+				$( '.site-import-layout-button' ).text( title );
+			}
+
+			if( url ) {
+				$('.single-site-preview').animate({
+					scrollTop: 0
+				},0);
+				$('.single-site-preview img').addClass('loading').attr( 'src', url );
+				var imgLarge = new Image();
+				imgLarge.src = large_img_url;
+				imgLarge.onload = function () {
+					$('.single-site-preview img').removeClass('loading');
+					$('.single-site-preview img').attr('src', imgLarge.src );
+				};
+			}
+		},
+
 	};
 
 	/**
