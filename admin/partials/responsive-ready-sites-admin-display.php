@@ -284,7 +284,7 @@
 						<div class="single-site-pages">
 							<div id="single-pages">
 								<# for (page_id in data.pages)  { #>
-								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-dynamic-page="" >
+								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-required-plugins="{{ JSON.stringify( data.pages[page_id]['required_plugins'] )}}" data-dynamic-page="" >
 									<div class="inner">
 										<#
 										var featured_image_class = '';

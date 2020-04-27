@@ -192,7 +192,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_bind: function()
 		{
 			$( document ).on( 'click'                     , '.import-demo-data, .responsive-ready-site-import-free', ResponsiveSitesAdmin._importDemo );
-			$( document ).on( 'click'                     , '.responsive-ready-page-import-free', ResponsiveSitesAdmin._importSinglePage );
+			$( document ).on( 'click'                     , '.site-import-layout-button', ResponsiveSitesAdmin._importSinglePage );
 			$( document ).on( 'click'                     , '.theme-browser .inactive.ra-site-single .theme-screenshot, .theme-browser .inactive.ra-site-single .more-details, .theme-browser .inactive.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._preview );
 			$( document ).on( 'click'                     , '.theme-browser .active.ra-site-single .theme-screenshot, .theme-browser .active.ra-site-single .more-details, .theme-browser .active.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._doNothing );
 			$( document ).on( 'click'                     , '.close-full-overlay', ResponsiveSitesAdmin._closeFullOverlay );
@@ -1091,24 +1091,32 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var date = new Date();
 
+			$( '.site-import-options' ).hide();
+
 			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap' );
 
 			var demo_api = self.data( 'demo-api' ) || '';
+			var required_plugins = self.data( 'required-plugins' ) || '';
+			var page_id = ResponsiveSitesAdmin._get_id( $( '#single-pages' ).find('.current_page').attr('data-page-id') ) || '';
 
 			ResponsiveSitesAdmin.import_start_time = new Date();
 
 			$( '.sites-import-process-errors .current-importing-status-error-title' ).html( '' );
 
 			$( '.sites-import-process-errors' ).hide();
-			$( '.responsive-ready-page-import-free' ).addClass( 'updating-message installing' )
+			$( '.site-import-layout-button' ).addClass( 'updating-message installing' )
 				.text( "Importing.." );
-			$( '.responsive-ready-page-import-free' ).addClass( 'disabled not-click-able' );
+			$( '.site-import-layout-button' ).addClass( 'disabled not-click-able' );
 
 			if ( demo_api == '' ) {
 				ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 			} else {
-				ResponsiveSitesAdmin._importPage( demo_api, 2 );
+				ResponsiveSitesAdmin._importPage( demo_api, page_id );
 			}
+		},
+
+		_get_id: function( site_id ) {
+			return site_id.replace('id-', '');
 		},
 
 		_importPage: function( demo_api, page_id = 1 ) {
@@ -1136,10 +1144,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 										$( 'body' ).removeClass( 'importing-site' );
 										$( '.rotating,.current-importing-status-wrap,.notice-warning' ).remove();
 
-										var	output = '<h2>Responsive Ready Site import complete.</h2>';
-										output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">Launch Site</a></p>';
+										var	output = '<h2>Responsive Ready Site import Page complete.</h2>';
+										output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">Go To Site</a></p>';
 
-										$( '.site-import-options' ).hide();
+										$( '.single-site-wrap' ).hide();
 										$( '.result_preview' ).html( '' ).show();
 										$( '.result_preview' ).html( output );
 									} else {
