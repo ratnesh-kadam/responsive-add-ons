@@ -245,7 +245,7 @@
 <?php
 /** Template Import Options Page */
 ?>
-<script type="text/template" id="tmpl-responsive-ready-sites-import-page-options-page">
+<script type="text/template" id="tmpl-responsive-ready-sites-import-template-preview-page">
 	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
@@ -323,6 +323,63 @@
 					</div>
 				</div>
 			</div>
+				</div>
+			</div>
+			<div class="result_preview" style="display: none">
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="tmpl-responsive-ready-sites-import-template-options-page">
+	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
+		 data-page-id="{{{data.page_id}}}"
+		 data-demo-api="{{{data.demo_api}}}"
+		 data-required-plugins="{{ JSON.stringify( data.required_plugins )}}"
+		 data-required-pro-plugins="{{data.required_pro_plugins}}">
+		<div class="wp-full-overlay-header">
+			<div>
+				<span class="responsive-site-demo-name">{{data.name}}</span>
+				<button class="close-full-overlay responsive-addons"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'responsive-addons' ); ?></span></button>
+			</div>
+		</div>
+		<div class="wp-full-overlay-main">
+			<div class="sites-import-process-errors" style="display: none">
+				<div class="import-process-error">
+					<div class="current-importing-status-error-title"></div>
+				</div>
+			</div>
+
+			<div class="site-import-options">
+				<div class="responsive-ready-sites-advanced-options">
+					<h2>Importing {{data.demo_name}}</h2>
+					<p><?php esc_html_e( 'Importing this ready template will &hellip;', 'responsive-addons' ); ?></p>
+					<ul class="responsive-ready-site-contents">
+						<li class="responsive-ready-sites-import-plugins">
+							<strong><?php esc_html_e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
+							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
+							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
+								<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+							</div>
+						</li>
+						<li class="responsive-ready-sites-import-xml">
+							<label>
+								<strong><?php esc_html_e( 'Import Content', 'responsive-addons' ); ?></strong>
+							</label>
+							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
+							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
+								<p><?php esc_html_e( 'Imports ready template content. Depending on your internet speed this may take 1-3 minutes.', 'responsive-addons' ); ?></p>
+							</div>
+							<div class="responsive-ready-sites-import-process-wrap" style="display: none;">
+								<progress class="responsive-ready-sites-import-process" max="100" value="0"></progress>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="responsive-ready-sites-import-button-wrap">
+					<a class="button button-hero button-primary responsive-ready-template-import" href="#">
+						<?php esc_html_e( 'Import Template', 'responsive-addons' ); ?>
+					</a>
 				</div>
 			</div>
 			<div class="result_preview" style="display: none">

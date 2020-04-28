@@ -192,7 +192,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_bind: function()
 		{
 			$( document ).on( 'click'                     , '.import-demo-data, .responsive-ready-site-import-free', ResponsiveSitesAdmin._importDemo );
-			$( document ).on( 'click'                     , '.site-import-layout-button', ResponsiveSitesAdmin._importSinglePage );
+			$( document ).on( 'click'                     , '.site-import-layout-button', ResponsiveSitesAdmin._importSinglePageOptions );
+			$( document ).on( 'click'                     , '.responsive-ready-template-import', ResponsiveSitesAdmin._importSinglePage );
 			$( document ).on( 'click'                     , '.theme-browser .inactive.ra-site-single .theme-screenshot, .theme-browser .inactive.ra-site-single .more-details, .theme-browser .inactive.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._preview );
 			$( document ).on( 'click'                     , '.theme-browser .active.ra-site-single .theme-screenshot, .theme-browser .active.ra-site-single .more-details, .theme-browser .active.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._doNothing );
 			$( document ).on( 'click'                     , '.close-full-overlay', ResponsiveSitesAdmin._closeFullOverlay );
@@ -280,6 +281,139 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( 'body' ).attr( 'data-responsive-demo-paged', '1' );
 			$( 'body' ).attr( 'data-scrolling', false );
 
+		},
+
+		/**
+		 * Import Template options Screen
+		 */
+		_importSinglePageOptions: function(event) {
+			event.preventDefault();
+
+			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap' );
+
+			var demo_api = self.data( 'demo-api' ) || '';
+
+			var page_id = ResponsiveSitesAdmin._get_id( $( '#single-pages' ).find('.current_page').attr('data-page-id') ) || '';
+
+			var required_plugins = JSON.parse( $( '#single-pages' ).find('.current_page').attr('data-required-plugins') ) || '';
+
+			$( '#site-pages' ).hide();
+
+			$( '#responsive-ready-sites-import-options' ).show();
+
+			var template = wp.template( 'responsive-ready-sites-import-template-options-page' );
+
+			templateData = [{
+				page_id: page_id,
+				demo_api: demo_api,
+				required_plugins: required_plugins,
+			}];
+			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
+			$( '.theme-install-overlay' ).css( 'display', 'block' );
+
+		if ( $.isArray( required_plugins ) ) {
+			// or.
+			var $pluginsFilter = $( '#plugin-filter' ),
+				data           = {
+					action           : 'responsive-ready-sites-required-plugins',
+					_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+					required_plugins : required_plugins
+				};
+
+			// Add disabled class from import button.
+			$( '.responsive-demo-import' )
+				.addClass( 'disabled not-click-able' )
+				.removeAttr( 'data-import' );
+
+			$( '.required-plugins' ).addClass( 'loading' ).html( '<span class="spinner is-active"></span>' );
+
+			// Required Required.
+			$.ajax(
+				{
+					url  : responsiveSitesAdmin.ajaxurl,
+					type : 'POST',
+					data : data,
+				}
+			)
+				.fail(
+					function( jqXHR ){
+
+						// Remove loader.
+						$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+
+					}
+				)
+				.done(
+					function ( response ) {
+						required_plugins = response.data['required_plugins'];
+
+						// Remove loader.
+						$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+						$( '.required-plugins-list' ).html( '' );
+
+						/**
+						 * Count remaining plugins.
+						 *
+						 * @type number
+						 */
+						var remaining_plugins = 0;
+
+						/**
+						 * Not Installed
+						 *
+						 * List of not installed required plugins.
+						 */
+						if ( typeof required_plugins.notinstalled !== 'undefined' ) {
+
+							// Add not have installed plugins count.
+							remaining_plugins += parseInt( required_plugins.notinstalled.length );
+
+							$( required_plugins.notinstalled ).each(
+								function( index, plugin ) {
+									$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+								}
+							);
+						}
+
+						/**
+						 * Inactive
+						 *
+						 * List of not inactive required plugins.
+						 */
+						if ( typeof required_plugins.inactive !== 'undefined' ) {
+							// Add inactive plugins count.
+							remaining_plugins += parseInt( required_plugins.inactive.length );
+
+							$( required_plugins.inactive ).each(
+								function( index, plugin ) {
+									$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+								}
+							);
+						}
+
+						/**
+						 * Active
+						 *
+						 * List of not active required plugins.
+						 */
+						if ( typeof required_plugins.active !== 'undefined' ) {
+
+							$( required_plugins.active ).each(
+								function( index, plugin ) {
+									$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+								}
+							);
+						}
+
+						/**
+						 * Enable Demo Import Button
+						 *
+						 * @type number
+						 */
+						responsiveSitesAdmin.requiredPlugins = required_plugins;
+					}
+				);
+			}
 		},
 
 		/**
@@ -450,7 +584,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				pages			  = self.data( 'pages' ) || '',
 				responsiveSiteOptions = self.find( '.responsive-site-options' ).val() || '';
 
-			var template = wp.template( 'responsive-ready-sites-import-page-options-page' );
+			var template = wp.template( 'responsive-ready-sites-import-template-preview-page' );
 
 			templateData = [{
 				demo_type: demoType,
@@ -1132,12 +1266,12 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap' );
 
-			var demo_api = self.data( 'demo-api' ) || '';
-			var required_plugins = self.data( 'required-plugins' ) || '';
+			var page_id = self.data( 'page-id' ) || '',
+				demo_api = self.data( 'demo-api' ) || '',
+				required_plugins = self.data( 'required-plugins' ) || '';
 
 
 			ResponsiveSitesAdmin._installRequiredPluginsForTemplate(required_plugins);
-			var page_id = ResponsiveSitesAdmin._get_id( $( '#single-pages' ).find('.current_page').attr('data-page-id') ) || '';
 
 			ResponsiveSitesAdmin.import_start_time = new Date();
 
@@ -1148,10 +1282,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 				.text( "Importing.." );
 			$( '.site-import-layout-button' ).addClass( 'disabled not-click-able' );
 
-			if ( demo_api == '' ) {
-				ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
-			} else {
+			if ( page_id ) {
 				ResponsiveSitesAdmin._importPage( demo_api, page_id );
+			} else {
+				ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 			}
 		},
 
