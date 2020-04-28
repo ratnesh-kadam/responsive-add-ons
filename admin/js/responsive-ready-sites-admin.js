@@ -176,6 +176,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 		import_start_time  : '',
 		import_end_time    : '',
 
+		current_page_id : '',
+
 		init: function()
 		{
 			this._resetPagedCount();
@@ -1266,9 +1268,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap' );
 
-			var page_id = self.data( 'page-id' ) || '',
-				demo_api = self.data( 'demo-api' ) || '',
-				required_plugins = self.data( 'required-plugins' ) || '';
+			ResponsiveSitesAdmin.current_page_id = self.data( 'page-id' ) || '';
+			ResponsiveSitesAdmin.current_page_api = self.data( 'demo-api' ) || '';
+
+			var required_plugins = self.data( 'required-plugins' ) || '';
 
 
 			ResponsiveSitesAdmin._installRequiredPluginsForTemplate(required_plugins);
@@ -1282,8 +1285,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 				.text( "Importing.." );
 			$( '.site-import-layout-button' ).addClass( 'disabled not-click-able' );
 
-			if ( page_id ) {
-				ResponsiveSitesAdmin._importPage( demo_api, page_id );
+			if ( ResponsiveSitesAdmin.current_page_id ) {
+				ResponsiveSitesAdmin._importPage();
 			} else {
 				ResponsiveSitesAdmin._log_error( 'There was an error while processing import. Please try again.', true );
 			}
@@ -1293,8 +1296,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 			return site_id.replace('id-', '');
 		},
 
-		_importPage: function( demo_api, page_id = 1 ) {
-			page_api_url = demo_api + '/wp-json/wp/v2/pages/' + page_id;
+		_importPage: function() {
+
+			page_api_url = ResponsiveSitesAdmin.current_page_api + '/wp-json/wp/v2/pages/' + ResponsiveSitesAdmin.current_page_id;
 
 			fetch( page_api_url ).then(
 				response => {

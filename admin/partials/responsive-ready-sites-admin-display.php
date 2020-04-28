@@ -253,8 +253,6 @@
 		 data-demo-type="{{{data.demo_type}}}"
 		 data-required-plugins="{{data.required_plugins}}"
 		 data-required-pro-plugins="{{data.required_pro_plugins}}">
-		<input type="hidden" class="responsive-site-options" value="{{data.site_options_data}}" >
-		<input type="hidden" class="demo_site_id" value="{{{ data.id }}}">
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
