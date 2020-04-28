@@ -839,8 +839,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$this->import_post_meta( $new_page_id, $post_meta );
 			}
 
-			update_post_meta( $new_page_id, '_wp_page_template', 'elementor_header_footer' );
-
 			wp_send_json_success(
 				array(
 					'remove-page-id' => $page_id,
