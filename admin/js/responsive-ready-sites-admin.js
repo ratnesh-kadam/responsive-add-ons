@@ -748,12 +748,49 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		},
 
+		/**
+		 * Bulk Plugin Active & Install
+		 */
+		_bulkPluginInstallActivateForTemplate: function()
+		{
+			if ( 0 === responsiveSitesAdmin.required_plugins.length ) {
+				return;
+			}
+
+			var not_installed 	 = responsiveSitesAdmin.required_plugins.notinstalled || '';
+			var activate_plugins = responsiveSitesAdmin.required_plugins.inactive || '';
+
+			// Install wordpress.org plugins.
+			if ( not_installed.length > 0 ) {
+				ResponsiveSitesAdmin._installAllPlugins( not_installed );
+			}
+
+			// Activate wordpress.org plugins.
+			if ( activate_plugins.length > 0 ) {
+				ResponsiveSitesAdmin._activateAllPlugins( activate_plugins );
+			}
+
+			if ( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
+				ResponsiveSitesAdmin._ready_for_import_template();
+			}
+
+		},
+
 		_ready_for_import_site: function () {
 			var notinstalled = responsiveSitesAdmin.required_plugins.notinstalled || 0;
 			var inactive     = responsiveSitesAdmin.required_plugins.inactive || 0;
 
 			if ( ResponsiveSitesAdmin._areEqual( notinstalled.length, inactive.length ) ) {
 				$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
+			}
+		},
+
+		_ready_for_import_template: function () {
+			var notinstalled = responsiveSitesAdmin.required_plugins.notinstalled || 0;
+			var inactive     = responsiveSitesAdmin.required_plugins.inactive || 0;
+
+			if ( ResponsiveSitesAdmin._areEqual( notinstalled.length, inactive.length ) ) {
+				$( document ).trigger( 'responsive-ready-template-install-and-activate-required-plugins-done' );
 			}
 		},
 
@@ -1097,6 +1134,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var demo_api = self.data( 'demo-api' ) || '';
 			var required_plugins = self.data( 'required-plugins' ) || '';
+
+
+			ResponsiveSitesAdmin._installRequiredPluginsForTemplate(required_plugins);
 			var page_id = ResponsiveSitesAdmin._get_id( $( '#single-pages' ).find('.current_page').attr('data-page-id') ) || '';
 
 			ResponsiveSitesAdmin.import_start_time = new Date();
@@ -1304,6 +1344,36 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			} else {
 				$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
+			}
+		},
+
+		_installRequiredPluginsForTemplate: function( requiredPlugins ){
+
+			if ( $.isArray( requiredPlugins ) ) {
+
+				// Required Required.
+				$.ajax(
+					{
+						url  : responsiveSitesAdmin.ajaxurl,
+						type : 'POST',
+						data : {
+							action           : 'responsive-ready-sites-required-plugins',
+							_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+							required_plugins : requiredPlugins
+						},
+					}
+				)
+					.done(
+						function ( response ) {
+							var required_plugins = response.data['required_plugins'] || '';
+
+							responsiveSitesAdmin.required_plugins = required_plugins;
+							ResponsiveSitesAdmin._bulkPluginInstallActivate();
+						}
+					);
+
+			} else {
+				$( document ).trigger( 'responsive-ready-template-install-and-activate-required-plugins-done' );
 			}
 		},
 
