@@ -28,5 +28,7 @@ class Responsive_Add_Ons_Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {}
+	public static function activate() {
+		set_transient( 'responsive_add_ons_activation_redirect', true, MINUTE_IN_SECONDS );
+	}
 }
