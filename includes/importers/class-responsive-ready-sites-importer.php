@@ -839,6 +839,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				$this->import_post_meta( $new_page_id, $post_meta );
 			}
 
+			do_action( 'responsive_ready_sites_process_template', $new_page_id );
+
 			wp_send_json_success(
 				array(
 					'remove-page-id' => $page_id,

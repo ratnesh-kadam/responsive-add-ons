@@ -34,6 +34,15 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		public static $process_all;
 
 		/**
+		 * Process Single Page
+		 *
+		 * @since 2.0.8
+		 * @var object Class object.
+		 * @access public
+		 */
+		public static $process_single;
+
+		/**
 		 * Initiator
 		 *
 		 * @since 1.0.14
@@ -64,6 +73,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			require_once $responsive_ready_sites_batch_processing . 'helpers/class-wp-async-request.php';
 			require_once $responsive_ready_sites_batch_processing . 'helpers/class-wp-background-process.php';
 			require_once $responsive_ready_sites_batch_processing . 'helpers/class-wp-background-process-responsive.php';
+			require_once $responsive_ready_sites_batch_processing . 'helpers/class-wp-background-process-responsive-single.php';
 
 			// Prepare Page Builders.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-elementor.php';
@@ -72,10 +82,14 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			// Menu fix.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
 
-			self::$process_all = new WP_Background_Process_Responsive();
+			self::$process_all    = new WP_Background_Process_Responsive();
+			self::$process_single = new WP_Background_Process_Responsive_Single();
 
 			// Start image importing after site import complete.
 			add_action( 'responsive_ready_sites_import_complete', array( $this, 'start_process' ) );
+			add_action( 'responsive_ready_template_import_complete', array( $this, 'start_process' ) );
+
+			add_action( 'responsive_ready_sites_process_template', array( $this, 'start_process_page' ) );
 		}
 
 		/**
@@ -106,6 +120,33 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			// Dispatch Queue.
 			self::$process_all->save()->dispatch();
+		}
+
+		/**
+		 * Start Single Page Import
+		 *
+		 * @param  int $page_id Page ID .
+		 * @since 2.0.8
+		 * @return void
+		 */
+		public function start_process_page( $page_id ) {
+
+			// @todo Remove required `allow_url_fopen` support.
+			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
+				// !important, Clear the cache after images import.
+				\Elementor\Plugin::$instance->posts_css_manager->clear_cache();
+
+				$import = new \Elementor\TemplateLibrary\Responsive_Ready_Sites_Batch_Processing_Elementor();
+				self::$process_single->push_to_queue(
+					array(
+						'page_id'  => $page_id,
+						'instance' => $import,
+					)
+				);
+			}
+
+			// Dispatch Queue.
+			self::$process_single->save()->dispatch();
 		}
 
 		/**

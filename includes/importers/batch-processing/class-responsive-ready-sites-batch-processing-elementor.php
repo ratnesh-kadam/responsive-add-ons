@@ -95,6 +95,17 @@ class Responsive_Ready_Sites_Batch_Processing_Elementor extends Source_Local {
 					// Import the data.
 					$data = $this->process_export_import_content( $data, 'on_import' );
 
+					$data = wp_json_encode( $data, true );
+					if ( ! empty( $data ) ) {
+						$site_url = get_site_url();
+						$site_url = str_replace( '/', '\/', $site_url );
+						// @todo fetch site url dynamically
+						$demo_site_url = 'http://testccreadysites.cyberchimps.com/yoga-instructor/';
+						$demo_site_url = str_replace( '/', '\/', $demo_site_url );
+						$data          = str_replace( $demo_site_url, $site_url, $data );
+						$data          = json_decode( $data, true );
+					}
+
 					// Update processed meta.
 					update_metadata( 'post', $post_id, '_elementor_data', $data );
 					update_metadata( 'post', $post_id, '_responsive_sites_hotlink_imported', true );
