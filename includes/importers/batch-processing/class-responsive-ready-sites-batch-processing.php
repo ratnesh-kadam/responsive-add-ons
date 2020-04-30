@@ -63,11 +63,11 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		public function __construct() {
 
 			// Core Helpers - Image.
-			// @todo 	This file is required for Elementor.
-			// Once we implement our logic for updating elementor data then we'll delete this file.
 			require_once ABSPATH . 'wp-admin/includes/image.php';
 
 			$responsive_ready_sites_batch_processing = plugin_dir_path( __FILE__ );
+
+			require_once $responsive_ready_sites_batch_processing . 'helpers/class-responsive-ready-sites-image-importer.php';
 
 			// Core Helpers - Batch Processing.
 			require_once $responsive_ready_sites_batch_processing . 'helpers/class-wp-async-request.php';

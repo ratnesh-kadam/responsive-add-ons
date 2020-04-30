@@ -178,7 +178,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Gutenberg' ) ) :
 						'url' => $image_url,
 						'id'  => 0,
 					);
-					$downloaded_image = Astra_Sites_Image_Importer::get_instance()->import( $image );
+					$downloaded_image = Responsive_Ready_Sites_Image_Importer::get_instance()->import( $image );
 
 					// Old and New image mapping links.
 					$link_mapping[ $image_url ] = $downloaded_image['url'];
