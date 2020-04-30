@@ -1296,6 +1296,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 									'action' : 'responsive-sites-create-page',
 									'_ajax_nonce' : responsiveSitesAdmin._ajax_nonce,
 									'data'   : data,
+									'current_page_api' : ResponsiveSitesAdmin.current_page_api,
 								},
 								success: function( response ){
 									if ( response.success ) {

@@ -89,21 +89,28 @@ class Responsive_Ready_Sites_Batch_Processing_Elementor extends Source_Local {
 						}
 					}
 
-					$data = add_magic_quotes( $data );
-					$data = json_decode( $data, true );
+					if ( ! is_array( $data ) ) {
+						$data = json_decode( $data, true );
+					}
+
+					$document = Plugin::$instance->documents->get( $post_id );
+					if ( $document ) {
+						$data = $document->get_elements_raw_data( $data, true );
+					}
 
 					// Import the data.
 					$data = $this->process_export_import_content( $data, 'on_import' );
 
-					$data = wp_json_encode( $data, true );
-					if ( ! empty( $data ) ) {
-						$site_url = get_site_url();
-						$site_url = str_replace( '/', '\/', $site_url );
-						// @todo fetch site url dynamically
-						$demo_site_url = 'http://testccreadysites.cyberchimps.com/yoga-instructor/';
-						$demo_site_url = str_replace( '/', '\/', $demo_site_url );
-						$data          = str_replace( $demo_site_url, $site_url, $data );
-						$data          = json_decode( $data, true );
+					$current_page_api = get_option( 'current_page_api' );
+					if ( isset( $current_page_api ) ) {
+						$data = wp_json_encode( $data, true );
+						if ( ! empty( $data ) ) {
+							$site_url         = get_site_url();
+							$site_url         = str_replace( '/', '\/', $site_url );
+							$current_page_api = str_replace( '/', '\/', $current_page_api );
+							$data             = str_replace( $current_page_api, $site_url, $data );
+							$data             = json_decode( $data, true );
+						}
 					}
 
 					// Update processed meta.

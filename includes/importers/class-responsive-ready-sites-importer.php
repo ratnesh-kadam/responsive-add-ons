@@ -819,6 +819,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				wp_send_json_error( 'Page Data is empty.' );
 			}
 
+			$current_page_api = isset( $_POST['current_page_api'] ) ? $_POST['current_page_api'] : '';
+			update_option( 'current_page_api', $current_page_api );
+
 			$page_id = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
 			$title   = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
 			$excerpt = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';

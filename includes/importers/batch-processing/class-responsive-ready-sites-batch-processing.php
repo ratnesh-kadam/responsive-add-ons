@@ -87,7 +87,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			// Start image importing after site import complete.
 			add_action( 'responsive_ready_sites_import_complete', array( $this, 'start_process' ) );
-			add_action( 'responsive_ready_template_import_complete', array( $this, 'start_process' ) );
 
 			add_action( 'responsive_ready_sites_process_template', array( $this, 'start_process_page' ) );
 		}
@@ -131,7 +130,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		 */
 		public function start_process_page( $page_id ) {
 
-			// @todo Remove required `allow_url_fopen` support.
 			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
 				// !important, Clear the cache after images import.
 				\Elementor\Plugin::$instance->posts_css_manager->clear_cache();
