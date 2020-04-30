@@ -1305,7 +1305,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 										$( '.rotating,.current-importing-status-wrap,.notice-warning' ).remove();
 
 										var	output = '<h2>Responsive Ready Site import Page complete.</h2>';
-										output    += '<p><a class="button button-primary button-hero" href="' + responsiveSitesAdmin.siteURL + '" target="_blank">Go To Site</a></p>';
+										output    += '<p><a class="button button-primary button-hero" href="' + response.data['link'] + '" target="_blank">View Template</a></p>';
 
 										$( '.single-site-wrap' ).hide();
 										$( '.result_preview' ).html( '' ).show();
