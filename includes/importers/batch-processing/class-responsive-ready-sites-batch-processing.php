@@ -102,7 +102,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			Responsive_Ready_Sites_Importer_Log::add( 'Batch Process Started!' );
 
-			// Add "gutenberg" in import [queue].
+			// Add "gutenberg" in import queue.
 			self::$process_all->push_to_queue( Responsive_Ready_Sites_Batch_Processing_Gutenberg::get_instance() );
 
 			// Add "elementor" in import [queue].
@@ -130,8 +130,15 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		 */
 		public function start_process_page( $page_id ) {
 
+			// Add "gutenberg" in import queue.
+			self::$process_single->push_to_queue(
+				array(
+					'page_id'  => $page_id,
+					'instance' => Responsive_Ready_Sites_Batch_Processing_Gutenberg::get_instance(),
+				)
+			);
+
 			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
-				// !important, Clear the cache after images import.
 				\Elementor\Plugin::$instance->posts_css_manager->clear_cache();
 
 				$import = new \Elementor\TemplateLibrary\Responsive_Ready_Sites_Batch_Processing_Elementor();

@@ -116,6 +116,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Gutenberg' ) ) :
 				}
 			}
 
+			$content = $this->get_content( $content );
+
 			// Update content.
 			wp_update_post(
 				array(
@@ -123,6 +125,84 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Gutenberg' ) ) :
 					'post_content' => $content,
 				)
 			);
+		}
+
+		/**
+		 * Download and Replace images
+		 *
+		 * @since 2.2.8
+		 *
+		 * @param  string $content Mixed post content.
+		 * @return array           Hotlink image array.
+		 */
+		public function get_content( $content = '' ) {
+
+			$content = stripslashes( $content );
+
+			// Extract all links.
+			preg_match_all( '#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $content, $match );
+
+			$all_links = array_unique( $match[0] );
+
+			// Not have any link.
+			if ( empty( $all_links ) ) {
+				return $content;
+			}
+
+			$link_mapping = array();
+			$image_links  = array();
+			$other_links  = array();
+
+			foreach ( $all_links as $key => $link ) {
+				if ( preg_match( '/^((https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|gif|jpeg)\/?$/i', $link ) ) {
+
+					// Get all image links except *-150x, *-300x and *-1024x.
+					if (
+						false === strpos( $link, '-150x' ) &&
+						false === strpos( $link, '-300x' ) &&
+						false === strpos( $link, '-1024x' )
+					) {
+						$image_links[] = $link;
+					}
+				} else {
+
+					// other links.
+					$other_links[] = $link;
+				}
+			}
+
+			if ( ! empty( $image_links ) ) {
+				foreach ( $image_links as $key => $image_url ) {
+					// Download remote image.
+					$image            = array(
+						'url' => $image_url,
+						'id'  => 0,
+					);
+					$downloaded_image = Astra_Sites_Image_Importer::get_instance()->import( $image );
+
+					// Old and New image mapping links.
+					$link_mapping[ $image_url ] = $downloaded_image['url'];
+				}
+			}
+
+			$current_page_api = get_option( 'current_page_api' );
+			if ( isset( $current_page_api ) ) {
+					$site_url = get_site_url();
+				foreach ( $other_links as $key => $link ) {
+					$link_mapping[ $link ] = str_replace( $current_page_api, $site_url, $link );
+				}
+			}
+
+			foreach ( $link_mapping as $old_url => $new_url ) {
+				$content = str_replace( $old_url, $new_url, $content );
+
+				// Replace the slashed URLs if any exist.
+				$old_url = str_replace( '/', '/\\', $old_url );
+				$new_url = str_replace( '/', '/\\', $new_url );
+				$content = str_replace( $old_url, $new_url, $content );
+			}
+
+			return $content;
 		}
 
 	}
