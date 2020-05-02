@@ -63,6 +63,7 @@
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
 			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
+			 data-wpforms-path="{{{ data.items[ key ].wpforms_path }}}"
 			 data-allow-pages="{{{ data.items[ key ].allow_pages }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
@@ -121,6 +122,7 @@
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
 		 data-demo-type="{{{data.demo_type}}}"
+		 data-wpforms-path="{{{data.wpforms_path}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}"
@@ -251,6 +253,7 @@
 		 data-demo-name="{{{data.name}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-demo-type="{{{data.demo_type}}}"
+		 data-wpforms-path="{{{data.wpforms_path}}}"
 		 data-required-plugins="{{data.required_plugins}}"
 		 data-required-pro-plugins="{{data.required_pro_plugins}}">
 		<div class="wp-full-overlay-header">
@@ -333,6 +336,7 @@
 	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
 		 data-page-id="{{{data.page_id}}}"
 		 data-demo-api="{{{data.demo_api}}}"
+		 data-wpforms-path="{{{data.wpforms_path}}}"
 		 data-required-plugins="{{ JSON.stringify( data.required_plugins )}}"
 		 data-required-pro-plugins="{{data.required_pro_plugins}}">
 		<div class="wp-full-overlay-header">
