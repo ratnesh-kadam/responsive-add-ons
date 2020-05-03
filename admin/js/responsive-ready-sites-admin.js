@@ -1,7 +1,6 @@
 /**
  * Responsive Ready Sites importer events
  *
- * @since 1.0.0
  * @package Responsive Ready Sites
  */
 
@@ -13,7 +12,6 @@
  * - run()
  * - stop()
  *
- * @since 1.0.0
  */
 var ResponsiveSitesAjaxQueue = (function() {
 
@@ -23,8 +21,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Add AJAX request
-		 *
-		 * @since 1.0.0
 		 */
 		add:  function(opt) {
 			requests.push( opt );
@@ -32,8 +28,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Remove AJAX request
-		 *
-		 * @since 1.0.0
 		 */
 		remove:  function(opt) {
 			if ( jQuery.inArray( opt, requests ) > -1 ) {
@@ -43,8 +37,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Run / Process AJAX request
-		 *
-		 * @since 1.0.0
 		 */
 		run: function() {
 			var self = this,
@@ -76,8 +68,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Stop AJAX request
-		 *
-		 * @since 1.0.0
 		 */
 		stop:  function() {
 
@@ -90,6 +80,14 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 (function( $ ) {
 
+	/**
+	 * WXR Import
+	 *
+	 * - updateDelta()
+	 * - updateProgress()
+	 * - render()
+	 *
+	 */
 	var wxrImport = {
 		complete: {
 			posts: 0,
@@ -147,6 +145,60 @@ var ResponsiveSitesAjaxQueue = (function() {
 		}
 	};
 
+	/**
+	 * Responsive Sites Admin
+	 *
+	 * - init()
+	 * - _bind()
+	 * - _resetPagedCount()
+	 * - _doNothing()
+	 * - _toggle_tooltip()
+	 * - _areEqual()
+	 * - _closeFullOverlay()
+	 * - _importSiteOptionsScreen()
+	 * - _importDemo()
+	 * - _is_responsive_theme_active()
+	 * - _log_error()
+	 * - _checkResponsiveAddonsProInstalled()
+	 * - _preview()
+	 * - _renderDemoPreview()
+	 * - _process_import()
+	 * - _importSite()
+	 * - _installRequiredPlugins()
+	 * - _removePluginFromQueue()
+	 * - _bulkPluginInstallActivate()
+	 * - _installAllPlugins()
+	 * - _pluginInstalling()
+	 * - _pluginInstallSuccess()
+	 * - _activateAllPlugins()
+	 * - _ready_for_import_site()
+	 * - _ready_for_import_template()
+	 * - _resetData()
+	 * - _backup_before_reset_options()
+	 * - _backupOptions()
+	 * - _reset_customizer_data()
+	 * - _reset_site_options()
+	 * - _reset_widgets_data()
+	 * - _reset_terms()
+	 * - _reset_wp_forms()
+	 * - _reset_posts()
+	 * - _importWPForms()
+	 * - _importXML()
+	 * - _importCustomizerSettings()
+	 * - _importWidgets()
+	 * - _importCustomizerSettings()
+	 * - _importSiteOptions()
+	 * - _importSiteEnd()
+	 * - _importPagePreviewScreen()
+	 * - _change_site_preview_screenshot()
+	 * - _set_preview_screenshot_by_page()
+	 * - _importSinglePageOptions()
+	 * - _importSinglePage()
+	 * - _get_id()
+	 * - _importPage()
+	 * - ucwords()
+	 *
+	 */
 	ResponsiveSitesAdmin = {
 
 		reset_remaining_posts: 0,
@@ -187,28 +239,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Binds events for the Responsive Ready Sites.
-		 *
-		 * @since 1.0.0
-		 * @access private
-		 * @method _bind
 		 */
 		_bind: function()
 		{
+			// Site Import events.
 			$( document ).on( 'click'                     , '.import-demo-data, .responsive-ready-site-import-free', ResponsiveSitesAdmin._importDemo );
-			$( document ).on( 'click'                     , '.site-import-layout-button', ResponsiveSitesAdmin._importSinglePageOptions );
-			$( document ).on( 'click'                     , '.responsive-ready-template-import', ResponsiveSitesAdmin._importSinglePage );
 			$( document ).on( 'click'                     , '.theme-browser .inactive.ra-site-single .theme-screenshot, .theme-browser .inactive.ra-site-single .more-details, .theme-browser .inactive.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._preview );
 			$( document ).on( 'click'                     , '.theme-browser .active.ra-site-single .theme-screenshot, .theme-browser .active.ra-site-single .more-details, .theme-browser .active.ra-site-single .install-theme-preview', ResponsiveSitesAdmin._doNothing );
 			$( document ).on( 'click'                     , '.close-full-overlay', ResponsiveSitesAdmin._closeFullOverlay );
 			$( document ).on( 'click', '.responsive-demo-import-options-free', ResponsiveSitesAdmin._importSiteOptionsScreen );
-			$( document ).on( 'click', '.responsive-page-import-options-free', ResponsiveSitesAdmin._importPagePreviewScreen );
 			$( document ).on( 'click', '.responsive-ready-sites-tooltip-icon', ResponsiveSitesAdmin._toggle_tooltip );
-
-			$( document ).on('click'                     , '#single-pages .site-single', ResponsiveSitesAdmin._change_site_preview_screenshot);
-
 			$( document ).on( 'responsive-get-active-theme' , ResponsiveSitesAdmin._is_responsive_theme_active );
 			$( document ).on( 'responsive-ready-sites-install-start'       , ResponsiveSitesAdmin._process_import );
-
 			$( document ).on( 'responsive-ready-sites-import-set-site-data-done'   		, ResponsiveSitesAdmin._installRequiredPlugins );
 			$( document ).on( 'responsive-ready-sites-install-and-activate-required-plugins-done', ResponsiveSitesAdmin._resetData );
 			$( document ).on( 'responsive-ready-sites-reset-data'							, ResponsiveSitesAdmin._backup_before_reset_options );
@@ -218,7 +260,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'responsive-ready-sites-reset-widgets-data-done'				, ResponsiveSitesAdmin._reset_terms );
 			$( document ).on( 'responsive-ready-sites-delete-terms-done'					, ResponsiveSitesAdmin._reset_wp_forms );
 			$( document ).on( 'responsive-ready-sites-delete-wp-forms-done'				, ResponsiveSitesAdmin._reset_posts );
-
 			$( document ).on( 'responsive-ready-sites-reset-data-done' , ResponsiveSitesAdmin._importWPForms );
 			$( document ).on( 'responsive-ready-sites-import-wpforms-done' , ResponsiveSitesAdmin._importXML );
 			$( document ).on( 'responsive-ready-sites-import-xml-done' , ResponsiveSitesAdmin._importCustomizerSettings );
@@ -226,10 +267,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'responsive-ready-sites-import-widgets-done' , ResponsiveSitesAdmin._importSiteOptions );
 			$( document ).on( 'responsive-ready-sites-import-options-done' , ResponsiveSitesAdmin._importSiteEnd );
 
-
+			// Single Page Import events.
+			$( document ).on( 'click'                     , '.site-import-layout-button', ResponsiveSitesAdmin._importSinglePageOptions );
+			$( document ).on( 'click'                     , '.responsive-ready-template-import', ResponsiveSitesAdmin._importSinglePage );
+			$( document ).on( 'click', '.responsive-page-import-options-free', ResponsiveSitesAdmin._importPagePreviewScreen );
+			$( document ).on('click'                     , '#single-pages .site-single', ResponsiveSitesAdmin._change_site_preview_screenshot);
 			$( document ).on( 'responsive-ready-template-install-and-activate-required-plugins-done' , ResponsiveSitesAdmin._importPage );
 			$( document ).on( 'responsive-ready-sites-import-template-start'   		, ResponsiveSitesAdmin._installRequiredPlugins );
 
+			// Wordpress Plugin install events.
 			$( document ).on( 'wp-plugin-installing'      , ResponsiveSitesAdmin._pluginInstalling );
 			$( document ).on( 'wp-plugin-install-success' , ResponsiveSitesAdmin._pluginInstallSuccess );
 		},
@@ -435,10 +481,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Fires when a nav item is clicked.
-		 *
-		 * @since 1.0.0
-		 * @access private
-		 * @method _importDemo
 		 */
 		_importDemo: function(event) {
 			event.preventDefault();
@@ -1497,9 +1539,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Preview Templates for the Site
-		 *
-		 * @since 2.0.8
-		 * @return null
 		 */
 		_change_site_preview_screenshot: function( event ) {
 			event.preventDefault();
@@ -1572,109 +1611,13 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
 
-			if ( $.isArray( required_plugins ) ) {
-				// or.
-				var $pluginsFilter = $( '#plugin-filter' ),
-					data           = {
-						action           : 'responsive-ready-sites-required-plugins',
-						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
-						required_plugins : required_plugins
-					};
-
-				// Add disabled class from import button.
-				$( '.responsive-demo-import' )
-					.addClass( 'disabled not-click-able' )
-					.removeAttr( 'data-import' );
-
-				$( '.required-plugins' ).addClass( 'loading' ).html( '<span class="spinner is-active"></span>' );
-
-				// Required Required.
-				$.ajax(
-					{
-						url  : responsiveSitesAdmin.ajaxurl,
-						type : 'POST',
-						data : data,
-					}
-				)
-					.fail(
-						function( jqXHR ){
-
-							// Remove loader.
-							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
-
-						}
-					)
-					.done(
-						function ( response ) {
-							required_plugins = response.data['required_plugins'];
-
-							// Remove loader.
-							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
-							$( '.required-plugins-list' ).html( '' );
-
-							/**
-							 * Count remaining plugins.
-							 *
-							 * @type number
-							 */
-							var remaining_plugins = 0;
-
-							/**
-							 * Not Installed
-							 *
-							 * List of not installed required plugins.
-							 */
-							if ( typeof required_plugins.notinstalled !== 'undefined' ) {
-
-								// Add not have installed plugins count.
-								remaining_plugins += parseInt( required_plugins.notinstalled.length );
-
-								$( required_plugins.notinstalled ).each(
-									function( index, plugin ) {
-										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
-									}
-								);
-							}
-
-							/**
-							 * Inactive
-							 *
-							 * List of not inactive required plugins.
-							 */
-							if ( typeof required_plugins.inactive !== 'undefined' ) {
-								// Add inactive plugins count.
-								remaining_plugins += parseInt( required_plugins.inactive.length );
-
-								$( required_plugins.inactive ).each(
-									function( index, plugin ) {
-										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
-									}
-								);
-							}
-
-							/**
-							 * Active
-							 *
-							 * List of not active required plugins.
-							 */
-							if ( typeof required_plugins.active !== 'undefined' ) {
-
-								$( required_plugins.active ).each(
-									function( index, plugin ) {
-										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
-									}
-								);
-							}
-
-							/**
-							 * Enable Demo Import Button
-							 *
-							 * @type number
-							 */
-							responsiveSitesAdmin.requiredPlugins = required_plugins;
-						}
-					);
-			}
+            $( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+            $( '.required-plugins-list' ).html( '' );
+            $( required_plugins ).each(
+            	function( index, plugin ) {
+            		$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+            	}
+            	);
 		},
 
 		/**
@@ -1685,7 +1628,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var date = new Date();
 
-			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap' );
+			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap.template-options-page' );
 
 			var required_plugins = self.data( 'required-plugins' ) || '';
 

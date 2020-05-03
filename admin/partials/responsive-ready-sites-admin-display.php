@@ -248,7 +248,7 @@
 /** Template Import Options Page */
 ?>
 <script type="text/template" id="tmpl-responsive-ready-sites-import-template-preview-page">
-	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
+	<div class="responsive-ready-sites-advanced-options-wrap template-preview-page wp-full-overlay collapsed"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
 		 data-screenshot="{{{data.screenshot}}}"
@@ -285,7 +285,18 @@
 						<div class="single-site-pages">
 							<div id="single-pages">
 								<# for (page_id in data.pages)  { #>
-								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-required-plugins="{{ JSON.stringify( data.pages[page_id]['required_plugins'] )}}" data-dynamic-page="" >
+								<#
+								var required_plugins = [];
+								for( id in data.pages[page_id]['plugins']) {
+									JSON.parse( data.required_plugins ).forEach( function( single_plugin ) {
+										if ( data.pages[page_id]['plugins'][id] == single_plugin.slug ) {
+											required_plugins.push( single_plugin );
+										}
+									}
+								);
+								}
+								#>
+								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-required-plugins="{{ JSON.stringify( required_plugins )}}" >
 									<div class="inner">
 										<#
 										var featured_image_class = '';
@@ -333,7 +344,7 @@
 </script>
 
 <script type="text/template" id="tmpl-responsive-ready-sites-import-template-options-page">
-	<div class="responsive-ready-sites-advanced-options-wrap wp-full-overlay collapsed"
+	<div class="responsive-ready-sites-advanced-options-wrap template-options-page wp-full-overlay collapsed"
 		 data-page-id="{{{data.page_id}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-wpforms-path="{{{data.wpforms_path}}}"
