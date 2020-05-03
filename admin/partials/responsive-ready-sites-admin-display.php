@@ -347,6 +347,7 @@
 	<div class="responsive-ready-sites-advanced-options-wrap template-options-page wp-full-overlay collapsed"
 		 data-page-id="{{{data.page_id}}}"
 		 data-demo-api="{{{data.demo_api}}}"
+		 data-includes-wp-forms="{{{data.includes_wp_forms}}}"
 		 data-wpforms-path="{{{data.wpforms_path}}}"
 		 data-required-plugins="{{ JSON.stringify( data.required_plugins )}}"
 		 data-required-pro-plugins="{{data.required_pro_plugins}}">

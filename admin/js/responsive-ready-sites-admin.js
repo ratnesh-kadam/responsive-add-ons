@@ -1595,6 +1595,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var required_plugins = JSON.parse( $( '#single-pages' ).find( '.current_page' ).attr( 'data-required-plugins' ) ) || '';
 
+			var includes_wp_forms = JSON.parse( $( '#single-pages' ).find( '.current_page' ).attr( 'data-includes-wp-forms' ) ) || false;
+
 			$( '#site-pages' ).hide();
 
 			$( '#responsive-ready-sites-import-options' ).show();
@@ -1606,6 +1608,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				demo_api: demo_api,
 				required_plugins: required_plugins,
 				wpforms_path: wpforms_path,
+				includes_wp_forms: includes_wp_forms,
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
@@ -1722,11 +1725,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 					fetch( page_api_url ).then(
 						response => {
-                        return response.json();
+							return response.json();
 						}
 					).then(
 						data => {
-                        // Import Single Page.
+							// Import Single Page.
 							$.ajax(
 								{
 									url: responsiveSitesAdmin.ajaxurl,
@@ -1759,7 +1762,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					).catch(
 						err => {
-                        ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
+							ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
 						}
 					);
 				}
