@@ -11,7 +11,6 @@
  * - remove()
  * - run()
  * - stop()
- *
  */
 var ResponsiveSitesAjaxQueue = (function() {
 
@@ -86,7 +85,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 	 * - updateDelta()
 	 * - updateProgress()
 	 * - render()
-	 *
 	 */
 	var wxrImport = {
 		complete: {
@@ -195,9 +193,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 	 * - _importSinglePageOptions()
 	 * - _importSinglePage()
 	 * - _get_id()
+	 * - _import_wpform()
 	 * - _importPage()
 	 * - ucwords()
-	 *
 	 */
 	ResponsiveSitesAdmin = {
 
@@ -271,7 +269,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'click'                     , '.site-import-layout-button', ResponsiveSitesAdmin._importSinglePageOptions );
 			$( document ).on( 'click'                     , '.responsive-ready-template-import', ResponsiveSitesAdmin._importSinglePage );
 			$( document ).on( 'click', '.responsive-page-import-options-free', ResponsiveSitesAdmin._importPagePreviewScreen );
-			$( document ).on('click'                     , '#single-pages .site-single', ResponsiveSitesAdmin._change_site_preview_screenshot);
+			$( document ).on( 'click'                     , '#single-pages .site-single', ResponsiveSitesAdmin._change_site_preview_screenshot );
 			$( document ).on( 'responsive-ready-template-install-and-activate-required-plugins-done' , ResponsiveSitesAdmin._importPage );
 			$( document ).on( 'responsive-ready-sites-import-template-start'   		, ResponsiveSitesAdmin._installRequiredPlugins );
 
@@ -353,7 +351,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				demo_name             = self.data( 'demo-name' ) || '',
 				demo_slug             = self.data( 'demo-slug' ) || '',
 				requiredPlugins       = self.data( 'required-plugins' ) || '',
-				pages			  = self.data( 'pages' ) || '',
+				pages                 = self.data( 'pages' ) || '',
 				responsiveSiteOptions = self.find( '.responsive-site-options' ).val() || '';
 
 			var template = wp.template( 'responsive-ready-sites-import-options-page' );
@@ -380,7 +378,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						action           : 'responsive-ready-sites-required-plugins',
 						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
 						required_plugins : requiredPlugins
-					};
+				};
 
 				// Add disabled class from import button.
 				$( '.responsive-demo-import' )
@@ -613,18 +611,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_renderDemoPreview: function(anchor) {
 
-			var demoId                             = anchor.data( 'demo-id' ) || '',
-				demoURL                            = anchor.data( 'demo-url' ) || '',
-				screenshot                         = anchor.data( 'screenshot' ) || '',
-				demo_name                          = anchor.data( 'demo-name' ) || '',
-				demo_slug                          = anchor.data( 'demo-slug' ) || '',
-				wpforms_path                       = anchor.data( 'wpforms-path' ) || '',
-				requiredPlugins                    = anchor.data( 'required-plugins' ) || '',
-				allow_pages                    	   = anchor.data( 'allow-pages' ) || false,
+			var demoId                         = anchor.data( 'demo-id' ) || '',
+				demoURL                        = anchor.data( 'demo-url' ) || '',
+				screenshot                     = anchor.data( 'screenshot' ) || '',
+				demo_name                      = anchor.data( 'demo-name' ) || '',
+				demo_slug                      = anchor.data( 'demo-slug' ) || '',
+				wpforms_path                   = anchor.data( 'wpforms-path' ) || '',
+				requiredPlugins                = anchor.data( 'required-plugins' ) || '',
+				allow_pages                    = anchor.data( 'allow-pages' ) || false,
 				pages                    	   = anchor.data( 'pages' ) || '',
-				responsiveSiteOptions              = anchor.find( '.responsive-site-options' ).val() || '',
-				demo_type                          = anchor.data( 'demo-type' ) || '',
-				isResponsiveAddonsProInstalled     = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled();
+				responsiveSiteOptions          = anchor.find( '.responsive-site-options' ).val() || '',
+				demo_type                      = anchor.data( 'demo-type' ) || '',
+				isResponsiveAddonsProInstalled = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled();
 
 			var template = wp.template( 'responsive-ready-site-preview' );
 
@@ -727,7 +725,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 							ResponsiveSitesAdmin.required_pro_plugins           = JSON.stringify( demo_data.data['required_pro_plugins'] || '' );
 							ResponsiveSitesAdmin.widgets_data                   = JSON.stringify( demo_data.data['site_widgets_data'] ) || '';
 							ResponsiveSitesAdmin.site_options_data              = JSON.stringify( demo_data.data['site_options_data'] ) || '';
-							ResponsiveSitesAdmin.pages						= JSON.stringify( demo_data.data['pages'] ) || '';
+							ResponsiveSitesAdmin.pages                          = JSON.stringify( demo_data.data['pages'] ) || '';
 
 							$( document ).trigger( 'responsive-ready-sites-import-set-site-data-done' );
 						}
@@ -766,10 +764,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 					);
 
 			} else {
-				if( ResponsiveSitesAdmin.processing_single_template ) {
-					$(document).trigger('responsive-ready-template-install-and-activate-required-plugins-done');
+				if ( ResponsiveSitesAdmin.processing_single_template ) {
+					$( document ).trigger( 'responsive-ready-template-install-and-activate-required-plugins-done' );
 				} else {
-					$(document).trigger('responsive-ready-sites-install-and-activate-required-plugins-done');
+					$( document ).trigger( 'responsive-ready-sites-install-and-activate-required-plugins-done' );
 				}
 			}
 		},
@@ -809,7 +807,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			}
 
 			if ( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
-				if( ResponsiveSitesAdmin.processing_single_template ) {
+				if ( ResponsiveSitesAdmin.processing_single_template ) {
 					ResponsiveSitesAdmin._ready_for_import_template();
 				} else {
 					ResponsiveSitesAdmin._ready_for_import_site();
@@ -893,7 +891,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 										$( '.responsive-ready-sites-import-plugins .responsive-ready-sites-tooltip-icon' ).addClass( 'processed-import' );
 
-										if( ResponsiveSitesAdmin.processing_single_template ) {
+										if ( ResponsiveSitesAdmin.processing_single_template ) {
 											ResponsiveSitesAdmin._ready_for_import_template();
 										} else {
 											ResponsiveSitesAdmin._ready_for_import_site();
@@ -935,7 +933,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 									// Reset not installed plugins list.
 									responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( single_plugin.slug, pluginsList );
 
-									if( ResponsiveSitesAdmin.processing_single_template ) {
+									if ( ResponsiveSitesAdmin.processing_single_template ) {
 										ResponsiveSitesAdmin._ready_for_import_site();
 									} else {
 										ResponsiveSitesAdmin._ready_for_import_template();
@@ -964,6 +962,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		/**
 		 * Ready for template import
+		 *
 		 * @private
 		 */
 		_ready_for_import_template: function () {
@@ -1514,10 +1513,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var apiURL                = self.data( 'demo-api' ) || '',
 				demoType              = self.data( 'demo-type' ) || '',
 				demo_name             = self.data( 'demo-name' ) || '',
-				wpforms_path             = self.data( 'wpforms-path' ) || '',
-				screenshot             = self.data( 'screenshot' ) || '',
+				wpforms_path          = self.data( 'wpforms-path' ) || '',
+				screenshot            = self.data( 'screenshot' ) || '',
 				requiredPlugins       = self.data( 'required-plugins' ) || '',
-				pages			  = self.data( 'pages' ) || '',
+				pages                 = self.data( 'pages' ) || '',
 				responsiveSiteOptions = self.find( '.responsive-site-options' ).val() || '';
 
 			var template = wp.template( 'responsive-ready-sites-import-template-preview-page' );
@@ -1536,14 +1535,13 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
 		},
 
-
 		/**
 		 * Preview Templates for the Site
 		 */
 		_change_site_preview_screenshot: function( event ) {
 			event.preventDefault();
 
-			var item = $(this);
+			var item = $( this );
 
 			ResponsiveSitesAdmin._set_preview_screenshot_by_page( item );
 		},
@@ -1552,29 +1550,32 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 * Set Preview Image for the Page
 		 */
 		_set_preview_screenshot_by_page: function( element ) {
-			var large_img_url = $(element).find( '.theme-screenshot' ).attr( 'data-featured-src' ) || '';
-			var url = $(element).find( '.theme-screenshot' ).attr( 'data-src' ) || '';
-			var page_name = $(element).find('.theme-name').text() || '';
+			var large_img_url = $( element ).find( '.theme-screenshot' ).attr( 'data-featured-src' ) || '';
+			var url           = $( element ).find( '.theme-screenshot' ).attr( 'data-src' ) || '';
+			var page_name     = $( element ).find( '.theme-name' ).text() || '';
 
 			$( element ).siblings().removeClass( 'current_page' );
 			$( element ).addClass( 'current_page' );
 
 			$( '.site-import-layout-button' ).removeClass( 'disabled' );
-			if( page_name ) {
+			if ( page_name ) {
 				var title = responsiveSitesAdmin.importSingleTemplateButtonTitle.replace( '%s', page_name.trim() );
 				$( '.site-import-layout-button' ).text( title );
 			}
 
-			if( url ) {
-				$('.single-site-preview').animate({
-					scrollTop: 0
-				},0);
-				$('.single-site-preview img').addClass('loading').attr( 'src', url );
-				var imgLarge = new Image();
-				imgLarge.src = large_img_url;
+			if ( url ) {
+				$( '.single-site-preview' ).animate(
+					{
+						scrollTop: 0
+					},
+					0
+				);
+				$( '.single-site-preview img' ).addClass( 'loading' ).attr( 'src', url );
+				var imgLarge    = new Image();
+				imgLarge.src    = large_img_url;
 				imgLarge.onload = function () {
-					$('.single-site-preview img').removeClass('loading');
-					$('.single-site-preview img').attr('src', imgLarge.src );
+					$( '.single-site-preview img' ).removeClass( 'loading' );
+					$( '.single-site-preview img' ).attr( 'src', imgLarge.src );
 				};
 			}
 		},
@@ -1587,14 +1588,12 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap' );
 
-			var demo_api = self.data( 'demo-api' ) || '';
-			var wpforms_path = self.data( 'wpforms-path' ) || '';
+			var demo_api     = self.data( 'demo-api' ) || '',
+				wpforms_path = self.data( 'wpforms-path' ) || '';
 
-			var page_id = ResponsiveSitesAdmin._get_id( $( '#single-pages' ).find('.current_page').attr('data-page-id') ) || '';
+			var page_id = ResponsiveSitesAdmin._get_id( $( '#single-pages' ).find( '.current_page' ).attr( 'data-page-id' ) ) || '';
 
-			var required_plugins = JSON.parse( $( '#single-pages' ).find('.current_page').attr('data-required-plugins') ) || '';
-
-			//var wpforms_path = JSON.parse( $( '#single-pages' ).find('.current_page').attr('data-wpforms-path') ) || '';
+			var required_plugins = JSON.parse( $( '#single-pages' ).find( '.current_page' ).attr( 'data-required-plugins' ) ) || '';
 
 			$( '#site-pages' ).hide();
 
@@ -1606,18 +1605,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 				page_id: page_id,
 				demo_api: demo_api,
 				required_plugins: required_plugins,
-				//wpforms_path: wpforms_path,
+				wpforms_path: wpforms_path,
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
 
-            $( '.required-plugins' ).removeClass( 'loading' ).html( '' );
-            $( '.required-plugins-list' ).html( '' );
-            $( required_plugins ).each(
-            	function( index, plugin ) {
-            		$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
-            	}
-            	);
+			$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+			$( '.required-plugins-list' ).html( '' );
+			$( required_plugins ).each(
+				function( index, plugin ) {
+					$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+				}
+			);
 		},
 
 		/**
@@ -1630,11 +1629,19 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap.template-options-page' );
 
-			var required_plugins = self.data( 'required-plugins' ) || '';
+			var required_plugins  = self.data( 'required-plugins' ) || '',
+				includes_wp_forms = self.data( 'includes-wp-forms' ) || false,
+				wpforms_path      = self.data( 'wpforms-path' ) || '';
 
-			ResponsiveSitesAdmin.current_page_id = self.data( 'page-id' ) || '';
+			ResponsiveSitesAdmin.current_page_id  = self.data( 'page-id' ) || '';
 			ResponsiveSitesAdmin.current_page_api = self.data( 'demo-api' ) || '';
-			ResponsiveSitesAdmin.required_plugins = JSON.stringify(required_plugins);
+			ResponsiveSitesAdmin.required_plugins = JSON.stringify( required_plugins );
+
+			if ( includes_wp_forms ) {
+				ResponsiveSitesAdmin.wpforms_path = wpforms_path;
+			} else {
+				ResponsiveSitesAdmin.wpforms_path = '';
+			}
 
 			ResponsiveSitesAdmin.import_start_time = new Date();
 
@@ -1654,7 +1661,52 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 * Get Page id from attribute
 		 */
 		_get_id: function( site_id ) {
-			return site_id.replace('id-', '');
+			return site_id.replace( 'id-', '' );
+		},
+
+		/**
+		 * Import WP Forms
+		 */
+		_import_wpform: function( wpforms_path, callback ) {
+
+			if ( '' == wpforms_path ) {
+				if ( callback && typeof callback == "function") {
+					callback( '' );
+				}
+				return;
+			}
+
+			$.ajax(
+				{
+					url  : responsiveSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action      : 'responsive-ready-sites-import-wpforms',
+						wpforms_path : wpforms_path,
+						_ajax_nonce : responsiveSitesAdmin._ajax_nonce,
+					},
+				}
+			)
+				.fail(
+					function( jqXHR ){
+						ResponsiveSitesAdmin._log_error( jqXHR );
+						ResponsiveSitesAdmin._log_error( jqXHR.status + jqXHR.statusText, 'Import WP Forms Failed!', jqXHR );
+					}
+				)
+				.done(
+					function ( response ) {
+
+						// 1. Fail - Import WPForms Options.
+						if ( false === response.success ) {
+							ResponsiveSitesAdmin._log_error( response.data, 'Import WP Forms Failed!' );
+						} else {
+							if ( callback && typeof callback == "function") {
+								callback( response );
+							}
+						}
+					}
+				);
 		},
 
 		/**
@@ -1662,52 +1714,57 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 */
 		_importPage: function() {
 
-			page_api_url = ResponsiveSitesAdmin.current_page_api + '/wp-json/wp/v2/pages/' + ResponsiveSitesAdmin.current_page_id;
+			ResponsiveSitesAdmin._import_wpform(
+				ResponsiveSitesAdmin.wpforms_path,
+				function( form_response ) {
 
-			fetch( page_api_url ).then(
-				response => {
-					return response.json();
-				}
-			).then(
-				data => {
-					// Import Single Page.
-						$.ajax(
-							{
-								url: responsiveSitesAdmin.ajaxurl,
-								type: 'POST',
-								dataType: 'json',
-								data: {
-									'action' : 'responsive-sites-create-page',
-									'_ajax_nonce' : responsiveSitesAdmin._ajax_nonce,
-									'data'   : data,
-									'current_page_api' : ResponsiveSitesAdmin.current_page_api,
-								},
-								success: function( response ){
-									if ( response.success ) {
-										$( 'body' ).removeClass( 'importing-site' );
-										$( '.site-import-options' ).hide();
-										$( '.rotating,.current-importing-status-wrap,.notice-warning' ).remove();
+					page_api_url = ResponsiveSitesAdmin.current_page_api + '/wp-json/wp/v2/pages/' + ResponsiveSitesAdmin.current_page_id;
 
-										var	output = '<h2>Responsive Ready Site import Page complete.</h2>';
-										output    += '<p><a class="button button-primary button-hero" href="' + response.data['link'] + '" target="_blank">View Template</a></p>';
+					fetch( page_api_url ).then(
+						response => {
+                        return response.json();
+						}
+					).then(
+						data => {
+                        // Import Single Page.
+							$.ajax(
+								{
+									url: responsiveSitesAdmin.ajaxurl,
+									type: 'POST',
+									dataType: 'json',
+									data: {
+										'action': 'responsive-sites-create-page',
+										'_ajax_nonce': responsiveSitesAdmin._ajax_nonce,
+										'data': data,
+										'current_page_api': ResponsiveSitesAdmin.current_page_api,
+									},
+									success: function (response) {
+										if (response.success) {
+											$( 'body' ).removeClass( 'importing-site' );
+											$( '.site-import-options' ).hide();
+											$( '.rotating,.current-importing-status-wrap,.notice-warning' ).remove();
 
-										$( '.single-site-wrap' ).hide();
-										$( '.result_preview' ).html( '' ).show();
-										$( '.result_preview' ).html( output );
-									} else {
-										ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
+											var output = '<h2>Responsive Ready Site import Page complete.</h2>';
+											output    += '<p><a class="button button-primary button-hero" href="' + response.data['link'] + '" target="_blank">View Template</a></p>';
+
+											$( '.single-site-wrap' ).hide();
+											$( '.result_preview' ).html( '' ).show();
+											$( '.result_preview' ).html( output );
+										} else {
+											ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
+										}
 									}
 								}
-							}
-						);
-				}
-			).catch(
-				err => {
-					ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
+							);
+						}
+					).catch(
+						err => {
+                        ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
+						}
+					);
 				}
 			);
 		},
-
 
 		ucwords: function( str ) {
 			if ( ! str ) {

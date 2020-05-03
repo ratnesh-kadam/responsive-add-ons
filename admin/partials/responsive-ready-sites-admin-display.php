@@ -296,7 +296,7 @@
 								);
 								}
 								#>
-								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-required-plugins="{{ JSON.stringify( required_plugins )}}" >
+								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-required-plugins="{{ JSON.stringify( required_plugins )}}" data-includes-wp-forms="{{ data.pages[page_id]['includes_wp_forms'] }}" >
 									<div class="inner">
 										<#
 										var featured_image_class = '';
