@@ -708,7 +708,7 @@ class Responsive_Add_Ons {
 	/**
 	 * Responsive Addons Admin Page
 	 */
-	public function responsive_add_ons() {
+	public function responsive_add_ons_templates() {
 
 		if ( $this->is_responsive_addons_pro_is_active() && ! $this->responsive_pro_license_is_active() ) {
 			wp_redirect( admin_url( '/options-general.php?page=wc_am_client_responsive_addons_pro_dashboard' ) );
@@ -830,7 +830,7 @@ class Responsive_Add_Ons {
 			__( 'Getting Started', 'responsive-addons' ),
 			'manage_options',
 			'responsive_add_ons',
-			array( $this, 'responsive_pro_getting_started' ),
+			array( $this, 'responsive_add_ons_getting_started' ),
 			10
 		);
 
@@ -840,7 +840,7 @@ class Responsive_Add_Ons {
 			__( 'Site Templates', 'responsive-addons' ),
 			'manage_options',
 			'responsive-add-ons',
-			array( $this, 'responsive_add_ons' ),
+			array( $this, 'responsive_add_ons_templates' ),
 			20
 		);
 
