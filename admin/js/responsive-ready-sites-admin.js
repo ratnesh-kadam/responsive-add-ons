@@ -1651,9 +1651,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( '.sites-import-process-errors .current-importing-status-error-title' ).html( '' );
 
 			$( '.sites-import-process-errors' ).hide();
-			$( '.site-import-layout-button' ).addClass( 'updating-message installing' )
+			$( '.responsive-ready-template-import' ).addClass( 'updating-message installing' )
 				.text( "Importing.." );
-			$( '.site-import-layout-button' ).addClass( 'disabled not-click-able' );
+			$( '.responsive-ready-template-import' ).addClass( 'disabled not-click-able' );
 
 			ResponsiveSitesAdmin.processing_single_template = true;
 
@@ -1716,6 +1716,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 		 * Import page.
 		 */
 		_importPage: function() {
+
+			$( '.responsive-ready-sites-import-xml .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
 
 			ResponsiveSitesAdmin._import_wpform(
 				ResponsiveSitesAdmin.wpforms_path,
