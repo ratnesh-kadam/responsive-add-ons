@@ -311,12 +311,12 @@
 										thumbnail_image = featured_image;
 										}
 										#>
-										<span class="site-preview" data-title="{{ data.pages[page_id]['page_tile'] }}">
+										<span class="site-preview" data-title="{{ data.pages[page_id]['page_title'] }}">
 										<div class="theme-screenshot one loading {{ featured_image_class }}" data-src="{{ featured_image }}" data-featured-src="{{ featured_image }}" style="background-image: url('{{ featured_image }}');"></div>
 									</span>
 										<div class="theme-id-container">
 											<h3 class="theme-name">
-												{{{ data.pages[page_id]['page_tile'] }}}
+												{{{ data.pages[page_id]['page_title'] }}}
 											</h3>
 										</div>
 									</div>
