@@ -891,8 +891,8 @@ class Responsive_Add_Ons {
 					</div>
 					<div class="responsive-add-ons-getting-started__content">
 						<div class="responsive-add-ons-getting-started__content--narrow">
-							<h2><?php echo __( 'Welcome to Responsive Pro', 'responsive-addons' ); ?></h2>
-							<p><?php echo __( 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the in.', 'responsive-addons' ); ?></p>
+							<h2><?php echo __( 'Click, Import, Launch!', 'responsive-addons' ); ?></h2>
+							<p><?php echo __( 'Build Sites Fast with Responsive Pro. Fully Customizable, Mobile-Friendly with Premium Features.', 'responsive-addons' ); ?></p>
 						</div>
 
 						<div class="responsive-add-ons-getting-started__video">
