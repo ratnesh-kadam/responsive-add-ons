@@ -89,11 +89,11 @@ class Responsive_Plugin_Install_Helper {
 		);
 		switch ( $state ) {
 			case 'install':
-				$button .= '<a data-redirect="' . esc_url( $redirect ) . '" data-slug="' . esc_attr( $slug ) . '" class="install-now responsive-install-plugin button  " href="' . esc_url( $nonce ) . '" data-name="' . esc_attr( $slug ) . '" aria-label="Install ' . esc_attr( $slug ) . '">' . __( 'Install and activate', 'responsive' ) . '</a>';
+				$button .= '<a data-redirect="' . esc_url( $redirect ) . '" data-slug="' . esc_attr( $slug ) . '" class="install-now responsive-install-plugin button  " href="' . esc_url( $nonce ) . '" data-name="' . esc_attr( $slug ) . '" aria-label="Install ' . esc_attr( $slug ) . '">' . __( 'Install and activate', 'responsive-addons' ) . '</a>';
 				break;
 
 			case 'activate':
-				$button .= '<a  data-redirect="' . esc_url( $redirect ) . '" data-slug="' . esc_attr( $slug ) . '" class="activate-now button button-primary" href="' . esc_url( $nonce ) . '" aria-label="Activate ' . esc_attr( $slug ) . '">' . esc_html__( 'Activate', 'responsive' ) . '</a>';
+				$button .= '<a  data-redirect="' . esc_url( $redirect ) . '" data-slug="' . esc_attr( $slug ) . '" class="activate-now button button-primary" href="' . esc_url( $nonce ) . '" aria-label="Activate ' . esc_attr( $slug ) . '">' . esc_html__( 'Activate', 'responsive-addons' ) . '</a>';
 				break;
 
 			case 'deactivate':
@@ -108,12 +108,12 @@ class Responsive_Plugin_Install_Helper {
 					network_admin_url( 'plugins.php' )
 				);
 
-				$button .= '<a  data-redirect="' . esc_url( $redirect ) . '" data-slug="' . esc_attr( $slug ) . '" class="deactivate-now button" href="' . esc_url( $nonce ) . '" data-name="' . esc_attr( $slug ) . '" aria-label="Deactivate ' . esc_attr( $slug ) . '">' . esc_html__( 'Deactivate', 'responsive' ) . '</a>';
+				$button .= '<a  data-redirect="' . esc_url( $redirect ) . '" data-slug="' . esc_attr( $slug ) . '" class="deactivate-now button" href="' . esc_url( $nonce ) . '" data-name="' . esc_attr( $slug ) . '" aria-label="Deactivate ' . esc_attr( $slug ) . '">' . esc_html__( 'Deactivate', 'responsive-addons' ) . '</a>';
 				break;
 
 			case 'enable_cpt':
 				$url     = admin_url( 'admin.php?page=jetpack#/settings' );
-				$button .= '<a  data-redirect="' . esc_url( $redirect ) . '" class="button" href="' . esc_url( $url ) . '">' . esc_html__( 'Activate', 'responsive' ) . ' ' . esc_html__( 'Jetpack Portfolio', 'responsive' ) . '</a>';
+				$button .= '<a  data-redirect="' . esc_url( $redirect ) . '" class="button" href="' . esc_url( $url ) . '">' . esc_html__( 'Activate', 'responsive-addons' ) . ' ' . esc_html__( 'Jetpack Portfolio', 'responsive-addons' ) . '</a>';
 				break;
 		} // End switch.
 		$button .= '</div>';
@@ -153,7 +153,7 @@ class Responsive_Plugin_Install_Helper {
 			'responsive-plugin-install-helper',
 			'responsive_plugin_helper',
 			array(
-				'activating' => esc_html__( 'Activating ', 'responsive' ),
+				'activating' => esc_html__( 'Activating ', 'responsive-addons' ),
 			)
 		);
 		wp_localize_script(

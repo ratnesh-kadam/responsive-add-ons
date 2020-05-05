@@ -519,7 +519,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 			// Verify Nonce.
 			check_ajax_referer( 'responsive-addons', '_ajax_nonce' );
 			if ( ! current_user_can( 'install_plugins' ) ) {
-				wp_send_json_error( __( 'You are not allowed to perform this action', 'resposnive-addons' ) );
+				wp_send_json_error( __( 'You are not allowed to perform this action', 'responsive-addons' ) );
 			}
 
 			$current_active_site_slug               = isset( $_REQUEST['slug'] ) ? $_REQUEST['slug'] : '';
