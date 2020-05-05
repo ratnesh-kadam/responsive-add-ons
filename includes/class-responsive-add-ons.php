@@ -716,14 +716,14 @@ class Responsive_Add_Ons {
 		}
 		?>
 			<div class="wrap">
-				<h1><?php esc_html_e( 'Responsive Importer Options' ); ?></h1>
+				<h1><?php esc_html_e( 'Responsive Importer Options', 'responsive-addons' ); ?></h1>
 				<h2 class="nav-tab-wrapper">
 					<span class="nav-tab
 										<?php
 										if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) {
 											echo ' nav-tab-active';}
 										?>
-					"><?php esc_html_e( 'Templates' ); ?></span>
+					"><?php esc_html_e( 'Templates', 'responsive-addons' ); ?></span>
 				</h2>
 					<?php
 						do_action( 'responsive_addons_importer_page' );
@@ -765,8 +765,8 @@ class Responsive_Add_Ons {
 		if ( in_array( $page, $show_footer ) ) {
 			$rate_text = sprintf(
 				/* translators: %s: Link to 5 star rating */
-				__( 'If you like the <strong>Responsive Ready Sites Importer</strong> plugin please leave us a %s rating. It takes a minute and helps a lot. Thanks in advance!', 'responsive-add-ons' ),
-				'<a href="https://wordpress.org/support/view/plugin-reviews/responsive-add-ons?filter=5#postform" target="_blank" class="responsive-rating-link" style="text-decoration:none;" data-rated="' . esc_attr__( 'Thanks :)', 'responsive-add-ons' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
+				__( 'If you like the <strong>Responsive Ready Sites Importer</strong> plugin please leave us a %s rating. It takes a minute and helps a lot. Thanks in advance!', 'responsive-addons' ),
+				'<a href="https://wordpress.org/support/view/plugin-reviews/responsive-add-ons?filter=5#postform" target="_blank" class="responsive-rating-link" style="text-decoration:none;" data-rated="' . esc_attr__( 'Thanks :)', 'responsive-addons' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
 			);
 
 			return $rate_text;
