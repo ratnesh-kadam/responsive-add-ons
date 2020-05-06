@@ -821,7 +821,7 @@ class Responsive_Add_Ons {
 			'responsive_add_ons',
 			array( $this, 'responsive_add_ons_getting_started' ),
 			RESPONSIVE_ADDONS_URI . '/admin/images/responsive-add-ons-menu-icon.png',
-			59.5,
+			59.5
 		);
 
 		add_submenu_page(
