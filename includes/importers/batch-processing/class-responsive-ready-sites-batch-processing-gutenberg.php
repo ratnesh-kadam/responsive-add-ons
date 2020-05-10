@@ -104,6 +104,13 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Gutenberg' ) ) :
 		 */
 		public function import_single_post( $post_id = 0 ) {
 
+			$is_elementor_page = get_post_meta( $post_id, '_elementor_version', true );
+
+			// If page contain Elementor meta then skip this page.
+			if ( $is_elementor_page ) {
+				return;
+			}
+
 			$ids_mapping = get_option( 'responsive_sites_wpforms_ids_mapping', array() );
 
 			// Post content.
