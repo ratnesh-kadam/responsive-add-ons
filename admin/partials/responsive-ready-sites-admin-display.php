@@ -63,6 +63,7 @@
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
 			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
+			 data-check_plugins_installed="{{{ data.items[ key ].check_plugins_installed }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
 			 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
@@ -119,6 +120,7 @@
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
 		 data-demo-type="{{{data.demo_type}}}"
+		 data-check_plugins_installed="{{{data.check_plugins_installed}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}"
@@ -180,7 +182,7 @@
 					<p>Importing this ready site will &hellip;</p>
 					<ul class="responsive-ready-site-contents">
 						<li class="responsive-ready-sites-import-plugins">
-							<strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
+							<span class="responsive-ready-sites-install-plugins-title"><strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong></span>
 							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
 								<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
