@@ -416,7 +416,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 								);
 							}
 
-							if ( check_plugins_installed && typeof required_plugins.notinstalled !== 'undefined' ) {
+							if ( check_plugins_installed && typeof required_plugins.notinstalled !== 'undefined' && required_plugins.notinstalled.length > 0 ) {
 								$( '.responsive-ready-site-import-free' ).addClass( 'disabled not-click-able' );
 								$( '.responsive-ready-site-import-free' ).prop( 'disabled',true );
 								$( '.responsive-ready-sites-install-plugins-title' ).append( '<span class="warning"> - Please make sure you have following plugins Installed</span>' );
