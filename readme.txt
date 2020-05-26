@@ -5,7 +5,7 @@ Tags: one click demo import, gutenberg, elementor, templates
 Requires at least: 5.0
 Tested up to: 5.4.1
 Requires PHP: 5.3
-Stable tag: 2.2.8
+Stable tag: 2.2.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,9 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
+= 2.2.9 - 26th May 2020 =
+* Added - flag to check required plugins are installed
+
 = 2.2.8 - 5th May 2020 =
 * Added - New WordPress admin menu item and pages
 * Fixed - Footer menu issue
