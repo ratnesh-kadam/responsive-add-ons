@@ -72,6 +72,9 @@ class Responsive_Ready_Sites_Options_Importer {
 			'elementor_space_between_widgets',
 			'elementor_stretched_section_container',
 
+			// Plugin: Elementor Pro.
+			'elementor_pro_theme_builder_conditions',
+
 			// Plugin: WooCommerce.
 			// Pages.
 			'woocommerce_shop_page_title',
