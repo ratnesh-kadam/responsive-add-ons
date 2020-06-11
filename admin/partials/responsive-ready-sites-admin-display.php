@@ -65,6 +65,7 @@
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 			 data-wpforms-path="{{{ data.items[ key ].wpforms_path }}}"
 			 data-allow-pages="{{{ data.items[ key ].allow_pages }}}"
+			 data-check_plugins_installed="{{{ data.items[ key ].check_plugins_installed }}}"
 			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
 			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
 			 data-pages="{{ JSON.stringify(data.items[ key ]['pages'] )}}"
@@ -123,6 +124,7 @@
 		 data-demo-name="{{{data.name}}}"
 		 data-demo-type="{{{data.demo_type}}}"
 		 data-wpforms-path="{{{data.wpforms_path}}}"
+		 data-check_plugins_installed="{{{data.check_plugins_installed}}}"
 		 data-demo-slug="{{{data.slug}}}"
 		 data-screenshot="{{{data.screenshot}}}"
 		 data-required-plugins="{{data.required_plugins}}"
@@ -370,7 +372,7 @@
 					<p><?php esc_html_e( 'Importing this ready template will &hellip;', 'responsive-addons' ); ?></p>
 					<ul class="responsive-ready-site-contents">
 						<li class="responsive-ready-sites-import-plugins">
-							<strong><?php esc_html_e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
+							<span class="responsive-ready-sites-install-plugins-title"><strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong></span>
 							<span class="responsive-ready-sites-tooltip-icon" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
 								<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>

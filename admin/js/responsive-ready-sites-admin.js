@@ -343,22 +343,24 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			$( '#responsive-ready-sites-import-options' ).show();
 
-			var demoId                = self.data( 'demo-id' ) || '',
-				apiURL                = self.data( 'demo-api' ) || '',
-				demoType              = self.data( 'demo-type' ) || '',
-				demoURL               = self.data( 'demo-url' ) || '',
-				screenshot            = self.data( 'screenshot' ) || '',
-				demo_name             = self.data( 'demo-name' ) || '',
-				demo_slug             = self.data( 'demo-slug' ) || '',
-				requiredPlugins       = self.data( 'required-plugins' ) || '',
-				pages                 = self.data( 'pages' ) || '',
-				responsiveSiteOptions = self.find( '.responsive-site-options' ).val() || '';
+			var demoId                  = self.data( 'demo-id' ) || '',
+				apiURL                  = self.data( 'demo-api' ) || '',
+				demoType                = self.data( 'demo-type' ) || '',
+				check_plugins_installed = self.data( 'check_plugins_installed' ) || '',
+				demoURL                 = self.data( 'demo-url' ) || '',
+				screenshot              = self.data( 'screenshot' ) || '',
+				demo_name               = self.data( 'demo-name' ) || '',
+                pages                   = self.data( 'pages' ) || '',
+				demo_slug               = self.data( 'demo-slug' ) || '',
+				requiredPlugins         = self.data( 'required-plugins' ) || '',
+				responsiveSiteOptions   = self.find( '.responsive-site-options' ).val() || '';
 
 			var template = wp.template( 'responsive-ready-sites-import-options-page' );
 
 			templateData = [{
 				id: demoId,
 				demo_type: demoType,
+				check_plugins_installed: check_plugins_installed,
 				demo_url: demoURL,
 				demo_api: apiURL,
 				screenshot: screenshot,
@@ -465,6 +467,12 @@ var ResponsiveSitesAjaxQueue = (function() {
 								);
 							}
 
+							if ( check_plugins_installed && typeof required_plugins.notinstalled !== 'undefined' && required_plugins.notinstalled.length > 0 ) {
+								$( '.responsive-ready-site-import-free' ).addClass( 'disabled not-click-able' );
+								$( '.responsive-ready-site-import-free' ).prop( 'disabled',true );
+								$( '.responsive-ready-sites-install-plugins-title' ).append( '<span class="warning"> - Please make sure you have following plugins Installed</span>' );
+								$( '#responsive-ready-sites-tooltip-plugins-settings' ).css( 'display', 'block' );
+							}
 							/**
 							 * Enable Demo Import Button
 							 *
@@ -620,6 +628,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				requiredPlugins                = anchor.data( 'required-plugins' ) || '',
 				allow_pages                    = anchor.data( 'allow-pages' ) || false,
 				pages                    	   = anchor.data( 'pages' ) || '',
+                check_plugins_installed        = anchor.data( 'check_plugins_installed' ) || '',
 				responsiveSiteOptions          = anchor.find( '.responsive-site-options' ).val() || '',
 				demo_type                      = anchor.data( 'demo-type' ) || '',
 				isResponsiveAddonsProInstalled = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled();
@@ -637,6 +646,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
 				demo_type: demo_type,
+				check_plugins_installed: check_plugins_installed,
 				is_responsive_addons_pro_installed: isResponsiveAddonsProInstalled,
 				allow_pages: allow_pages,
 				pages: JSON.stringify( pages ),
