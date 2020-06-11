@@ -249,7 +249,7 @@
 <?php
 /** Template Import Options Page */
 ?>
-<script type="text/template" id="tmpl-responsive-ready-sites-import-template-preview-page">
+<script type="text/template" id="tmpl-responsive-ready-sites-import-page-preview-page">
 	<div class="responsive-ready-sites-advanced-options-wrap template-preview-page wp-full-overlay collapsed"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
@@ -345,8 +345,8 @@
 	</div>
 </script>
 
-<script type="text/template" id="tmpl-responsive-ready-sites-import-template-options-page">
-	<div class="responsive-ready-sites-advanced-options-wrap template-options-page wp-full-overlay collapsed"
+<script type="text/template" id="tmpl-responsive-ready-sites-import-single-page-options-page">
+	<div class="responsive-ready-sites-advanced-options-wrap single-page-import-options-page wp-full-overlay collapsed"
 		 data-page-id="{{{data.page_id}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-includes-wp-forms="{{{data.includes_wp_forms}}}"
@@ -393,7 +393,7 @@
 					</ul>
 				</div>
 				<div class="responsive-ready-sites-import-button-wrap">
-					<a class="button button-hero button-primary responsive-ready-template-import" href="#">
+					<a class="button button-hero button-primary responsive-ready-page-import" href="#">
 						<?php esc_html_e( 'Import Template', 'responsive-addons' ); ?>
 					</a>
 				</div>
