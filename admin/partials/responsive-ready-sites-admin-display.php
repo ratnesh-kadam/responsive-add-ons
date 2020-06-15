@@ -361,7 +361,7 @@
 		 data-includes-wp-forms="{{{data.includes_wp_forms}}}"
 		 data-wpforms-path="{{{data.wpforms_path}}}"
 		 data-required-plugins="{{ JSON.stringify( data.required_plugins )}}"
-		 data-required-pro-plugins="{{data.required_pro_plugins}}">
+		 data-required-pro-plugins="{{ JSON.stringify( data.required_pro_plugins )}}">
 		<div class="wp-full-overlay-header">
 			<div>
 				<span class="responsive-site-demo-name">{{data.name}}</span>
