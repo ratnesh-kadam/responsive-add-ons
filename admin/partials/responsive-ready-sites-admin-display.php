@@ -289,16 +289,25 @@
 								<# for (page_id in data.pages)  { #>
 								<#
 								var required_plugins = [];
-								for( id in data.pages[page_id]['plugins']) {
+								for( id in data.pages[page_id]['free_plugins']) {
 									JSON.parse( data.required_plugins ).forEach( function( single_plugin ) {
-										if ( data.pages[page_id]['plugins'][id] == single_plugin.slug ) {
+										if ( data.pages[page_id]['free_plugins'][id] == single_plugin.slug ) {
 											required_plugins.push( single_plugin );
 										}
 									}
 								);
 								}
+								var required_pro_plugins = [];
+								for( id in data.pages[page_id]['pro_plugins']) {
+									JSON.parse( data.required_pro_plugins ).forEach( function( single_plugin ) {
+										if ( data.pages[page_id]['pro_plugins'][id] == single_plugin.slug ) {
+											required_pro_plugins.push( single_plugin );
+										}
+									}
+								);
+								}
 								#>
-								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-required-plugins="{{ JSON.stringify( required_plugins )}}" data-includes-wp-forms="{{ data.pages[page_id]['includes_wp_forms'] }}" >
+								<div class="theme responsive-theme site-single" data-page-id="{{data.pages[page_id]['page_id']}}" data-required-pro-plugins="{{ JSON.stringify( required_pro_plugins )}}" data-required-plugins="{{ JSON.stringify( required_plugins )}}" data-includes-wp-forms="{{ data.pages[page_id]['includes_wp_forms'] }}" >
 									<div class="inner">
 										<#
 										var featured_image_class = '';
@@ -314,7 +323,7 @@
 										}
 										#>
 										<span class="site-preview" data-title="{{ data.pages[page_id]['page_title'] }}">
-										<div class="theme-screenshot one loading {{ featured_image_class }}" data-src="{{ featured_image }}" data-featured-src="{{ featured_image }}" style="background-image: url('{{ featured_image }}');"></div>
+										<div class="theme-screenshot one loading {{ featured_image_class }}" data-src="{{ featured_image }}" data-featured-src="{{ featured_image }}" data-demo-type="{{ data.demo_type }}" style="background-image: url('{{ featured_image }}');"></div>
 									</span>
 										<div class="theme-id-container">
 											<h3 class="theme-name">
@@ -331,7 +340,7 @@
 						<div class="site-action-buttons-wrap">
 							<a href="#" class="button button-hero site-preview-button" target="_blank">Preview "{{data.name}}" Site <i class="dashicons dashicons-external"></i></a>
 							<div class="site-action-buttons-right">
-								<div style="margin-left: 5px;" class="button button-hero button-primary site-import-layout-button disabled"><?php esc_html_e( 'Select Template', 'responsive-addons' ); ?></div>
+								<div style="margin-left: 5px;" class="button button-hero button-primary single-page-import-button-{{{ data.demo_type }}} disabled"><?php esc_html_e( 'Select Template', 'responsive-addons' ); ?></div>
 							</div>
 						</div>
 					</div>
@@ -393,7 +402,7 @@
 					</ul>
 				</div>
 				<div class="responsive-ready-sites-import-button-wrap">
-					<a class="button button-hero button-primary responsive-ready-page-import" href="#">
+					<a class="button button-hero button-primary responsive-ready-page-import-{{{ data.demo_type }}}" href="#">
 						<?php esc_html_e( 'Import Template', 'responsive-addons' ); ?>
 					</a>
 				</div>

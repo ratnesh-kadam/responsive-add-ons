@@ -266,12 +266,12 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'responsive-ready-sites-import-options-done' , ResponsiveSitesAdmin._importSiteEnd );
 
 			// Single Page Import events.
-			$( document ).on( 'click'                     , '.site-import-layout-button', ResponsiveSitesAdmin._importSinglePageOptions );
-			$( document ).on( 'click'                     , '.responsive-ready-page-import', ResponsiveSitesAdmin._importSinglePage );
+			$( document ).on( 'click'                     , '.single-page-import-button-free', ResponsiveSitesAdmin._importSinglePageOptions );
+			$( document ).on( 'click'                     , '.responsive-ready-page-import-free', ResponsiveSitesAdmin._importSinglePage );
 			$( document ).on( 'click', '.responsive-page-import-options-free', ResponsiveSitesAdmin._importPagePreviewScreen );
 			$( document ).on( 'click'                     , '#single-pages .site-single', ResponsiveSitesAdmin._change_site_preview_screenshot );
 			$( document ).on( 'responsive-ready-page-install-and-activate-required-plugins-done' , ResponsiveSitesAdmin._importPage );
-			$( document ).on( 'responsive-ready-sites-import-page-start'   		, ResponsiveSitesAdmin._installRequiredPlugins );
+			$( document ).on( 'responsive-ready-sites-import-page-free-start'   		, ResponsiveSitesAdmin._installRequiredPlugins );
 
 			// Wordpress Plugin install events.
 			$( document ).on( 'wp-plugin-installing'      , ResponsiveSitesAdmin._pluginInstalling );
@@ -350,7 +350,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				demoURL                 = self.data( 'demo-url' ) || '',
 				screenshot              = self.data( 'screenshot' ) || '',
 				demo_name               = self.data( 'demo-name' ) || '',
-                pages                   = self.data( 'pages' ) || '',
+				pages                   = self.data( 'pages' ) || '',
 				demo_slug               = self.data( 'demo-slug' ) || '',
 				requiredPlugins         = self.data( 'required-plugins' ) || '',
 				responsiveSiteOptions   = self.find( '.responsive-site-options' ).val() || '';
@@ -628,7 +628,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				requiredPlugins                = anchor.data( 'required-plugins' ) || '',
 				allow_pages                    = anchor.data( 'allow-pages' ) || false,
 				pages                    	   = anchor.data( 'pages' ) || '',
-                check_plugins_installed        = anchor.data( 'check_plugins_installed' ) || '',
+				check_plugins_installed        = anchor.data( 'check_plugins_installed' ) || '',
 				responsiveSiteOptions          = anchor.find( '.responsive-site-options' ).val() || '',
 				demo_type                      = anchor.data( 'demo-type' ) || '',
 				isResponsiveAddonsProInstalled = ResponsiveSitesAdmin._checkResponsiveAddonsProInstalled();
@@ -1563,14 +1563,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var large_img_url = $( element ).find( '.theme-screenshot' ).attr( 'data-featured-src' ) || '';
 			var url           = $( element ).find( '.theme-screenshot' ).attr( 'data-src' ) || '';
 			var page_name     = $( element ).find( '.theme-name' ).text() || '';
+			var demo_type     = $( element ).find( '.theme-screenshot' ).attr( 'data-demo-type' ) || '';
 
 			$( element ).siblings().removeClass( 'current_page' );
 			$( element ).addClass( 'current_page' );
 
-			$( '.site-import-layout-button' ).removeClass( 'disabled' );
+			$( '.single-page-import-button-' + demo_type ).removeClass( 'disabled' );
 			if ( page_name ) {
 				var title = responsiveSitesAdmin.importSingleTemplateButtonTitle.replace( '%s', page_name.trim() );
-				$( '.site-import-layout-button' ).text( title );
+				$( '.single-page-import-button-' + demo_type ).text( title );
 			}
 
 			if ( url ) {
@@ -1599,7 +1600,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var self = $( this ).parents( '.responsive-ready-sites-advanced-options-wrap' );
 
 			var demo_api     = self.data( 'demo-api' ) || '',
-				wpforms_path = self.data( 'wpforms-path' ) || '';
+				wpforms_path = self.data( 'wpforms-path' ) || '',
+				demo_type 	 = self.data( 'demo-type' ) || '';
 
 			var page_id = ResponsiveSitesAdmin._get_id( $( '#single-pages' ).find( '.current_page' ).attr( 'data-page-id' ) ) || '';
 
@@ -1619,6 +1621,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				required_plugins: required_plugins,
 				wpforms_path: wpforms_path,
 				includes_wp_forms: includes_wp_forms,
+				demo_type: demo_type,
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
@@ -1661,13 +1664,13 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( '.sites-import-process-errors .current-importing-status-error-title' ).html( '' );
 
 			$( '.sites-import-process-errors' ).hide();
-			$( '.responsive-ready-page-import' ).addClass( 'updating-message installing' )
+			$( '.responsive-ready-page-import-free' ).addClass( 'updating-message installing' )
 				.text( "Importing.." );
-			$( '.responsive-ready-page-import' ).addClass( 'disabled not-click-able' );
+			$( '.responsive-ready-page-import-free' ).addClass( 'disabled not-click-able' );
 
 			ResponsiveSitesAdmin.processing_single_template = true;
 
-			$( document ).trigger( 'responsive-ready-sites-import-page-start' );
+			$( document ).trigger( 'responsive-ready-sites-import-page-free-start' );
 		},
 
 		/**
@@ -1737,11 +1740,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 					fetch( page_api_url ).then(
 						response => {
-							return response.json();
+                        return response.json();
 						}
 					).then(
 						data => {
-							// Import Single Page.
+                        // Import Single Page.
 							$.ajax(
 								{
 									url: responsiveSitesAdmin.ajaxurl,
@@ -1774,7 +1777,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					).catch(
 						err => {
-							ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
+                        ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
 						}
 					);
 				}
