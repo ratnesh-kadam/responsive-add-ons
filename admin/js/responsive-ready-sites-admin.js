@@ -346,6 +346,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var demoId                  = self.data( 'demo-id' ) || '',
 				apiURL                  = self.data( 'demo-api' ) || '',
 				demoType                = self.data( 'demo-type' ) || '',
+				active_site             = self.data( 'active-site' ) || '',
 				check_plugins_installed = self.data( 'check_plugins_installed' ) || '',
 				demoURL                 = self.data( 'demo-url' ) || '',
 				screenshot              = self.data( 'screenshot' ) || '',
@@ -362,6 +363,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				demo_type: demoType,
 				check_plugins_installed: check_plugins_installed,
 				demo_url: demoURL,
+				active_site: active_site,
 				demo_api: apiURL,
 				screenshot: screenshot,
 				name: demo_name,
@@ -623,6 +625,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				demoURL                        = anchor.data( 'demo-url' ) || '',
 				screenshot                     = anchor.data( 'screenshot' ) || '',
 				demo_name                      = anchor.data( 'demo-name' ) || '',
+				active_site                    = anchor.data( 'active-site' ) || '',
 				demo_slug                      = anchor.data( 'demo-slug' ) || '',
 				wpforms_path                   = anchor.data( 'wpforms-path' ) || '',
 				requiredPlugins                = anchor.data( 'required-plugins' ) || '',
@@ -641,6 +644,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				demo_api: demoURL,
 				screenshot: screenshot,
 				name: demo_name,
+				active_site: active_site,
 				wpforms_path: wpforms_path,
 				slug: demo_slug,
 				required_plugins: JSON.stringify( requiredPlugins ),
@@ -1740,11 +1744,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 					fetch( page_api_url ).then(
 						response => {
-                        return response.json();
+							return response.json();
 						}
 					).then(
 						data => {
-                        // Import Single Page.
+							// Import Single Page.
 							$.ajax(
 								{
 									url: responsiveSitesAdmin.ajaxurl,
@@ -1777,7 +1781,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						}
 					).catch(
 						err => {
-                        ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
+							ResponsiveSitesAdmin._log_error( 'Page Rest API Request Failed!', true );
 						}
 					);
 				}
