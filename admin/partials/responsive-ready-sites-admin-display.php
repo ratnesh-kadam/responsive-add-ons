@@ -38,30 +38,14 @@
 <script type="text/template" id="tmpl-responsive-sites-list">
 
 	<# if ( data.items.length ) { #>
-
-	<# if ( data.active_site_data !== "" ) {#>
-	<div class="theme active ra-site-single" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name">
-		 <div class="inner">
-			<span class="site-preview">
-				<div class="theme-screenshot" style="background-image: url('{{ data.active_site_data.featured_image_url }}');"></div>
-			</span>
-			<div class="theme-id-container">
-				<h3 class="theme-name" id="responsive-theme-name">Active : {{{ data.active_site_data.title }}}</h3>
-			</div>
-		</div>
-	</div>
-	<# } #>
+	
 	<# for ( key in data.items ) { #>
-
-	<# if (data.items[ key ].slug === data.active_site ) { #>
-	<# continue; #>
-	<# } #>
-
 		<div class="theme inactive ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 			 data-demo-id="{{{ data.items[ key ].id }}}"
 			 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
 			 data-demo-slug="{{{  data.items[ key ].slug }}}"
 			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
+			 data-active-site="{{{  data.active_site }}}"
 			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
 			 data-wpforms-path="{{{ data.items[ key ].wpforms_path }}}"
 			 data-allow-pages="{{{ data.items[ key ].allow_pages }}}"
@@ -76,6 +60,9 @@
 						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured_image_url'] }}');"></div>
 					</span>
 			<span class="demo-type {{{ data.items[ key ].demo_type }}}">{{{ data.items[ key ].demo_type }}}</span>
+			<# if (data.items[ key ].slug === data.active_site ) { #>
+				<span class="current_active_site"><?php esc_html_e( 'Currently Active', 'responsive-addons' ); ?></span>
+			<# } #>
 			<div class="theme-id-container">
 				<h3 class="theme-name" id="responsive-theme-name">{{{ data.items[ key ].title.rendered }}}</h3>
 				<div class="theme-actions">
@@ -122,6 +109,7 @@
 		 data-demo-url="{{{data.demo_url}}}"
 		 data-demo-api="{{{data.demo_api}}}"
 		 data-demo-name="{{{data.name}}}"
+		 data-active-site="{{{data.active_site}}}"
 		 data-demo-type="{{{data.demo_type}}}"
 		 data-wpforms-path="{{{data.wpforms_path}}}"
 		 data-check_plugins_installed="{{{data.check_plugins_installed}}}"
@@ -191,6 +179,9 @@
 					<div class="responsive-ready-sites-advanced-options">
 						<h2>Importing {{data.demo_name}}</h2>
 						<p><?php esc_html_e( 'Importing this ready site will &hellip;', 'responsive-addons' ); ?></p>
+						<# if ( data.slug === data.active_site ) { #>
+							<p><?php esc_html_e( 'This will delete previously imported site', 'responsive-addons' ); ?></p>
+						<# } #>
 						<ul class="responsive-ready-site-contents">
 							<li class="responsive-ready-sites-import-plugins">
 								<strong><?php esc_html_e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
