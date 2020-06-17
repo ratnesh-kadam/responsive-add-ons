@@ -948,9 +948,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 									responsiveSitesAdmin.required_plugins.inactive = ResponsiveSitesAdmin._removePluginFromQueue( single_plugin.slug, pluginsList );
 
 									if ( ResponsiveSitesAdmin.processing_single_template ) {
-										ResponsiveSitesAdmin._ready_for_import_site();
-									} else {
 										ResponsiveSitesAdmin._ready_for_import_template();
+									} else {
+										ResponsiveSitesAdmin._ready_for_import_site();
 									}
 
 								}
