@@ -655,11 +655,11 @@ class Responsive_Add_Ons {
 	 * Check if Responsive Addons Pro License is Active.
 	 */
 	public function is_responsive_pro_license_is_active() {
-		global $wcam_lib;
-		if ( is_null( $wcam_lib ) ) {
+		global $wcam_lib_responsive_pro;
+		if ( is_null( $wcam_lib_responsive_pro ) ) {
 			wp_send_json_error();
 		}
-		$license_status = $wcam_lib->license_key_status();
+		$license_status = $wcam_lib_responsive_pro->license_key_status();
 
 		if ( ! empty( $license_status['data']['activated'] ) && $license_status['data']['activated'] ) {
 			wp_send_json_success();
@@ -672,11 +672,11 @@ class Responsive_Add_Ons {
 	 * Check if Responsive Addons Pro License is Active.
 	 */
 	public function responsive_pro_license_is_active() {
-		global $wcam_lib;
-		if ( is_null( $wcam_lib ) ) {
+		global $wcam_lib_responsive_pro;
+		if ( is_null( $wcam_lib_responsive_pro ) ) {
 			return false;
 		}
-		$license_status = $wcam_lib->license_key_status();
+		$license_status = $wcam_lib_responsive_pro->license_key_status();
 
 		if ( ! empty( $license_status['data']['activated'] ) && $license_status['data']['activated'] ) {
 			return true;
