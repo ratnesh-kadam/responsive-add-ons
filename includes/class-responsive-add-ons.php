@@ -425,12 +425,13 @@ class Responsive_Add_Ons {
 				'responsive_sites_localize_vars',
 				array(
 					'debug' => ((defined('WP_DEBUG') && WP_DEBUG) || isset($_GET['debug'])) ? true : false, //phpcs:ignore
-					'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
-					'siteURL'           => site_url(),
-					'_ajax_nonce'       => wp_create_nonce( 'responsive-addons' ),
-					'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
-					'required_plugins'  => array(),
-					'ApiURL'            => self::$api_url,
+					'ajaxurl'                         => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'siteURL'                         => site_url(),
+					'_ajax_nonce'                     => wp_create_nonce( 'responsive-addons' ),
+					'XMLReaderDisabled'               => ! class_exists( 'XMLReader' ) ? true : false,
+					'required_plugins'                => array(),
+					'ApiURL'                          => self::$api_url,
+					'importSingleTemplateButtonTitle' => __( 'Import "%s" Template', 'responsive-addons' ),
 				)
 			);
 
@@ -837,7 +838,7 @@ class Responsive_Add_Ons {
 		add_submenu_page(
 			'responsive_add_ons',
 			'Responsive Ready Sites Importer',
-			__( 'Site Templates', 'responsive-addons' ),
+			__( 'Ready Sites', 'responsive-addons' ),
 			'manage_options',
 			'responsive-add-ons',
 			array( $this, 'responsive_add_ons_templates' ),
