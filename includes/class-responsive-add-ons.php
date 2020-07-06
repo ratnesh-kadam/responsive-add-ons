@@ -838,7 +838,7 @@ class Responsive_Add_Ons {
 		add_submenu_page(
 			'responsive_add_ons',
 			'Responsive Ready Sites Importer',
-			__( 'Site Templates', 'responsive-addons' ),
+			__( 'Ready Sites', 'responsive-addons' ),
 			'manage_options',
 			'responsive-add-ons',
 			array( $this, 'responsive_add_ons_templates' ),
