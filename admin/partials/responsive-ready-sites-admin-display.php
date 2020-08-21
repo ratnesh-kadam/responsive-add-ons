@@ -329,7 +329,7 @@
 					</div>
 					<div class="single-site-footer">
 						<div class="site-action-buttons-wrap">
-							<a href="#" class="button button-hero site-preview-button" target="_blank">Preview "{{data.name}}" Site <i class="dashicons dashicons-external"></i></a>
+							<a href="{{{data.demo_api}}}" class="button button-hero site-preview-button" target="_blank">Preview "{{data.name}}" Site <i class="dashicons dashicons-external"></i></a>
 							<div class="site-action-buttons-right">
 								<div style="margin-left: 5px;" class="button button-hero button-primary single-page-import-button-{{{ data.demo_type }}} disabled"><?php esc_html_e( 'Select Template', 'responsive-addons' ); ?></div>
 							</div>
