@@ -59,7 +59,7 @@ module.exports = function (grunt) {
 				build: {
 					options: {
 						mode: 'zip',
-						archive: './release/<%= pkg.name %>.zip'
+						archive: './release/responsive-add-ons.zip'
 					},
 					expand: true,
 					cwd: 'release/<%= pkg.version %>/',
