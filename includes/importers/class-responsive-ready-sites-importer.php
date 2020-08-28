@@ -76,7 +76,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				// Import single page.
 				add_action( 'wp_ajax_responsive-sites-create-page', array( $this, 'import_single_page' ) );
 
-				if ( defined( 'WP_CLI' ) || ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.0.0', '>=' ) ) ) {
+				if ( ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.0.0', '>=' ) ) ) {
 					remove_filter( 'wp_import_post_meta', array( 'Elementor\Compatibility', 'on_wp_import_post_meta' ) );
 					remove_filter( 'wxr_importer.pre_process.post_meta', array( 'Elementor\Compatibility', 'on_wxr_importer_pre_process_post_meta' ) );
 
