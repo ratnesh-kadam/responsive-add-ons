@@ -71,6 +71,8 @@ class Responsive_Ready_Sites_Options_Importer {
 			'elementor_scheme_typography',
 			'elementor_space_between_widgets',
 			'elementor_stretched_section_container',
+			'elementor_load_fa4_shim',
+			'elementor_active_kit',
 
 			// Plugin: Elementor Pro.
 			'elementor_pro_theme_builder_conditions',
