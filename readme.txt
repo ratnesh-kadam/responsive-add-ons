@@ -5,7 +5,7 @@ Tags: one click demo import, gutenberg, elementor, templates
 Requires at least: 5.0
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 2.4.1
+Stable tag: 2.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,9 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
+= 2.4.2 - 10th November 2020 =
+* Fix: Fixed vulnerability issue for analytics sdk
+
 = 2.4.1 - 28th August 2020 =
 - Fix: Compatibility with Elementor 3.0.0 and above
 
