@@ -184,24 +184,24 @@
 						<# } #>
 						<ul class="responsive-ready-site-contents">
 							<li class="responsive-ready-sites-import-plugins">
-                                <input type="checkbox" name="plugins" checked="checked" class="disabled checkbox" readonly>
+								<input type="checkbox" name="plugins" checked="checked" class="disabled checkbox" readonly>
 								<strong><?php esc_html_e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
-                                <span class="responsive-ready-sites-tooltip-icon responsive-ready-sites-tooltip-plugins-settings" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-arrow-down-alt2"></span></span>
-                                <div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
-                                    <# if ( 'pro' === data.demo_type ) { #>
-                                        <div class="responsive-ready-sites-third-party-plugins-warning"><?php _e( 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'responsive-addons' ); ?></div>
-                                    <# } #>
-                                    <div class="responsive-ready-sites-plugins-installed"><?php _e( 'The plugin is already installed', 'responsive-addons' ); ?></div>
-                                    <div class="responsive-ready-sites-plugins-can-be-installed"><?php _e( 'We will install the plugin for you.', 'responsive-addons' ); ?></div>
-                                    <# if ( 'pro' === data.demo_type ) { #>
-                                        <div class="responsive-ready-sites-third-party-plugins"><?php _e( 'Premium Pluging - won\'t be installed.', 'responsive-addons' ); ?></div>
-                                    <# } #>
-                                    <ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+								<span class="responsive-ready-sites-tooltip-icon responsive-ready-sites-tooltip-plugins-settings" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-arrow-down-alt2"></span></span>
+								<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
+									<# if ( 'pro' === data.demo_type ) { #>
+										<div class="responsive-ready-sites-third-party-plugins-warning"><?php _e( 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'responsive-addons' ); ?></div>
+									<# } #>
+									<div class="responsive-ready-sites-plugins-installed"><?php _e( 'The plugin is already installed', 'responsive-addons' ); ?></div>
+									<div class="responsive-ready-sites-plugins-can-be-installed"><?php _e( 'We will install the plugin for you.', 'responsive-addons' ); ?></div>
+									<# if ( 'pro' === data.demo_type ) { #>
+										<div class="responsive-ready-sites-third-party-plugins"><?php _e( 'Premium Pluging - won\'t be installed.', 'responsive-addons' ); ?></div>
+									<# } #>
+									<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
 								</div>
 							</li>
 							<li class="responsive-ready-sites-reset-data">
 								<label>
-                                    <input type="checkbox" name="reset" checked="checked" class="checkbox">
+									<input type="checkbox" name="reset" checked="checked" class="checkbox">
 									<strong><?php esc_html_e( 'Delete Previous Import', 'responsive-addons' ); ?></strong>
 								</label>
 								<span class="responsive-ready-sites-tooltip-icon responsive-ready-sites-tooltip-reset-data" data-tip-id="responsive-ready-sites-tooltip-reset-data"><span class="dashicons dashicons-arrow-down-alt2"></span></span>
@@ -210,8 +210,8 @@
 								</div>
 							</li>
 							<li class="responsive-ready-sites-import-xml">
-                                <input type="checkbox" name="content" checked="checked" class="disabled checkbox" readonly>
-                                <strong><?php esc_html_e( 'Import Content', 'responsive-addons' ); ?></strong>
+								<input type="checkbox" name="content" checked="checked" class="disabled checkbox" readonly>
+								<strong><?php esc_html_e( 'Import Content', 'responsive-addons' ); ?></strong>
 								<span class="responsive-ready-sites-tooltip-icon responsive-ready-sites-tooltip-site-content" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-arrow-down-alt2"></span></span>
 								<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
 									<p><?php esc_html_e( 'Imports sample pages, posts, images and menus. Depending on your internet speed this may take 2-10 minutes.', 'responsive-addons' ); ?></p>
@@ -221,8 +221,8 @@
 								</div>
 							</li>
 							<li class="responsive-ready-sites-import-customizer">
-                                <input type="checkbox" name="customizer" checked="checked" class="disabled checkbox" readonly>
-                                <strong><?php esc_html_e( 'Import Customizer Settings', 'responsive-addons' ); ?></strong>
+								<input type="checkbox" name="customizer" checked="checked" class="disabled checkbox" readonly>
+								<strong><?php esc_html_e( 'Import Customizer Settings', 'responsive-addons' ); ?></strong>
 								<span class="responsive-ready-sites-tooltip-icon responsive-ready-sites-tooltip-customizer-settings" data-tip-id="responsive-ready-sites-tooltip-customizer-settings"><span class="dashicons dashicons-arrow-down-alt2"></span></span>
 								<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-customizer-settings" style="display: none;">
 									<p><?php esc_html_e( 'Imports sample customizer settings including site identity, typography, colors and other theme options.', 'responsive-addons' ); ?></p>
