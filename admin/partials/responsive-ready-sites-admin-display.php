@@ -191,6 +191,11 @@
                                     <# if ( 'pro' === data.demo_type ) { #>
                                         <div class="responsive-ready-sites-third-party-plugins-warning"><?php _e( 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'responsive-addons' ); ?></div>
                                     <# } #>
+                                    <div class="responsive-ready-sites-plugins-installed"><?php _e( 'The plugin is already installed', 'responsive-addons' ); ?></div>
+                                    <div class="responsive-ready-sites-plugins-can-be-installed"><?php _e( 'We will install the plugin for you.', 'responsive-addons' ); ?></div>
+                                    <# if ( 'pro' === data.demo_type ) { #>
+                                        <div class="responsive-ready-sites-third-party-plugins"><?php _e( 'Premium Pluging - won\'t be installed.', 'responsive-addons' ); ?></div>
+                                    <# } #>
                                     <ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
 								</div>
 							</li>
