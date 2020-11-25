@@ -1649,11 +1649,112 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
 			$( '.required-plugins-list' ).html( '' );
-			$( required_plugins ).each(
-				function( index, plugin ) {
-					$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-achievable plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
-				}
-			);
+
+			if ( $.isArray( required_plugins ) ) {
+				// or.
+				var $pluginsFilter = $( '#plugin-filter' ),
+					data           = {
+						action           : 'responsive-ready-sites-required-plugins',
+						_ajax_nonce      : responsiveSitesAdmin._ajax_nonce,
+						required_plugins : required_plugins
+					};
+
+				$( '.required-plugins' ).addClass( 'loading' ).html( '<span class="spinner is-active"></span>' );
+
+				// Required Required.
+				$.ajax(
+					{
+						url  : responsiveSitesAdmin.ajaxurl,
+						type : 'POST',
+						data : data,
+					}
+				)
+					.fail(
+						function( jqXHR ){
+
+							// Remove loader.
+							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+
+						}
+					)
+					.done(
+						function ( response ) {
+							required_plugins = response.data['required_plugins'];
+
+							// Remove loader.
+							$( '.required-plugins' ).removeClass( 'loading' ).html( '' );
+							$( '.required-plugins-list' ).html( '' );
+
+							/**
+							 * Count remaining plugins.
+							 *
+							 * @type number
+							 */
+							var remaining_plugins = 0;
+
+							/**
+							 * Not Installed
+							 *
+							 * List of not installed required plugins.
+							 */
+							if ( typeof required_plugins.notinstalled !== 'undefined' ) {
+
+								// Add not have installed plugins count.
+								remaining_plugins += parseInt( required_plugins.notinstalled.length );
+
+								$( required_plugins.notinstalled ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-not-installed plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Inactive
+							 *
+							 * List of not inactive required plugins.
+							 */
+							if ( typeof required_plugins.inactive !== 'undefined' ) {
+								// Add inactive plugins count.
+								remaining_plugins += parseInt( required_plugins.inactive.length );
+
+								$( required_plugins.inactive ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-installed plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							/**
+							 * Active
+							 *
+							 * List of not active required plugins.
+							 */
+							if ( typeof required_plugins.active !== 'undefined' ) {
+
+								$( required_plugins.active ).each(
+									function( index, plugin ) {
+										$( '.required-plugins-list' ).append( '<li class="plugin-card plugin-installed-active plugin-card-' + plugin.slug + '" data-slug="' + plugin.slug + '" data-init="' + plugin.init + '" data-name="' + plugin.name + '">' + plugin.name + '</li>' );
+									}
+								);
+							}
+
+							if ( check_plugins_installed && typeof required_plugins.notinstalled !== 'undefined' && required_plugins.notinstalled.length > 0 ) {
+								$( '.responsive-ready-site-import-free' ).addClass( 'disabled not-click-able' );
+								$( '.responsive-ready-site-import-free' ).prop( 'disabled',true );
+								$( '.responsive-ready-sites-install-plugins-title' ).append( '<span class="warning"> - Please make sure you have following plugins Installed</span>' );
+								$( '#responsive-ready-sites-tooltip-plugins-settings' ).css( 'display', 'block' );
+							}
+							/**
+							 * Enable Demo Import Button
+							 *
+							 * @type number
+							 */
+							responsiveSitesAdmin.requiredPlugins = required_plugins;
+						}
+					);
+
+			}
 		},
 
 		/**

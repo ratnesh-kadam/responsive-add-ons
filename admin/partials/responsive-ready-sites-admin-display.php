@@ -191,13 +191,13 @@
 									<# if ( 'pro' === data.demo_type ) { #>
 										<div class="responsive-ready-sites-third-party-plugins-warning"><?php _e( 'This ready site requires premium plugins. As these are third party premium plugins, you\'ll need to purchase, install and activate.', 'responsive-addons' ); ?></div>
 									<# } #>
-                                    <div class="responsive-ready-sites-plugin-installation-info">
-									    <div class="responsive-ready-sites-plugins-installed"><?php _e( 'The plugin is already installed.', 'responsive-addons' ); ?></div>
-									    <div class="responsive-ready-sites-plugins-can-be-installed"><?php _e( 'We will install the plugin for you.', 'responsive-addons' ); ?></div>
-									    <# if ( 'pro' === data.demo_type ) { #>
-										    <div class="responsive-ready-sites-third-party-plugins"><?php _e( 'Premium Plugins - won\'t be installed.', 'responsive-addons' ); ?></div>
-									    <# } #>
-                                    </div>
+									<div class="responsive-ready-sites-plugin-installation-info">
+										<div class="responsive-ready-sites-plugins-installed"><?php _e( 'The plugin is already installed.', 'responsive-addons' ); ?></div>
+										<div class="responsive-ready-sites-plugins-can-be-installed"><?php _e( 'We will install the plugin for you.', 'responsive-addons' ); ?></div>
+										<# if ( 'pro' === data.demo_type ) { #>
+											<div class="responsive-ready-sites-third-party-plugins"><?php _e( 'Premium Plugins - won\'t be installed.', 'responsive-addons' ); ?></div>
+										<# } #>
+									</div>
 									<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
 								</div>
 							</li>
@@ -382,16 +382,26 @@
 					<p><?php esc_html_e( 'Importing this ready template will &hellip;', 'responsive-addons' ); ?></p>
 					<ul class="responsive-ready-site-contents">
 						<li class="responsive-ready-sites-import-plugins">
-							<span class="responsive-ready-sites-install-plugins-title"><strong><?php _e( 'Install Required Plugins', 'responsive-addons' ); ?></strong></span>
+							<input type="checkbox" name="plugins" checked="checked" class="disabled checkbox" readonly>
+							<strong><?php esc_html_e( 'Install Required Plugins', 'responsive-addons' ); ?></strong>
 							<span class="responsive-ready-sites-tooltip-icon responsive-ready-sites-tooltip-plugins-settings" data-tip-id="responsive-ready-sites-tooltip-plugins-settings"><span class="dashicons dashicons-arrow-down-alt2"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
+								<# if ( 'pro' === data.demo_type ) { #>
+								<div class="responsive-ready-sites-third-party-plugins-warning"><?php _e( 'This ready template requires premium plugins. As these are third party premium plugins, you\'ll need to purchase, install and activate.', 'responsive-addons' ); ?></div>
+								<# } #>
+								<div class="responsive-ready-sites-plugin-installation-info">
+									<div class="responsive-ready-sites-plugins-installed"><?php _e( 'The plugin is already installed.', 'responsive-addons' ); ?></div>
+									<div class="responsive-ready-sites-plugins-can-be-installed"><?php _e( 'We will install the plugin for you.', 'responsive-addons' ); ?></div>
+									<# if ( 'pro' === data.demo_type ) { #>
+									<div class="responsive-ready-sites-third-party-plugins"><?php _e( 'Premium Plugins - won\'t be installed.', 'responsive-addons' ); ?></div>
+									<# } #>
+								</div>
 								<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
 							</div>
 						</li>
 						<li class="responsive-ready-sites-import-xml">
-							<label>
-								<strong><?php esc_html_e( 'Import Content', 'responsive-addons' ); ?></strong>
-							</label>
+							<input type="checkbox" name="content" checked="checked" class="disabled checkbox" readonly>
+							<strong><?php esc_html_e( 'Import Content', 'responsive-addons' ); ?></strong>
 							<span class="responsive-ready-sites-tooltip-icon responsive-ready-sites-tooltip-site-content" data-tip-id="responsive-ready-sites-tooltip-site-content"><span class="dashicons dashicons-arrow-down-alt2"></span></span>
 							<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-site-content" style="display: none;">
 								<p><?php esc_html_e( 'Imports ready template content. Depending on your internet speed this may take 1-3 minutes.', 'responsive-addons' ); ?></p>

@@ -778,6 +778,7 @@ responsive-ready-site-import-free.button.installing:before {
 	padding: 10px 10px 10px 20px;
 	margin-left: -15px;
 	line-height: 2;
+	margin-top: 5px;
 }
 @media screen and (max-width: 768px ) {
 	#responsive-theme-activation .responsive-addons-message-inner {
