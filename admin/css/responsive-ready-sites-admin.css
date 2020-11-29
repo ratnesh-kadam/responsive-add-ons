@@ -699,43 +699,6 @@ responsive-ready-site-import-free.button.installing:before {
 	font-size: 20px;
 	text-decoration: none;
 }
-.responsive-ready-sites-plugins-installed:before {
-	margin: 0 3px 0 0;
-	color: #008000;
-	animation: none;
-	content: "\f147";
-	display: inline-block;
-	font: normal 20px/1 dashicons;
-	-webkit-font-smoothing: antialiased;
-	vertical-align: middle;
-}
-.responsive-ready-sites-plugins-can-be-installed:before {
-	margin: 0 3px 0 0;
-	color: #87CEEB;
-	animation: none;
-	content: "\f147";
-	display: inline-block;
-	font: normal 20px/1 dashicons;
-	-webkit-font-smoothing: antialiased;
-	vertical-align: middle;
-}
-.responsive-ready-sites-third-party-plugins:before {
-	margin: 0 3px 0 0;
-	color: #FF0000;
-	animation: none;
-	content: "\f158";
-	display: inline-block;
-	font: normal 20px/1 dashicons;
-	-webkit-font-smoothing: antialiased;
-	vertical-align: middle;
-}
-.responsive-ready-sites-plugin-installation-info {
-	background-color: #DDDDDD;
-	padding: 10px 10px 10px 20px;
-	margin-left: -15px;
-	line-height: 2;
-	margin-top: 5px;
-}
 @media screen and (max-width: 768px ) {
 	#responsive-theme-activation .responsive-addons-message-inner {
 		display: block;
