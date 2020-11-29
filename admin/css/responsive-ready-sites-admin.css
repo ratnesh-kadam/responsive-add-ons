@@ -699,6 +699,13 @@ responsive-ready-site-import-free.button.installing:before {
 	font-size: 20px;
 	text-decoration: none;
 }
+.responsive-premium-plugin-tag {
+	color: #ff0000;
+}
+.responsive-ready-sites-third-party-plugins-warning {
+	padding: 5px 5px 5px 10px;
+	font-size: 13px;
+}
 @media screen and (max-width: 768px ) {
 	#responsive-theme-activation .responsive-addons-message-inner {
 		display: block;
