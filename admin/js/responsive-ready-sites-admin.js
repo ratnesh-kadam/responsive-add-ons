@@ -229,6 +229,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		current_page_id : '',
 		processing_single_template: false,
+		pro_plugins_flag: false,
 
 		init: function()
 		{
@@ -373,6 +374,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
 				pages: JSON.stringify( pages ),
+				pro_plugins_flag: ResponsiveSitesAdmin.pro_plugins_flag,
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
@@ -1643,6 +1645,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				wpforms_path: wpforms_path,
 				includes_wp_forms: includes_wp_forms,
 				demo_type: demo_type,
+				pro_plugins_flag: ResponsiveSitesAdmin.pro_plugins_flag,
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
