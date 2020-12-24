@@ -190,7 +190,7 @@
 								<div class="responsive-ready-sites-tooltip-message" id="responsive-ready-sites-tooltip-plugins-settings" style="display: none;">
 									<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
 									<# if ( data.pro_plugins_flag ) { #>
-										<div class="responsive-ready-sites-third-party-plugins-warning"><?php _e( 'This ready site required third party Premium Plugins. you\'ll need to purchase, install and activate. Ignore this if installed already.', 'responsive-addons' ); ?></div>
+										<div class="responsive-ready-sites-third-party-plugins-warning"><?php _e( 'This ready site requires third party Premium Plugins. you\'ll need to purchase, install and activate. Ignore this if installed already.', 'responsive-addons' ); ?></div>
 										<ul class="required-third-party-plugins-list"><span class="is-active"></span></ul>
 									<# } #>
 								</div>
