@@ -3,7 +3,7 @@
  * Plugin Name: Responsive Ready Sites Importer
  * Plugin URI: http://wordpress.org/plugins/responsive-add-ons/
  * Description: Import Responsive Ready Sites that help you launch your website quickly. Just import, update & hit the launch button.
- * Version: 2.4.2
+ * Version: 2.4.3
  * Author: CyberChimps
  * License: GPL2
  *
@@ -45,7 +45,7 @@ if ( ! defined( 'RESPONSIVE_ADDONS_URI' ) ) {
 }
 
 if ( ! defined( 'RESPONSIVE_ADDONS_VER' ) ) {
-	define( 'RESPONSIVE_ADDONS_VER', '2.4.2' );
+	define( 'RESPONSIVE_ADDONS_VER', '2.4.3' );
 }
 
 if ( ! function_exists( 'ra_fs' ) ) {
@@ -65,7 +65,7 @@ if ( ! function_exists( 'ra_fs' ) ) {
 					'slug'            => 'responsive-add-ons',
 					'product_name'    => 'Responsive Ready Sites Importer',
 					'module_type'     => 'plugin',
-					'version'         => '2.4.2',
+					'version'         => '2.4.3',
 					'plugin_basename' => 'responsive-add-ons/responsive-add-ons.php',
 					'plugin_url'      => RESPONSIVE_ADDONS_DIR_URL,
 				)
