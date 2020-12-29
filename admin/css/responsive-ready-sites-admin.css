@@ -128,8 +128,14 @@
 .responsive-ready-sites-tooltip-icon{
 	float: right;
 }
+.responsive-ready-sites-tooltip-icon .dashicons.active {
+	transform: rotate(180deg);
+}
+.responsive-ready-sites-tooltip-message#responsive-ready-sites-tooltip-plugins-settings{
+	margin-left: 14px;
+}
 .responsive-ready-sites-tooltip-message{
-	margin-left: 20px;
+	margin-left: 23px;
 }
 responsive-ready-site-import-free.button.updating-message:before,
 responsive-ready-site-import-free.button.installing:before {
@@ -181,9 +187,27 @@ responsive-ready-site-import-free.button.installing:before {
 	float: none;
 	margin: 0;
 }
+.required-third-party-plugins-list {
+	margin-left: 2em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	list-style-type: disc;
+}
+.required-third-party-plugins-list .plugin-card {
+	background: transparent;
+	border: none;
+	margin: 0;
+	line-height: 2;
+	float: none;
+	width: 100%;
+}
+.required-third-party-plugins-list .spinner {
+	float: none;
+	margin: 0;
+}
 .processing-import:before{
 	margin: -2px 10px 0 0;
-	color: green;
+	color: #008000;
 	animation: rotation 2s infinite linear;
 	content: "\f463";
 	display: inline-block;
@@ -193,7 +217,7 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .processed-import:before{
 	margin: -2px 10px 0 0;
-	color: green;
+	color: #008000;
 	animation: none;
 	content: "\f147";
 	display: inline-block;
@@ -276,13 +300,16 @@ responsive-ready-site-import-free.button.installing:before {
 .responsive-ready-sites-advanced-options-wrap .result_preview {
 	margin-top: 15%;
 }
+.responsive-ready-sites-advanced-options .disabled {
+	pointer-events: none;
+}
 .demo-type.pro{
 	position: absolute;
 	right: 0;
 	top: 0;
 	background: #ff793f;
 	z-index: 1;
-	color: #fff;
+	color: #ffffff;
 	padding: 0.5em 1em;
 	text-transform: uppercase;
 	box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
@@ -293,7 +320,7 @@ responsive-ready-site-import-free.button.installing:before {
 	top: 0;
 	background: #ff793f;
 	z-index: 1;
-	color: #fff;
+	color: #ffffff;
 	padding: 0.5em 1em;
 	text-transform: uppercase;
 	box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
@@ -690,7 +717,13 @@ responsive-ready-site-import-free.button.installing:before {
 	font-size: 20px;
 	text-decoration: none;
 }
-
+.responsive-premium-plugin-tag {
+	color: #0073aa;
+}
+.responsive-ready-sites-third-party-plugins-warning {
+	padding: 5px 5px 5px 10px;
+	font-size: 13px;
+}
 @media screen and (max-width: 768px ) {
 	#responsive-theme-activation .responsive-addons-message-inner {
 		display: block;

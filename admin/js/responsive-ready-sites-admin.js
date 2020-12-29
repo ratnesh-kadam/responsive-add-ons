@@ -172,6 +172,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 	 * - _ready_for_import_site()
 	 * - _ready_for_import_template()
 	 * - _resetData()
+	 * - _is_reset_data()
 	 * - _backup_before_reset_options()
 	 * - _backupOptions()
 	 * - _reset_customizer_data()
@@ -228,6 +229,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		current_page_id : '',
 		processing_single_template: false,
+		pro_plugins_flag: false,
 
 		init: function()
 		{
@@ -305,6 +307,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var tip_id = $( this ).data( 'tip-id' ) || '';
 			if ( tip_id && $( '#' + tip_id ).length ) {
 				$( '#' + tip_id ).toggle();
+				$('.' + tip_id + ' .dashicons').toggleClass('active');
 			}
 		},
 
@@ -371,6 +374,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				required_plugins: JSON.stringify( requiredPlugins ),
 				responsive_site_options: responsiveSiteOptions,
 				pages: JSON.stringify( pages ),
+				pro_plugins_flag: ResponsiveSitesAdmin.pro_plugins_flag,
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
@@ -994,8 +998,23 @@ var ResponsiveSitesAjaxQueue = (function() {
 		_resetData: function( event ) {
 			event.preventDefault();
 
-			$( '.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon' ).addClass( 'processing-import' );
-			$( document ).trigger( 'responsive-ready-sites-reset-data' );
+			if( ResponsiveSitesAdmin._is_reset_data() ) {
+				$('.responsive-ready-sites-reset-data .responsive-ready-sites-tooltip-icon').addClass('processing-import');
+				$(document).trigger('responsive-ready-sites-reset-data');
+			} else {
+				$( document ).trigger( 'responsive-ready-sites-reset-data-done' );
+			}
+		},
+
+		/**
+		 *
+		 * Check if delete previous data checkbox is checked
+		 */
+		_is_reset_data: function() {
+			if ( $( '.responsive-ready-sites-reset-data' ).find('.checkbox').is(':checked') ) {
+				return true;
+			}
+			return false;
 		},
 
 		/**
@@ -1626,6 +1645,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				wpforms_path: wpforms_path,
 				includes_wp_forms: includes_wp_forms,
 				demo_type: demo_type,
+				pro_plugins_flag: ResponsiveSitesAdmin.pro_plugins_flag,
 			}];
 			$( '#responsive-ready-sites-import-options' ).append( template( templateData[0] ) );
 			$( '.theme-install-overlay' ).css( 'display', 'block' );
