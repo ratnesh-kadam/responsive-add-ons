@@ -106,7 +106,7 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 4. Your website is ready
 
 == Changelog ==
-= 2.4.3 - 29th December 2020 =
+= 2.4.3 - 30th December 2020 =
 * Feature - Prompt user to install the third party plugins
 * Feature - Get user consent before deleting previous imported ready site
 
