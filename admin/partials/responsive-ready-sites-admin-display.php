@@ -36,35 +36,34 @@
 ?>
 
 <script type="text/template" id="tmpl-responsive-sites-list">
-
-	<# if ( data.items.length ) { #>
+    <# if ( data.length ) { #>
 	
-	<# for ( key in data.items ) { #>
-		<div class="theme inactive ra-site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
-			 data-demo-id="{{{ data.items[ key ].id }}}"
-			 data-demo-url="{{{ data.items[ key ]['site_url'] }}}"
-			 data-demo-slug="{{{  data.items[ key ].slug }}}"
-			 data-demo-name="{{{  data.items[ key ].title.rendered }}}"
+	<# for ( key in data ) { #>
+		<div class="theme inactive ra-site-single {{ data[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+			 data-demo-id="{{{ data[ key ].id }}}"
+			 data-demo-url="{{{ data[ key ]['site_url'] }}}"
+			 data-demo-slug="{{{  data[ key ].slug }}}"
+			 data-demo-name="{{{  data[ key ].title.rendered }}}"
 			 data-active-site="{{{  data.active_site }}}"
-			 data-demo-type="{{{ data.items[ key ].demo_type }}}"
-			 data-wpforms-path="{{{ data.items[ key ].wpforms_path }}}"
-			 data-allow-pages="{{{ data.items[ key ].allow_pages }}}"
-			 data-check_plugins_installed="{{{ data.items[ key ].check_plugins_installed }}}"
-			 data-screenshot="{{{ data.items[ key ]['featured_image_url'] }}}"
-			 data-required-plugins="{{ JSON.stringify(data.items[ key ]['required_plugins']) }}"
-			 data-pages="{{ JSON.stringify(data.items[ key ]['pages'] )}}"
-			 data-required-pro-plugins="{{ JSON.stringify(data.items[ key ]['required_pro_plugins']) }}">
-			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data.items[ key ][ 'site_options_data' ]) }}">
+			 data-demo-type="{{{ data[ key ].demo_type }}}"
+			 data-wpforms-path="{{{ data[ key ].wpforms_path }}}"
+			 data-allow-pages="{{{ data[ key ].allow_pages }}}"
+			 data-check_plugins_installed="{{{ data[ key ].check_plugins_installed }}}"
+			 data-screenshot="{{{ data[ key ]['featured_image_url'] }}}"
+			 data-required-plugins="{{ JSON.stringify(data[ key ]['required_plugins']) }}"
+			 data-pages="{{ JSON.stringify(data[ key ]['pages'] )}}"
+			 data-required-pro-plugins="{{ JSON.stringify(data[ key ]['required_pro_plugins']) }}">
+			<input type="hidden" class="site_options_data" value="{{ JSON.stringify(data[ key ][ 'site_options_data' ]) }}">
 		<div class="inner">
-					<span class="site-preview" data-href="{{ data.items[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
-						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured_image_url'] }}');"></div>
+					<span class="site-preview" data-href="{{ data[ key ]['responsive-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="data title">
+						<div class="theme-screenshot" style="background-image: url('{{ data[ key ]['featured_image_url'] }}');"></div>
 					</span>
-			<span class="demo-type {{{ data.items[ key ].demo_type }}}">{{{ data.items[ key ].demo_type }}}</span>
-			<# if (data.items[ key ].slug === data.active_site ) { #>
+			<span class="demo-type {{{ data[ key ].demo_type }}}">{{{ data[ key ].demo_type }}}</span>
+			<# if (data[ key ].slug === data.active_site ) { #>
 				<span class="current_active_site"><?php esc_html_e( 'Currently Active', 'responsive-addons' ); ?></span>
 			<# } #>
 			<div class="theme-id-container">
-				<h3 class="theme-name" id="responsive-theme-name">{{{ data.items[ key ].title.rendered }}}</h3>
+				<h3 class="theme-name" id="responsive-theme-name">{{{ data[ key ].title.rendered }}}</h3>
 				<div class="theme-actions">
 					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'responsive-addons' ); ?></button>
 				</div>

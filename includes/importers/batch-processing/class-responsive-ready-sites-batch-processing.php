@@ -79,6 +79,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-elementor.php';
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-gutenberg.php';
 
+			// Batch Processing Importer
+            require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-importer.php';
+
 			// Menu fix.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
 
@@ -89,6 +92,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			add_action( 'responsive_ready_sites_import_complete', array( $this, 'start_process' ) );
 
 			add_action( 'responsive_ready_sites_process_template', array( $this, 'start_process_page' ) );
+
+            add_action( 'wp_ajax_responsive-ready-sites-import-sites', array( $this, 'import_sites' ) );
+
 		}
 
 		/**
@@ -204,6 +210,34 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			return $post_types;
 		}
+
+        /**
+         * Import Sites
+         *
+         * @since 2.0.0
+         * @return void
+         */
+        public function import_sites() {
+            error_log('inside import_sites');
+            $page_no = isset( $_POST['page_no'] ) ? absint( $_POST['page_no'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+            if ( $page_no ) {
+                $sites_and_pages = Responsive_Ready_Sites_Batch_Processing_Importer::get_instance()->import_sites( $page_no );
+
+                $default_page_builder = 'elementor';
+
+//                $current_page_builder_sites = array();
+//                foreach ( $page_builder_keys as $site_id => $page_builder ) {
+                    //if ( $default_page_builder === $page_builder ) {
+                        //$current_page_builder_sites[ $site_id ] = $sites_and_pages[ $site_id ];
+                        $current_page_builder_sites = $sites_and_pages;
+//                    }
+//                }
+
+                wp_send_json_success( $current_page_builder_sites );
+            }
+
+            wp_send_json_error();
+        }
 
 	}
 

@@ -421,6 +421,8 @@ class Responsive_Add_Ons {
 
 			wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI . 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '2.0.0', true );
 
+            $default_page_builder = 'elementor';
+
 			$data = apply_filters(
 				'responsive_sites_localize_vars',
 				array(
@@ -432,6 +434,7 @@ class Responsive_Add_Ons {
 					'required_plugins'                => array(),
 					'ApiURL'                          => self::$api_url,
 					'importSingleTemplateButtonTitle' => __( 'Import "%s" Template', 'responsive-addons' ),
+                    'default_page_builder_sites'      => $this->get_sites_by_page_builder( $default_page_builder ),
 				)
 			);
 
@@ -988,4 +991,49 @@ class Responsive_Add_Ons {
 
 		exit;
 	}
+
+    /**
+     * Get all sites
+     *
+     * @since 2.0.0
+     * @return array All sites.
+     */
+    public function get_all_sites() {
+        $sites_and_pages = array();
+        $total_requests  = 6;
+
+        for ( $page = 1; $page <= $total_requests; $page++ ) {
+            $current_page_data = get_site_option( 'cyb-sites-and-pages-page-' . $page, array() );
+            if ( ! empty( $current_page_data ) ) {
+                foreach ( $current_page_data as $page_id => $page_data ) {
+                    $sites_and_pages[] = $page_data;
+                }
+            }
+        }
+        return $sites_and_pages;
+    }
+
+    /**
+     * Get Page Builder Sites
+     *
+     * @since 2.0.0
+     *
+     * @param  string $default_page_builder default page builder slug.
+     * @return array page builder sites.
+     */
+    public function get_sites_by_page_builder( $default_page_builder = '' ) {
+        $sites_and_pages            = $this->get_all_sites();
+        return $sites_and_pages;
+        $current_page_builder_sites = array();
+        if ( ! empty( $sites_and_pages ) ) {
+            $page_builder_keys = wp_list_pluck( $sites_and_pages, 'responsive-site-page-builder' );
+            foreach ( $page_builder_keys as $site_id => $page_builder ) {
+                if ( $default_page_builder === $page_builder ) {
+                    $current_page_builder_sites[ $site_id ] = $sites_and_pages[ $site_id ];
+                }
+            }
+        }
+
+        return $current_page_builder_sites;
+    }
 }

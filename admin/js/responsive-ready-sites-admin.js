@@ -147,6 +147,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 	 * Responsive Sites Admin
 	 *
 	 * - init()
+	 * - _show_default_page_builder_sites()
 	 * - _bind()
 	 * - _resetPagedCount()
 	 * - _doNothing()
@@ -197,6 +198,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 	 * - _import_wpform()
 	 * - _importPage()
 	 * - ucwords()
+	 * - _sync_library_with_ajax()
 	 */
 	ResponsiveSitesAdmin = {
 
@@ -233,9 +235,35 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		init: function()
 		{
+			this._show_default_page_builder_sites();
 			this._resetPagedCount();
 			this._bind();
 		},
+
+		_show_default_page_builder_sites: function() {
+
+			if( Object.keys( responsiveSitesAdmin.default_page_builder_sites ).length ) {
+
+				//ResponsiveSitesAdmin.add_sites( responsiveSitesAdmin.default_page_builder_sites );
+
+				var template          = wp.template( 'responsive-sites-list' );
+
+				$('#responsive-sites').append( template( responsiveSitesAdmin.default_page_builder_sites ) );
+
+			} else {
+
+				var temp = [];
+				for (var i = 0; i < 8; i++) {
+					temp['id-' + i] = {
+						'title' : 'Lorem Ipsum',
+						'class' : 'placeholder-site',
+					};
+				}
+
+				ResponsiveSitesAdmin._sync_library_with_ajax( true );
+			}
+		},
+
 
 		/**
 		 * Binds events for the Responsive Ready Sites.
@@ -1829,6 +1857,43 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			return str;
 		},
+
+		_sync_library_with_ajax: function( is_append ) {
+
+			var total = 5;
+
+			//ResponsiveSitesAdmin._log_error( total );
+
+			for( let i = 1; i <= total; i++ ) {
+
+				ResponsiveSitesAjaxQueue.add({
+					url: responsiveSitesAdmin.ajaxurl,
+					type: 'POST',
+					data: {
+						action  : 'responsive-ready-sites-import-sites',
+						page_no : i,
+					},
+					success: function( result ){
+						ResponsiveSitesAdmin._log_error( result );
+
+						//if( is_append ) {
+							//if( ! ResponsiveSitesAdmin.isEmpty( result.data ) ) {
+
+								var template          = wp.template( 'responsive-sites-list' );
+
+								$('#responsive-sites').append( template( result.data ) );
+
+								responsiveSitesAdmin.default_page_builder_sites = $.extend({}, responsiveSitesAdmin.default_page_builder_sites, result.data);
+							//}
+
+						//}
+					}
+				});
+		}
+			// Run the AJAX queue.
+			ResponsiveSitesAjaxQueue.run();
+
+			},
 
 	};
 
