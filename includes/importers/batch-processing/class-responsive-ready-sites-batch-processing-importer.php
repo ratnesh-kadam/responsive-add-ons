@@ -69,9 +69,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
                 )
             );
 
-            $api_url = add_query_arg( $query_args, 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites' );
+            $api_url = add_query_arg( $query_args, 'http://ccreadysites.to/wp-json/wp/v2/cyberchimps-sites' );
 
-            error_log('API URL'.$api_url);
             $response = wp_remote_get( $api_url, $api_args );
             if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
                 $sites_and_pages = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -91,21 +90,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
             update_site_option( 'cyb-sites-batch-status-string', 'Complete storing data for page ' . $page, 'no' );
 
             return $sites_and_pages;
-        }
-
-        /**
-         * Generate JSON file.
-         *
-         * @since 2.0.0
-         *
-         * @param  string $filename File name.
-         * @param  array  $data     JSON file data.
-         * @return void.
-         */
-        public function generate_file( $filename = '', $data = array() ) {
-            if ( defined( 'WP_CLI' ) ) {
-                $this->get_filesystem()->put_contents( ASTRA_SITES_DIR . 'inc/json/' . $filename . '.json', wp_json_encode( $data ) );
-            }
         }
 
         /**
