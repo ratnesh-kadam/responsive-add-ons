@@ -421,7 +421,7 @@ class Responsive_Add_Ons {
 
 			wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI . 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '2.0.0', true );
 
-            $default_page_builder = 'elementor';
+            $default_page_builder = 'all';
 
 			$data = apply_filters(
 				'responsive_sites_localize_vars',
@@ -794,8 +794,8 @@ class Responsive_Add_Ons {
 							<div class="selected-page-builder">
 								<?php
                                 $page_builder = array(
-                                        'name' => 'Elementor',
-                                        'slug' => 'elementor',
+                                        'name' => 'All',
+                                        'slug' => 'all',
                                 );
                                 if ( $page_builder ) {
                                     ?>
@@ -919,6 +919,11 @@ class Responsive_Add_Ons {
      */
     public function get_default_page_builders() {
         return array(
+            array(
+                'id'   => 32,
+                'slug' => 'all',
+                'name' => 'ALL',
+            ),
             array(
                 'id'   => 33,
                 'slug' => 'elementor',
@@ -1218,14 +1223,10 @@ class Responsive_Add_Ons {
      */
     public function get_sites_by_page_builder( $default_page_builder = '' ) {
         $sites_and_pages            = $this->get_all_sites();
-        return $sites_and_pages;
         $current_page_builder_sites = array();
         if ( ! empty( $sites_and_pages ) ) {
-            $page_builder_keys = wp_list_pluck( $sites_and_pages, 'responsive-site-page-builder' );
-            foreach ( $page_builder_keys as $site_id => $page_builder ) {
-                if ( $default_page_builder === $page_builder ) {
-                    $current_page_builder_sites[ $site_id ] = $sites_and_pages[ $site_id ];
-                }
+            foreach ( $sites_and_pages as $site_id => $site_details ) {
+                    $current_page_builder_sites[] = $site_details;
             }
         }
 

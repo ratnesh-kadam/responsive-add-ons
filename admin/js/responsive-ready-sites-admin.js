@@ -2044,17 +2044,14 @@ var ResponsiveSitesAjaxQueue = (function() {
 				var match_id = '';
 
 				if ( '' != search_term ) {
-					//need to set to false
 					text_match = false;
 				}
 
 				if ( '' != $filter_name ) {
-					//need to set to false
 					category_match = false;
 				}
 
 				if ( '' != $filter_type ) {
-					//need to set to false
 					free_match = false;
 				}
 

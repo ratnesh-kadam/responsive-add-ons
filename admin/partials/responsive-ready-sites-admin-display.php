@@ -36,7 +36,7 @@
 ?>
 
 <script type="text/template" id="tmpl-responsive-sites-list">
-    <# if ( data.length ) { #>
+    <# if ( true ) { #>
 
 	<# for ( key in data ) { #>
 		<div class="theme inactive ra-site-single {{ data[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
