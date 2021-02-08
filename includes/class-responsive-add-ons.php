@@ -904,6 +904,9 @@ class Responsive_Add_Ons {
                         <?php
                     }
                     ?>
+                    <input autocomplete="off" placeholder="<?php esc_html_e( 'Search...', 'responsive-addons' ); ?>" type="search" aria-describedby="live-search-desc" id="cyb-filter-search-input" class="wp-filter-search">
+                    <span class="responsive-icon-search search-icon"></span>
+                    <div class="responsive-sites-autocomplete-result"></div>
                 </div>
             </div>
         </div>

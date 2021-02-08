@@ -2041,6 +2041,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				var text_match = true;
 				var free_match = true;
 				var category_match = true;
+				var page_builder_match = true;
 				var match_id = '';
 
 				if ( '' != search_term ) {
@@ -2057,7 +2058,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 				// Check in site title.
 				if( current_site['title'] ) {
-					var site_title = ResponsiveSitesAdmin._unescape_lower( current_site['title'] );
+					var site_title = ResponsiveSitesAdmin._unescape_lower( current_site['title']['rendered'] );
 
 					if( site_title.toLowerCase().includes( search_term ) ) {
 						text_match = true;
@@ -2090,7 +2091,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 						items[site_id] = current_site;
 						items[site_id]['type'] = 'site';
 						items[site_id]['site_id'] = site_id;
-						items[site_id]['pages-count'] = ( undefined != current_site['pages'] ) ? Object.keys( current_site['pages'] ).length : 0;
+						items[site_id]['pages_count'] = ( undefined != current_site['pages'] ) ? Object.keys( current_site['pages'] ).length : 0;
 						tags_strings.push( ResponsiveSitesAdmin._unescape_lower( current_site['title'] ));
 					}
 				}
@@ -2121,6 +2122,13 @@ var ResponsiveSitesAjaxQueue = (function() {
 			}
 			return true;
 		},
+
+		add_sites_after_search: function( data ) {
+			var template          = wp.template( 'responsive-sites-list' );
+
+			$('#responsive-sites').html( template( data ) );
+		},
+
 
 		add_sites: function( data ) {
 			var template          = wp.template( 'responsive-sites-list' );
