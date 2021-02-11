@@ -325,6 +325,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on('click', '.page-builder-icon', ResponsiveSitesAdmin._toggle_page_builder_list );
 			$( document ).on( 'click', '.responsive-sites__filter-wrap-checkbox, .responsive-sites__filter-wrap', ResponsiveSitesAdmin._filterClick );
 			$( document ).on('keyup input'                     , '#cyb-filter-search-input', ResponsiveSitesAdmin._search );
+			$( document ).on( 'click'                    , '.nav-tab-wrapper .page-builders li', ResponsiveSitesAdmin._change_page_builder )
 		},
 
 		/**
@@ -2041,7 +2042,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 				var text_match = true;
 				var free_match = true;
 				var category_match = true;
-				var page_builder_match = true;
 				var match_id = '';
 
 				if ( '' != search_term ) {
@@ -2134,6 +2134,50 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var template          = wp.template( 'responsive-sites-list' );
 
 			$('#responsive-sites').html( template( data ) );
+		},
+
+		_change_page_builder: function() {
+
+			var page_builder_slug = $(this).attr('data-page-builder') || '';
+			var page_builder_title = $(this).find('.title').text() || '';
+
+			if( page_builder_title ) {
+				$('.selected-page-builder').find('.page-builder-title').text( page_builder_title );
+			}
+
+			$('#cyb-filter-search-input').val( '' );
+
+			if( $('.page-builders [data-page-builder="'+page_builder_slug+'"]').length ) {
+				$('.page-builders [data-page-builder="'+page_builder_slug+'"]').siblings().removeClass('active');
+				$('.page-builders [data-page-builder="'+page_builder_slug+'"]').addClass('active');
+			}
+
+			var items = [],
+				tags_strings = [];
+
+			for( site_id in responsiveSitesAdmin.default_page_builder_sites ) {
+
+				var current_site = responsiveSitesAdmin.default_page_builder_sites[site_id];
+				var page_builder_match = false;
+
+				if ( page_builder_slug == 'all' || current_site['page_builder'] == page_builder_slug ) {
+					page_builder_match = true;
+				}
+
+				if ( page_builder_match ) {
+					items[site_id] = current_site;
+					items[site_id]['type'] = 'site';
+					items[site_id]['site_id'] = site_id;
+					items[site_id]['pages_count'] = ( undefined != current_site['pages'] ) ? Object.keys( current_site['pages'] ).length : 0;
+					tags_strings.push( ResponsiveSitesAdmin._unescape_lower( current_site['title'] ));
+				}
+			}
+
+			if( ! ResponsiveSitesAdmin.isEmpty( items ) ) {
+				ResponsiveSitesAdmin.add_sites( items );
+			} else {
+				$('#responsive-sites').html( wp.template('responsive-sites-no-sites') );
+			}
 		},
 
 	};
