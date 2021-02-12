@@ -948,4 +948,76 @@ responsive-ready-site-import-free.button.installing:before {
 	background-color: #f7f7f7;
 }
 
+.responsive-sites-autocomplete-result {
+	position: absolute;
+	top: 46px !important;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
 
+.responsive-sites-autocomplete-result .ui-autocomplete {
+	text-align: left;
+	left: 0 !important;
+	right: 0 !important;
+	width: calc( 100% - 2px ) !important;
+	z-index: 999999;
+	top: 0 !important;
+}
+
+#responsive-sites-filters .ui-autocomplete li,
+#responsive-sites-filters .ui-autocomplete li:focus,
+#responsive-sites-filters .ui-autocomplete li:hover {
+	outline: none;
+}
+#responsive-sites-filters .ui-autocomplete li {
+	padding: 3px 20px;
+	text-transform: capitalize;
+}
+#responsive-sites-filters .ui-autocomplete li:hover {
+	background-color: #eeeeee;
+}
+
+#responsive-sites-filters .ui-widget.ui-widget-content {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+	border: 1px solid rgba(32,33,36,0.18);
+	border-top: none;
+	overflow: hidden;
+	box-shadow: 0 3px 4px 0 rgba(32,33,36,0.18);
+	background: transparent;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #fff;
+}
+
+#responsive-sites-filters .ui-autocomplete li,
+#responsive-sites-filters .ui-autocomplete li:focus,
+#responsive-sites-filters .ui-autocomplete li:hover {
+	outline: none;
+}
+#responsive-sites-filters .ui-autocomplete li {
+	padding: 3px 20px;
+	text-transform: capitalize;
+}
+#responsive-sites-filters .ui-autocomplete li:hover {
+	background-color: #eeeeee;
+}
+.responsive-sites-autocomplete-result {
+	position: absolute;
+	top: 46px !important;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.responsive-sites-autocomplete-result .ui-autocomplete {
+	text-align: left;
+	left: 0 !important;
+	right: 0 !important;
+	width: calc( 60% - 2px ) !important;
+	z-index: 999999;
+	top: 0 !important;
+}

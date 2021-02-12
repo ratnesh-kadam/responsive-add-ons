@@ -218,6 +218,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 		widgets_data: '',
 		site_options_data: '',
 
+		filter_array: [],
+		autocompleteTags: [],
+
 		templateData: {},
 
 		site_customizer_data: '',
@@ -240,19 +243,19 @@ var ResponsiveSitesAjaxQueue = (function() {
 			this._show_default_page_builder_sites();
 			this._resetPagedCount();
 			this._bind();
+			this._addAutocomplete();
+			this._autocomplete();
 		},
 
 		_show_default_page_builder_sites: function() {
 
-			// if( Object.keys( responsiveSitesAdmin.default_page_builder_sites ).length ) {
-			//
-			// 	//ResponsiveSitesAdmin.add_sites( responsiveSitesAdmin.default_page_builder_sites );
-			//
-			// 	var template          = wp.template( 'responsive-sites-list' );
-			//
-			// 	$('#responsive-sites').append( template( responsiveSitesAdmin.default_page_builder_sites ) );
-			//
-			// } else {
+			if( Object.keys( responsiveSitesAdmin.default_page_builder_sites ).length ) {
+
+				var template          = wp.template( 'responsive-sites-list' );
+
+				ResponsiveSitesAdmin.add_sites( responsiveSitesAdmin.default_page_builder_sites );
+
+			} else {
 
 				var temp = [];
 				for (var i = 0; i < 8; i++) {
@@ -263,7 +266,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				}
 
 				ResponsiveSitesAdmin._sync_library_with_ajax( true );
-			//}
+			}
 		},
 
 
@@ -324,8 +327,9 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on( 'click', '.responsive-sites__category-filter-anchor', ResponsiveSitesAdmin._toggleFilter );
 			$( document ).on('click', '.page-builder-icon', ResponsiveSitesAdmin._toggle_page_builder_list );
 			$( document ).on( 'click', '.responsive-sites__filter-wrap-checkbox, .responsive-sites__filter-wrap', ResponsiveSitesAdmin._filterClick );
-			$( document ).on('keyup input'                     , '#cyb-filter-search-input', ResponsiveSitesAdmin._search );
-			$( document ).on( 'click'                    , '.nav-tab-wrapper .page-builders li', ResponsiveSitesAdmin._change_page_builder )
+			$( document ).on('keyup input'                     , '#wp-filter-search-input', ResponsiveSitesAdmin._search );
+			$( document ).on( 'click'                    , '.nav-tab-wrapper .page-builders li', ResponsiveSitesAdmin._change_page_builder );
+			$( document ).on('click'                     , '.ui-autocomplete .ui-menu-item', ResponsiveSitesAdmin._show_search_term );
 		},
 
 		/**
@@ -1952,13 +1956,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				$( this ).addClass( 'category-active' );
 				$( '.responsive-sites__category-filter-anchor' ).text( $( this ).text() );
 				$( '.responsive-sites__category-filter-anchor' ).trigger( 'click' );
-				$( '#cyb-filter-search-input' ).val( '' );
-
-				if( $( '.responsive-sites-show-favorite-button' ).hasClass( 'active' ) ) {
-					$( '.responsive-sites-show-favorite-button' ).removeClass( 'active' );
-					$( 'body' ).removeClass( 'responsive-sites-showing-favorites' );
-					ResponsiveSitesAdmin._clean_url_params( 'favorites' );
-				}
+				$( '#wp-filter-search-input' ).val( '' );
 			}
 
 			var $filter_name = $( '.responsive-sites__category-filter-anchor' ).attr( 'data-slug' );
@@ -1979,7 +1977,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			ResponsiveSitesAdmin._closeFilter();
 
-			$( '#cyb-filter-search-input' ).trigger( 'keyup' );
+			$( '#wp-filter-search-input' ).trigger( 'keyup' );
 		},
 
 		_search: function(event) {
@@ -2029,12 +2027,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 				tags_strings = [];
 			search_term = search_term.toLowerCase();
 
-			if ( search_term == '' && ResponsiveSitesAdmin.filter_array.length == 0 ) {
+			var $page_builder = $('.page-builders .active').attr('data-page-builder') || 'all';
+
+			if ( search_term == '' && ResponsiveSitesAdmin.filter_array.length == 0 && $page_builder == 'all' ) {
 				return responsiveSitesAdmin.default_page_builder_sites;
 			}
 
 			var $filter_type = $( '.responsive-sites__filter-wrap-checkbox input[name=responsive-sites-radio]:checked' ).val();
 			var $filter_name = $( '.responsive-sites__category-filter-anchor' ).attr( 'data-slug' );
+
 
 			for( site_id in responsiveSitesAdmin.default_page_builder_sites ) {
 
@@ -2042,6 +2043,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				var text_match = true;
 				var free_match = true;
 				var category_match = true;
+				var page_builder_match = false;
 				var match_id = '';
 
 				if ( '' != search_term ) {
@@ -2054,6 +2056,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 				if ( '' != $filter_type ) {
 					free_match = false;
+				}
+
+				if( '' != $page_builder) {
+					page_builder_match = false;
 				}
 
 				// Check in site title.
@@ -2086,15 +2092,24 @@ var ResponsiveSitesAjaxQueue = (function() {
 					}
 				}
 
+				if ( $page_builder == 'all' || current_site['page_builder'] == $page_builder ) {
+					page_builder_match = true;
+				}
+
 				if ( '' != match_id ) {
-					if ( text_match && category_match && free_match ) {
+					if ( text_match && category_match && free_match && page_builder_match ) {
 						items[site_id] = current_site;
 						items[site_id]['type'] = 'site';
 						items[site_id]['site_id'] = site_id;
 						items[site_id]['pages_count'] = ( undefined != current_site['pages'] ) ? Object.keys( current_site['pages'] ).length : 0;
-						tags_strings.push( ResponsiveSitesAdmin._unescape_lower( current_site['title'] ));
+						tags_strings.push( ResponsiveSitesAdmin._unescape_lower( current_site['title']['rendered'] ));
 					}
 				}
+			}
+
+			if ( tags_strings.length > 0 ) {
+				ResponsiveSitesAdmin.autocompleteTags = tags_strings;
+				ResponsiveSitesAdmin._autocomplete();
 			}
 
 			return items;
@@ -2138,6 +2153,26 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		_change_page_builder: function() {
 
+			ResponsiveSitesAdmin.filter_array = [];
+
+			var $filter_name = $( '.responsive-sites__category-filter-anchor' ).attr( 'data-slug' );
+
+			if ( '' != $filter_name ) {
+				ResponsiveSitesAdmin.filter_array.push( $filter_name );
+			}
+
+			if( $( '.responsive-sites__filter-wrap-checkbox input[name=responsive-sites-radio]:checked' ).length ) {
+				$( '.responsive-sites__filter-wrap-checkbox input[name=responsive-sites-radio]' ).removeClass('active');
+				$( '.responsive-sites__filter-wrap-checkbox input[name=responsive-sites-radio]:checked' ).addClass('active');
+			}
+			var $filter_type = $( '.responsive-sites__filter-wrap-checkbox .checkbox.active' ).val();
+
+			if ( '' != $filter_type ) {
+				ResponsiveSitesAdmin.filter_array.push( $filter_type );
+			}
+
+			ResponsiveSitesAdmin._closeFilter();
+
 			var page_builder_slug = $(this).attr('data-page-builder') || '';
 			var page_builder_title = $(this).find('.title').text() || '';
 
@@ -2145,39 +2180,64 @@ var ResponsiveSitesAjaxQueue = (function() {
 				$('.selected-page-builder').find('.page-builder-title').text( page_builder_title );
 			}
 
-			$('#cyb-filter-search-input').val( '' );
-
 			if( $('.page-builders [data-page-builder="'+page_builder_slug+'"]').length ) {
 				$('.page-builders [data-page-builder="'+page_builder_slug+'"]').siblings().removeClass('active');
 				$('.page-builders [data-page-builder="'+page_builder_slug+'"]').addClass('active');
 			}
 
-			var items = [],
-				tags_strings = [];
+			$( '#wp-filter-search-input' ).trigger( 'keyup' );
+		},
 
-			for( site_id in responsiveSitesAdmin.default_page_builder_sites ) {
+		_addAutocomplete: function() {
 
-				var current_site = responsiveSitesAdmin.default_page_builder_sites[site_id];
-				var page_builder_match = false;
+			var sites = responsiveSitesAdmin.default_page_builder_sites || [];
+			var strings = [];
 
-				if ( page_builder_slug == 'all' || current_site['page_builder'] == page_builder_slug ) {
-					page_builder_match = true;
-				}
+			// Add site title's in autocomplete.
+			for( site_id in sites ) {
 
-				if ( page_builder_match ) {
-					items[site_id] = current_site;
-					items[site_id]['type'] = 'site';
-					items[site_id]['site_id'] = site_id;
-					items[site_id]['pages_count'] = ( undefined != current_site['pages'] ) ? Object.keys( current_site['pages'] ).length : 0;
-					tags_strings.push( ResponsiveSitesAdmin._unescape_lower( current_site['title'] ));
-				}
+				var title = ResponsiveSitesAdmin._unescape( sites[ site_id ]['title'] );
+
+				title = title.toLowerCase().replace('&#8211;', '-' );
+
+				strings.push( title );
 			}
 
-			if( ! ResponsiveSitesAdmin.isEmpty( items ) ) {
-				ResponsiveSitesAdmin.add_sites( items );
-			} else {
-				$('#responsive-sites').html( wp.template('responsive-sites-no-sites') );
-			}
+			ResponsiveSitesAdmin.autocompleteTags = strings;
+		},
+
+		_autocomplete: function() {
+
+			var strings = ResponsiveSitesAdmin.autocompleteTags;
+			strings = _.uniq( strings );
+			strings = _.sortBy( strings );
+
+			$( "#wp-filter-search-input" ).autocomplete({
+				appendTo: ".responsive-sites-autocomplete-result",
+				classes: {
+					"ui-autocomplete": "responsive-sites-auto-suggest"
+				},
+				source: function(request, response) {
+					var results = $.ui.autocomplete.filter(strings, request.term);
+
+					// Show only 10 results.
+					response(results.slice(0, 15));
+				},
+				open: function( event, ui ) {
+					$('.search-form').addClass( 'searching' );
+				},
+				close: function( event, ui ) {
+					$('.search-form').removeClass( 'searching' );
+				}
+			});
+
+			$( "#wp-filter-search-input" ).focus();
+		},
+
+		_show_search_term: function() {
+			var search_term = $(this).text() || '';
+			$('#wp-filter-search-input').val( search_term );
+			$('#wp-filter-search-input').trigger( 'keyup' );
 		},
 
 	};

@@ -417,11 +417,9 @@ class Responsive_Add_Ons {
 
 			wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '2.0.0', true );
 
-			wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '2.0.0', true );
+			wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates', 'jquery-ui-autocomplete' ), '2.0.0', true );
 
 			wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI . 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '2.0.0', true );
-
-            $default_page_builder = 'all';
 
 			$data = apply_filters(
 				'responsive_sites_localize_vars',
@@ -434,7 +432,7 @@ class Responsive_Add_Ons {
 					'required_plugins'                => array(),
 					'ApiURL'                          => self::$api_url,
 					'importSingleTemplateButtonTitle' => __( 'Import "%s" Template', 'responsive-addons' ),
-                    'default_page_builder_sites'      => $this->get_sites_by_page_builder( $default_page_builder ),
+                    'default_page_builder_sites'      => $this->get_sites_by_page_builder(),
 				)
 			);
 
@@ -900,11 +898,10 @@ class Responsive_Add_Ons {
                                 </li>
                             </ul>
                         </div>
-                        <input placeholder="<?php esc_html_e( 'Search...', 'responsive-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="cyb-filter-search-input" class="wp-filter-search" style="display:none;">
                         <?php
                     }
                     ?>
-                    <input autocomplete="off" placeholder="<?php esc_html_e( 'Search...', 'responsive-addons' ); ?>" type="search" aria-describedby="live-search-desc" id="cyb-filter-search-input" class="wp-filter-search">
+                    <input autocomplete="off" placeholder="<?php esc_html_e( 'Search...', 'responsive-addons' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
                     <span class="responsive-icon-search search-icon"></span>
                     <div class="responsive-sites-autocomplete-result"></div>
                 </div>
@@ -1224,7 +1221,7 @@ class Responsive_Add_Ons {
      * @param  string $default_page_builder default page builder slug.
      * @return array page builder sites.
      */
-    public function get_sites_by_page_builder( $default_page_builder = '' ) {
+    public function get_sites_by_page_builder() {
         $sites_and_pages            = $this->get_all_sites();
         $current_page_builder_sites = array();
         if ( ! empty( $sites_and_pages ) ) {
