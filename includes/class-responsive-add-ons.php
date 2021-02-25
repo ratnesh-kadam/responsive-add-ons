@@ -784,6 +784,11 @@ class Responsive_Add_Ons {
 
         ?>
             <div class="nav-tab-wrapper">
+                <div class="logo">
+                    <div class="responsive-sites-logo-wrap">
+                            <img src="<?php echo esc_url( RESPONSIVE_ADDONS_URI . 'admin/images/responsive-thumbnail.jpg' ); ?>">
+                    </div>
+                </div>
                 <div id="responsive-sites-filters" class="hide-on-mobile">
                     <?php $this->site_filters(); ?>
                 </div>

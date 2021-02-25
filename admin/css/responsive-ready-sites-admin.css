@@ -734,6 +734,9 @@ responsive-ready-site-import-free.button.installing:before {
 
 #responsive-sites__category-filter {
 	display: inline-block;
+	border: 1px solid #DDDDDD;
+	border-right: 0;
+	border-radius: 6px 0 0 6px;
 }
 #responsive-sites__category-filter .responsive-sites__category-filter-anchor {
 	height: 44px;
@@ -823,6 +826,7 @@ responsive-ready-site-import-free.button.installing:before {
 	display: flex;
 	align-items: center;
 	height: 46px;
+	float: none;
 }
 #responsive-sites-filters {
 	flex: 1;
@@ -1020,4 +1024,86 @@ responsive-ready-site-import-free.button.installing:before {
 	width: calc( 60% - 2px ) !important;
 	z-index: 999999;
 	top: 0 !important;
+}
+@media only screen and (min-width: 768px) {
+	.theme-browser .theme {
+		width: 25%;
+		margin: 0 0 1em 0em;
+		box-shadow: none;
+	}
+}
+.theme-browser .theme .theme-screenshot:after {
+	padding-top: 118%;
+}
+.theme-browser .theme {
+	border: none;
+}
+#wp-filter-search-input {
+	font-weight: 400;
+	width: 100%;
+	opacity: 1;
+	height: 46px;
+	background: #fff;
+	line-height: 32px;
+	border-radius: 0 6px 6px 0;
+	font-size: 13px;
+	padding: 5px 20px;
+	border: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	box-shadow: none;
+}
+@media only screen and (min-width: 1200px) {
+	#responsive-sites-filters .search-form {
+		width: 600px;
+		margin: 0 auto;
+	}
+}
+.responsive-sites-logo-wrap {
+	width: 42px;
+	height: 42px;
+}
+#responsive-sites-menu-page .nav-tab-wrapper .logo,
+#responsive-sites-menu-page .form {
+	display: flex;
+	align-items: center;
+}
+#responsive-sites-menu-page .nav-tab-wrapper .logo {
+	border-right: 1px solid #dddddd;
+	padding: 13px 20px 14px 20px;
+}
+.page-builder-icon .selected-page-builder {
+	height: 42px;
+	position: relative;
+	cursor: pointer;
+	display: flex;
+	padding: 0 12px 0 12px;
+	border: 1px solid #DDDDDD;
+	width: 96px;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: 500;
+	border-radius: 6px;
+	background-color: #ffffff;
+}
+.page-builder-icon {
+	display: inline-block;
+	border-right: 0;
+}
+
+@media only screen and (min-width: 768px) {
+	.theme-browser .theme {
+		width: 25%;
+		padding: 1.1%;
+		margin: 0 0 1em 0em;
+		box-shadow: none;
+	}
+}
+
+@media only screen and (min-width: 1640px) {
+	.theme-browser .theme:nth-child(3n) {
+		margin-right: 0;
+	}
+	.theme-browser .theme:nth-child(4n) {
+		margin-right: 0;
+	}
 }
