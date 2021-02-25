@@ -1107,3 +1107,37 @@ responsive-ready-site-import-free.button.installing:before {
 		margin-right: 0;
 	}
 }
+@media screen and (max-width: 480px) {
+	#responsive-sites-menu-page .nav-tab-wrapper {
+		position: relative;
+		top: 0;
+		left: 0;
+	}
+}
+@media screen and (max-width: 782px) {
+	#responsive-sites-menu-page .nav-tab-wrapper {
+		margin: 0;
+		top: 0;
+	}
+}
+@media screen and (max-width: 480px) {
+	.hide-on-mobile {
+		display: none;
+	}
+}
+@media screen and (min-width: 481px) {
+	.hide-on-desktop {
+		display: none;
+	}
+	.responsive-sites__category-filter-items {
+		z-index: 99;
+	}
+}
+@media screen and (max-width: 480px) {
+	#responsive-sites-filters.hide-on-desktop {
+		box-shadow: 25px 0 30px rgba(28, 39, 60, 0.09);
+		border-bottom: 1px solid #dddddd;
+		background: #fff;
+		padding: 10px;
+	}
+}

@@ -833,6 +833,9 @@ class Responsive_Add_Ons {
 						</span>
                 </div>
             </div><!-- .nav-tab-wrapper -->
+            <div id="responsive-sites-filters" class="hide-on-desktop">
+            <?php $this->site_filters(); ?>
+        </div>
             <?php
     }
 
