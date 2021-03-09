@@ -719,14 +719,6 @@ class Responsive_Add_Ons {
 		?>
 			<div class="wrap">
 				<h1><?php esc_html_e( 'Responsive Importer Options', 'responsive-addons' ); ?></h1>
-				<h2 class="nav-tab-wrapper">
-					<span class="nav-tab
-										<?php
-										if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) {
-											echo ' nav-tab-active';}
-										?>
-					"><?php esc_html_e( 'Templates', 'responsive-addons' ); ?></span>
-				</h2>
 					<?php
                         $this->init_nav_menu( 'general' );
 						do_action( 'responsive_addons_importer_page' );

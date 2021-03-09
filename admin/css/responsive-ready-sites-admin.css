@@ -293,10 +293,6 @@ responsive-ready-site-import-free.button.installing:before {
 	line-height: 1.7;
 	text-align: center;
 }
-#responsive-ready-sites-admin-page {
-	padding: 20px 35px 20px 35px;
-	background: #ffffff;
-}
 .responsive-ready-sites-advanced-options-wrap .result_preview {
 	margin-top: 15%;
 }
@@ -305,12 +301,13 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .demo-type.pro{
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: -10px;
+	top: -10px;
 	background: #ff793f;
 	z-index: 1;
 	color: #ffffff;
-	padding: 0.5em 1em;
+	padding: 0.2em 0.8em;
+	border-radius: 2px;
 	text-transform: uppercase;
 	box-shadow: -2px 2px 5px rgba(0,0,0,0.1);
 }
@@ -924,7 +921,6 @@ responsive-ready-site-import-free.button.installing:before {
 .page-builder-icon {
 	display: inline-block;
 	font-size: 12px;
-	padding: 23px 10px;
 	width: 164px;
 	position: relative;
 	cursor: pointer;
@@ -1093,7 +1089,7 @@ responsive-ready-site-import-free.button.installing:before {
 @media only screen and (min-width: 768px) {
 	.theme-browser .theme {
 		width: 25%;
-		padding: 1.1%;
+		padding: 1%;
 		margin: 0 0 1em 0em;
 		box-shadow: none;
 	}
@@ -1140,4 +1136,22 @@ responsive-ready-site-import-free.button.installing:before {
 		background: #fff;
 		padding: 10px;
 	}
+}
+#responsive-sites-filters .section-left {
+	flex: 1;
+}
+#responsive-sites .ra-site-single .inner {
+	position: relative;
+	border-radius: 2px;
+	overflow: initial;
+	border: 1px solid #ddd;
+	transition: all 0.4s;
+}
+.responsive-sites-autocomplete-result .ui-autocomplete {
+    text-align: left;
+    left: 0 !important;
+    right: 0 !important;
+    width: calc( 100% - 2px ) !important;
+    z-index: 999999;
+    top: 0 !important;
 }
