@@ -69,7 +69,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
                 )
             );
 
-            $api_url = add_query_arg( $query_args, 'http://ccreadysites.to/wp-json/wp/v2/cyberchimps-sites' );
+            $api_url = add_query_arg( $query_args, 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites' );
 
             $response = wp_remote_get( $api_url, $api_args );
             if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {

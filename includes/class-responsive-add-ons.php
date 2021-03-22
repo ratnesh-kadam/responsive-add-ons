@@ -244,7 +244,7 @@ class Responsive_Add_Ons {
 	 * @since  1.0.0
 	 */
 	public static function set_api_url() {
-		self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'http://ccreadysites.to/wp-json/wp/v2/' );
+		self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/' );
 	}
 
 	/**
@@ -473,10 +473,12 @@ class Responsive_Add_Ons {
 	 *
 	 * @since 2.0.0
 	 */
-	public function responsive_ready_sites_admin_enqueue_styles() {
-		// Responsive Ready Sites admin styles.
-		wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI . 'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
-		wp_enqueue_style( 'responsive-ready-sites-admin' );
+	public function responsive_ready_sites_admin_enqueue_styles( $hook = '' ) {
+        if ( 'toplevel_page_responsive_add_ons' === $hook || 'responsive_page_responsive-add-ons' === $hook || 'responsive_page_responsive_add_ons_go_pro' === $hook ) {
+            // Responsive Ready Sites admin styles.
+            wp_register_style('responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI . 'admin/css/responsive-ready-sites-admin.css', false, '1.0.0');
+            wp_enqueue_style('responsive-ready-sites-admin');
+        }
 	}
 
 	/**
@@ -770,10 +772,6 @@ class Responsive_Add_Ons {
             <?php
         }
 
-        $current_slug = isset( $_GET['page'] ) ? esc_attr( $_GET['page'] ) : 'starter-templates'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-        $default_page_builder = 'elementor';
-
         ?>
             <div class="nav-tab-wrapper">
                 <div class="logo">
@@ -789,8 +787,8 @@ class Responsive_Add_Ons {
 							<div class="selected-page-builder">
 								<?php
                                 $page_builder = array(
-                                        'name' => 'All',
-                                        'slug' => 'all',
+                                        'name' => 'Elementor',
+                                        'slug' => 'elementor',
                                 );
                                 if ( $page_builder ) {
                                     ?>
@@ -845,26 +843,11 @@ class Responsive_Add_Ons {
                 <div class="search-form">
                     <?php
                     $categories = array(
-                            array(
-                                    'name' => 'Business',
-                                    'slug'     => 'business'
-                            ),
-                            array(
-                                'name' => 'Other',
-                                'slug'     => 'other'
-                            ),
-                            array(
-                                'name' => 'Blog',
-                                'slug'     => 'blog'
-                            ),
-                            array(
-                                'name' => 'Ecommerce',
-                                'slug'     => 'ecommerce'
-                            ),
-                            array(
-                                'name' => 'Free',
-                                'slug'     => 'free'
-                            ),
+                            array( 'name' => 'Business', 'slug'     => 'business'),
+                            array(  'name' => 'Other',  'slug'     => 'other' ),
+                            array( 'name' => 'Blog',  'slug'     => 'blog' ),
+                            array( 'name' => 'Ecommerce', 'slug'     => 'ecommerce' ),
+                            array( 'name' => 'Free', 'slug'     => 'free' ),
                     );
                     if ( ! empty( $categories ) ) {
                         ?>

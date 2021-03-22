@@ -36,10 +36,8 @@
 ?>
 
 <script type="text/template" id="tmpl-responsive-sites-list">
-    <# if ( true ) { #>
-
 	<# for ( key in data ) { #>
-		<div class="theme inactive ra-site-single {{ data[ key ].status }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
+		<div class="theme inactive ra-site-single {{ data[ key ].status }} {{ data[ key ].class }}" tabindex="0" aria-describedby="responsive-theme-action responsive-theme-name"
 			 data-demo-id="{{{ data[ key ].id }}}"
 			 data-demo-url="{{{ data[ key ]['site_url'] }}}"
 			 data-demo-slug="{{{  data[ key ].slug }}}"
@@ -70,17 +68,6 @@
 			</div>
 		</div>
 	</div>
-	<# } #>
-	<# } else { #>
-	<p class="no-themes" style="display:block;">
-		<?php esc_html_e( 'No Demos found', 'responsive-addons' ); ?>
-		<span class="description">
-				<?php
-				/* translators: %1$s External Link */
-				printf( esc_html__( 'No More Sites', 'responsive-addons' ) );
-				?>
-			</span>
-	</p>
 	<# } #>
 </script>
 <?php

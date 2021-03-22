@@ -233,7 +233,7 @@ responsive-ready-site-import-free.button.installing:before {
 	border-radius: 5px;
 }
 #responsive-ready-sites-admin-page .responsive-sites-header {
-	margin: 20px 20px 40px 20px;
+	margin: 40px 20px 40px 20px;
 	font-size: 26px;
 }
 .theme-browser .theme.active {
@@ -283,7 +283,7 @@ responsive-ready-site-import-free.button.installing:before {
 	text-align: center;
 }
 .responsive-sites-header .ready-site-list-title {
-	font-size: 35px;
+	font-size: 30px;
 	font-weight: 500;
 	line-height: 1.2;
 	padding: 9px 0 4px 0;
@@ -816,6 +816,7 @@ responsive-ready-site-import-free.button.installing:before {
 }
 
 #responsive-sites-filters .search-form {
+	position: relative;
 	font-weight: normal;
 	border: none;
 	margin: 0;
@@ -1023,13 +1024,13 @@ responsive-ready-site-import-free.button.installing:before {
 }
 @media only screen and (min-width: 768px) {
 	.theme-browser .theme {
-		width: 25%;
+		width: 33%;
 		margin: 0 0 1em 0em;
 		box-shadow: none;
 	}
 }
 .theme-browser .theme .theme-screenshot:after {
-	padding-top: 118%;
+	//padding-top: 118%;
 }
 .theme-browser .theme {
 	border: none;
@@ -1067,7 +1068,7 @@ responsive-ready-site-import-free.button.installing:before {
 	border-right: 1px solid #dddddd;
 	padding: 13px 20px 14px 20px;
 }
-.page-builder-icon .selected-page-builder {
+#responsive-sites-menu-page .page-builder-icon .selected-page-builder {
 	height: 42px;
 	position: relative;
 	cursor: pointer;
@@ -1088,7 +1089,7 @@ responsive-ready-site-import-free.button.installing:before {
 
 @media only screen and (min-width: 768px) {
 	.theme-browser .theme {
-		width: 25%;
+		width: 33%;
 		padding: 1%;
 		margin: 0 0 1em 0em;
 		box-shadow: none;
