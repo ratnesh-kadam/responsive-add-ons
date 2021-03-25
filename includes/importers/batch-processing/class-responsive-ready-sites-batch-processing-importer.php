@@ -25,6 +25,14 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
         private static $instance;
 
         /**
+         * API Url
+         *
+         * @since 2.5.0
+         * @var   string API Url
+         */
+        public static $api_url;
+
+        /**
          * Initiator
          *
          * @since 2.2.1
@@ -43,7 +51,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
          *
          * @since 2.2.1
          */
-        public function __construct() {}
+        public function __construct() {
+            self::set_api_url();
+        }
 
         /**
          * Import
@@ -69,9 +79,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
                 )
             );
 
-            $api_url = add_query_arg( $query_args, 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/cyberchimps-sites' );
+            $api_url = add_query_arg( $query_args, self::$api_url.'cyberchimps-sites');
 
             $response = wp_remote_get( $api_url, $api_args );
+
             if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
                 $sites_and_pages = json_decode( wp_remote_retrieve_body( $response ), true );
 
@@ -95,7 +106,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
         /**
          * Get an instance of WP_Filesystem_Direct.
          *
-         * @since 2.0.0
+         * @since 2.5.0
          * @return object A WP_Filesystem_Direct instance.
          */
         public static function get_filesystem() {
@@ -106,6 +117,15 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
             WP_Filesystem();
 
             return $wp_filesystem;
+        }
+
+        /**
+         * Setter for $api_url
+         *
+         * @since  2.5.0
+         */
+        public static function set_api_url() {
+            self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/' );
         }
     }
 

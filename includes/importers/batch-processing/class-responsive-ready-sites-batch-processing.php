@@ -43,6 +43,14 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		public static $process_single;
 
 		/**
+		 * API Url
+		 *
+		 * @since 2.5.0
+		 * @var   string API Url
+		 */
+		public static $api_url;
+
+		/**
 		 * Initiator
 		 *
 		 * @since 1.0.14
@@ -79,8 +87,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-elementor.php';
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-gutenberg.php';
 
-			// Batch Processing Importer
-            require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-importer.php';
+			// Batch Processing Importer.
+			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-importer.php';
 
 			// Menu fix.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
@@ -93,8 +101,11 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			add_action( 'responsive_ready_sites_process_template', array( $this, 'start_process_page' ) );
 
-            add_action( 'wp_ajax_responsive-ready-sites-import-sites', array( $this, 'import_sites' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-import-sites', array( $this, 'import_sites' ) );
 
+			add_action( 'wp_ajax_responsive-sites-get-sites-request-count', array( $this, 'ready_sites_requests_count' ) );
+
+			self::set_api_url();
 		}
 
 		/**
@@ -211,33 +222,79 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			return $post_types;
 		}
 
-        /**
-         * Import Sites
-         *
-         * @since 2.0.0
-         * @return void
-         */
-        public function import_sites() {
-            error_log('inside import_sites');
-            $page_no = isset( $_POST['page_no'] ) ? absint( $_POST['page_no'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-            if ( $page_no ) {
-                $sites_and_pages = Responsive_Ready_Sites_Batch_Processing_Importer::get_instance()->import_sites( $page_no );
+		/**
+		 * Import Sites
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function import_sites() {
+			$page_no = isset( $_POST['page_no'] ) ? absint( $_POST['page_no'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( $page_no ) {
+				$sites_and_pages = Responsive_Ready_Sites_Batch_Processing_Importer::get_instance()->import_sites( $page_no );
 
-                $default_page_builder = 'elementor';
+				wp_send_json_success( $sites_and_pages );
+			}
 
-//                $current_page_builder_sites = array();
-//                foreach ( $page_builder_keys as $site_id => $page_builder ) {
-                    //if ( $default_page_builder === $page_builder ) {
-                        //$current_page_builder_sites[ $site_id ] = $sites_and_pages[ $site_id ];
-                        $current_page_builder_sites = $sites_and_pages;
-//                    }
-//                }
+			wp_send_json_error();
+		}
 
-                wp_send_json_success( $current_page_builder_sites );
-            }
+		/**
+		 * Get Total Requests
+		 *
+		 * @since 2.5.0
+		 * @return integer
+		 */
+		public function get_total_requests() {
 
-            wp_send_json_error();
-        }
+			$api_args = array(
+				'timeout' => 60,
+			);
+
+			$api_url = self::$api_url . 'get-posts-count/?per_page=15';
+
+			$response = wp_remote_get( $api_url, $api_args );
+
+			if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+
+				$total_requests = json_decode( wp_remote_retrieve_body( $response ), true );
+
+				if ( isset( $total_requests ) ) {
+
+					update_site_option( 'responsive-ready-sites-requests', $total_requests, 'no' );
+
+					return $total_requests;
+				}
+			}
+
+			$this->get_total_requests();
+		}
+
+		/**
+		 * Sites Requests Count
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function ready_sites_requests_count() {
+
+			// Get count.
+			$total_requests = $this->get_total_requests();
+			if ( $total_requests ) {
+				wp_send_json_success( $total_requests );
+			}
+
+			wp_send_json_error();
+		}
+
+		/**
+		 * Setter for $api_url
+		 *
+		 * @since  2.5.0
+		 */
+		public static function set_api_url() {
+			self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/' );
+		}
 
 	}
 

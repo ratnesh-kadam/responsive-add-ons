@@ -1892,51 +1892,61 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		_sync_library_with_ajax: function( is_append ) {
 
-			var total = 5;
+			$.ajax({
+				url: responsiveSitesAdmin.ajaxurl,
+				type: 'POST',
+				data: {
+					action: 'responsive-sites-get-sites-request-count',
+				},
+			})
+				.fail(function (jqXHR) {
+					console.log('The api request to fetch the sites request count fails');
+				})
+				.done(function (response) {
 
-			for( let i = 1; i <= total; i++ ) {
+					var total = response.data;
 
-				ResponsiveSitesAjaxQueue.add({
-					url: responsiveSitesAdmin.ajaxurl,
-					type: 'POST',
-					data: {
-						action  : 'responsive-ready-sites-import-sites',
-						page_no : i,
-					},
-					success: function( result ){
-						ResponsiveSitesAdmin._log_error( result );
+					for( let i = 1; i <= total; i++ ) {
 
-						if( is_append ) {
-							if( ! ResponsiveSitesAdmin.isEmpty( result.data ) ) {
+						ResponsiveSitesAjaxQueue.add({
+							url: responsiveSitesAdmin.ajaxurl,
+							type: 'POST',
+							data: {
+								action  : 'responsive-ready-sites-import-sites',
+								page_no : i,
+							},
+							success: function( result ){
+								if( is_append ) {
+									if( ! ResponsiveSitesAdmin.isEmpty( result.data ) ) {
 
-								var template          = wp.template( 'responsive-sites-list' );
+										var template          = wp.template( 'responsive-sites-list' );
 
-								// First fill the placeholders and then append remaining sites.
-								if ($('.placeholder-site').length) {
-									for (site_id in result.data) {
+										// First fill the placeholders and then append remaining sites.
 										if ($('.placeholder-site').length) {
-											$('.placeholder-site').first().remove();
+											for (site_id in result.data) {
+												if ($('.placeholder-site').length) {
+													$('.placeholder-site').first().remove();
+												}
+											}
+											if ($('#responsive-sites .site-single:not(.placeholder-site)').length) {
+												$('#responsive-sites .site-single:not(.placeholder-site)').last().after(template(result.data));
+											} else {
+												$('#responsive-sites').prepend(template(result.data));
+											}
+										} else {
+											$('#responsive-sites').append(template(result.data));
 										}
+
+										responsiveSitesAdmin.default_page_builder_sites = $.extend({}, responsiveSitesAdmin.default_page_builder_sites, result.data);
 									}
-									if ($('#responsive-sites .site-single:not(.placeholder-site)').length) {
-										$('#responsive-sites .site-single:not(.placeholder-site)').last().after(template(result.data));
-									} else {
-										$('#responsive-sites').prepend(template(result.data));
-									}
-								} else {
-									$('#responsive-sites').append(template(result.data));
+
 								}
-
-								responsiveSitesAdmin.default_page_builder_sites = $.extend({}, responsiveSitesAdmin.default_page_builder_sites, result.data);
 							}
-
-						}
+						});
 					}
+					// Run the AJAX queue.
+					ResponsiveSitesAjaxQueue.run();
 				});
-		}
-			// Run the AJAX queue.
-			ResponsiveSitesAjaxQueue.run();
-
 			},
 
 		_toggleFilter: function( e ) {
