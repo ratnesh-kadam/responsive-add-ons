@@ -23,9 +23,6 @@
 	<div class="theme-browser rendered">
 		<div id="responsive-sites" class="themes wp-clearfix"></div>
 	</div>
-	<div class="spinner-wrap">
-		<span class="spinner"></span>
-	</div>
 
 </div>
 

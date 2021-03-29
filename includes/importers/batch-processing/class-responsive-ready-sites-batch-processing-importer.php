@@ -89,16 +89,11 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
                 if ( isset( $sites_and_pages['code'] ) ) {
                     $message = isset( $sites_and_pages['message'] ) ? $sites_and_pages['message'] : '';
                 } else {
-
                     update_site_option( 'cyb-sites-and-pages-page-' . $page, $sites_and_pages, 'no' );
-
                 }
             } else {
                 error_log( 'API Error: ' . $response->get_error_message() );
             }
-
-            error_log( 'Complete storing data for page ' . $page );
-            update_site_option( 'cyb-sites-batch-status-string', 'Complete storing data for page ' . $page, 'no' );
 
             return $sites_and_pages;
         }

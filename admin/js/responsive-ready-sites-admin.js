@@ -338,6 +338,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on('keyup input'                     , '#wp-filter-search-input', ResponsiveSitesAdmin._search );
 			$( document ).on( 'click'                    , '.nav-tab-wrapper .page-builders li', ResponsiveSitesAdmin._change_page_builder );
 			$( document ).on('click'                     , '.ui-autocomplete .ui-menu-item', ResponsiveSitesAdmin._show_search_term );
+			$( document ).on('click', '.responsive-sites-sync-library-button', ResponsiveSitesAdmin._sync_library);
 		},
 
 		/**
@@ -1948,6 +1949,48 @@ var ResponsiveSitesAjaxQueue = (function() {
 					ResponsiveSitesAjaxQueue.run();
 				});
 			},
+
+		_sync_library: function (event) {
+			event.preventDefault();
+			var button = $(this);
+
+			if (button.hasClass('updating-message')) {
+				//return;
+			}
+
+			button.addClass('updating-message');
+
+			//$('.astra-sites-sync-library-message').remove();
+
+			var noticeContent = wp.updates.adminNotice({
+			 	className: 'responsive-ready-sites-sync-library-message responsive-ready-sites-notice notice notice-info',
+			 	message: '<span class="message">' + 'Sync Library Starts' + '</span>' +'<button type="button" class="notice-dismiss"><span class="screen-reader-text">' + 'Dismiss this notice.' + '</span></button>',
+			});
+			$('#screen-meta').after(noticeContent);
+
+			$(document).trigger('wp-updates-notice-added');
+
+			$.ajax({
+				url: responsiveSitesAdmin.ajaxurl,
+				type: 'POST',
+				data: {
+					action: 'responsive-ready-sites-update-library',
+				},
+			})
+				.done(function (response) {
+					console.log(response);
+
+					if (response.success) {
+						if ('updated' === response.data) {
+							console.log('Already sync all the sites.');
+						} else {
+							ResponsiveSitesAdmin._sync_library_with_ajax();
+						}
+					} else {
+						console.groupEnd('Update Library Request');
+					}
+				});
+		},
 
 		_toggleFilter: function( e ) {
 
