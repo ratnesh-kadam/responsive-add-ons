@@ -1990,8 +1990,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 				},
 			})
 				.done(function (response) {
-					console.log(response);
-
 					if (response.success) {
 						if ('updated' === response.data) {
 

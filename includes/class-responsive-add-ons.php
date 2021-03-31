@@ -1197,7 +1197,7 @@ class Responsive_Add_Ons {
 		$total_requests  = 6;
 
 		for ( $page = 1; $page <= $total_requests; $page++ ) {
-			$current_page_data = get_site_option( 'cyb-sites-and-pages-page-' . $page, array() );
+			$current_page_data = get_site_option( 'responsive-ready-sites-and-pages-page-' . $page, array() );
 			if ( ! empty( $current_page_data ) ) {
 				foreach ( $current_page_data as $page_id => $page_data ) {
 					$sites_and_pages[] = $page_data;
