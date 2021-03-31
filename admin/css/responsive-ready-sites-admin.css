@@ -233,7 +233,7 @@ responsive-ready-site-import-free.button.installing:before {
 	border-radius: 5px;
 }
 #responsive-ready-sites-admin-page .responsive-sites-header {
-	margin: 40px 20px 40px 20px;
+	margin: 20px 20px 20px 20px;
 	font-size: 26px;
 }
 .theme-browser .theme.active {
@@ -423,28 +423,6 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .hide-me {
 	display: none !important;
-}
-#responsive-theme-activation {
-	border: none;
-	padding: 20px;
-}
-#responsive-theme-activation .responsive-addons-message-inner {
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-}
-#responsive-theme-activation .responsive-addons-message-icon {
-	font-size: 20px;
-}
-#responsive-theme-activation .responsive-addons-message-content {
-	padding: 0 20px;
-}
-#responsive-theme-activation .responsive-addons-message-content .responsive-addons-message-actions {
-	margin-top: 10px;
-}
-#responsive-theme-activation .responsive-addons-message-content p{
-	padding: 0px;
-	margin: 0px;
 }
 .single-site {
 	display: flex;
@@ -1172,4 +1150,13 @@ responsive-ready-site-import-free.button.installing:before {
 	font-size: 25px;
 	width: 40px;
 	height: 20px;
+}
+.responsive-sites-sync-library-button.updating-message {
+	animation: rotation 2s infinite linear;
+}
+.responsive_page_responsive-add-ons .responsive-ready-sites-notice{
+	display: block;
+}
+.responsive_page_responsive-add-ons #wpbody-content {
+	padding-top: 80px;
 }

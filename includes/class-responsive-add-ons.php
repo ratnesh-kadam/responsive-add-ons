@@ -46,27 +46,27 @@ class Responsive_Add_Ons {
 	 */
 	public function __construct() {
 
-		add_action( 'admin_init', array( &$this, 'admin_init' ) );
-		add_action( 'admin_notices', array( &$this, 'add_theme_installation_notice' ), 1 );
-		add_action( 'wp_head', array( &$this, 'responsive_head' ) );
-		add_action( 'plugins_loaded', array( &$this, 'responsive_addons_translations' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_notices', array( $this, 'add_theme_installation_notice' ), 1 );
+		add_action( 'wp_head', array( $this, 'responsive_head' ) );
+		add_action( 'plugins_loaded', array( $this, 'responsive_addons_translations' ) );
 		$plugin = plugin_basename( __FILE__ );
-		add_filter( "plugin_action_links_$plugin", array( &$this, 'plugin_settings_link' ) );
+		add_filter( "plugin_action_links_$plugin", array( $this, 'plugin_settings_link' ) );
 
 		// Responsive Ready Site Importer Menu.
-		add_action( 'admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
 
-		add_action( 'admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'responsive_ready_sites_admin_enqueue_styles' ) );
 
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_responsive-ready-sites-activate-theme', array( $this, 'activate_theme' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-required-plugins', array( &$this, 'required_plugin' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array( &$this, 'required_plugin_activate' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array( &$this, 'set_reset_data' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array( &$this, 'backup_settings' ) );
-			add_action( 'wp_ajax_responsive-is-theme-active', array( &$this, 'check_responsive_theme_active' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-required-plugins', array( $this, 'required_plugin' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array( $this, 'set_reset_data' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array( $this, 'backup_settings' ) );
+			add_action( 'wp_ajax_responsive-is-theme-active', array( $this, 'check_responsive_theme_active' ) );
 			// Dismiss admin notice.
-			add_action( 'wp_ajax_responsive-notice-dismiss', array( &$this, 'dismiss_notice' ) );
+			add_action( 'wp_ajax_responsive-notice-dismiss', array( $this, 'dismiss_notice' ) );
 			// Check if Responsive Addons pro plugin is active.
 			add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed' ) );
 
@@ -272,7 +272,7 @@ class Responsive_Add_Ons {
 		register_setting(
 			'responsive_addons',
 			'responsive_addons_options',
-			array( &$this, 'responsive_addons_sanitize' )
+			array( $this, 'responsive_addons_sanitize' )
 		);
 
 	}
@@ -394,7 +394,7 @@ class Responsive_Add_Ons {
 	 *
 	 * @since 2.0.0
 	 */
-	public function responsive_ready_sites_admin_enqueue_scripts( $hook ) {
+	public function responsive_ready_sites_admin_enqueue_scripts( $hook = '' ) {
 
 		wp_enqueue_script( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/js/install-responsive-theme.js', array( 'jquery', 'updates' ), RESPONSIVE_ADDONS_VER, true );
 		wp_enqueue_style( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/css/install-responsive-theme.css', null, RESPONSIVE_ADDONS_VER, 'all' );
@@ -427,10 +427,34 @@ class Responsive_Add_Ons {
 					'ApiURL'                          => self::$api_url,
 					'importSingleTemplateButtonTitle' => __( 'Import "%s" Template', 'responsive-addons' ),
 					'default_page_builder_sites'      => $this->get_sites_by_page_builder(),
+					'strings'                         => array(
+						'syncCompleteMessage'  => $this->get_sync_complete_message(),
+						/* translators: %s is a template name */
+						'importSingleTemplate' => __( 'Import "%s" Template', 'responsive-addons' ),
+					),
+					'dismiss'                         => __( 'Dismiss this notice.', 'responsive-addons' ),
+					'syncLibraryStart'                => '<span class="message">' . esc_html__( 'Syncing ready sites templates library in the background. The process can take anywhere between 2 to 3 minutes. We will notify you once done.', 'responsive-addons' ) . '</span>',
 				)
 			);
 
 			wp_localize_script( 'responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data );
+		}
+	}
+
+	/**
+	 * Get Sync Complete Message
+	 *
+	 * @since 2.0.0
+	 * @param  boolean $echo Echo the message.
+	 * @return mixed
+	 */
+	public function get_sync_complete_message( $echo = false ) {
+
+		$message = __( 'Template library refreshed!', 'responsive-addons' );
+		if ( $echo ) {
+			echo esc_html( $message );
+		} else {
+			return esc_html( $message );
 		}
 	}
 
@@ -686,7 +710,6 @@ class Responsive_Add_Ons {
 		}
 		?>
 			<div class="wrap">
-				<h1><?php esc_html_e( 'Responsive Importer Options', 'responsive-addons' ); ?></h1>
 					<?php
 						$this->init_nav_menu( 'general' );
 						do_action( 'responsive_addons_importer_page' );

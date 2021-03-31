@@ -67,7 +67,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
         public function import_sites( $page = 1 ) {
 
             $api_args        = array(
-                'timeout' => 30,
+                'timeout' => 60,
             );
             $sites_and_pages = array();
 

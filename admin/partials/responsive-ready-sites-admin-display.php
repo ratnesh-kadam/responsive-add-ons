@@ -394,6 +394,8 @@
 		</div>
 	</div>
 </script>
+<?php
+wp_print_admin_notice_templates();
 
 
 

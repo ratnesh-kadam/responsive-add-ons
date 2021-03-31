@@ -1955,17 +1955,18 @@ var ResponsiveSitesAjaxQueue = (function() {
 			var button = $(this);
 
 			if (button.hasClass('updating-message')) {
-				//return;
+				return;
 			}
 
 			button.addClass('updating-message');
 
-			//$('.astra-sites-sync-library-message').remove();
+			$('.responsive-ready-sites-sync-library-message').remove();
 
 			var noticeContent = wp.updates.adminNotice({
-			 	className: 'responsive-ready-sites-sync-library-message responsive-ready-sites-notice notice notice-info',
-			 	message: '<span class="message">' + 'Sync Library Starts' + '</span>' +'<button type="button" class="notice-dismiss"><span class="screen-reader-text">' + 'Dismiss this notice.' + '</span></button>',
+				className: 'responsive-ready-sites-sync-library-message responsive-ready-sites-notice notice notice-info',
+				message: responsiveSitesAdmin.syncLibraryStart + '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
 			});
+
 			$('#screen-meta').after(noticeContent);
 
 			$(document).trigger('wp-updates-notice-added');
@@ -1982,12 +1983,25 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 					if (response.success) {
 						if ('updated' === response.data) {
-							console.log('Already sync all the sites.');
+
+							$('#wpbody-content').find('.responsive-ready-sites-sync-library-message').remove();
+							var noticeContent = wp.updates.adminNotice({
+								className: 'notice responsive-ready-sites-notice notice-success is-dismissible responsive-ready-sites-sync-library-message',
+								message: responsiveSitesAdmin.strings.syncCompleteMessage + ' <button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
+							});
+							$('#screen-meta').after(noticeContent);
+							button.removeClass('updating-message');
 						} else {
 							ResponsiveSitesAdmin._sync_library_with_ajax();
 						}
 					} else {
-						console.groupEnd('Update Library Request');
+						$('#wpbody-content').find('.responsive-ready-sites-sync-library-message').remove();
+						var noticeContent = wp.updates.adminNotice({
+							className: 'notice astra-sites-notice notice-error is-dismissible responsive-ready-sites-sync-library-message',
+							message: response.data + ' <button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
+						});
+						$('#screen-meta').after(noticeContent);
+						button.removeClass('updating-message');
 					}
 				});
 		},

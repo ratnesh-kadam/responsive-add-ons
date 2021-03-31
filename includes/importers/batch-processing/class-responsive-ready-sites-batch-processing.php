@@ -51,6 +51,15 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		public static $api_url;
 
 		/**
+		 * Last Export Checksums
+		 *
+		 * @since 2.5.0
+		 * @var object Class object.
+		 * @access public
+		 */
+		public $last_xml_export_checksums;
+
+		/**
 		 * Initiator
 		 *
 		 * @since 1.0.14
@@ -104,6 +113,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			add_action( 'wp_ajax_responsive-ready-sites-import-sites', array( $this, 'import_sites' ) );
 
 			add_action( 'wp_ajax_responsive-sites-get-sites-request-count', array( $this, 'ready_sites_requests_count' ) );
+
+			add_action( 'wp_ajax_responsive-ready-sites-update-library', array( $this, 'update_sites_library' ) );
 
 			self::set_api_url();
 		}
@@ -295,6 +306,81 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		public static function set_api_url() {
 			self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/' );
 		}
+
+		/**
+		 * Update Sites Library
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function update_sites_library() {
+
+			if ( 'no' === $this->get_last_export_checksums() ) {
+				wp_send_json_success( 'updated' );
+			}
+
+			$import_with = 'ajax';
+
+			wp_send_json_success( $import_with );
+		}
+
+		/**
+		 * Get Last Exported Checksum Status
+		 *
+		 * @since 2.5.0
+		 * @return string Checksums Status.
+		 */
+		public function get_last_export_checksums() {
+
+			$old_last_export_checksums = get_site_option( 'responsive-ready-sites-last-xml-export-checksums', '' );
+
+			$new_last_export_checksums = $this->set_last_export_checksums();
+
+			$checksums_status = 'no';
+
+			if ( empty( $old_last_export_checksums ) ) {
+				$checksums_status = 'yes';
+			}
+
+			if ( $new_last_export_checksums !== $old_last_export_checksums ) {
+				$checksums_status = 'yes';
+			}
+
+			return apply_filters( 'responsive_ready_sites_checksums_status', $checksums_status );
+		}
+
+		/**
+		 * Set Last Exported Checksum
+		 *
+		 * @since 2.5.0
+		 * @return string Checksums Status.
+		 */
+		public function set_last_export_checksums() {
+
+			if ( ! empty( $this->last_export_checksums ) ) {
+				return $this->last_export_checksums;
+			}
+
+			$api_args = array(
+				'timeout' => 60,
+			);
+
+			$response = wp_remote_get( self::$api_url . 'get-last-xml-export-checksum', $api_args );
+
+			if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+				$result = json_decode( wp_remote_retrieve_body( $response ), true );
+
+				// Set last export checksums.
+				if ( ! empty( $result['last_xml_export_checksums'] ) ) {
+					update_site_option( 'responsive-ready-sites-last-xml-export-checksums', $result['last_xml_export_checksums'], 'no' );
+
+					$this->last_xml_export_checksums = $result['last_xml_export_checksums'];
+				}
+			}
+
+			return $this->last_xml_export_checksums;
+		}
+
 
 	}
 
