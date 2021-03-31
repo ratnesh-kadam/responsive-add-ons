@@ -1942,6 +1942,17 @@ var ResponsiveSitesAjaxQueue = (function() {
 									}
 
 								}
+
+								if (i === total && responsiveSitesAdmin.strings.syncCompleteMessage) {
+									$('#wpbody-content').find('.responsive-sites-sync-library-message').remove();
+									var noticeContent = wp.updates.adminNotice({
+										className: 'notice responsive-ready-sites-notice notice-success is-dismissible responsive-ready-sites-sync-library-message',
+										message: responsiveSitesAdmin.strings.syncCompleteMessage + ' <button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
+									});
+									$('#screen-meta').after(noticeContent);
+
+									$('.responsive-sites-sync-library-button').removeClass('updating-message');
+								}
 							}
 						});
 					}
@@ -1997,7 +2008,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					} else {
 						$('#wpbody-content').find('.responsive-ready-sites-sync-library-message').remove();
 						var noticeContent = wp.updates.adminNotice({
-							className: 'notice astra-sites-notice notice-error is-dismissible responsive-ready-sites-sync-library-message',
+							className: 'notice responsive-ready-sites-notice notice-error is-dismissible responsive-ready-sites-sync-library-message',
 							message: response.data + ' <button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
 						});
 						$('#screen-meta').after(noticeContent);
