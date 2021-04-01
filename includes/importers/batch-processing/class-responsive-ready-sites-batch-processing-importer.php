@@ -90,6 +90,11 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
 					$message = isset( $sites_and_pages['message'] ) ? $sites_and_pages['message'] : '';
 					return $message;
 				} else {
+
+					foreach ( $sites_and_pages as $key => $site ) {
+						$sites_and_pages[ 'id-' . $site['id'] ] = $site;
+						unset( $sites_and_pages[ $key ] );
+					}
 					update_site_option( 'responsive-ready-sites-and-pages-page-' . $page, $sites_and_pages, 'no' );
 				}
 			} else {

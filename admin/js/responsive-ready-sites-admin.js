@@ -1932,7 +1932,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 												}
 											}
 											if ($('#responsive-sites .site-single:not(.placeholder-site)').length) {
-												$('#responsive-sites .site-single:not(.placeholder-site)').last().after(template(result.data));
+												$('#responsive-sites .site-single:not(.placeholder-site)').last().after(template(data));
 											} else {
 												$('#responsive-sites').prepend(template(data));
 											}
@@ -2133,7 +2133,6 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			var $filter_type = $( '.responsive-sites__filter-wrap-checkbox input[name=responsive-sites-radio]:checked' ).val();
 			var $filter_name = $( '.responsive-sites__category-filter-anchor' ).attr( 'data-slug' );
-
 
 			for( site_id in responsiveSitesAdmin.default_page_builder_sites ) {
 
