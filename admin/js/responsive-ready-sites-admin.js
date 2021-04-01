@@ -1922,6 +1922,8 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 										var template          = wp.template( 'responsive-sites-list' );
 
+										var data = ResponsiveSitesAdmin._filter_sites_by_page_builder(result.data);
+
 										// First fill the placeholders and then append remaining sites.
 										if ($('.placeholder-site').length) {
 											for (site_id in result.data) {
@@ -1932,10 +1934,10 @@ var ResponsiveSitesAjaxQueue = (function() {
 											if ($('#responsive-sites .site-single:not(.placeholder-site)').length) {
 												$('#responsive-sites .site-single:not(.placeholder-site)').last().after(template(result.data));
 											} else {
-												$('#responsive-sites').prepend(template(result.data));
+												$('#responsive-sites').prepend(template(data));
 											}
 										} else {
-											$('#responsive-sites').append(template(result.data));
+											$('#responsive-sites').append(template(data));
 										}
 
 										responsiveSitesAdmin.default_page_builder_sites = $.extend({}, responsiveSitesAdmin.default_page_builder_sites, result.data);
