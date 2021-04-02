@@ -1961,7 +1961,21 @@ var ResponsiveSitesAjaxQueue = (function() {
 					// Run the AJAX queue.
 					ResponsiveSitesAjaxQueue.run();
 				});
+			ResponsiveSitesAdmin._sync_library_complete();
 			},
+
+		_sync_library_complete: function () {
+			$.ajax({
+				url: responsiveSitesAdmin.ajaxurl,
+				type: 'POST',
+				data: {
+					action: 'responsive-ready-sites-update-sites-library-complete',
+				},
+			}).done(function (response) {
+				ResponsiveSitesAdmin._log(response);
+				console.groupEnd('Update Library Request');
+			});
+		},
 
 		_sync_library: function (event) {
 			event.preventDefault();

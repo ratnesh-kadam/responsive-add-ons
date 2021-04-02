@@ -116,6 +116,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			add_action( 'wp_ajax_responsive-ready-sites-update-library', array( $this, 'update_sites_library' ) );
 
+			add_action( 'wp_ajax_responsive-ready-sites-update-sites-library-complete', array( $this, 'update_sites_library_complete' ) );
+
 			self::set_api_url();
 		}
 
@@ -251,6 +253,30 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		}
 
 		/**
+		 * Update Library Complete
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function update_sites_library_complete() {
+			$this->update_latest_checksums();
+			wp_send_json_success();
+		}
+
+		/**
+		 * Update Latest Checksums
+		 *
+		 * Store latest checksum after batch complete.
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function update_latest_checksums() {
+			$latest_checksums = get_site_option( 'responsive-ready-sites-last-xml-export-checksums-latest', '' );
+			update_site_option( 'responsive-ready-sites-last-xml-export-checksums', $latest_checksums );
+		}
+
+		/**
 		 * Get Total Requests
 		 *
 		 * @since 2.5.0
@@ -272,7 +298,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 				if ( isset( $total_requests ) ) {
 
-					update_site_option( 'responsive-ready-sites-requests', $total_requests, 'no' );
+					update_site_option( 'responsive-ready-sites-requests', $total_requests );
 
 					return $total_requests;
 				}
@@ -372,7 +398,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 				// Set last export checksums.
 				if ( ! empty( $result['last_xml_export_checksums'] ) ) {
-					update_site_option( 'responsive-ready-sites-last-xml-export-checksums', $result['last_xml_export_checksums'], 'no' );
+					update_site_option( 'responsive-ready-sites-last-xml-export-checksums-latest', $result['last_xml_export_checksums'] );
 
 					$this->last_xml_export_checksums = $result['last_xml_export_checksums'];
 				}

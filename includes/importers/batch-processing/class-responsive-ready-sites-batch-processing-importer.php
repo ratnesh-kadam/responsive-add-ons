@@ -95,7 +95,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
 						$sites_and_pages[ 'id-' . $site['id'] ] = $site;
 						unset( $sites_and_pages[ $key ] );
 					}
-					update_site_option( 'responsive-ready-sites-and-pages-page-' . $page, $sites_and_pages, 'no' );
+					update_site_option( 'responsive-ready-sites-and-pages-page-' . $page, $sites_and_pages );
 				}
 			} else {
 				error_log( 'API Error: ' . $response->get_error_message() );
