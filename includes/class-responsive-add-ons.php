@@ -433,7 +433,7 @@ class Responsive_Add_Ons {
 						'importSingleTemplate' => __( 'Import "%s" Template', 'responsive-addons' ),
 					),
 					'dismiss'                         => __( 'Dismiss this notice.', 'responsive-addons' ),
-					'syncLibraryStart'                => '<span class="message">' . esc_html__( 'Syncing ready sites templates in the background. The process can take anywhere between 2 to 3 minutes. We will notify you once done.', 'responsive-addons' ) . '</span>',
+					'syncTemplatesLibraryStart'                => '<span class="message">' . esc_html__( 'Syncing ready sites templates in the background. The process can take anywhere between 2 to 3 minutes. We will notify you once done.', 'responsive-addons' ) . '</span>',
 				)
 			);
 
@@ -772,9 +772,9 @@ class Responsive_Add_Ons {
 					<?php $this->site_filters(); ?>
 				</div>
 				<div class="form">
-					<div class="sync-library-wrap header-actions">
+					<div class="sync-ready-sites-templates-wrap header-actions">
 						<div class="filters-slug">
-							<a title="<?php esc_html_e( 'Sync Library', 'responsive-add-ons' ); ?>" href="#" class="responsive-sites-sync-library-button">
+							<a title="<?php esc_html_e( 'Sync Templates', 'responsive-add-ons' ); ?>" href="#" class="responsive-ready-sites-sync-templates-button">
 								<span class="dashicons dashicons-update-alt"></span>
 							</a>
 						</div>

@@ -1137,21 +1137,22 @@ responsive-ready-site-import-free.button.installing:before {
     z-index: 999999;
     top: 0 !important;
 }
-.sync-library-wrap a {
+.sync-ready-sites-templates-wrap a {
 	display: inline-block;
 	margin: 0 10px;
 	padding: 15px 0;
 	border-bottom: 4px solid #fff;
 	color: #646970;
 	cursor: pointer;
+	box-shadow: none;
 }
-.sync-library-wrap .dashicons {
+.sync-ready-sites-templates-wrap .dashicons {
 	text-decoration: none;
 	font-size: 25px;
 	width: 40px;
 	height: 20px;
 }
-.responsive-sites-sync-library-button.updating-message {
+.responsive-ready-sites-sync-templates-button.updating-message {
 	animation: rotation 2s infinite linear;
 }
 .responsive_page_responsive-add-ons .responsive-ready-sites-notice{

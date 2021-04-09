@@ -198,7 +198,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 	 * - _import_wpform()
 	 * - _importPage()
 	 * - ucwords()
-	 * - _sync_library_with_ajax()
+	 * - _sync_templates_library_with_ajax()
 	 */
 	ResponsiveSitesAdmin = {
 
@@ -273,7 +273,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 				ResponsiveSitesAdmin.add_sites(temp);
 				$('#respnonsive-sites').addClass('temp');
 
-				ResponsiveSitesAdmin._sync_library_with_ajax( true );
+				ResponsiveSitesAdmin._sync_templates_library_with_ajax( true );
 			}
 		},
 
@@ -338,7 +338,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			$( document ).on('keyup input'                     , '#wp-filter-search-input', ResponsiveSitesAdmin._search );
 			$( document ).on( 'click'                    , '.nav-tab-wrapper .page-builders li', ResponsiveSitesAdmin._change_page_builder );
 			$( document ).on('click'                     , '.ui-autocomplete .ui-menu-item', ResponsiveSitesAdmin._show_search_term );
-			$( document ).on('click', '.responsive-sites-sync-library-button', ResponsiveSitesAdmin._sync_library);
+			$( document ).on('click', '.responsive-ready-sites-sync-templates-button', ResponsiveSitesAdmin._sync_library);
 		},
 
 		/**
@@ -1891,7 +1891,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 			return str;
 		},
 
-		_sync_library_with_ajax: function( is_append ) {
+		_sync_templates_library_with_ajax: function( is_append ) {
 
 			$.ajax({
 				url: responsiveSitesAdmin.ajaxurl,
@@ -1946,14 +1946,14 @@ var ResponsiveSitesAjaxQueue = (function() {
 								}
 
 								if (i === total && responsiveSitesAdmin.strings.syncCompleteMessage) {
-									$('#wpbody-content').find('.responsive-sites-sync-library-message').remove();
+									$('#wpbody-content').find('.responsive-sites-sync-templates-library-message').remove();
 									var noticeContent = wp.updates.adminNotice({
-										className: 'notice responsive-ready-sites-notice notice-success is-dismissible responsive-ready-sites-sync-library-message',
+										className: 'notice responsive-ready-sites-notice notice-success is-dismissible responsive-ready-sites-sync-templates-library-message',
 										message: responsiveSitesAdmin.strings.syncCompleteMessage + ' <button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
 									});
 									$('#screen-meta').after(noticeContent);
 
-									$('.responsive-sites-sync-library-button').removeClass('updating-message');
+									$('.responsive-ready-sites-sync-templates-button').removeClass('updating-message');
 								}
 							}
 						});
@@ -1961,15 +1961,15 @@ var ResponsiveSitesAjaxQueue = (function() {
 					// Run the AJAX queue.
 					ResponsiveSitesAjaxQueue.run();
 				});
-			ResponsiveSitesAdmin._sync_library_complete();
+			ResponsiveSitesAdmin._sync_templates_library_complete();
 			},
 
-		_sync_library_complete: function () {
+		_sync_templates_library_complete: function () {
 			$.ajax({
 				url: responsiveSitesAdmin.ajaxurl,
 				type: 'POST',
 				data: {
-					action: 'responsive-ready-sites-update-sites-library-complete',
+					action: 'responsive-ready-sites-update-templates-library-complete',
 				},
 			}).done(function (response) {
 				ResponsiveSitesAdmin._log(response);
@@ -1987,11 +1987,11 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 			button.addClass('updating-message');
 
-			$('.responsive-ready-sites-sync-library-message').remove();
+			$('.responsive-ready-sites-sync-templates-library-message').remove();
 
 			var noticeContent = wp.updates.adminNotice({
-				className: 'responsive-ready-sites-sync-library-message responsive-ready-sites-notice notice notice-info',
-				message: responsiveSitesAdmin.syncLibraryStart + '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
+				className: 'responsive-ready-sites-sync-templates-library-message responsive-ready-sites-notice notice notice-info',
+				message: responsiveSitesAdmin.syncTemplatesLibraryStart + '<button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
 			});
 
 			$('#screen-meta').after(noticeContent);
@@ -2002,27 +2002,27 @@ var ResponsiveSitesAjaxQueue = (function() {
 				url: responsiveSitesAdmin.ajaxurl,
 				type: 'POST',
 				data: {
-					action: 'responsive-ready-sites-update-library',
+					action: 'responsive-ready-sites-update-templates-library',
 				},
 			})
 				.done(function (response) {
 					if (response.success) {
 						if ('updated' === response.data) {
 
-							$('#wpbody-content').find('.responsive-ready-sites-sync-library-message').remove();
+							$('#wpbody-content').find('.responsive-ready-sites-sync-templates-library-message').remove();
 							var noticeContent = wp.updates.adminNotice({
-								className: 'notice responsive-ready-sites-notice notice-success is-dismissible responsive-ready-sites-sync-library-message',
+								className: 'notice responsive-ready-sites-notice notice-success is-dismissible responsive-ready-sites-sync-templates-library-message',
 								message: responsiveSitesAdmin.strings.syncCompleteMessage + ' <button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
 							});
 							$('#screen-meta').after(noticeContent);
 							button.removeClass('updating-message');
 						} else {
-							ResponsiveSitesAdmin._sync_library_with_ajax();
+							ResponsiveSitesAdmin._sync_templates_library_with_ajax();
 						}
 					} else {
-						$('#wpbody-content').find('.responsive-ready-sites-sync-library-message').remove();
+						$('#wpbody-content').find('.responsive-ready-sites-sync-templates-library-message').remove();
 						var noticeContent = wp.updates.adminNotice({
-							className: 'notice responsive-ready-sites-notice notice-error is-dismissible responsive-ready-sites-sync-library-message',
+							className: 'notice responsive-ready-sites-notice notice-error is-dismissible responsive-ready-sites-sync-templates-library-message',
 							message: response.data + ' <button type="button" class="notice-dismiss"><span class="screen-reader-text">' + responsiveSitesAdmin.dismiss + '</span></button>',
 						});
 						$('#screen-meta').after(noticeContent);

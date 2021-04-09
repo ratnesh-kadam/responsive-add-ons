@@ -352,7 +352,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				update_option( '_responsive_sites_old_customizer_data', $customizer_data );
 
 				if ( isset( $customizer_data['responsive_settings'] ) ) {
-					Responsive_Ready_Sites_Importer_Log::add( 'Old Responsive Theme Options ' . get_option( 'responsive_theme_options' ) );
+					Responsive_Ready_Sites_Importer_Log::add( 'Old Responsive Theme Options ' . wp_json_encode( get_option( 'responsive_theme_options', array() ) ) );
 					update_option( 'responsive_theme_options', $customizer_data['responsive_settings'] );
 				}
 
@@ -360,10 +360,10 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 					$current_theme = wp_get_theme();
 					if ( is_child_theme() && 'Responsive' === $current_theme->parent()->get( 'Name' ) ) {
 						$current_theme = str_replace( ' ', '-', strtolower( $current_theme ) );
-						Responsive_Ready_Sites_Importer_Log::add( 'Backup - Responsive Theme Mods ' . get_option( 'theme_mods_' . $current_theme, true ) );
+						Responsive_Ready_Sites_Importer_Log::add( 'Backup - Responsive Theme Mods ' . wp_json_encode( get_option( 'theme_mods_' . $current_theme, array() ) ) );
 						update_option( 'theme_mods_' . $current_theme, $customizer_data['theme_mods_responsive'] );
 					} else {
-						Responsive_Ready_Sites_Importer_Log::add( 'Backup - Responsive Theme Mods ' . get_option( 'theme_mods_responsive', true ) );
+						Responsive_Ready_Sites_Importer_Log::add( 'Backup - Responsive Theme Mods ' . wp_json_encode( get_option( 'theme_mods_responsive', array() ) ) );
 						update_option( 'theme_mods_responsive', $customizer_data['theme_mods_responsive'] );
 					}
 				}

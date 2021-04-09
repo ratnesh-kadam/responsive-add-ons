@@ -114,9 +114,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			add_action( 'wp_ajax_responsive-sites-get-sites-request-count', array( $this, 'ready_sites_requests_count' ) );
 
-			add_action( 'wp_ajax_responsive-ready-sites-update-library', array( $this, 'update_sites_library' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-update-templates-library', array( $this, 'update_sites_library' ) );
 
-			add_action( 'wp_ajax_responsive-ready-sites-update-sites-library-complete', array( $this, 'update_sites_library_complete' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-update-templates-library-complete', array( $this, 'update_templates_library_complete' ) );
 
 			self::set_api_url();
 		}
@@ -258,7 +258,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		 * @since 2.5.0
 		 * @return void
 		 */
-		public function update_sites_library_complete() {
+		public function update_templates_library_complete() {
 			$this->update_latest_checksums();
 			wp_send_json_success();
 		}
