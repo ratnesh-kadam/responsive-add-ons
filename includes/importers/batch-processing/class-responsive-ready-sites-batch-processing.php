@@ -118,6 +118,8 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 
 			add_action( 'wp_ajax_responsive-ready-sites-update-templates-library-complete', array( $this, 'update_templates_library_complete' ) );
 
+			add_action( 'admin_head', array( $this, 'initialize_ready_sites_templates_importer' ) );
+
 			self::set_api_url();
 		}
 
@@ -407,7 +409,128 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			return $this->last_xml_export_checksums;
 		}
 
+		/**
+		 * Start Importer
+		 *
+		 * @since 2.0.0
+		 * @return void
+		 */
+		public function initialize_ready_sites_templates_importer() {
 
+			$process_sync = apply_filters( 'responsive_ready_sites_initial_sync', true );
+
+			if ( ! $process_sync ) {
+				return;
+			}
+
+			$is_fresh_site = get_site_option( 'responsive-ready-sites-fresh-site', '' );
+
+			// Process initially for the fresh user.
+			if ( isset( $_GET['reset'] ) ) {
+				// Process Ready sites data import.
+				$this->process_batch();
+			} elseif ( empty( $is_fresh_site ) ) {
+				$this->process_batch();
+				update_site_option( 'responsive-ready-sites-fresh-site', 'yes', 'no' );
+			} else {
+				$current_screen = get_current_screen();
+				// return if not Responsive Ready Sites grid page.
+				if ( ! is_object( $current_screen ) && null === $current_screen ) {
+					return;
+				}
+				if ( 'responsive_page_responsive-add-ons' === $current_screen->id ) {
+					// Process import.
+					$this->process_ready_sites_templates_import();
+				}
+			}
+		}
+
+		/**
+		 * Process Import
+		 *
+		 * @since 2.0.0
+		 *
+		 * @return mixed Null if process is already started.
+		 */
+		public function process_ready_sites_templates_import() {
+
+			// Batch is already started? Then return.
+			$status = get_site_option( 'responsive-ready-sites-batch-status' );
+			if ( 'in-process' === $status ) {
+				return;
+			}
+
+			// Check batch expiry.
+			$expired = get_transient( 'responsive-ready-sites-import-templates-check' );
+			if ( false !== $expired ) {
+				return;
+			}
+
+			// For 1 week.
+			set_transient( 'responsive-ready-sites-import-templates-check', 'true', WEEK_IN_SECONDS );
+
+			update_site_option( 'responsive-ready-sites-batch-status', 'in-process' );
+
+			// Process batch.
+			$this->process_batch();
+		}
+
+		/**
+		 * Process Batch
+		 *
+		 * @since 2.0.0
+		 * @return mixed
+		 */
+		public function process_batch() {
+
+			if ( 'no' === $this->get_last_export_checksums() ) {
+				return;
+			}
+
+			// Get count.
+			$total_requests = $this->get_total_requests();
+			if ( $total_requests ) {
+
+				$api_args = array(
+					'timeout' => 60,
+				);
+
+				for ( $page = 1; $page <= $total_requests; $page++ ) {
+					$sites_and_pages = array();
+
+					$query_args = apply_filters(
+						'cyb_sites_import_sites_query_args',
+						array(
+							'per_page' => 15,
+							'page'     => $page,
+						)
+					);
+
+					$api_url = add_query_arg( $query_args, self::$api_url . 'cyberchimps-sites' );
+
+					$response = wp_remote_get( $api_url, $api_args );
+
+					if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+						$sites_and_pages = json_decode( wp_remote_retrieve_body( $response ), true );
+
+						if ( isset( $sites_and_pages['code'] ) ) {
+							$message = isset( $sites_and_pages['message'] ) ? $sites_and_pages['message'] : '';
+							return $message;
+						} else {
+							foreach ( $sites_and_pages as $key => $site ) {
+								$sites_and_pages[ 'id-' . $site['id'] ] = $site;
+								unset( $sites_and_pages[ $key ] );
+							}
+							update_site_option( 'responsive-ready-sites-and-pages-page-' . $page, $sites_and_pages );
+						}
+					} else {
+						error_log( 'API Error: ' . $response->get_error_message() );
+					}
+				}
+			}
+
+			delete_site_option( 'responsive-ready-sites-batch-status' );
+		}
 	}
 
 	/**
