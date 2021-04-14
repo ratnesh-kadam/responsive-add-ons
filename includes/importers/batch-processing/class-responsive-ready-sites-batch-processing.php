@@ -417,12 +417,6 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		 */
 		public function initialize_ready_sites_templates_importer() {
 
-			$process_sync = apply_filters( 'responsive_ready_sites_initial_sync', true );
-
-			if ( ! $process_sync ) {
-				return;
-			}
-
 			$is_fresh_site = get_site_option( 'responsive-ready-sites-fresh-site', '' );
 
 			// Process initially for the fresh user.
@@ -440,7 +434,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 				}
 				if ( 'responsive_page_responsive-add-ons' === $current_screen->id ) {
 					// Process import.
-					$this->process_ready_sites_templates_import();
+					$this->process_ready_sites_templates_data_import();
 				}
 			}
 		}
@@ -452,7 +446,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		 *
 		 * @return mixed Null if process is already started.
 		 */
-		public function process_ready_sites_templates_import() {
+		public function process_ready_sites_templates_data_import() {
 
 			// Batch is already started? Then return.
 			$status = get_site_option( 'responsive-ready-sites-batch-status' );
