@@ -412,7 +412,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		/**
 		 * Start Importer
 		 *
-		 * @since 2.0.0
+		 * @since 2.5.0
 		 * @return void
 		 */
 		public function initialize_ready_sites_templates_importer() {
@@ -442,7 +442,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		/**
 		 * Process Import
 		 *
-		 * @since 2.0.0
+		 * @since 2.5.0
 		 *
 		 * @return mixed Null if process is already started.
 		 */
@@ -472,7 +472,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		/**
 		 * Process Batch
 		 *
-		 * @since 2.0.0
+		 * @since 2.5.0
 		 * @return mixed
 		 */
 		public function process_batch() {

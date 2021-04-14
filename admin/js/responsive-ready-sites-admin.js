@@ -1972,8 +1972,7 @@ var ResponsiveSitesAjaxQueue = (function() {
 					action: 'responsive-ready-sites-update-templates-library-complete',
 				},
 			}).done(function (response) {
-				ResponsiveSitesAdmin._log(response);
-				console.groupEnd('Update Library Request');
+				console.log("Ready Sites data Updated");
 			});
 		},
 
