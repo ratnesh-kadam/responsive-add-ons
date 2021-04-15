@@ -836,10 +836,6 @@ class Responsive_Add_Ons {
 							'slug' => 'business',
 						),
 						array(
-							'name' => 'Other',
-							'slug' => 'other',
-						),
-						array(
 							'name' => 'Blog',
 							'slug' => 'blog',
 						),
@@ -848,8 +844,8 @@ class Responsive_Add_Ons {
 							'slug' => 'ecommerce',
 						),
 						array(
-							'name' => 'Free',
-							'slug' => 'free',
+							'name' => 'Onepage',
+							'slug' => 'onepage',
 						),
 					);
 					if ( ! empty( $categories ) ) {
@@ -860,11 +856,9 @@ class Responsive_Add_Ons {
 								<li class="responsive-sites__filter-wrap category-active" data-slug=""><?php esc_html_e( 'All', 'responsive-addons' ); ?> </li>
 								<?php
 								foreach ( $categories as $key => $value ) {
-									if ( 'free' !== $value['slug'] ) {
-										?>
+									?>
 										<li class="responsive-sites__filter-wrap" data-slug="<?php echo esc_attr( $value['slug'] ); ?>"><?php echo esc_html( $value['name'] ); ?> </li>
-										<?php
-									}
+									<?php
 								}
 								?>
 								<li class="responsive-sites__filter-wrap-checkbox first-wrap">
