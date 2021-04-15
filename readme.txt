@@ -107,8 +107,8 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 
 == Changelog ==
 = 2.5.0 - 15th April 2021 =
-* Feature - Added page builder and category filter to show ready sites based on selected page builder with selected categories
-* Feature - Search box on the ready sites grid page to search for the specific/related ready sites
+* Feature - Added filters on ready sites grid page to filter the ready sites based on page builder and categories
+* Feature - Search box on the ready sites grid page to search for the ready sites
 
 = 2.4.3 - 30th December 2020 =
 * Feature - Prompt user to install the third party plugins
