@@ -43,6 +43,23 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 		public static $process_single;
 
 		/**
+		 * API Url
+		 *
+		 * @since 2.5.0
+		 * @var   string API Url
+		 */
+		public static $api_url;
+
+		/**
+		 * Last Export Checksums
+		 *
+		 * @since 2.5.0
+		 * @var object Class object.
+		 * @access public
+		 */
+		public $last_xml_export_checksums;
+
+		/**
 		 * Initiator
 		 *
 		 * @since 1.0.14
@@ -79,6 +96,9 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-elementor.php';
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-gutenberg.php';
 
+			// Batch Processing Importer.
+			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-importer.php';
+
 			// Menu fix.
 			require_once $responsive_ready_sites_batch_processing . 'class-responsive-ready-sites-batch-processing-menu.php';
 
@@ -89,6 +109,18 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			add_action( 'responsive_ready_sites_import_complete', array( $this, 'start_process' ) );
 
 			add_action( 'responsive_ready_sites_process_template', array( $this, 'start_process_page' ) );
+
+			add_action( 'wp_ajax_responsive-ready-sites-import-sites', array( $this, 'import_sites' ) );
+
+			add_action( 'wp_ajax_responsive-sites-get-sites-request-count', array( $this, 'ready_sites_requests_count' ) );
+
+			add_action( 'wp_ajax_responsive-ready-sites-update-templates-library', array( $this, 'update_sites_library' ) );
+
+			add_action( 'wp_ajax_responsive-ready-sites-update-templates-library-complete', array( $this, 'update_templates_library_complete' ) );
+
+			add_action( 'admin_head', array( $this, 'initialize_ready_sites_templates_importer' ) );
+
+			self::set_api_url();
 		}
 
 		/**
@@ -205,6 +237,294 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			return $post_types;
 		}
 
+		/**
+		 * Import Sites
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function import_sites() {
+			$page_no = isset( $_POST['page_no'] ) ? absint( $_POST['page_no'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( $page_no ) {
+				$sites_and_pages = Responsive_Ready_Sites_Batch_Processing_Importer::get_instance()->import_sites( $page_no );
+
+				wp_send_json_success( $sites_and_pages );
+			}
+
+			wp_send_json_error();
+		}
+
+		/**
+		 * Update Library Complete
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function update_templates_library_complete() {
+			$this->update_latest_checksums();
+			wp_send_json_success();
+		}
+
+		/**
+		 * Update Latest Checksums
+		 *
+		 * Store latest checksum after batch complete.
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function update_latest_checksums() {
+			$latest_checksums = get_site_option( 'responsive-ready-sites-last-xml-export-checksums-latest', '' );
+			update_site_option( 'responsive-ready-sites-last-xml-export-checksums', $latest_checksums );
+		}
+
+		/**
+		 * Get Total Requests
+		 *
+		 * @since 2.5.0
+		 * @return integer
+		 */
+		public function get_total_requests() {
+
+			$api_args = array(
+				'timeout' => 60,
+			);
+
+			$api_url = self::$api_url . 'get-ready-sites-requests-count/?per_page=15';
+
+			$response = wp_remote_get( $api_url, $api_args );
+
+			if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+
+				$total_requests = json_decode( wp_remote_retrieve_body( $response ), true );
+
+				if ( isset( $total_requests ) ) {
+
+					update_site_option( 'responsive-ready-sites-requests', $total_requests );
+
+					return $total_requests;
+				}
+			}
+
+			$this->get_total_requests();
+		}
+
+		/**
+		 * Sites Requests Count
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function ready_sites_requests_count() {
+
+			// Get count.
+			$total_requests = $this->get_total_requests();
+			if ( $total_requests ) {
+				wp_send_json_success( $total_requests );
+			}
+
+			wp_send_json_error();
+		}
+
+		/**
+		 * Setter for $api_url
+		 *
+		 * @since  2.5.0
+		 */
+		public static function set_api_url() {
+			self::$api_url = apply_filters( 'responsive_ready_sites_api_url', 'https://ccreadysites.cyberchimps.com/wp-json/wp/v2/' );
+		}
+
+		/**
+		 * Update Sites Library
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function update_sites_library() {
+
+			if ( 'no' === $this->get_last_export_checksums() ) {
+				wp_send_json_success( 'updated' );
+			}
+
+			$import_with = 'ajax';
+
+			wp_send_json_success( $import_with );
+		}
+
+		/**
+		 * Get Last Exported Checksum Status
+		 *
+		 * @since 2.5.0
+		 * @return string Checksums Status.
+		 */
+		public function get_last_export_checksums() {
+
+			$old_last_export_checksums = get_site_option( 'responsive-ready-sites-last-xml-export-checksums', '' );
+
+			$new_last_export_checksums = $this->set_last_export_checksums();
+
+			$checksums_status = 'no';
+
+			if ( empty( $old_last_export_checksums ) ) {
+				$checksums_status = 'yes';
+			}
+
+			if ( $new_last_export_checksums !== $old_last_export_checksums ) {
+				$checksums_status = 'yes';
+			}
+
+			return apply_filters( 'responsive_ready_sites_checksums_status', $checksums_status );
+		}
+
+		/**
+		 * Set Last Exported Checksum
+		 *
+		 * @since 2.5.0
+		 * @return string Checksums Status.
+		 */
+		public function set_last_export_checksums() {
+
+			if ( ! empty( $this->last_export_checksums ) ) {
+				return $this->last_export_checksums;
+			}
+
+			$api_args = array(
+				'timeout' => 60,
+			);
+
+			$response = wp_remote_get( self::$api_url . 'get-last-xml-export-checksum', $api_args );
+
+			if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+				$result = json_decode( wp_remote_retrieve_body( $response ), true );
+
+				// Set last export checksums.
+				if ( ! empty( $result['last_xml_export_checksums'] ) ) {
+					update_site_option( 'responsive-ready-sites-last-xml-export-checksums-latest', $result['last_xml_export_checksums'] );
+
+					$this->last_xml_export_checksums = $result['last_xml_export_checksums'];
+				}
+			}
+
+			return $this->last_xml_export_checksums;
+		}
+
+		/**
+		 * Start Importer
+		 *
+		 * @since 2.5.0
+		 * @return void
+		 */
+		public function initialize_ready_sites_templates_importer() {
+
+			$is_fresh_site = get_site_option( 'responsive-ready-sites-fresh-site', '' );
+
+			// Process initially for the fresh user.
+			if ( isset( $_GET['reset'] ) ) {
+				// Process Ready sites data import.
+				$this->process_batch();
+			} elseif ( empty( $is_fresh_site ) ) {
+				$this->process_batch();
+				update_site_option( 'responsive-ready-sites-fresh-site', 'yes', 'no' );
+			} else {
+				$current_screen = get_current_screen();
+				// return if not Responsive Ready Sites grid page.
+				if ( ! is_object( $current_screen ) && null === $current_screen ) {
+					return;
+				}
+				if ( 'responsive_page_responsive-add-ons' === $current_screen->id ) {
+					// Process import.
+					$this->process_ready_sites_templates_data_import();
+				}
+			}
+		}
+
+		/**
+		 * Process Import
+		 *
+		 * @since 2.5.0
+		 *
+		 * @return mixed Null if process is already started.
+		 */
+		public function process_ready_sites_templates_data_import() {
+
+			// Batch is already started? Then return.
+			$status = get_site_option( 'responsive-ready-sites-batch-status' );
+			if ( 'in-process' === $status ) {
+				return;
+			}
+
+			// Check batch expiry.
+			$expired = get_transient( 'responsive-ready-sites-import-templates-check' );
+			if ( false !== $expired ) {
+				return;
+			}
+
+			// For 1 week.
+			set_transient( 'responsive-ready-sites-import-templates-check', 'true', WEEK_IN_SECONDS );
+
+			update_site_option( 'responsive-ready-sites-batch-status', 'in-process' );
+
+			// Process batch.
+			$this->process_batch();
+		}
+
+		/**
+		 * Process Batch
+		 *
+		 * @since 2.5.0
+		 * @return mixed
+		 */
+		public function process_batch() {
+
+			if ( 'no' === $this->get_last_export_checksums() ) {
+				return;
+			}
+
+			// Get count.
+			$total_requests = $this->get_total_requests();
+			if ( $total_requests ) {
+
+				$api_args = array(
+					'timeout' => 60,
+				);
+
+				for ( $page = 1; $page <= $total_requests; $page++ ) {
+					$sites_and_pages = array();
+
+					$query_args = apply_filters(
+						'cyb_sites_import_sites_query_args',
+						array(
+							'per_page' => 15,
+							'page'     => $page,
+						)
+					);
+
+					$api_url = add_query_arg( $query_args, self::$api_url . 'cyberchimps-sites' );
+
+					$response = wp_remote_get( $api_url, $api_args );
+
+					if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+						$sites_and_pages = json_decode( wp_remote_retrieve_body( $response ), true );
+
+						if ( isset( $sites_and_pages['code'] ) ) {
+							$message = isset( $sites_and_pages['message'] ) ? $sites_and_pages['message'] : '';
+							return $message;
+						} else {
+							foreach ( $sites_and_pages as $key => $site ) {
+								$sites_and_pages[ 'id-' . $site['id'] ] = $site;
+								unset( $sites_and_pages[ $key ] );
+							}
+							update_site_option( 'responsive-ready-sites-and-pages-page-' . $page, $sites_and_pages );
+						}
+					} else {
+						error_log( 'API Error: ' . $response->get_error_message() );
+					}
+				}
+			}
+
+			delete_site_option( 'responsive-ready-sites-batch-status' );
+		}
 	}
 
 	/**
