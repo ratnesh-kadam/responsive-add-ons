@@ -3,22 +3,22 @@
  * Batch Processing Importer
  *
  * @package Responsive Addons
- * @since 2.2.1
+ * @since 2.5.0
  */
 
 if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
 
 	/**
-	 * Responsive Ready Sites Batch Processing Gutenberg
+	 * Responsive Ready Sites Batch Processing Importer
 	 *
-	 * @since 2.2.1
+	 * @since 2.5.0
 	 */
 	class Responsive_Ready_Sites_Batch_Processing_Importer {
 
 		/**
 		 * Instance
 		 *
-		 * @since 2.2.1
+		 * @since 2.5.0
 		 * @access private
 		 * @var object Class object.
 		 */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
 		/**
 		 * Initiator
 		 *
-		 * @since 2.2.1
+		 * @since 2.5.0
 		 * @return object initialized object of class.
 		 */
 		public static function get_instance() {
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
 		/**
 		 * Constructor
 		 *
-		 * @since 2.2.1
+		 * @since 2.5.0
 		 */
 		public function __construct() {
 			self::set_api_url();
@@ -58,8 +58,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing_Importer' ) ) :
 		/**
 		 * Import
 		 *
-		 * @since 1.0.14
-		 * @since 2.0.0 Added page no.
+		 * @since 2.5.0
 		 *
 		 * @param  integer $page Page number.
 		 * @return array
