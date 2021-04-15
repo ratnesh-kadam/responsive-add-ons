@@ -19,3 +19,25 @@
     box-shadow: none;
     outline: none;
 }
+#responsive-theme-activation {
+    border: none;
+    padding: 20px;
+}
+#responsive-theme-activation .responsive-addons-message-inner {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+#responsive-theme-activation .responsive-addons-message-icon {
+    font-size: 20px;
+}
+#responsive-theme-activation .responsive-addons-message-content {
+    padding: 0 20px;
+}
+#responsive-theme-activation .responsive-addons-message-content .responsive-addons-message-actions {
+    margin-top: 10px;
+}
+#responsive-theme-activation .responsive-addons-message-content p{
+    padding: 0px;
+    margin: 0px;
+}

@@ -27,7 +27,6 @@
 		{
 			this._bind();
 			this._setActiveSite();
-			this._loadFirstGrid();
 		},
 
 		/**
