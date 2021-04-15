@@ -433,7 +433,7 @@ class Responsive_Add_Ons {
 						'importSingleTemplate' => __( 'Import "%s" Template', 'responsive-addons' ),
 					),
 					'dismiss'                         => __( 'Dismiss this notice.', 'responsive-addons' ),
-					'syncTemplatesLibraryStart'                => '<span class="message">' . esc_html__( 'Syncing ready sites templates in the background. The process can take anywhere between 2 to 3 minutes. We will notify you once done.', 'responsive-addons' ) . '</span>',
+					'syncTemplatesLibraryStart'       => '<span class="message">' . esc_html__( 'Syncing ready sites templates in the background. The process can take anywhere between 2 to 3 minutes. We will notify you once done.', 'responsive-addons' ) . '</span>',
 				)
 			);
 
@@ -450,7 +450,7 @@ class Responsive_Add_Ons {
 	 */
 	public function get_sync_complete_message( $echo = false ) {
 
-		$message = __( 'Template library refreshed!', 'responsive-addons' );
+		$message = __( 'Ready Sites data refreshed!', 'responsive-addons' );
 		if ( $echo ) {
 			echo esc_html( $message );
 		} else {
@@ -466,7 +466,7 @@ class Responsive_Add_Ons {
 	public function responsive_ready_sites_admin_enqueue_styles( $hook = '' ) {
 		if ( 'toplevel_page_responsive_add_ons' === $hook || 'responsive_page_responsive-add-ons' === $hook || 'responsive_page_responsive_add_ons_go_pro' === $hook ) {
 			// Responsive Ready Sites admin styles.
-			wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI . 'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
+			wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI . 'admin/css/responsive-ready-sites-admin.css', false, RESPONSIVE_ADDONS_VER );
 			wp_enqueue_style( 'responsive-ready-sites-admin' );
 		}
 	}
@@ -722,7 +722,7 @@ class Responsive_Add_Ons {
 	 * Init Nav Menu
 	 *
 	 * @param mixed $action Action name.
-	 * @since 1.0.6
+	 * @since 2.5.0
 	 */
 	public function init_nav_menu( $action = '' ) {
 
@@ -735,7 +735,7 @@ class Responsive_Add_Ons {
 	 * Render tab menu
 	 *
 	 * @param mixed $action Action name.
-	 * @since 1.0.6
+	 * @since 2.5.0
 	 */
 	public function render_tab_menu( $action = '' ) {
 		?>
@@ -750,17 +750,9 @@ class Responsive_Add_Ons {
 	 * Prints HTML content for tabs
 	 *
 	 * @param mixed $action Action name.
-	 * @since 1.0.6
+	 * @since 2.5.0
 	 */
 	public function render( $action ) {
-
-		// Settings update message.
-		if ( isset( $_REQUEST['message'] ) && ( 'saved' === $_REQUEST['message'] || 'saved_ext' === $_REQUEST['message'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			?>
-			<span id="message" class="notice responsive-sites-notice notice-success is-dismissive"><p> <?php esc_html_e( 'Settings saved successfully.', 'responsive-addons' ); ?> </p></span>
-			<?php
-		}
-
 		?>
 			<div class="nav-tab-wrapper">
 				<div class="logo">
@@ -828,7 +820,7 @@ class Responsive_Add_Ons {
 	/**
 	 * Site Filters
 	 *
-	 * @since 2.0.0
+	 * @since 2.5.0
 	 *
 	 * @return void
 	 */
@@ -908,23 +900,23 @@ class Responsive_Add_Ons {
 	/**
 	 * Get Default Page Builders
 	 *
-	 * @since 2.0.0
+	 * @since 2.5.0
 	 * @return array
 	 */
 	public function get_default_page_builders() {
 		return array(
 			array(
-				'id'   => 32,
+				'id'   => 1,
 				'slug' => 'all',
 				'name' => 'ALL',
 			),
 			array(
-				'id'   => 33,
+				'id'   => 2,
 				'slug' => 'elementor',
 				'name' => 'Elementor',
 			),
 			array(
-				'id'   => 42,
+				'id'   => 3,
 				'slug' => 'gutenberg',
 				'name' => 'Gutenberg',
 			),
@@ -1189,12 +1181,13 @@ class Responsive_Add_Ons {
 	/**
 	 * Get all sites
 	 *
-	 * @since 2.0.0
+	 * @since 2.5.0
 	 * @return array All sites.
 	 */
 	public function get_all_sites() {
 		$sites_and_pages = array();
-		$total_requests  = 6;
+
+		$total_requests = $this->get_total_requests();
 
 		for ( $page = 1; $page <= $total_requests; $page++ ) {
 			$current_page_data = get_site_option( 'responsive-ready-sites-and-pages-page-' . $page, array() );
@@ -1210,7 +1203,7 @@ class Responsive_Add_Ons {
 	/**
 	 * Get Page Builder Sites
 	 *
-	 * @since 2.0.0
+	 * @since 2.5.0
 	 *
 	 * @param  string $default_page_builder default page builder slug.
 	 * @return array page builder sites.
@@ -1225,5 +1218,36 @@ class Responsive_Add_Ons {
 		}
 
 		return $current_page_builder_sites;
+	}
+
+	/**
+	 * Get Total Requests
+	 *
+	 * @since 2.5.0
+	 * @return integer
+	 */
+	public function get_total_requests() {
+
+		$api_args = array(
+			'timeout' => 60,
+		);
+
+		$api_url = self::$api_url . 'get-ready-sites-requests-count/?per_page=15';
+
+		$response = wp_remote_get( $api_url, $api_args );
+
+		if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+
+			$total_requests = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( isset( $total_requests ) ) {
+
+				update_site_option( 'responsive-ready-sites-requests', $total_requests );
+
+				return $total_requests;
+			}
+		}
+
+		$this->get_total_requests();
 	}
 }

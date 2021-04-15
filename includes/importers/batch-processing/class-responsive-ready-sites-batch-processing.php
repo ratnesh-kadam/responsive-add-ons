@@ -290,7 +290,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 				'timeout' => 60,
 			);
 
-			$api_url = self::$api_url . 'get-posts-count/?per_page=15';
+			$api_url = self::$api_url . 'get-ready-sites-requests-count/?per_page=15';
 
 			$response = wp_remote_get( $api_url, $api_args );
 
