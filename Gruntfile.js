@@ -64,7 +64,7 @@ module.exports = function (grunt) {
 					expand: true,
 					cwd: 'release/<%= pkg.version %>/',
 					src: ['**/*'],
-					dest: '<%= pkg.name %>'
+					dest: 'responsive-add-ons'
 				}
 			},
 

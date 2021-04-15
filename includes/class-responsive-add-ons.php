@@ -766,7 +766,7 @@ class Responsive_Add_Ons {
 				<div class="form">
 					<div class="sync-ready-sites-templates-wrap header-actions">
 						<div class="filters-slug">
-							<a title="<?php esc_html_e( 'Sync Templates', 'responsive-add-ons' ); ?>" href="#" class="responsive-ready-sites-sync-templates-button">
+							<a title="<?php esc_html_e( 'Sync Ready Sites', 'responsive-add-ons' ); ?>" href="#" class="responsive-ready-sites-sync-templates-button">
 								<span class="dashicons dashicons-update-alt"></span>
 							</a>
 						</div>
