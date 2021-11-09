@@ -605,11 +605,9 @@ responsive-ready-site-import-free.button.installing:before {
 	width: 40px;
 	height: 40px;
 	background: inherit;
-	padding-top: 5px;
+	padding-top: 10px;
 }
-.responsive-add-ons-getting-started__content {
-	padding: 50px;
-}
+
 .responsive-add-ons-getting-started__content h2 {
 	font-size: 2em;
 	margin-top: 0;
@@ -617,6 +615,7 @@ responsive-ready-site-import-free.button.installing:before {
 .responsive-add-ons-getting-started__content--narrow {
 	max-width: 500px;
 	margin: auto;
+	padding-top: 2rem;
 }
 .responsive-add-ons-getting-started__video {
 	margin: 40px 0 60px;
@@ -1160,4 +1159,99 @@ responsive-ready-site-import-free.button.installing:before {
 }
 .responsive_page_responsive-add-ons #wpbody-content {
 	padding-top: 80px;
+}
+
+div.responsive-add-ons-getting-started__content div:nth-child(4) {
+	background-color: #ebffe6;
+}
+
+.slogan-text {
+	font-size: 1.1rem;
+}
+
+.responsive-add-ons-getting-started__video iframe {
+	height: 500px;
+	width: 100%;
+}
+
+.go-pro-container {
+	padding: 4rem 0;
+}
+.responsive-add-ons-getting-started__text {
+	font-size: 1.3rem;
+    margin: 0 auto;
+    width: 60%;
+}
+.responsive-add-ons-getting-started--button-go-pro {
+    background-color: #2862b1;
+}
+.responsive-add-ons-getting-started--button-go-pro:hover {
+	background-color: #1d4b8b;
+	transform: scale(1.1);
+}
+
+.getting-started-button {
+	border: transparent;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: inherit;
+    line-height: inherit;
+    padding: 20px 45px;
+    margin-top: 25px;
+    text-transform: uppercase;
+	transition: all 250ms ease-in-out;
+}
+
+.responsive-add-ons-getting-started__links {
+	display: flex;
+	justify-content: space-evenly;
+	padding: 0 3rem 60px;
+}
+.responsive-add-ons-getting-started__card {
+	display: grid;
+	grid-template-rows: 5rem 3rem 7rem;
+    width: 180px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 9px;
+    box-shadow: 0 3px 12px rgb(0 0 0 / 15%);
+}
+.card-text {
+	font-size: 0.9rem;
+	margin: 0;
+}
+.getting-started-svgs {
+	height: 6rem;
+	width: 6rem;
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: auto;
+}
+.help-center {
+	background-image: url(../images/svgs/help.svg);
+}
+.video-guides {
+	background-image: url(../images/svgs/video-guides.svg);
+}
+.community-support {
+	background-image: url(../images/svgs/community-support.svg);
+}
+
+.responsive-add-ons-getting-started__footer {
+	padding: 4rem 0;
+}
+.getting-started-footer-text {
+	margin: 0;
+	font-size: 1.1rem;
+}
+.footer-community-button {
+	background-color: #2862b1;
+}
+.footer-community-button:hover {
+	background-color: #1d4b8b;
+	transform: scale(1.1);
 }
