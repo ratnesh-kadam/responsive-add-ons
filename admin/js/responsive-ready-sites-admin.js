@@ -245,6 +245,52 @@ var ResponsiveSitesAjaxQueue = (function() {
 			this._bind();
 			this._addAutocomplete();
 			this._autocomplete();
+			this._display_guided_overlay();
+		},
+
+		_display_guided_overlay: function() {
+			if(responsiveSitesAdmin.activated_first_time) {
+				$("div[id*='step-']").css('display', 'block');
+
+				$('#step-one').addClass('make-visible');
+
+				$('.skip-tour').click(endTour);
+
+				$('#step-one-next').on('click', function(){
+					$('#step-one').removeClass('make-visible');
+					$('#step-two').addClass('make-visible');
+				});
+				$('#step-two-previous').on('click', function(){
+					$('#step-two').removeClass('make-visible');
+					$('#step-one').addClass('make-visible');
+				});
+
+				$('#step-two-next').on('click', function(){
+					$('#step-two').removeClass('make-visible');
+					$('#step-three').addClass('make-visible');
+				});
+				$('#step-three-previous').on('click', function(){
+					$('#step-three').removeClass('make-visible');
+					$('#step-two').addClass('make-visible');
+				});
+
+				$('#step-three-finish').click(endTour);
+
+				function endTour() {
+					$("div[id*='step-']").removeClass('make-visible');
+					setTimeout(function(){
+						$("div[id*='step-']").css('display', 'none');
+					}, 1000)
+					$.ajax({
+						type: 'POST',
+						url: ajaxurl,
+						data: {
+							action    : 'update-first-time-activation',
+						},
+						dataType: 'json'
+					});
+				}
+			}
 		},
 
 		_show_default_page_builder_sites: function() {
