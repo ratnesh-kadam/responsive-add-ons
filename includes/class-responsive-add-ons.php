@@ -72,6 +72,9 @@ class Responsive_Add_Ons {
 
 			// Check if Responsive Addons pro license is active.
 			add_action( 'wp_ajax_check-responsive-add-ons-pro-license-active', array( $this, 'is_responsive_pro_license_is_active' ) );
+
+			// Update first time activation.
+			add_action( 'wp_ajax_update-first-time-activation', array( $this, 'update_first_time_activation_variable' ) );
 		}
 
 		// Responsive Addons Menu.
@@ -96,6 +99,13 @@ class Responsive_Add_Ons {
 		add_action( 'init', array( $this, 'app_output_buffer' ) );
 		self::set_api_url();
 
+	}
+
+	/**
+	 * Updates the variable defined for first time activation.
+	 */
+	public function update_first_time_activation_variable() {
+		update_option( 'ra_first_time_activation', false );
 	}
 
 	/**
@@ -418,7 +428,7 @@ class Responsive_Add_Ons {
 			$data = apply_filters(
 				'responsive_sites_localize_vars',
 				array(
-					'debug' => ((defined('WP_DEBUG') && WP_DEBUG) || isset($_GET['debug'])) ? true : false, //phpcs:ignore
+					'debug'                           => ((defined('WP_DEBUG') && WP_DEBUG) || isset($_GET['debug'])) ? true : false, //phpcs:ignore
 					'ajaxurl'                         => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'siteURL'                         => site_url(),
 					'_ajax_nonce'                     => wp_create_nonce( 'responsive-addons' ),
@@ -434,6 +444,7 @@ class Responsive_Add_Ons {
 					),
 					'dismiss'                         => __( 'Dismiss this notice.', 'responsive-addons' ),
 					'syncTemplatesLibraryStart'       => '<span class="message">' . esc_html__( 'Syncing ready sites templates in the background. The process can take anywhere between 2 to 3 minutes. We will notify you once done.', 'responsive-addons' ) . '</span>',
+					'activated_first_time'            => get_option( 'ra_first_time_activation' )
 				)
 			);
 
@@ -809,6 +820,13 @@ class Responsive_Add_Ons {
 							<?php wp_nonce_field( 'responsive-sites-welcome-screen', 'responsive-sites-page-builder' ); ?>
 						</form>
 					</span>
+					<div class="guided-overlay step-one" id="step-one">
+						<p class="guide-text">Select your desired page builder.</p>
+						<div class="guided-overlay-buttons">
+							<button class="skip-tour" id="skip-tour">Skip tour</button>
+							<button id="step-one-next">Next</button>
+						</div>
+					</div>
 				</div>
 			</div><!-- .nav-tab-wrapper -->
 			<div id="responsive-sites-filters" class="hide-on-desktop">
@@ -877,6 +895,14 @@ class Responsive_Add_Ons {
 									</label>
 								</li>
 							</ul>
+						</div>
+						<div class="guided-overlay step-two" id="step-two">
+							<p class="guide-text">Choose the category and type of the template from the dropdown.</p>
+							<div class="guided-overlay-buttons">
+								<button class="skip-tour"id="skip-tour-two">Skip tour</button>
+								<button id="step-two-previous">Previous</button>
+								<button id="step-two-next">Next</button>
+							</div>
 						</div>
 						<?php
 					}
