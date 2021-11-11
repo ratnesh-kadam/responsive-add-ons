@@ -1265,8 +1265,8 @@ div.responsive-add-ons-getting-started__content div:nth-child(4) {
     padding: 1rem;
     border-radius: 0.5rem;
 	opacity: 0;
+	visibility: hidden;
 	transform: translateY(40px);
-	z-index: 2;
 	transition: all 500ms ease-in-out;
 }
 .guided-overlay:before {
@@ -1301,6 +1301,7 @@ div.responsive-add-ons-getting-started__content div:nth-child(4) {
 .make-visible {
 	opacity: 1;
 	transform: translateY(0);
+	visibility: visible;
 }
 
 .step-one {
@@ -1310,8 +1311,13 @@ div.responsive-add-ons-getting-started__content div:nth-child(4) {
 .step-two {
 	top: 60px;
 	left: -50px;
+	max-width: 212px;
+}
+.step-two:before {
+	right: 7rem;
 }
 .step-three {
+	z-index: 1;
 	left: 40px;
 }
 
