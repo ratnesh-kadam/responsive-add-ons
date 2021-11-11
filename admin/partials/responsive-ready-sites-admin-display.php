@@ -60,7 +60,14 @@
 			<div class="theme-id-container">
 				<h3 class="theme-name" id="responsive-theme-name">{{{ data[ key ].title.rendered }}}</h3>
 				<div class="theme-actions">
-					<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'responsive-addons' ); ?></button>
+					<button id="preview-button" class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'responsive-addons' ); ?></button>
+				</div>
+			</div>
+			<div class="guided-overlay step-three" id="step-three">
+				<p class="guide-text">Click the "Preview" button to view the website template and click import.</p>
+				<div class="guided-overlay-buttons">
+					<button id="step-three-previous">Previous</button>
+					<button id="step-three-finish" class="finish-tour">Finish Tour</button>
 				</div>
 			</div>
 		</div>
