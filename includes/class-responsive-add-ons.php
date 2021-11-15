@@ -1047,34 +1047,12 @@ class Responsive_Add_Ons {
 		add_submenu_page(
 			'responsive_add_ons',
 			'Responsive Ready Sites Importer',
-			__( 'Ready Sites', 'responsive-addons' ),
+			__( 'Website Templates', 'responsive-addons' ),
 			'manage_options',
 			'responsive-add-ons',
 			array( $this, 'responsive_add_ons_templates' ),
 			20
 		);
-
-		add_submenu_page(
-			'responsive_add_ons',
-			'',
-			__( 'Community Support', 'responsive-addons' ),
-			'manage_options',
-			'responsive_add_ons_community_support',
-			array( $this, 'responsive_add_ons_community_support' ),
-			30
-		);
-
-		if ( ! class_exists( 'Responsive_Addons_Pro' ) ) {
-			add_submenu_page(
-				'responsive_add_ons',
-				'',
-				__( 'Go Pro', 'responsive-addons' ),
-				'manage_options',
-				'responsive_add_ons_go_pro',
-				array( $this, 'responsive_add_ons_go_pro' ),
-				60
-			);
-		}
 	}
 
 	/**
@@ -1095,18 +1073,64 @@ class Responsive_Add_Ons {
 						<div class="responsive-add-ons-getting-started__title">
 							<?php echo __( 'Getting Started', 'responsive-addons' ); ?>
 						</div>
-						<a class="responsive-add-ons-getting-started__skip" href="<?php echo esc_url( admin_url() ); ?>">
+						<a class="responsive-add-ons-getting-started__skip" href="<?php echo esc_url( admin_url('admin.php?page=responsive-add-ons') ); ?>">
 							<span class="responsive-add-ons-getting-started__skip_button"><span class="screen-reader-text">Skip</span></span>
 						</a>
 					</div>
 					<div class="responsive-add-ons-getting-started__content">
 						<div class="responsive-add-ons-getting-started__content--narrow">
 							<h2><?php echo __( 'Click, Import, Launch!', 'responsive-addons' ); ?></h2>
-							<p><?php echo __( 'Build Sites Fast with Responsive Pro. Fully Customizable, Mobile-Friendly with Premium Features.', 'responsive-addons' ); ?></p>
+							<p class="slogan-text"><?php echo __( 'Build Sites Fast with Responsive Pro. Fully Customizable, Mobile-Friendly with Premium Features.', 'responsive-addons' ); ?></p>
 						</div>
 
-						<div class="responsive-add-ons-getting-started__video">
-							<iframe width="620" height="350" src="https://www.youtube-nocookie.com/embed/1eKjI0qjXPI?rel=0&amp;controls=1&amp;modestbranding=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<div class="responsive-add-ons-getting-started__content--sub-content">
+							<div class="responsive-add-ons-getting-started__video">
+								<iframe src="https://www.youtube-nocookie.com/embed/1eKjI0qjXPI?rel=0&amp;controls=1&amp;modestbranding=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							</div>
+						</div>
+
+						<div class="responsive-add-ons-getting-started__links">
+							<div class="responsive-add-ons-getting-started__card">
+								<div class="getting-started-svgs help-center"></div>
+								<h3><?php echo __( 'Help Center', 'responsive-addons' ); ?></h3>
+								<p class="card-text"><?php echo __( 'Read the documentation to find answers to your questions.', 'responsive-addons' ); ?></p>
+								<a href="https://docs.cyberchimps.com/responsive/responsive-sites" target="_blank"><?php echo __( 'Learn More >>', 'responsive-addons' ); ?></a>
+							</div>
+							<div class="responsive-add-ons-getting-started__card">
+								<div class="getting-started-svgs video-guides"></div>
+								<h3><?php echo __( 'Video Guides', 'responsive-addons' ); ?></h3>
+								<p class="card-text"><?php echo __( 'Browse through these video tutorials to learn more about how the plugin functions.', 'responsive-addons' ); ?></p>
+								<a href="https://youtube.com/playlist?list=PLXTwxw3ZJwPSpE3RYanAdYgnDptbSvjXl" target="_blank"><?php echo __( 'Watch Now >>', 'responsive-addons' ); ?></a>
+							</div>
+							<div class="responsive-add-ons-getting-started__card">
+								<div class="getting-started-svgs community-support"></div>
+								<h3><?php echo __( 'Community Support', 'responsive-addons' ); ?></h3>
+								<p class="card-text"><?php echo __( 'Find help to the commonly asked questions in our exclusive Community on Facebook.', 'responsive-addons' ); ?></p>
+								<a href="https://www.facebook.com/groups/responsive.theme" target="_blank"><?php echo __( 'Find Help >>', 'responsive-addons' ); ?></a>
+							</div>
+						</div>
+
+						<?php
+						$support_link = 'https://cyberchimps.com/my-account/';
+						if ( ! defined( 'RESPONSIVE_ADDONS_PRO_VERSION' ) ) { 
+							$support_link = 'https://wordpress.org/support/plugin/responsive-add-ons/#bbp_topic_title'; ?>
+							<div class="go-pro-container">
+								<p class="responsive-add-ons-getting-started__text"><?php echo __( 'Get access to all the pro templates and unlock more Theme Customizer settings using Responsive Pro', 'responsive-addons' ); ?></p>
+								<a href="admin.php?page=responsive_add_ons_go_pro">
+									<button class="getting-started-button responsive-add-ons-getting-started--button-go-pro">
+										<?php echo __( 'Go Pro!', 'responsive-addons' ); ?>
+									</button>
+								</a>
+							</div>
+						<?php } ?>
+
+						<div class="responsive-add-ons-getting-started__footer">
+							<p class="getting-started-footer-text"><?php echo __( 'Have questions? Get in touch with us. We\'ll be happy to help', 'responsive-addons' ); ?></p>
+							<a href="<?php echo esc_url( $support_link )?>" target="_blank">
+								<button class="getting-started-button footer-community-button">
+									<?php echo __( 'Request Support', 'responsive-addons' ); ?>
+								</button>
+							</a>
 						</div>
 					</div>
 				</div>
