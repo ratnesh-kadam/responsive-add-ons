@@ -102,7 +102,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 		public function clear_cache() {
 			// Clear 'Elementor' file cache.
 			if ( class_exists( '\Elementor\Plugin' ) ) {
-				Elementor\Plugin::$instance->posts_css_manager->clear_cache();
+				Elementor\Plugin::$instance->files_manager->clear_cache();
 			}
 			Responsive_Ready_Sites_Importer_Log::add( 'Complete ' );
 		}
