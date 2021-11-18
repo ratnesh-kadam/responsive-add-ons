@@ -369,7 +369,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Importer' ) ) :
 				}
 
 				// Add Custom CSS.
-				if ( isset( $options['custom_css'] ) ) {
+				if ( isset( $customizer_data['custom_css'] ) ) {
 					wp_update_custom_css_post( $customizer_data['custom_css'] );
 				}
 
