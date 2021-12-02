@@ -1079,8 +1079,8 @@ class Responsive_Add_Ons {
 					</div>
 					<div class="responsive-add-ons-getting-started__content">
 						<div class="responsive-add-ons-getting-started__content--narrow">
-							<h2><?php echo __( 'Click, Import, Launch!', 'responsive-addons' ); ?></h2>
-							<p class="slogan-text"><?php echo __( 'Build Sites Fast with Responsive Pro. Fully Customizable, Mobile-Friendly with Premium Features.', 'responsive-addons' ); ?></p>
+							<h2><?php echo __( 'Welcome to Responsive Ready Websites', 'responsive-addons' ); ?></h2>
+							<p class="slogan-text"><?php echo __( 'Create Responsive, Fast and Customizable websites in minutes.', 'responsive-addons' ); ?></p>
 						</div>
 
 						<div class="responsive-add-ons-getting-started__content--sub-content">
@@ -1115,8 +1115,8 @@ class Responsive_Add_Ons {
 						if ( ! defined( 'RESPONSIVE_ADDONS_PRO_VERSION' ) ) { 
 							$support_link = 'https://wordpress.org/support/plugin/responsive-add-ons/#bbp_topic_title'; ?>
 							<div class="go-pro-container">
-								<p class="responsive-add-ons-getting-started__text"><?php echo __( 'Get access to all the pro templates and unlock more Theme Customizer settings using Responsive Pro', 'responsive-addons' ); ?></p>
-								<a href="admin.php?page=responsive_add_ons_go_pro">
+								<p class="responsive-add-ons-getting-started__text"><?php echo __( 'Get access to all the pro templates and unlock more theme customizer settings using Responsive Pro', 'responsive-addons' ); ?></p>
+								<a href="https://cyberchimps.com/pricing/?utm_source=plugin&utm_medium=responsive-add-ons&utm_campaign=go-pro" target="_blank">
 									<button class="getting-started-button responsive-add-ons-getting-started--button-go-pro">
 										<?php echo __( 'Go Pro!', 'responsive-addons' ); ?>
 									</button>
