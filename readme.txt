@@ -1,9 +1,9 @@
-=== Elementor & Gutenberg Website Templates For Responsive ===
-Contributors: CyberChimps
+=== Responsive Template Importer - Gutenberg & Elementor ===
+Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
-Tags: Website templates, Elementor templates, ready site templates, Gutenberg templates, templates importer, ready sites, one-click import, responsive theme, CyberChimps
+Tags: elementor, gutenberg, one click demo import, templates, website templates, ready site templates, ready to import websites, elementor landing page templates, template for elementor, free elementor templates download, free landing page templates, ready made websites free, free landing page templates for elementor, free landing page templates for gutenberg, templates for gutenberg
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.6
 Requires PHP: 5.6
 Stable tag: 2.5.0
 License: GPLv2 or later
@@ -13,150 +13,84 @@ Import Gutenberg & Elementor Templates for the Responsive WordPress theme.
 
 == Description ==
 
-Elementor & Gutenberg Website Templates for the Responsive theme. 
+Import Gutenberg & Elementor Templates for the Responsive WordPress theme.
 
-== ELEMENTOR & GUTENBERG WEBSITE TEMPLATES FOR THE RESPONSIVE THEME ==
+Get fully working ready-to-use website templates built for the Elementor page builder and Gutenberg - the new WordPress blocks editor. All you have to do is import a website template, edit the content and launch your website.
 
-Using this plugin with the [Responsive theme](https://wordpress.org/themes/responsive/) by CyberChimps, you can access 46+ free and premium ready-to-use [website templates](https://cyberchimps.com/responsive-ready-websites/).
+This plugin extends the popular [Responsive theme](https://wordpress.org/themes/responsive/). It adds the following features:
 
-These are ready-to-use websites built for the Elementor page builder and the new WordPress blocks editor (Gutenberg). All you have to do is import a website template, edit the content and launch your professional website.
+- One click demo import of ready-to-use, Gutenberg & Elementor templates
+- Ability to rollback the Responsive theme to a previous version
 
-= WHY SHOULD YOU USE READY TO USE WEBSITE TEMPLATES TO BUILD YOUR WEBSITE? =
+= What are ready-to-use website templates? =
+The Responsive theme comes with 60+ ready-to-use [website templates](https://cyberchimps.com/responsive-ready-websites/).
 
-- **No Coding Required**
-These ready templates don’t require any coding skills. Bloggers, marketers can easily build websites using these templates. A person who doesn’t know HTML and CSS can create a website template. Even coders and web designers prefer to use ready-made website templates to build high-converting landing pages.
+Website templates help you save time designing your website. All you have to do is import a template, edit it with a drag & drop editor, and launch.
 
-- **Blazing Fast Performance**
-Website templates are designed to load fast with minified assets, and optimized database queries. This increases the site speed.
+These website templates have the following features:
 
-- **Design Flexibility**
-Once a template is imported, you can make changes to it according to your need. Website templates can reduce your time to build a website from scratch by 70 percent.
+- Pre-designed pages such as homepage, about, services, and contact.
+- Responsive designs that work on all devices.
+- Easy drag & drop editing.
+- Copyright-free stock images that you can use on your website.
+- Automatically installs all necessary plugins.
 
-- **Live Preview**
-Using Drag & Drop editing features you can design a page and see the changes that you make to your website instantly.
+= What website templates can I import? =
+Responsive comes with 60+ ready-to-use WordPress [website templates](https://cyberchimps.com/responsive-ready-websites/).
 
-- **Numerous Design Options**
-The abundant design options and choices for building web pages are a major advantage of ready site templates. The hardest part is choosing which template benefits your business the most.
+**Business Website Templates For Responsive Theme**
 
-https://www.youtube.com/watch?v=JNeQKg1QJhk
-
-= FEATURES OF THE ELEMENTOR & GUTENBERG WEBSITE TEMPLATES PLUGIN =
-
-**One-click demo import**
-You can import any of the Elementor & Gutenberg templates with just a click and start customizing them in no time.
-
-For example, if you wish to build an e-commerce website, it’ll take up a lot of your time to start from scratch. Instead, using a [ready-to-use WooCommerce template](https://cyberchimps.com/wordpress-themes/woocommerce/), your e-commerce site can go live in 30 minutes.
-
-**Faster load times**
-Load time is a significant ranking factor for websites. Hence these website templates for Responsive have been designed considering the new page experience update being rolled out are super lightweight and load in less than 1 second.
-
-**Rollback the Responsive theme to a previous version**
-If you don’t wish to update to the responsive theme, you can shift to a previous version of Responsive with this plugin.
-
-**Responsive designs that work on all devices**
-We have made these templates in such a way that they are suitable for all devices and will auto adjust to the screen size.
-
-**Copyright-free stock images**
-You don’t have to worry about copyright for the images that come inside these ready site templates. You can use these images wherever you wish on your site as they are copyright-free.
-
-**Pre-designed pages**
-These templates come with pre-designed pages like Homepage, About, Services, and Contact. You just have to replace the content on these pages and your website is ready to go live.
-
-== STEPS TO IMPORT THE WEBSITE TEMPLATES ==
-
-- Upload the plugin zip file or install the plugin through the WordPress plugins dashboard & Activate the plugin.
-- Go to Appearance > Responsive Options > AddOns to see all Ready Site templates.
-- Preview a Ready Site Template
-- Click on Import SIte at the top left corner.
-- You’re Done.
-
-== READY WEBSITE TEMPLATES WHICH YOU CAN IMPORT ==
-
-**Business Website Templates**
-- Consulting Business Template
-- One Page Business Template
 - Startup WordPress Template
-- AppPress Website Template
+- Business WordPress Template
+- Corporate WordPress Template
 
-**Health & Fitness Website Templates**
+**Health & Fitness Website Templates For Responsive Theme**
+
 - Health Coach WordPress Template
 - Gym WordPress Template
 - Yoga WordPress Template
 
-**Local Business Website Templates**
+**Local Business Website Templates For Responsive Theme**
+
 - Accountant WordPress Template
 - Lawyer WordPress Template
 - Restaurant WordPress Template
 - Photography WordPress Template
 - Tattoo Studio WordPress Templates
 
-**Real Estate Website Templates**
+**Real Estate Website Templates For Responsive Theme**
+
 - Construction WordPress Template
 - Real Estate WordPress Template
-- Interior Design WordPress Template
+- Interior Decorator WordPress Template
 
-**Blog Templates**
+**Blogs Templates For Responsive Theme**
+
 - Cooking & Recipe Blog WordPress Templates
 - Travel Blog WordPress Templates
 - Lifestyle Blog WordPress Templates
 
 **WooCommerce WordPress Templates**
+
 - General store website templates
-- Fashion & Jewelry website templates
+- Fashion & jewellery website templates
 - Furniture store website templates
 
-**Medical WordPress Templates**
-- Doctor website template
-- Dentist website template
+= How to import ready sites? =
+Here's how it works:
 
-== PROS OF THE RESPONSIVE THEME ==
-
-**Easy Customization**
-[The Responsive theme](https://cyberchimps.com) is designed for beginners as well as professional developers to create fantastic landing pages and websites within a few clicks.
-
-**Faster Load Time**
-Websites have fast loading pages as Responsive uses the best coding standards.
-
-**Responsive Web Design**
-The Responsive theme auto-adjusts itself to mobiles, tabs, and desktops, giving a wonderful experience for users.
-
-**Integrations with eCommerce plugins**
-This theme can be used with WooCommerce, LearnDash, and other similar plugins to design any type of eCommerce website with ease.
-
-== RELATED PRODUCTS FOR THE RESPONSIVE THEME==
-
-[Responsive Gutenberg Blocks - Addons for Gutenberg Editor](https://wordpress.org/plugins/responsive-block-editor-addons/)
-With more than 26+ creative blocks for Gutenberg, you can design beautiful pages without writing a single line of code. You can create modern responsive designs compatible with all devices.
-
-[Responsive Elementor Widgets & Addons](https://cyberchimps.com/elementor-widgets-addons/)
-The Responsive Elementor Widgets & Addons plugin comes with 20+ creative elements and extensions for building your professional website. This plugin comes included with Responsive Pro. You can use widgets like Slider, Testimonial, Audio Player, Form Styler.
-
-We are constantly adding more elements to this plugin.
+[youtube https://www.youtube.com/watch?v=JNeQKg1QJhk&t=2s]
 
 == Frequently Asked Questions ==
 
-= 1. Are all the ready site templates free? =
-We have 46+ Free and Pro ready to use website templates. With this plugin, you will get access to all free templates. For the Pro templates, you will have to buy and activate the [Responsive Pro](https://cyberchimps.com/responsive-go-pro/).
+= 1. Are all the ready sites free? =
+We have 60+ free and Pro Ready Sites. With Responsive Ready Sites Importer, you will get access to all free sites. To import Pro templates, you will have to install [Responsive Pro](https://cyberchimps.com/responsive-pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=faq-responsive-pro).
 
-To import the Pro templates, you will have to install Responsive Pro.
-
-= 2. Will the Elementor & Gutenberg Website Templates plugin work on my theme? =
-The templates are built with customizer settings of Responsive Theme to provide maximum control to you. Hence, to use this plugin you will have to install the Responsive Theme.
+= 2. Will Responsive Ready Sites Importer work on my theme? =
+The templates are built with customizer settings of Responsive Theme to provide maximum control to you. Hence, to use Responsive Ready Sites Importer, you will have to install Responsive Theme.
 
 = 3. Do I need to install any other plugins? =
-Absolutely not! Once you install the plugin, it will take care of all other dependencies. You can sit back and let the importer do the job.
-
-= 4. Can I deactivate the plugin after importing a website template? =
-You definitely can! The importer plugin can be deactivated once you have downloaded a template. However, as we are constantly adding more features to it, it’s best to keep it activated.
-
-= 5. Is this plugin compatible with my page builder? =
-Currently, this plugin is only compatible with elements like Elementor and Gutenberg. We’ll be adding compatibility with Beaver Builder and Divi in the future after taking inputs from our users.
-
-= 6. Will my website Speed be affected after I activate this plugin? =
-Definitely not. 
-
-= 7. How do I report issues and get support? =
-You can send us an email at [support@cyberchimps.com](mailto:support@cyberchimps.com) and we’d be happy to help you out.
+Absolutely not! Once you install the plugin, it will take care of all other dependencies. You can sit back and let importer do the job.
 
 == Installation ==
 
@@ -320,3 +254,5 @@ You can send us an email at [support@cyberchimps.com](mailto:support@cyberchimps
 
 = 1.0.0 =
 * Initial set up and release
+readme.txt
+Displaying readme.txt.
