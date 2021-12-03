@@ -1094,7 +1094,7 @@ class Responsive_Add_Ons {
 								<div class="getting-started-svgs help-center"></div>
 								<h3><?php echo __( 'Help Center', 'responsive-addons' ); ?></h3>
 								<p class="card-text"><?php echo __( 'Read the documentation to find answers to your questions.', 'responsive-addons' ); ?></p>
-								<a href="https://docs.cyberchimps.com/responsive/responsive-sites" target="_blank"><?php echo __( 'Learn More >>', 'responsive-addons' ); ?></a>
+								<a href="https://docs.cyberchimps.com/responsive/responsive-sites?utm_source=plugin&utm_medium=responsive-add-ons&utm_campaign=help-resources" target="_blank"><?php echo __( 'Learn More >>', 'responsive-addons' ); ?></a>
 							</div>
 							<div class="responsive-add-ons-getting-started__card">
 								<div class="getting-started-svgs video-guides"></div>
@@ -1113,7 +1113,7 @@ class Responsive_Add_Ons {
 						<?php
 						$support_link = 'https://cyberchimps.com/my-account/';
 						if ( ! defined( 'RESPONSIVE_ADDONS_PRO_VERSION' ) ) { 
-							$support_link = 'https://wordpress.org/support/plugin/responsive-add-ons/#bbp_topic_title'; ?>
+							$support_link = ' https://wordpress.org/support/plugin/responsive-add-ons/'; ?>
 							<div class="go-pro-container">
 								<p class="responsive-add-ons-getting-started__text"><?php echo __( 'Get access to all the pro templates and unlock more theme customizer settings using Responsive Pro', 'responsive-addons' ); ?></p>
 								<a href="https://cyberchimps.com/pricing/?utm_source=plugin&utm_medium=responsive-add-ons&utm_campaign=go-pro" target="_blank">
@@ -1145,7 +1145,7 @@ class Responsive_Add_Ons {
 	 * Display quick links.
 	 *
 	 * @static
-	 * @since 2.6.1
+	 * @since 2.6.0
 	 * @access public
 	 */
 	public static function responsive_add_ons_quick_links() {
@@ -1171,7 +1171,7 @@ class Responsive_Add_Ons {
 				</a>	
 				<?php
 				
-				$support_link = defined('RESPONSIVE_ADDONS_PRO_VERSION') ? esc_attr('https://cyberchimps.com/my-account/') : esc_attr('https://wordpress.org/support/plugin/responsive-add-ons/#bbp_topic_title') ;
+				$support_link = defined('RESPONSIVE_ADDONS_PRO_VERSION') ? esc_attr('https://cyberchimps.com/my-account/') : esc_attr(' https://wordpress.org/support/plugin/responsive-add-ons/') ;
 				?>
 				<a href="<?php echo $support_link; ?>" target="_blank" class="link-anchor support-link">
 					<span class="quick-links-text"><?php esc_html_e( 'Request Support', 'responsive-addons' ); ?></span>
