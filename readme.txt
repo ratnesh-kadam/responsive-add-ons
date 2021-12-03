@@ -1,32 +1,45 @@
-=== Responsive Template Importer - Gutenberg & Elementor ===
+=== Responsive Template Importer - Elementor & Gutenberg Themes===
 Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
 Tags: elementor, gutenberg, one click demo import, templates, website templates, ready site templates, ready to import websites, elementor landing page templates, template for elementor, free elementor templates download, free landing page templates, ready made websites free, free landing page templates for elementor, free landing page templates for gutenberg, templates for gutenberg
 Requires at least: 5.0
-Tested up to: 5.6
+Tested up to: 5.8.2
 Requires PHP: 5.6
 Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Import Gutenberg & Elementor Templates for the Responsive WordPress theme.
+Import free and pro Gutenberg and Elementor Templates for the Responsive WordPress theme.
 
 == Description ==
 
-Import Gutenberg & Elementor Templates for the Responsive WordPress theme.
+**Import free and pro Gutenberg and Elementor Templates for the Responsive WordPress theme.**
 
-Get fully working ready-to-use website templates built for the Elementor page builder and Gutenberg - the new WordPress blocks editor. All you have to do is import a website template, edit the content and launch your website.
+Get fully working and  professionally designed ready-to-use website templates built for the Elementor page builder and Gutenberg - the new WordPress blocks editor. All you have to do is import a website template, edit the content and launch your website.
 
 This plugin extends the popular [Responsive theme](https://wordpress.org/themes/responsive/). It adds the following features:
 
 - One click demo import of ready-to-use, Gutenberg & Elementor templates
 - Ability to rollback the Responsive theme to a previous version
+- Option to import the entire website or selected pages, which allows you to mix and match while building website
+
 
 = What are ready-to-use website templates? =
-The Responsive theme comes with 60+ ready-to-use [website templates](https://cyberchimps.com/responsive-ready-websites/).
+The Responsive theme comes with **60+ ready-to-use [website templates](https://cyberchimps.com/responsive-ready-websites/)**
 
 Website templates help you save time designing your website. All you have to do is import a template, edit it with a drag & drop editor, and launch.
 
+[Plugin reviews](https://wordpress.org/plugins/responsive-add-ons/#reviews)
+
+> A very stable, reliable, lean and fast-loading theme with minimum hassle. Also great support. Thank you!
+>
+> Totally as advertised. I love the Ready-Sites package!
+>
+> Great, classic design!
+>
+> Very easy to use
+
+= Features =
 These website templates have the following features:
 
 - Pre-designed pages such as homepage, about, services, and contact.
@@ -40,67 +53,130 @@ Responsive comes with 60+ ready-to-use WordPress [website templates](https://cyb
 
 **Business Website Templates For Responsive Theme**
 
-- Startup WordPress Template
-- Business WordPress Template
-- Corporate WordPress Template
+- [Startup WordPress Template](https://cyberchimps.com/wordpress-themes/startup-business/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Business WordPress Template](https://cyberchimps.com/wordpress-themes/business-template/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Corporate WordPress Template](https://cyberchimps.com/wordpress-themes/corporate-business/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Help and Documentation WordPress Template](https://cyberchimps.com/wordpress-themes/documentation-wordpress-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Mobile app and software WordPress Template](https://cyberchimps.com/wordpress-themes/apppress/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Question and Answer WordPress Template](https://cyberchimps.com/wordpress-themes/question-and-answer/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Learning Management System (LMS) WordPress Template](https://cyberchimps.com/wordpress-themes/lms/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Insurance WordPress Template](https://cyberchimps.com/wordpress-themes/insurance/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
 
-**Health & Fitness Website Templates For Responsive Theme**
+**Health & Wellness Website Templates For Responsive Theme**
 
-- Health Coach WordPress Template
-- Gym WordPress Template
-- Yoga WordPress Template
+- [Health Coach WordPress Template](https://cyberchimps.com/wordpress-themes/health-coach/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Gym WordPress Template](https://cyberchimps.com/wordpress-themes/fitness-gym/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Yoga WordPress Template](https://cyberchimps.com/wordpress-themes/yoga-instructor/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Spa Center WordPress Template](https://cyberchimps.com/wordpress-themes/spa/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+
 
 **Local Business Website Templates For Responsive Theme**
 
-- Accountant WordPress Template
-- Lawyer WordPress Template
-- Restaurant WordPress Template
-- Photography WordPress Template
-- Tattoo Studio WordPress Templates
+- [Accountant WordPress Template](https://cyberchimps.com/wordpress-themes/accountant/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Lawyer WordPress Template](https://cyberchimps.com/wordpress-themes/corporate-lawyer/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Consulting WordPress Template](https://cyberchimps.com/wordpress-themes/techmo-wordpress-consulting-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Restaurant WordPress Template](https://cyberchimps.com/wordpress-themes/restaurant/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Photography WordPress Template](https://cyberchimps.com/wordpress-themes/wordpress-photography-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Tattoo Studio WordPress Template](https://cyberchimps.com/wordpress-themes/tattoo-studio/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Barber shop WordPress Template](https://cyberchimps.com/wordpress-themes/barber-shop/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Doctor WordPress Template](https://cyberchimps.com/wordpress-themes/doctor/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Dental Clinic WordPress Template](https://cyberchimps.com/wordpress-themes/dental-clinic/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Travel Agency WordPress Template](https://cyberchimps.com/wordpress-themes/travel-agency/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Transport and Logistics WordPress Template](https://cyberchimps.com/wordpress-themes/transport/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Finance Consulting WordPress Template](https://cyberchimps.com/wordpress-themes/finplan-finance-consulting-wordpress-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Portfolio for Web developer WordPress Template](https://cyberchimps.com/wordpress-themes/portfolio/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Kindergarten and Daycare WordPress Template](https://cyberchimps.com/wordpress-themes/tiny-tots-kindergarten-wordpress-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [School WordPress Template](https://cyberchimps.com/wordpress-themes/edukids-premium-school-wordpress-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+
 
 **Real Estate Website Templates For Responsive Theme**
 
-- Construction WordPress Template
-- Real Estate WordPress Template
-- Interior Decorator WordPress Template
+- [Construction WordPress Template](https://cyberchimps.com/wordpress-themes/construction/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Real Estate WordPress Template](https://cyberchimps.com/wordpress-themes/real-estate-pro-wordpress-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Interior Decorator WordPress Template](https://cyberchimps.com/wordpress-themes/interior-design-pro-wordpress-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Home Decor WordPress Template](https://cyberchimps.com/wordpress-themes/home-decor/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
 
 **Blogs Templates For Responsive Theme**
 
-- Cooking & Recipe Blog WordPress Templates
-- Travel Blog WordPress Templates
-- Lifestyle Blog WordPress Templates
+- [Cooking & Recipe Blog WordPress Template](https://cyberchimps.com/wordpress-themes/food/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Travel Blog WordPress Template](https://cyberchimps.com/wordpress-themes/travel-blogger/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Lifestyle Blog WordPress Template](https://cyberchimps.com/wordpress-themes/lifestyle/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [ Personal Podcast WordPress Template](https://cyberchimps.com/wordpress-themes/podcast/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
 
 **WooCommerce WordPress Templates**
 
-- General store website templates
-- Fashion & jewellery website templates
-- Furniture store website templates
+- [eCommerce store WordPress template](https://cyberchimps.com/wordpress-themes/ecommerce-fashion/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [ Fashion Shop WordPress Template](https://cyberchimps.com/wordpress-themes/fashion-shop/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Jewellery WordPress template](https://cyberchimps.com/wordpress-themes/jewellery-shop/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Pet Shop WordPress Template](https://cyberchimps.com/wordpress-themes/pet-shop/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Online furniture store WordPress template](https://cyberchimps.com/wordpress-themes/furniture-shop/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Online Toy Store WordPress template](https://cyberchimps.com/wordpress-themes/toyziez-toy-store-wordpress-theme/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+
+**Others**
+
+- [Church WordPress Template](https://cyberchimps.com/wordpress-themes/church/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+- [Charity WordPress Template](https://cyberchimps.com/wordpress-themes/charity/?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=readysites)
+
+
 
 = How to import ready sites? =
 Here's how it works:
 
 [youtube https://www.youtube.com/watch?v=JNeQKg1QJhk&t=2s]
 
+== Help Resources==
+
+Check out the following help resources to know more about Ready Site importer Plugin:
+[Product Documentation](https://docs.cyberchimps.com/responsive/responsive-sites?utm_source=wordpress-org&utm_medium=responsive-ad-ons&utm_campaign=helpresources)
+[Video Guides](https://youtube.com/playlist?list=PLXTwxw3ZJwPSpE3RYanAdYgnDptbSvjXl)
+
 == Frequently Asked Questions ==
 
 = 1. Are all the ready sites free? =
-We have 60+ free and Pro Ready Sites. With Responsive Ready Sites Importer, you will get access to all free sites. To import Pro templates, you will have to install [Responsive Pro](https://cyberchimps.com/responsive-pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=faq-responsive-pro).
+We have 60+ free and Pro Ready Sites. With Responsive Ready Sites Importer, you will get access to all free sites. To import Pro templates, you will have to install [Responsive Pro](https://cyberchimps.com/pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=faq-responsive-pro).
 
 = 2. Will Responsive Ready Sites Importer work on my theme? =
 The templates are built with customizer settings of Responsive Theme to provide maximum control to you. Hence, to use Responsive Ready Sites Importer, you will have to install Responsive Theme.
 
 = 3. Do I need to install any other plugins? =
-Absolutely not! Once you install the plugin, it will take care of all other dependencies. You can sit back and let importer do the job.
+Absolutely not! Once you install the plugin, it will take care of all other dependencies. You can sit back and let the importer do the job.
 
 == Installation ==
 
-1. Upload the plugin zip from admin & Activate the plugin
-2. Go to Appearance > Responsive Options > AddOns to see all ready sites.
-3. Preview & click on Import site to import the site.
+You can install the Responsive Ready Site Importer plugin using any of the following two methods:
+
+**WordPress Admin Dashboard Installation**
+
+To install the Responsive Ready Sites Importer Plugin manually from the WordPress admin dashboard:
+
+1.Download the latest Responsive Ready Sites Importer plugin.
+2. Login to your WordPress Dashboard
+3. Go to Plugins > Add New
+4. Upload the downloaded plugin zip file
+5. Install and activate it
+
+ **FTP Installation**
+To install the Responsive Ready Sites Importer Plugin via FTP:
+Download Responsive Ready Sites Importer zip
+Unzip the Responsive Ready Sites Importer zip file
+Open your WordPress site via FTP. We would recommend you to use FileZilla
+From FTP, visit the root of the WordPress install
+Now visit wp-content folder > plugins
+Upload Responsive Ready Sites Importer unzipped folder from step 2
+**How to use the plugin?**
+After installing the plugin, you can import the ready to use website templates using the following steps:
+On your WordPress Dashboard, click on Responsive > Ready Sites to see all ready sites.
+Filter the templates based on niche or website builder.
+Preview & click on Import site to import the site.
+You can also choose to import a template, instead of the whole site.
+You can import any of the free templates using the Ready Site Importer Plugin.
+For importing the premium templates you need to install the Responsive Pro plugin that can be purchased from [CyberChimps Website]((https://cyberchimps.com/pricing/?utm_source=wordpress-org&utm_medium=responsive-add-ons&utm_campaign=responsive-pricing&utm_content=faq-responsive-pro)
+With the Pro version you will get Premium templates, Priority support and automatic updates to Pro plugin.
+
 
 == Screenshots ==
 
-1. Go to Appearance > Responsive Options > AddOns to see all ready sites.
+1. Go to Responsive > Ready Sites to see all ready sites.
 2. Preview & click on Import site to import.
 3. You will be able to see the import process
 4. Your website is ready
@@ -256,3 +332,4 @@ Absolutely not! Once you install the plugin, it will take care of all other depe
 * Initial set up and release
 readme.txt
 Displaying readme.txt.
+
