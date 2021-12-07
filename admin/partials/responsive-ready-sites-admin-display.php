@@ -23,8 +23,10 @@
 	<div class="theme-browser rendered">
 		<div id="responsive-sites" class="themes wp-clearfix"></div>
 		<?php 
-		include_once('../../includes/class-responsive-add-ons.php');
-		Responsive_Add_Ons::responsive_add_ons_quick_links();
+		if (file_exists('../../includes/class-responsive-add-ons.php')) {
+			include_once('../../includes/class-responsive-add-ons.php');
+			Responsive_Add_Ons::responsive_add_ons_quick_links();
+		}
 		?>
 	</div>
 </div>

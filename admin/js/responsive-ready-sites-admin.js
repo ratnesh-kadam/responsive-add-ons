@@ -250,31 +250,34 @@ var ResponsiveSitesAjaxQueue = (function() {
 
 		_display_guided_overlay: function() {
 			if(responsiveSitesAdmin.activated_first_time) {
-				$("div[id*='step-']").css('display', 'block');
-
 				$('#step-one').addClass('make-visible');
 
-				$('.skip-tour').click(endTour);
+				$(document).on('click', '.skip-tour', endTour);
 
-				$('#step-one-next').on('click', function(){
+				$(document).on('click', '#step-one-next', function(){
 					$('#step-one').removeClass('make-visible');
 					$('#step-two').addClass('make-visible');
 				});
-				$('#step-two-previous').on('click', function(){
+				$(document).on('click', '#step-two-previous', function(){
 					$('#step-two').removeClass('make-visible');
 					$('#step-one').addClass('make-visible');
 				});
 
-				$('#step-two-next').on('click', function(){
+				$(document).on('click', '#step-two-next', function(){
 					$('#step-two').removeClass('make-visible');
 					$('#step-three').addClass('make-visible');
+
+					scrollToElement('#step-three');
+
 				});
-				$('#step-three-previous').on('click', function(){
+				$(document).on('click', '#step-three-previous', function(){
 					$('#step-three').removeClass('make-visible');
 					$('#step-two').addClass('make-visible');
+
+					scrollToElement('#step-two');
 				});
 
-				$('#step-three-finish').click(endTour);
+				$(document).on('click', '#step-three-finish', endTour);
 
 				function endTour() {
 					$("div[id*='step-']").removeClass('make-visible');
@@ -289,6 +292,12 @@ var ResponsiveSitesAjaxQueue = (function() {
 						},
 						dataType: 'json'
 					});
+				}
+
+				function scrollToElement(el) {
+					$("html, body").animate({
+						scrollTop: $(el).offset().top - 300
+					}, 900);
 				}
 			}
 		},
