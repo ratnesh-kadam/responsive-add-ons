@@ -1010,7 +1010,7 @@ responsive-ready-site-import-free.button.installing:before {
 	}
 }
 .theme-browser .theme .theme-screenshot:after {
-	padding-top: 118%;
+	padding-top: 65%;
 }
 .theme-browser .theme {
 	border: none;
@@ -1299,6 +1299,7 @@ div.responsive-add-ons-getting-started__content div:nth-child(4) {
 	background-color: lightgray;
 }
 .make-visible {
+	display: block;
 	opacity: 1;
 	transform: translateY(0);
 	visibility: visible;
@@ -1317,6 +1318,7 @@ div.responsive-add-ons-getting-started__content div:nth-child(4) {
 	right: 7rem;
 }
 .step-three {
+	position: absolute;
 	z-index: 1;
 	left: 40px;
 }
