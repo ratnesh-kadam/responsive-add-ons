@@ -23,11 +23,52 @@
 	<div class="theme-browser rendered">
 		<div id="responsive-sites" class="themes wp-clearfix"></div>
 		<?php 
-		if (file_exists('../../includes/class-responsive-add-ons.php')) {
-			include_once('../../includes/class-responsive-add-ons.php');
-			Responsive_Add_Ons::responsive_add_ons_quick_links();
-		}
+		$help_icon = RESPONSIVE_ADDONS_DIR_URL . '/admin/images/help-doc.png';
+		$video_icon = RESPONSIVE_ADDONS_DIR_URL . '/admin/images/video.png';
+		$support_icon = RESPONSIVE_ADDONS_DIR_URL . '/admin/images/support.png';
+		$community_icon = RESPONSIVE_ADDONS_DIR_URL . '/admin/images/community.png';
 		?>
+		<div class="responsive-ready-sites-quick-links-wrapper">
+			<div class="responsive-ready-sites-quick-links">
+				<a href="<?php echo esc_attr('https://docs.cyberchimps.com/responsive/responsive-sites?utm_source=plugin&utm_medium=responsive-add-ons&utm_campaign=quick-links'); ?>" target="_blank" class="link-anchor help-doc-link">
+					<span class="quick-links-text"><?php esc_html_e( 'Help and Documentation', 'responsive-addons' ); ?></span>
+					<span class="quick-link-icon help-doc-icon">
+						<img src="<?php echo $help_icon; ?>" alt="">
+					</span>
+				</a>
+			
+				<a href="<?php echo esc_attr('https://youtube.com/playlist?list=PLXTwxw3ZJwPSpE3RYanAdYgnDptbSvjXl'); ?>" target="_blank" class="link-anchor video-guides-link">
+					<span class="quick-links-text"><?php esc_html_e( 'Video Guides', 'responsive-addons' ); ?></span>
+					<span class="quick-link-icon video-icon">
+						<img src="<?php echo $video_icon; ?>" alt="">
+					</span>
+				</a>	
+				<?php
+				$support_link = defined('RESPONSIVE_ADDONS_PRO_VERSION') ? esc_attr('https://cyberchimps.com/my-account/') : esc_attr(' https://wordpress.org/support/plugin/responsive-add-ons/') ;
+				?>
+				<a href="<?php echo $support_link; ?>" target="_blank" class="link-anchor support-link">
+					<span class="quick-links-text"><?php esc_html_e( 'Request Support', 'responsive-addons' ); ?></span>
+					<span class="quick-link-icon support-icon">
+						<img src="<?php echo $support_icon; ?>" alt="">
+					</span>
+				</a>	
+				<a href="<?php echo esc_attr('https://www.facebook.com/groups/responsive.theme'); ?>" target="_blank" class="link-anchor community-link">
+					<span class="quick-links-text"><?php esc_html_e( 'Join Our Community', 'responsive-addons' ); ?></span>
+					<span class="quick-link-icon community-icon">
+						<img src="<?php echo $community_icon; ?>" alt="">
+					</span>
+				</a>	
+			</div>
+			<button class="responsive-ready-sites-quick-links-toggler-button">
+				<div class="responsive-addons-cyberchimps-mascot"></div>
+				<div class="quick-links-text responsive-addons-quick-link-label"><?php esc_html_e('See Quick Links', 'responsive-addons'); ?></div>	
+			</button>
+		</div>
+		<script type="text/javascript">
+			jQuery('.responsive-ready-sites-quick-links-toggler-button').on('click', function(e) {
+				jQuery('.responsive-ready-sites-quick-links').toggleClass('show');
+			});
+		</script>
 	</div>
 </div>
 
