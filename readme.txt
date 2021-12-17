@@ -185,7 +185,7 @@ With the Pro version you will get Premium templates, Priority support and automa
 = 2.6.0 - 17th December 2021 =
 * Feature - Redesigned the Getting Started page to showcase all the useful links
 * Feature - Added a Quick Links button on the Getting Started page and Website Templates page
-* Feature - Added Guided Steps on Website Templates page
+* Feature - Added Guided Steps on the Website Templates page
 * Fix     - Customizer's Additional CSS getting escaped 
 
 = 2.5.0 - 15th April 2021 =
