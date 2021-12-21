@@ -46,27 +46,27 @@ class Responsive_Add_Ons {
 	 */
 	public function __construct() {
 
-		add_action( 'admin_init', array( &$this, 'admin_init' ) );
-		add_action( 'admin_notices', array( &$this, 'add_theme_installation_notice' ), 1 );
-		add_action( 'wp_head', array( &$this, 'responsive_head' ) );
-		add_action( 'plugins_loaded', array( &$this, 'responsive_addons_translations' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_notices', array( $this, 'add_theme_installation_notice' ), 1 );
+		add_action( 'wp_head', array( $this, 'responsive_head' ) );
+		add_action( 'plugins_loaded', array( $this, 'responsive_addons_translations' ) );
 		$plugin = plugin_basename( __FILE__ );
-		add_filter( "plugin_action_links_$plugin", array( &$this, 'plugin_settings_link' ) );
+		add_filter( "plugin_action_links_$plugin", array( $this, 'plugin_settings_link' ) );
 
 		// Responsive Ready Site Importer Menu.
-		add_action( 'admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'responsive_ready_sites_admin_enqueue_scripts' ) );
 
-		add_action( 'admin_enqueue_scripts', array( &$this, 'responsive_ready_sites_admin_enqueue_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'responsive_ready_sites_admin_enqueue_styles' ) );
 
 		if ( is_admin() ) {
 			add_action( 'wp_ajax_responsive-ready-sites-activate-theme', array( $this, 'activate_theme' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-required-plugins', array( &$this, 'required_plugin' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array( &$this, 'required_plugin_activate' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array( &$this, 'set_reset_data' ) );
-			add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array( &$this, 'backup_settings' ) );
-			add_action( 'wp_ajax_responsive-is-theme-active', array( &$this, 'check_responsive_theme_active' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-required-plugins', array( $this, 'required_plugin' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-set-reset-data', array( $this, 'set_reset_data' ) );
+			add_action( 'wp_ajax_responsive-ready-sites-backup-settings', array( $this, 'backup_settings' ) );
+			add_action( 'wp_ajax_responsive-is-theme-active', array( $this, 'check_responsive_theme_active' ) );
 			// Dismiss admin notice.
-			add_action( 'wp_ajax_responsive-notice-dismiss', array( &$this, 'dismiss_notice' ) );
+			add_action( 'wp_ajax_responsive-notice-dismiss', array( $this, 'dismiss_notice' ) );
 			// Check if Responsive Addons pro plugin is active.
 			add_action( 'wp_ajax_check-responsive-add-ons-pro-installed', array( $this, 'is_responsive_pro_is_installed' ) );
 
@@ -272,7 +272,7 @@ class Responsive_Add_Ons {
 		register_setting(
 			'responsive_addons',
 			'responsive_addons_options',
-			array( &$this, 'responsive_addons_sanitize' )
+			array( $this, 'responsive_addons_sanitize' )
 		);
 
 	}
@@ -394,10 +394,10 @@ class Responsive_Add_Ons {
 	 *
 	 * @since 2.0.0
 	 */
-	public function responsive_ready_sites_admin_enqueue_scripts( $hook ) {
+	public function responsive_ready_sites_admin_enqueue_scripts( $hook = '' ) {
 
-		wp_enqueue_script( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/js/install-responsive-theme.js', array( 'jquery', 'updates' ), '2.0.3', true );
-		wp_enqueue_style( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/css/install-responsive-theme.css', null, '2.0.3', 'all' );
+		wp_enqueue_script( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/js/install-responsive-theme.js', array( 'jquery', 'updates' ), RESPONSIVE_ADDONS_VER, true );
+		wp_enqueue_style( 'install-responsive-theme', RESPONSIVE_ADDONS_URI . 'admin/css/install-responsive-theme.css', null, RESPONSIVE_ADDONS_VER, 'all' );
 		$data = apply_filters(
 			'responsive_sites_install_theme_localize_vars',
 			array(
@@ -413,13 +413,7 @@ class Responsive_Add_Ons {
 
 		if ( 'responsive_page_responsive-add-ons' === $hook && empty( $_GET['action'] ) ) {
 
-			wp_enqueue_script( 'responsive-ready-sites-fetch', RESPONSIVE_ADDONS_URI . 'admin/js/fetch.umd.js', array( 'jquery' ), '2.0.0', true );
-
-			wp_enqueue_script( 'responsive-ready-sites-api', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-api.js', array( 'jquery', 'responsive-ready-sites-fetch' ), '2.0.0', true );
-
-			wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates' ), '2.0.0', true );
-
-			wp_enqueue_script( 'render-responsive-ready-sites', RESPONSIVE_ADDONS_URI . 'admin/js/render-responsive-ready-sites.js', array( 'wp-util', 'responsive-ready-sites-api', 'jquery' ), '2.0.0', true );
+			wp_enqueue_script( 'responsive-ready-sites-admin-js', RESPONSIVE_ADDONS_URI . 'admin/js/responsive-ready-sites-admin.js', array( 'jquery', 'wp-util', 'updates', 'jquery-ui-autocomplete' ), RESPONSIVE_ADDONS_VER, true );
 
 			$data = apply_filters(
 				'responsive_sites_localize_vars',
@@ -432,38 +426,35 @@ class Responsive_Add_Ons {
 					'required_plugins'                => array(),
 					'ApiURL'                          => self::$api_url,
 					'importSingleTemplateButtonTitle' => __( 'Import "%s" Template', 'responsive-addons' ),
+					'default_page_builder_sites'      => $this->get_sites_by_page_builder(),
+					'strings'                         => array(
+						'syncCompleteMessage'  => $this->get_sync_complete_message(),
+						/* translators: %s is a template name */
+						'importSingleTemplate' => __( 'Import "%s" Template', 'responsive-addons' ),
+					),
+					'dismiss'                         => __( 'Dismiss this notice.', 'responsive-addons' ),
+					'syncTemplatesLibraryStart'       => '<span class="message">' . esc_html__( 'Syncing ready sites templates in the background. The process can take anywhere between 2 to 3 minutes. We will notify you once done.', 'responsive-addons' ) . '</span>',
 				)
 			);
 
 			wp_localize_script( 'responsive-ready-sites-admin-js', 'responsiveSitesAdmin', $data );
+		}
+	}
 
-			$data = apply_filters(
-				'responsive_sites_localize_vars',
-				array(
-					'ApiURL' => self::$api_url,
-				)
-			);
+	/**
+	 * Get Sync Complete Message
+	 *
+	 * @since 2.0.0
+	 * @param  boolean $echo Echo the message.
+	 * @return mixed
+	 */
+	public function get_sync_complete_message( $echo = false ) {
 
-			// Use this for premium demos.
-			$request_params = apply_filters(
-				'responsive_sites_api_params',
-				array(
-					'site_url' => '',
-					'per_page' => 15,
-				)
-			);
-
-			wp_localize_script( 'responsive-ready-sites-api', 'responsiveSitesApi', $data );
-			$data = apply_filters(
-				'responsive_sites_render_localize_vars',
-				array(
-					'sites'            => $request_params,
-					'settings'         => array(),
-					'active_site_data' => $this->get_active_site_data(),
-				)
-			);
-
-			wp_localize_script( 'render-responsive-ready-sites', 'responsiveSitesRender', $data );
+		$message = __( 'Ready Sites data refreshed!', 'responsive-addons' );
+		if ( $echo ) {
+			echo esc_html( $message );
+		} else {
+			return esc_html( $message );
 		}
 	}
 
@@ -472,10 +463,12 @@ class Responsive_Add_Ons {
 	 *
 	 * @since 2.0.0
 	 */
-	public function responsive_ready_sites_admin_enqueue_styles() {
-		// Responsive Ready Sites admin styles.
-		wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI . 'admin/css/responsive-ready-sites-admin.css', false, '1.0.0' );
-		wp_enqueue_style( 'responsive-ready-sites-admin' );
+	public function responsive_ready_sites_admin_enqueue_styles( $hook = '' ) {
+		if ( 'toplevel_page_responsive_add_ons' === $hook || 'responsive_page_responsive-add-ons' === $hook || 'responsive_page_responsive_add_ons_go_pro' === $hook ) {
+			// Responsive Ready Sites admin styles.
+			wp_register_style( 'responsive-ready-sites-admin', RESPONSIVE_ADDONS_URI . 'admin/css/responsive-ready-sites-admin.css', false, RESPONSIVE_ADDONS_VER );
+			wp_enqueue_style( 'responsive-ready-sites-admin' );
+		}
 	}
 
 	/**
@@ -717,21 +710,211 @@ class Responsive_Add_Ons {
 		}
 		?>
 			<div class="wrap">
-				<h1><?php esc_html_e( 'Responsive Importer Options', 'responsive-addons' ); ?></h1>
-				<h2 class="nav-tab-wrapper">
-					<span class="nav-tab
-										<?php
-										if ( ! isset( $_GET['action'] ) || isset( $_GET['action'] ) && 'go_pro' != $_GET['action'] && 'license' != $_GET['action'] && 'pro_support' != $_GET['action'] ) {
-											echo ' nav-tab-active';}
-										?>
-					"><?php esc_html_e( 'Templates', 'responsive-addons' ); ?></span>
-				</h2>
 					<?php
+						$this->init_nav_menu( 'general' );
 						do_action( 'responsive_addons_importer_page' );
 					?>
 			</div>
 
 			<?php
+	}
+	/**
+	 * Init Nav Menu
+	 *
+	 * @param mixed $action Action name.
+	 * @since 2.5.0
+	 */
+	public function init_nav_menu( $action = '' ) {
+
+		if ( '' !== $action ) {
+			$this->render_tab_menu( $action );
+		}
+	}
+
+	/**
+	 * Render tab menu
+	 *
+	 * @param mixed $action Action name.
+	 * @since 2.5.0
+	 */
+	public function render_tab_menu( $action = '' ) {
+		?>
+		<div id="responsive-sites-menu-page">
+			<?php $this->render( $action ); ?>
+		</div>
+		<?php
+	}
+
+
+	/**
+	 * Prints HTML content for tabs
+	 *
+	 * @param mixed $action Action name.
+	 * @since 2.5.0
+	 */
+	public function render( $action ) {
+		?>
+			<div class="nav-tab-wrapper">
+				<div class="logo">
+					<div class="responsive-sites-logo-wrap">
+							<img src="<?php echo esc_url( RESPONSIVE_ADDONS_URI . 'admin/images/responsive-thumbnail.jpg' ); ?>">
+					</div>
+				</div>
+				<div id="responsive-sites-filters" class="hide-on-mobile">
+					<?php $this->site_filters(); ?>
+				</div>
+				<div class="form">
+					<div class="sync-ready-sites-templates-wrap header-actions">
+						<div class="filters-slug">
+							<a title="<?php esc_html_e( 'Sync Ready Sites', 'responsive-add-ons' ); ?>" href="#" class="responsive-ready-sites-sync-templates-button">
+								<span class="dashicons dashicons-update-alt"></span>
+							</a>
+						</div>
+					</div>
+					<span class="page-builder-icon">
+						<div class="selected-page-builder">
+							<?php
+							$page_builder = array(
+								'name' => 'Elementor',
+								'slug' => 'elementor',
+							);
+							if ( $page_builder ) {
+								?>
+								<span class="page-builder-title"><?php echo esc_html( $page_builder['name'] ); ?></span>
+								<span class="dashicons dashicons-arrow-down"></span>
+							<?php } ?>
+						</div>
+						<ul class="page-builders">
+							<?php
+							$default_page_builder = 'elementor';
+							$page_builders        = $this->get_default_page_builders();
+							foreach ( $page_builders as $key => $page_builder ) {
+								$class = '';
+								if ( $default_page_builder === $page_builder['slug'] ) {
+									$class = 'active';
+								}
+								?>
+								<li data-page-builder="<?php echo esc_html( $page_builder['slug'] ); ?>" class="<?php echo esc_html( $class ); ?>">
+									<div class="title"><?php echo esc_html( $page_builder['name'] ); ?></div>
+								</li>
+								<?php
+							}
+							?>
+						</ul>
+						<form id="responsive-sites-welcome-form-inline" enctype="multipart/form-data" method="post" style="display: none;">
+							<div class="fields">
+								<input type="hidden" name="page_builder" class="page-builder-input" required="required" />
+							</div>
+							<input type="hidden" name="message" value="saved" />
+							<?php wp_nonce_field( 'responsive-sites-welcome-screen', 'responsive-sites-page-builder' ); ?>
+						</form>
+					</span>
+				</div>
+			</div><!-- .nav-tab-wrapper -->
+			<div id="responsive-sites-filters" class="hide-on-desktop">
+			<?php $this->site_filters(); ?>
+		</div>
+			<?php
+	}
+
+	/**
+	 * Site Filters
+	 *
+	 * @since 2.5.0
+	 *
+	 * @return void
+	 */
+	public function site_filters() {
+		?>
+		<div class="wp-filter hide-if-no-js">
+			<div class="section-left">
+				<div class="search-form">
+					<?php
+					$categories = array(
+						array(
+							'name' => 'Business',
+							'slug' => 'business',
+						),
+						array(
+							'name' => 'Blog',
+							'slug' => 'blog',
+						),
+						array(
+							'name' => 'Ecommerce',
+							'slug' => 'ecommerce',
+						),
+						array(
+							'name' => 'Onepage',
+							'slug' => 'onepage',
+						),
+					);
+					if ( ! empty( $categories ) ) {
+						?>
+						<div id="responsive-sites__category-filter" class="dropdown-check-list" tabindex="100">
+							<span class="responsive-sites__category-filter-anchor" data-slug=""><?php esc_html_e( 'All', 'responsive-addons' ); ?></span>
+							<ul class="responsive-sites__category-filter-items">
+								<li class="responsive-sites__filter-wrap category-active" data-slug=""><?php esc_html_e( 'All', 'responsive-addons' ); ?> </li>
+								<?php
+								foreach ( $categories as $key => $value ) {
+									?>
+										<li class="responsive-sites__filter-wrap" data-slug="<?php echo esc_attr( $value['slug'] ); ?>"><?php echo esc_html( $value['name'] ); ?> </li>
+									<?php
+								}
+								?>
+								<li class="responsive-sites__filter-wrap-checkbox first-wrap">
+									<label>
+										<input id="radio-all" type="radio" name="responsive-sites-radio" class="checkbox active" value="" checked /><?php esc_html_e( 'All', 'responsive-addons' ); ?>
+									</label>
+								</li>
+								<li class="responsive-sites__filter-wrap-checkbox">
+									<label>
+										<input id="radio-free" type="radio" name="responsive-sites-radio" class="checkbox" value="free" /><?php esc_html_e( 'Free', 'responsive-addons' ); ?>
+									</label>
+								</li>
+								<li class="responsive-sites__filter-wrap-checkbox">
+									<label>
+										<input id="radio-premium" type="radio" name="responsive-sites-radio" class="checkbox" value="premium" /><?php esc_html_e( 'Premium', 'responsive-addons' ); ?>
+									</label>
+								</li>
+							</ul>
+						</div>
+						<?php
+					}
+					?>
+					<input autocomplete="off" placeholder="<?php esc_html_e( 'Search...', 'responsive-addons' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
+					<span class="responsive-icon-search search-icon"></span>
+					<div class="responsive-sites-autocomplete-result"></div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
+
+	/**
+	 * Get Default Page Builders
+	 *
+	 * @since 2.5.0
+	 * @return array
+	 */
+	public function get_default_page_builders() {
+		return array(
+			array(
+				'id'   => 1,
+				'slug' => 'all',
+				'name' => 'ALL',
+			),
+			array(
+				'id'   => 2,
+				'slug' => 'elementor',
+				'name' => 'Elementor',
+			),
+			array(
+				'id'   => 3,
+				'slug' => 'gutenberg',
+				'name' => 'Gutenberg',
+			),
+		);
 	}
 
 	/**
@@ -987,5 +1170,78 @@ class Responsive_Add_Ons {
 		wp_safe_redirect( admin_url( 'admin.php?page=responsive_add_ons' ) );
 
 		exit;
+	}
+
+	/**
+	 * Get all sites
+	 *
+	 * @since 2.5.0
+	 * @return array All sites.
+	 */
+	public function get_all_sites() {
+		$sites_and_pages = array();
+
+		$total_requests = $this->get_total_requests();
+
+		for ( $page = 1; $page <= $total_requests; $page++ ) {
+			$current_page_data = get_site_option( 'responsive-ready-sites-and-pages-page-' . $page, array() );
+			if ( ! empty( $current_page_data ) ) {
+				foreach ( $current_page_data as $page_id => $page_data ) {
+					$sites_and_pages[] = $page_data;
+				}
+			}
+		}
+		return $sites_and_pages;
+	}
+
+	/**
+	 * Get Page Builder Sites
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param  string $default_page_builder default page builder slug.
+	 * @return array page builder sites.
+	 */
+	public function get_sites_by_page_builder() {
+		$sites_and_pages            = $this->get_all_sites();
+		$current_page_builder_sites = array();
+		if ( ! empty( $sites_and_pages ) ) {
+			foreach ( $sites_and_pages as $site_id => $site_details ) {
+					$current_page_builder_sites[] = $site_details;
+			}
+		}
+
+		return $current_page_builder_sites;
+	}
+
+	/**
+	 * Get Total Requests
+	 *
+	 * @since 2.5.0
+	 * @return integer
+	 */
+	public function get_total_requests() {
+
+		$api_args = array(
+			'timeout' => 60,
+		);
+
+		$api_url = self::$api_url . 'get-ready-sites-requests-count/?per_page=15';
+
+		$response = wp_remote_get( $api_url, $api_args );
+
+		if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+
+			$total_requests = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			if ( isset( $total_requests ) ) {
+
+				update_site_option( 'responsive-ready-sites-requests', $total_requests );
+
+				return $total_requests;
+			}
+		}
+
+		$this->get_total_requests();
 	}
 }
