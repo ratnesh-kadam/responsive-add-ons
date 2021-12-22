@@ -171,7 +171,7 @@ if ( ! class_exists( 'Responsive_Ready_Sites_Batch_Processing' ) ) :
 			);
 
 			if ( is_plugin_active( 'elementor/elementor.php' ) ) {
-				\Elementor\Plugin::$instance->posts_css_manager->clear_cache();
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
 
 				$import = new \Elementor\TemplateLibrary\Responsive_Ready_Sites_Batch_Processing_Elementor();
 				self::$process_single->push_to_queue(

@@ -88,7 +88,6 @@ class Responsive_Ready_Sites_Batch_Processing_Elementor extends Source_Local {
 							$data = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $data );
 						}
 					}
-
 					if ( ! is_array( $data ) ) {
 						$data = json_decode( $data, true );
 					}
@@ -118,7 +117,7 @@ class Responsive_Ready_Sites_Batch_Processing_Elementor extends Source_Local {
 					update_metadata( 'post', $post_id, '_responsive_sites_hotlink_imported', true );
 
 					// !important, Clear the cache after images import.
-					Plugin::$instance->posts_css_manager->clear_cache();
+					Plugin::$instance->files_manager->clear_cache();
 
 				}
 			}
