@@ -5,7 +5,7 @@ Tags: elementor, gutenberg, one click demo import, templates, website templates,
 Requires at least: 5.0
 Tested up to: 5.8.2
 Requires PHP: 5.6
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,9 @@ With the Pro version you will get Premium templates, Priority support and automa
 4. Your website is ready
 
 == Changelog ==
+= 2.6.1 - 27th January 2022 =
+* Feature - Compatibility with WordPress 5.9
+
 = 2.6.0 - 17th December 2021 =
 * Feature - Redesigned the Getting Started page to showcase all the useful links
 * Feature - Added a Quick Links button on the Getting Started page and Website Templates page
