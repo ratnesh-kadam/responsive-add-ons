@@ -3,7 +3,7 @@ Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
 Tags: elementor, gutenberg, one click demo import, templates, website templates, ready site templates, ready to import websites, elementor landing page templates, template for elementor, free elementor templates download, free landing page templates, ready made websites free, free landing page templates for elementor, free landing page templates for gutenberg, templates for gutenberg
 Requires at least: 5.0
-Tested up to: 5.8.2
+Tested up to: 5.9
 Requires PHP: 5.6
 Stable tag: 2.6.1
 License: GPLv2 or later
