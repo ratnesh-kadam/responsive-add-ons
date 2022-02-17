@@ -1849,6 +1849,10 @@ if( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 			if ( ! empty( $this->requires_remapping['comment'] ) ) {
 				$this->post_process_comments( $this->requires_remapping['comment'] );
 			}
+
+			if ( ! empty( $this->mapping['term_id'] ) && current_user_can( 'activate_plugins' ) ) {
+				update_option( 'responsive_sites_term_ids_mapping', $this->mapping['term_id'] );
+			}
 		}
 
 		protected function post_process_posts( $todo ) {
