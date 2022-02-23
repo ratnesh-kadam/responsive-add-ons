@@ -1608,7 +1608,7 @@ if( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 				'parent'      => 'wp:term_parent',
 				'name'        => 'wp:term_name',
 				'description' => 'wp:term_description',
-				'termmeta'    => 'wp:term_termmeta',
+				'termmeta'    => 'wp:termmeta',
 			);
 			$taxonomy = null;
 
