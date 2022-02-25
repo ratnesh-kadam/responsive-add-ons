@@ -1608,6 +1608,7 @@ if( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 				'parent'      => 'wp:term_parent',
 				'name'        => 'wp:term_name',
 				'description' => 'wp:term_description',
+				'termmeta'    => 'wp:termmeta',
 			);
 			$taxonomy = null;
 
@@ -1641,8 +1642,28 @@ if( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 				}
 
 				$key = array_search( $child->tagName, $tag_name );
+				
 				if ( $key ) {
-					$data[ $key ] = $child->textContent;
+					if ('wp:termmeta' === $child->tagName) {
+						$key = '';
+						$value = '';
+
+						foreach ($child->childNodes as $metadata) {
+							if ( $metadata->nodeType !== XML_ELEMENT_NODE ) {
+								continue;
+							}
+
+							if ('wp:meta_key' === $metadata->tagName) {
+								$key = $metadata->textContent;
+							} else if ('wp:meta_value' === $metadata->tagName) {
+								$value = $metadata->textContent;
+							}
+						}
+
+						$meta[$key] = $value;
+					} else {
+						$data[ $key ] = $child->textContent;
+					}
 				}
 			}
 
@@ -1748,6 +1769,10 @@ if( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 
 			$term_id = $result['term_id'];
 
+			foreach ( $meta as $key => $value ) {
+				add_term_meta( $term_id, $key, $value );
+			}
+
 			$this->mapping['term'][ $mapping_key ] = $term_id;
 			$this->mapping['term_id'][ $original_id ] = $term_id;
 
@@ -1848,6 +1873,10 @@ if( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 			}
 			if ( ! empty( $this->requires_remapping['comment'] ) ) {
 				$this->post_process_comments( $this->requires_remapping['comment'] );
+			}
+
+			if ( ! empty( $this->mapping['term_id'] ) && current_user_can( 'activate_plugins' ) ) {
+				update_option( 'responsive_sites_term_ids_mapping', $this->mapping['term_id'] );
 			}
 		}
 

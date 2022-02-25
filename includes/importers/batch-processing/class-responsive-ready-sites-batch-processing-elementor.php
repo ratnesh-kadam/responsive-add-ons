@@ -88,9 +88,15 @@ class Responsive_Ready_Sites_Batch_Processing_Elementor extends Source_Local {
 							$data = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $data );
 						}
 					}
+					
 					if ( ! is_array( $data ) ) {
 						$data = json_decode( $data, true );
 					}
+					
+					$term_ids_mapping = get_option( 'responsive_sites_term_ids_mapping', array() );
+					$term_ids_mapping = maybe_unserialize( $term_ids_mapping);
+					
+					array_walk( $data, [$this, 'traverse_array_recursive'], $term_ids_mapping);
 
 					$document = Plugin::$instance->documents->get( $post_id );
 					if ( $document ) {
@@ -119,6 +125,28 @@ class Responsive_Ready_Sites_Batch_Processing_Elementor extends Source_Local {
 					// !important, Clear the cache after images import.
 					Plugin::$instance->files_manager->clear_cache();
 
+				}
+			}
+		}
+	}
+
+	/**
+	 * Traverse the array recursively based on a condition.
+	 *
+	 * @since 2.6.1
+	 * @param string|array $value Reference Value of the array.
+	 * @param string $key Key/Index of the array.
+	 * @param array $term_ids_mapping Term IDs mapping array.
+	 * @return void
+	 */
+	protected function traverse_array_recursive(&$value, $key, $term_ids_mapping) {
+		// This condition is specifically for Product categories related widget.
+		if ('rea_query_include_categories' !== $key && 'rea_query_exclude_categories' !== $key && is_array($value)) {
+			array_walk( $value, [$this, 'traverse_array_recursive'], $term_ids_mapping);
+		} else {
+			if (is_array($value)) {
+				foreach ($value as $index => $term_id) {
+					$value[$index] = $term_ids_mapping[$term_id];
 				}
 			}
 		}
