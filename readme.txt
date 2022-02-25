@@ -5,7 +5,7 @@ Tags: elementor, gutenberg, one click demo import, templates, website templates,
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,9 @@ With the Pro version you will get Premium templates, Priority support and automa
 4. Your website is ready
 
 == Changelog ==
+= 2.6.3 - 25th February 2022 =
+* Fix - WooCommerce Product Categories and its images not importing properly
+
 = 2.6.2 - 28th January 2022 =
 * Fix - Fixed critical error after plugin update v2.6.1
 
